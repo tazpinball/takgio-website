@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>TAKGIO — Ideas</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/ideas.css">
+</head>
+<body>
+
+  <!-- Password Gate -->
+  <div id="password-gate" class="password-gate">
+    <h1>TAKGIO</h1>
+    <form id="password-form" class="password-form">
+      <input type="password" id="password-input" placeholder="Enter password" autocomplete="off">
+      <button type="submit">Enter</button>
+      <div id="password-error" class="password-error"></div>
+    </form>
+  </div>
+
+  <!-- Ideas App (hidden until authenticated) -->
+  <div id="ideas-app" class="ideas-app">
+
+    <header class="ideas-header">
+      <h1>TAKGIO Ideas</h1>
+      <div class="user-info">
+        <span id="current-user"></span>
+        <button id="btn-logout" class="btn-logout">Lock</button>
+      </div>
+    </header>
+
+    <!-- Name prompt overlay -->
+    <div id="name-prompt-overlay" class="name-prompt-overlay" style="display:none;">
+      <div class="name-prompt">
+        <h2>What's your name?</h2>
+        <p>This will be shown next to ideas you add.</p>
+        <form id="name-form">
+          <input type="text" id="name-input" placeholder="Your name" autocomplete="off">
+          <button type="submit" class="btn-primary">Continue</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="ideas-container">
+
+      <!-- Add Idea -->
+      <div class="add-idea-section">
+        <h2>Add an Idea</h2>
+        <form id="add-idea-form" class="idea-form">
+          <input type="text" id="idea-name" placeholder="Idea name" required
+            title="A short, descriptive name for the idea. Example: Automated Bid Generator">
+          <textarea id="idea-description" placeholder="Description (optional)"
+            title="A brief summary of the idea in your own words. Example: Build a tool that auto-fills bid templates from project specs."></textarea>
+          <div class="form-row">
+            <select id="idea-stage"
+              title="Where this idea is in the pipeline. New ideas typically start as Draft.">
+              <option value="">Stage...</option>
+              <option value="Draft" selected>Draft</option>
+              <option value="Submitted">Submitted</option>
+              <option value="Under Review">Under Review</option>
+              <option value="Approved">Approved</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Testing / Pilot">Testing / Pilot</option>
+              <option value="Completed">Completed</option>
+              <option value="On Hold">On Hold</option>
+              <option value="Discarded">Discarded</option>
+            </select>
+            <select id="idea-priority"
+              title="How urgent or important is this idea? Example: High for revenue-impacting ideas.">
+              <option value="">Priority...</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+              <option value="Critical">Critical</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <select id="idea-category"
+              title="What type of idea is this? Example: Automation for tools that replace manual work.">
+              <option value="">Category...</option>
+              <option value="Automation">Automation</option>
+              <option value="Product">Product</option>
+              <option value="Service">Service</option>
+              <option value="Process Improvement">Process Improvement</option>
+              <option value="Other">Other</option>
+            </select>
+            <select id="idea-effort"
+              title="Rough estimate of work involved. S = days, M = weeks, L = months, XL = quarters.">
+              <option value="">Effort...</option>
+              <option value="S">S — Small</option>
+              <option value="M">M — Medium</option>
+              <option value="L">L — Large</option>
+              <option value="XL">XL — Extra Large</option>
+            </select>
+            <select id="idea-impact"
+              title="How much value will this deliver if completed? Example: High for ideas that drive revenue or save significant time.">
+              <option value="">Impact...</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <input type="text" id="idea-client" placeholder="Client / Contact"
+              title="Who is this idea for? The person or company that would benefit. Example: Jim (ABC Construction)">
+            <input type="text" id="idea-industry" placeholder="Industry"
+              title="The industry or sector this idea relates to. Example: Construction, Healthcare, Retail">
+            <input type="text" id="idea-relationship" placeholder="Relationship (e.g. friend)"
+              title="How do you know the client or how the idea originated? Example: Friend, Existing client, Cold lead">
+          </div>
+          <input type="text" id="idea-problem" placeholder="Problem being solved"
+            title="What pain point does this idea address? Example: Manually creating bids takes 10+ days per submission.">
+          <input type="text" id="idea-solution" placeholder="Proposed solution"
+            title="How would you solve the problem? Example: Auto-generate bid documents from a template and project data.">
+          <div class="form-row">
+            <input type="text" id="idea-time-savings" placeholder="Time savings (e.g. 10 days)"
+              title="Estimated time saved if this idea is implemented. Example: 10 days per bid, 2 hours per week">
+            <input type="text" id="idea-expected-outcome" placeholder="Expected outcome"
+              title="What result do you expect? Example: 3x more bids submitted per quarter, increased revenue">
+            <input type="date" id="idea-target-date"
+              title="When would you like this completed by? Pick a target date.">
+          </div>
+          <input type="url" id="idea-link" placeholder="Link / URL (e.g. https://...)"
+            title="A link to the product, prototype, doc, or related resource. Example: https://app.example.com/demo">
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">Add Idea</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Ideas List -->
+      <div class="ideas-list-section">
+        <h2>All Ideas</h2>
+        <div id="ideas-list" class="ideas-list">
+          <div class="ideas-empty">Loading...</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Supabase JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <!-- App config and logic -->
+  <script src="js/supabase-config.js"></script>
+  <script src="js/ideas.js"></script>
+
+</body>
+</html>
