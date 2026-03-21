@@ -117,6 +117,44 @@
     }
   }
 
+  // --- Theme toggle ---
+
+  function getTheme() {
+    return localStorage.getItem('ideas_theme') || 'vivid';
+  }
+
+  function setTheme(theme) {
+    localStorage.setItem('ideas_theme', theme);
+    document.body.setAttribute('data-theme', theme);
+    var btn = document.getElementById('btn-theme');
+    if (btn) {
+      btn.textContent = theme === 'dark' ? 'Dark' : 'Vivid';
+    }
+    // Rebuild chart for theme-appropriate label colors
+    if (stageChart) {
+      var isDark = theme === 'dark';
+      stageChart.options.scales.x.ticks.color = isDark ? '#aaa' : '#aaa';
+      stageChart.options.scales.x.title.color = isDark ? '#999' : '#888';
+      stageChart.options.scales.y.ticks.color = isDark ? '#ccc' : '#555';
+      stageChart.options.scales.x.grid.color = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)';
+      stageChart.update();
+    }
+  }
+
+  function toggleTheme() {
+    var current = getTheme();
+    setTheme(current === 'vivid' ? 'dark' : 'vivid');
+  }
+
+  function initTheme() {
+    var theme = getTheme();
+    document.body.setAttribute('data-theme', theme);
+    var btn = document.getElementById('btn-theme');
+    if (btn) {
+      btn.textContent = theme === 'dark' ? 'Dark' : 'Vivid';
+    }
+  }
+
   // --- Collapsible Add Form ---
 
   function toggleAddForm() {
@@ -253,7 +291,7 @@
         var val = dataset.data[i];
         if (val === 0) return;
         var props = bar.getProps(['x', 'y']);
-        ctx.fillStyle = '#444';
+        ctx.fillStyle = getTheme() === 'dark' ? '#ddd' : '#444';
         ctx.fillText(val, props.x + 10, props.y);
       });
       ctx.restore();
@@ -465,6 +503,7 @@
       '<th>Idea</th>' +
       '<th>Industry</th>' +
       '<th>Client / Contact</th>' +
+      '<th>Added</th>' +
       '</tr></thead>' +
       '<tbody>' +
       sorted.map(renderIdeaRow).join('') +
@@ -479,6 +518,9 @@
     var stageColor = STAGE_COLORS[stage] || '#6c757d';
     var industry = meta.industry || '';
     var client = meta.client || '';
+    var dateStr = idea.created_at
+      ? new Date(idea.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+      : '';
 
     // Subtle row tint based on stage color (10% opacity)
     var rowStyle = stage
@@ -495,6 +537,7 @@
       '<td class="idea-row-name">' + escapeHtml(idea.name) + '</td>' +
       '<td>' + (industry ? escapeHtml(industry) : '<span class="text-muted">—</span>') + '</td>' +
       '<td>' + (client ? escapeHtml(client) : '<span class="text-muted">—</span>') + '</td>' +
+      '<td class="idea-row-date">' + escapeHtml(dateStr) + '</td>' +
       '</tr>'
     );
   }
@@ -606,6 +649,8 @@
     document.getElementById('btn-logout').addEventListener('click', logout);
     document.getElementById('toggle-add-form').addEventListener('click', toggleAddForm);
     document.getElementById('btn-cancel-add').addEventListener('click', cancelAdd);
+    document.getElementById('btn-theme').addEventListener('click', toggleTheme);
+    initTheme();
 
     if (isAuthenticated()) {
       showApp();

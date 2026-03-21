@@ -101,6 +101,30 @@
     return localStorage.getItem('ideas_display_name') || '';
   }
 
+  // --- Theme toggle ---
+
+  function getTheme() {
+    return localStorage.getItem('ideas_theme') || 'vivid';
+  }
+
+  function setTheme(theme) {
+    localStorage.setItem('ideas_theme', theme);
+    document.body.setAttribute('data-theme', theme);
+    var btn = document.getElementById('btn-theme');
+    if (btn) btn.textContent = theme === 'dark' ? 'Dark' : 'Vivid';
+  }
+
+  function toggleTheme() {
+    setTheme(getTheme() === 'vivid' ? 'dark' : 'vivid');
+  }
+
+  function initTheme() {
+    var theme = getTheme();
+    document.body.setAttribute('data-theme', theme);
+    var btn = document.getElementById('btn-theme');
+    if (btn) btn.textContent = theme === 'dark' ? 'Dark' : 'Vivid';
+  }
+
   // --- App entry ---
 
   function showApp() {
@@ -361,6 +385,8 @@
   document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('password-form').addEventListener('submit', handleLogin);
     document.getElementById('btn-logout').addEventListener('click', logout);
+    document.getElementById('btn-theme').addEventListener('click', toggleTheme);
+    initTheme();
 
     if (isAuthenticated()) {
       showApp();
