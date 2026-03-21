@@ -159,6 +159,118 @@
     'Low': '#6c757d', 'Medium': '#0d6efd', 'High': '#fd7e14', 'Critical': '#dc3545'
   };
 
+  // Custom Chart.js plugin: 3D shadow + depth effect
+  var shadow3DPlugin = {
+    id: 'shadow3D',
+    beforeDatasetsDraw: function (chart) {
+      var ctx = chart.ctx;
+      ctx.save();
+      var meta = chart.getDatasetMeta(0);
+      var dataset = chart.data.datasets[0];
+      var depthX = 6;
+      var depthY = 6;
+
+      meta.data.forEach(function (bar, i) {
+        var props = bar.getProps(['x', 'y', 'base', 'height', 'width']);
+        var barX = props.base;
+        var barY = props.y - props.height / 2;
+        var barW = props.x - props.base;
+        var barH = props.height;
+
+        if (barW <= 0) return;
+
+        // Shadow layer (offset, darker)
+        ctx.fillStyle = 'rgba(0,0,0,0.12)';
+        ctx.beginPath();
+        ctx.roundRect(barX + depthX, barY + depthY, barW, barH, 4);
+        ctx.fill();
+
+        // Depth side (right face)
+        var baseColor = dataset.backgroundColor[i] || '#6c757d';
+        ctx.fillStyle = darkenColor(baseColor, 0.3);
+        ctx.beginPath();
+        ctx.moveTo(barX + barW, barY);
+        ctx.lineTo(barX + barW + depthX, barY + depthY);
+        ctx.lineTo(barX + barW + depthX, barY + barH + depthY);
+        ctx.lineTo(barX + barW, barY + barH);
+        ctx.closePath();
+        ctx.fill();
+
+        // Depth bottom face
+        ctx.fillStyle = darkenColor(baseColor, 0.2);
+        ctx.beginPath();
+        ctx.moveTo(barX, barY + barH);
+        ctx.lineTo(barX + depthX, barY + barH + depthY);
+        ctx.lineTo(barX + barW + depthX, barY + barH + depthY);
+        ctx.lineTo(barX + barW, barY + barH);
+        ctx.closePath();
+        ctx.fill();
+      });
+      ctx.restore();
+    },
+    afterDatasetsDraw: function (chart) {
+      // Gradient highlight on top of each bar for glossy effect
+      var ctx = chart.ctx;
+      ctx.save();
+      var meta = chart.getDatasetMeta(0);
+
+      meta.data.forEach(function (bar) {
+        var props = bar.getProps(['x', 'y', 'base', 'height', 'width']);
+        var barX = props.base;
+        var barY = props.y - props.height / 2;
+        var barW = props.x - props.base;
+        var barH = props.height;
+
+        if (barW <= 0) return;
+
+        var grad = ctx.createLinearGradient(barX, barY, barX, barY + barH);
+        grad.addColorStop(0, 'rgba(255,255,255,0.35)');
+        grad.addColorStop(0.5, 'rgba(255,255,255,0.05)');
+        grad.addColorStop(1, 'rgba(0,0,0,0.05)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.roundRect(barX, barY, barW, barH, 4);
+        ctx.fill();
+      });
+      ctx.restore();
+    }
+  };
+
+  // Data labels plugin: show count at end of each bar
+  var dataLabelsPlugin = {
+    id: 'barDataLabels',
+    afterDatasetsDraw: function (chart) {
+      var ctx = chart.ctx;
+      var meta = chart.getDatasetMeta(0);
+      var dataset = chart.data.datasets[0];
+
+      ctx.save();
+      ctx.font = 'bold 12px sans-serif';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+
+      meta.data.forEach(function (bar, i) {
+        var val = dataset.data[i];
+        if (val === 0) return;
+        var props = bar.getProps(['x', 'y']);
+        ctx.fillStyle = '#444';
+        ctx.fillText(val, props.x + 10, props.y);
+      });
+      ctx.restore();
+    }
+  };
+
+  function darkenColor(hex, amount) {
+    hex = hex.replace('#', '');
+    var r = parseInt(hex.substring(0, 2), 16);
+    var g = parseInt(hex.substring(2, 4), 16);
+    var b = parseInt(hex.substring(4, 6), 16);
+    r = Math.round(r * (1 - amount));
+    g = Math.round(g * (1 - amount));
+    b = Math.round(b * (1 - amount));
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+  }
+
   function updateChart(ideas) {
     var counts = {};
     STAGE_ORDER.forEach(function (s) { counts[s] = 0; });
@@ -190,22 +302,39 @@
       data: {
         labels: labels,
         datasets: [{
+          label: 'Ideas',
           data: data,
           backgroundColor: colors,
           borderRadius: 4,
-          barThickness: 22
+          borderSkipped: false,
+          barThickness: 24
         }]
       },
       options: {
         indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
+        layout: {
+          padding: { right: 40, top: 8, bottom: 8 }
+        },
         plugins: {
           legend: { display: false },
           tooltip: {
+            backgroundColor: 'rgba(26,26,46,0.9)',
+            titleFont: { size: 13, weight: 'bold' },
+            bodyFont: { size: 12 },
+            padding: 10,
+            cornerRadius: 6,
+            displayColors: true,
+            boxWidth: 10,
+            boxHeight: 10,
+            boxPadding: 4,
             callbacks: {
+              title: function (items) {
+                return items[0].label;
+              },
               label: function (ctx) {
-                return ctx.parsed.x + (ctx.parsed.x === 1 ? ' idea' : ' ideas');
+                return ' ' + ctx.parsed.x + (ctx.parsed.x === 1 ? ' idea' : ' ideas');
               }
             }
           }
@@ -213,15 +342,41 @@
         scales: {
           x: {
             beginAtZero: true,
-            ticks: { stepSize: 1, precision: 0 },
-            grid: { color: 'rgba(0,0,0,0.06)' }
+            title: {
+              display: true,
+              text: 'Number of Ideas',
+              font: { size: 12, weight: '600' },
+              color: '#888',
+              padding: { top: 8 }
+            },
+            ticks: {
+              stepSize: 1,
+              precision: 0,
+              font: { size: 11 },
+              color: '#aaa'
+            },
+            grid: {
+              color: 'rgba(0,0,0,0.04)',
+              drawTicks: false
+            },
+            border: { display: false }
           },
           y: {
             grid: { display: false },
-            ticks: { font: { size: 13 } }
+            ticks: {
+              font: { size: 13, weight: '500' },
+              color: '#555',
+              padding: 8
+            },
+            border: { display: false }
           }
+        },
+        animation: {
+          duration: 600,
+          easing: 'easeOutQuart'
         }
-      }
+      },
+      plugins: [shadow3DPlugin, dataLabelsPlugin]
     });
   }
 

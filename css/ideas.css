@@ -119,22 +119,24 @@
 
 /* ===== Stage Chart ===== */
 .chart-section {
-  background: #fff;
-  border-radius: 8px;
-  padding: 1.5rem;
+  background: linear-gradient(145deg, #ffffff, #f8f9fc);
+  border-radius: 10px;
+  padding: 1.5rem 1.5rem 1rem;
   margin-bottom: 2rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.03);
 }
 
 .chart-section h2 {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  color: #333;
+  font-size: 1.05rem;
+  margin-bottom: 0.75rem;
+  color: #444;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 .chart-wrapper {
   position: relative;
-  height: 280px;
+  height: 310px;
 }
 
 /* ===== Add Idea Form (Collapsible) ===== */
