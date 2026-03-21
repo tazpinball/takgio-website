@@ -12,6 +12,8 @@
   // --- Supabase client ---
   let supabase = null;
   let stageChart = null;
+  var allIdeas = [];       // cached for client-side sorting
+  var sortState = 'none';  // 'none' | 'asc' | 'desc'
 
   function initSupabase() {
     if (
@@ -115,6 +117,31 @@
     }
   }
 
+  // --- Collapsible Add Form ---
+
+  function toggleAddForm() {
+    var panel = document.getElementById('add-idea-panel');
+    var btn = document.getElementById('toggle-add-form');
+    if (panel.style.display === 'none') {
+      panel.style.display = 'block';
+      btn.classList.add('active');
+      btn.textContent = '— Hide Form';
+      document.getElementById('idea-name').focus();
+    } else {
+      panel.style.display = 'none';
+      btn.classList.remove('active');
+      btn.textContent = '+ Add Idea';
+    }
+  }
+
+  function cancelAdd() {
+    var panel = document.getElementById('add-idea-panel');
+    var btn = document.getElementById('toggle-add-form');
+    panel.style.display = 'none';
+    btn.classList.remove('active');
+    btn.textContent = '+ Add Idea';
+  }
+
   // --- Stage Chart ---
 
   var STAGE_ORDER = [
@@ -198,6 +225,38 @@
     });
   }
 
+  // --- Sorting ---
+
+  function getStageIndex(idea) {
+    var stage = (idea.metadata && idea.metadata.stage) || 'Draft';
+    var idx = STAGE_ORDER.indexOf(stage);
+    return idx >= 0 ? idx : 999;
+  }
+
+  function sortIdeas(ideas) {
+    var sorted = ideas.slice(); // copy
+    if (sortState === 'asc') {
+      sorted.sort(function (a, b) { return getStageIndex(a) - getStageIndex(b); });
+    } else if (sortState === 'desc') {
+      sorted.sort(function (a, b) { return getStageIndex(b) - getStageIndex(a); });
+    }
+    // 'none' keeps original DB order (newest first)
+    return sorted;
+  }
+
+  function cycleSortState() {
+    if (sortState === 'none') sortState = 'asc';
+    else if (sortState === 'asc') sortState = 'desc';
+    else sortState = 'none';
+    renderTable();
+  }
+
+  function getSortIndicator() {
+    if (sortState === 'asc') return ' ▲';
+    if (sortState === 'desc') return ' ▼';
+    return ' ⇅';
+  }
+
   // --- CRUD operations ---
 
   async function loadIdeas() {
@@ -217,27 +276,43 @@
       return;
     }
 
-    var ideas = result.data;
+    allIdeas = result.data || [];
 
     // Update chart
-    updateChart(ideas || []);
+    updateChart(allIdeas);
 
-    if (!ideas || ideas.length === 0) {
+    // Update count badge
+    var countEl = document.getElementById('ideas-count');
+    if (countEl) {
+      countEl.textContent = allIdeas.length;
+      countEl.style.display = allIdeas.length > 0 ? 'inline-block' : 'none';
+    }
+
+    renderTable();
+  }
+
+  function renderTable() {
+    var listEl = document.getElementById('ideas-list');
+
+    if (!allIdeas || allIdeas.length === 0) {
       listEl.innerHTML =
         '<div class="ideas-empty">No ideas yet. Add one above!</div>';
       return;
     }
 
+    var sorted = sortIdeas(allIdeas);
+
     var tableHtml =
       '<table class="ideas-table">' +
       '<thead><tr>' +
-      '<th>Stage</th>' +
+      '<th class="th-sortable" onclick="IdeasApp.cycleSortState()">Stage' +
+      '<span class="sort-indicator">' + getSortIndicator() + '</span></th>' +
       '<th>Idea</th>' +
       '<th>Industry</th>' +
       '<th>Client / Contact</th>' +
       '</tr></thead>' +
       '<tbody>' +
-      ideas.map(renderIdeaRow).join('') +
+      sorted.map(renderIdeaRow).join('') +
       '</tbody></table>';
 
     listEl.innerHTML = tableHtml;
@@ -250,8 +325,13 @@
     var industry = meta.industry || '';
     var client = meta.client || '';
 
+    // Subtle row tint based on stage color (10% opacity)
+    var rowStyle = stage
+      ? 'border-left: 4px solid ' + stageColor + '; background: ' + stageColor + '0a;'
+      : 'border-left: 4px solid transparent;';
+
     return (
-      '<tr class="idea-row" onclick="IdeasApp.viewIdea(\'' + idea.id + '\')">' +
+      '<tr class="idea-row" style="' + rowStyle + '" onclick="IdeasApp.viewIdea(\'' + idea.id + '\')">' +
       '<td>' +
       (stage
         ? '<span class="badge" style="background:' + stageColor + '">' + escapeHtml(stage) + '</span>'
@@ -342,7 +422,7 @@
     nameInput.value = '';
     descInput.value = '';
     clearMetadataFields();
-    nameInput.focus();
+    cancelAdd(); // collapse the form after adding
     loadIdeas();
   }
 
@@ -369,6 +449,8 @@
     document.getElementById('password-form').addEventListener('submit', handleLogin);
     document.getElementById('add-idea-form').addEventListener('submit', addIdea);
     document.getElementById('btn-logout').addEventListener('click', logout);
+    document.getElementById('toggle-add-form').addEventListener('click', toggleAddForm);
+    document.getElementById('btn-cancel-add').addEventListener('click', cancelAdd);
 
     if (isAuthenticated()) {
       showApp();
@@ -380,5 +462,6 @@
   // Expose functions needed by inline onclick handlers
   window.IdeasApp = {
     viewIdea: viewIdea,
+    cycleSortState: cycleSortState,
   };
 })();
