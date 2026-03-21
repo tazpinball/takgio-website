@@ -1,8 +1,9 @@
 // ============================================================
-// Ideas App — Password gate + Supabase CRUD
+// Ideas App — Password gate + Supabase CRUD + Stage Chart
 // ============================================================
 // Depends on: supabase-config.js (loaded first)
 //             Supabase JS CDN (loaded in ideas.html)
+//             Chart.js CDN (loaded in ideas.html)
 // ============================================================
 
 (function () {
@@ -10,6 +11,7 @@
 
   // --- Supabase client ---
   let supabase = null;
+  let stageChart = null;
 
   function initSupabase() {
     if (
@@ -113,11 +115,94 @@
     }
   }
 
+  // --- Stage Chart ---
+
+  var STAGE_ORDER = [
+    'Draft', 'Submitted', 'Under Review', 'Approved',
+    'In Progress', 'Testing / Pilot', 'Completed', 'On Hold', 'Discarded'
+  ];
+
+  var STAGE_COLORS = {
+    'Draft': '#6c757d', 'Submitted': '#0d6efd', 'Under Review': '#6f42c1',
+    'Approved': '#198754', 'In Progress': '#fd7e14', 'Testing / Pilot': '#20c997',
+    'Completed': '#198754', 'On Hold': '#ffc107', 'Discarded': '#dc3545'
+  };
+
+  var PRIORITY_COLORS = {
+    'Low': '#6c757d', 'Medium': '#0d6efd', 'High': '#fd7e14', 'Critical': '#dc3545'
+  };
+
+  function updateChart(ideas) {
+    var counts = {};
+    STAGE_ORDER.forEach(function (s) { counts[s] = 0; });
+
+    ideas.forEach(function (idea) {
+      var stage = (idea.metadata && idea.metadata.stage) || 'Draft';
+      if (counts[stage] !== undefined) {
+        counts[stage]++;
+      } else {
+        counts[stage] = 1;
+      }
+    });
+
+    var labels = STAGE_ORDER;
+    var data = labels.map(function (s) { return counts[s]; });
+    var colors = labels.map(function (s) { return STAGE_COLORS[s] || '#6c757d'; });
+
+    var ctx = document.getElementById('stage-chart');
+    if (!ctx) return;
+
+    if (stageChart) {
+      stageChart.data.datasets[0].data = data;
+      stageChart.update();
+      return;
+    }
+
+    stageChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: data,
+          backgroundColor: colors,
+          borderRadius: 4,
+          barThickness: 22
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function (ctx) {
+                return ctx.parsed.x + (ctx.parsed.x === 1 ? ' idea' : ' ideas');
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            beginAtZero: true,
+            ticks: { stepSize: 1, precision: 0 },
+            grid: { color: 'rgba(0,0,0,0.06)' }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { font: { size: 13 } }
+          }
+        }
+      }
+    });
+  }
+
   // --- CRUD operations ---
 
   async function loadIdeas() {
     var listEl = document.getElementById('ideas-list');
-    listEl.innerHTML = '<div class="loading-spinner">Loading ideas...</div>';
+    listEl.innerHTML = '<div class="ideas-empty">Loading...</div>';
 
     var result = await supabase
       .from('ideas')
@@ -133,96 +218,57 @@
     }
 
     var ideas = result.data;
+
+    // Update chart
+    updateChart(ideas || []);
+
     if (!ideas || ideas.length === 0) {
       listEl.innerHTML =
         '<div class="ideas-empty">No ideas yet. Add one above!</div>';
       return;
     }
 
-    listEl.innerHTML = ideas.map(renderIdeaCard).join('');
+    var tableHtml =
+      '<table class="ideas-table">' +
+      '<thead><tr>' +
+      '<th>Stage</th>' +
+      '<th>Idea</th>' +
+      '<th>Industry</th>' +
+      '<th>Client / Contact</th>' +
+      '</tr></thead>' +
+      '<tbody>' +
+      ideas.map(renderIdeaRow).join('') +
+      '</tbody></table>';
+
+    listEl.innerHTML = tableHtml;
   }
 
-  function renderBadges(meta) {
-    if (!meta) return '';
-    var html = '';
-    if (meta.stage) {
-      var sc = STAGE_COLORS[meta.stage] || '#6c757d';
-      html += '<span class="badge" style="background:' + sc + '">' + escapeHtml(meta.stage) + '</span>';
-    }
-    if (meta.priority) {
-      var pc = PRIORITY_COLORS[meta.priority] || '#6c757d';
-      html += '<span class="badge" style="background:' + pc + '">' + escapeHtml(meta.priority) + '</span>';
-    }
-    if (meta.category) {
-      html += '<span class="badge badge-outline">' + escapeHtml(meta.category) + '</span>';
-    }
-    if (meta.effort) {
-      html += '<span class="badge badge-outline">Effort: ' + escapeHtml(meta.effort) + '</span>';
-    }
-    if (meta.impact) {
-      html += '<span class="badge badge-outline">Impact: ' + escapeHtml(meta.impact) + '</span>';
-    }
-    return html ? '<div class="idea-card-badges">' + html + '</div>' : '';
-  }
-
-  function renderMetadataDetails(meta) {
-    if (!meta) return '';
-    var html = '';
-    // Only render the text/date fields as detail rows (badges handle the rest)
-    var detailKeys = ['client','industry','relationship','problem','solution','time_savings','expected_outcome','target_date','link'];
-    METADATA_FIELDS.forEach(function (f) {
-      if (detailKeys.indexOf(f.key) !== -1 && meta[f.key]) {
-        var val = meta[f.key];
-        var displayVal;
-        if (f.key === 'target_date') {
-          displayVal = escapeHtml(new Date(val + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }));
-        } else if (f.type === 'url') {
-          displayVal = '<a href="' + escapeAttr(val) + '" target="_blank" rel="noopener">' + escapeHtml(val) + '</a>';
-        } else {
-          displayVal = escapeHtml(val);
-        }
-        html +=
-          '<div class="meta-field">' +
-          '<span class="meta-label">' + escapeHtml(f.label) + ':</span> ' +
-          '<span class="meta-value">' + displayVal + '</span>' +
-          '</div>';
-      }
-    });
-    return html ? '<div class="idea-card-details">' + html + '</div>' : '';
-  }
-
-  function renderIdeaCard(idea) {
-    var date = new Date(idea.created_at).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-    });
+  function renderIdeaRow(idea) {
+    var meta = idea.metadata || {};
+    var stage = meta.stage || '';
+    var stageColor = STAGE_COLORS[stage] || '#6c757d';
+    var industry = meta.industry || '';
+    var client = meta.client || '';
 
     return (
-      '<div class="idea-card" data-id="' + idea.id + '"' +
-      ' data-metadata=\'' + escapeAttr(JSON.stringify(idea.metadata || {})) + '\'>' +
-      '  <div class="idea-card-header">' +
-      '    <h3>' + escapeHtml(idea.name) + '</h3>' +
-      '    <div class="idea-card-actions">' +
-      '      <button class="btn-edit" onclick="IdeasApp.editIdea(\'' + idea.id + '\')">Edit</button>' +
-      '      <button class="btn-delete" onclick="IdeasApp.deleteIdea(\'' + idea.id + '\')">Delete</button>' +
-      '    </div>' +
-      '  </div>' +
-      renderBadges(idea.metadata) +
-      (idea.description
-        ? '  <p>' + escapeHtml(idea.description) + '</p>'
-        : '') +
-      renderMetadataDetails(idea.metadata) +
-      '  <div class="idea-card-meta">Added by ' +
-      escapeHtml(idea.created_by || 'Unknown') +
-      ' on ' + date +
-      '</div>' +
-      '</div>'
+      '<tr class="idea-row" onclick="IdeasApp.viewIdea(\'' + idea.id + '\')">' +
+      '<td>' +
+      (stage
+        ? '<span class="badge" style="background:' + stageColor + '">' + escapeHtml(stage) + '</span>'
+        : '<span class="text-muted">—</span>') +
+      '</td>' +
+      '<td class="idea-row-name">' + escapeHtml(idea.name) + '</td>' +
+      '<td>' + (industry ? escapeHtml(industry) : '<span class="text-muted">—</span>') + '</td>' +
+      '<td>' + (client ? escapeHtml(client) : '<span class="text-muted">—</span>') + '</td>' +
+      '</tr>'
     );
   }
 
+  function viewIdea(id) {
+    window.location.href = 'idea-detail.html?id=' + encodeURIComponent(id);
+  }
+
   // --- Metadata field definitions ---
-  // type: 'text' = free text input, 'select' = dropdown, 'date' = date picker
   var METADATA_FIELDS = [
     { key: 'stage',            label: 'Stage',              type: 'select',
       options: ['Draft','Submitted','Under Review','Approved','In Progress','Testing / Pilot','Completed','On Hold','Discarded'] },
@@ -244,16 +290,6 @@
     { key: 'target_date',      label: 'Target Date',        type: 'date' },
     { key: 'link',             label: 'Link',               type: 'url',  placeholder: 'URL (e.g. https://...)' },
   ];
-
-  // Badge color mappings
-  var STAGE_COLORS = {
-    'Draft': '#6c757d', 'Submitted': '#0d6efd', 'Under Review': '#6f42c1',
-    'Approved': '#198754', 'In Progress': '#fd7e14', 'Testing / Pilot': '#20c997',
-    'Completed': '#198754', 'On Hold': '#ffc107', 'Discarded': '#dc3545'
-  };
-  var PRIORITY_COLORS = {
-    'Low': '#6c757d', 'Medium': '#0d6efd', 'High': '#fd7e14', 'Critical': '#dc3545'
-  };
 
   function collectMetadata() {
     var meta = {};
@@ -310,107 +346,6 @@
     loadIdeas();
   }
 
-  async function deleteIdea(id) {
-    if (!confirm('Delete this idea?')) return;
-
-    var result = await supabase.from('ideas').delete().eq('id', id);
-    if (result.error) {
-      alert('Error deleting idea: ' + result.error.message);
-      return;
-    }
-    loadIdeas();
-  }
-
-  function editIdea(id) {
-    var card = document.querySelector('.idea-card[data-id="' + id + '"]');
-    if (!card || card.classList.contains('editing')) return;
-
-    var nameEl = card.querySelector('h3');
-    var descEl = card.querySelector('p');
-    var currentName = nameEl ? nameEl.textContent : '';
-    var currentDesc = descEl ? descEl.textContent : '';
-    var currentMeta = {};
-    try { currentMeta = JSON.parse(card.getAttribute('data-metadata') || '{}'); } catch (e) {}
-
-    card.classList.add('editing');
-
-    var metaFieldsHtml = '';
-    METADATA_FIELDS.forEach(function (f) {
-      var curVal = currentMeta[f.key] || '';
-      if (f.type === 'select') {
-        var opts = '<option value="">' + escapeHtml(f.label) + '...</option>';
-        f.options.forEach(function (opt) {
-          opts += '<option value="' + escapeAttr(opt) + '"' +
-            (curVal === opt ? ' selected' : '') + '>' + escapeHtml(opt) + '</option>';
-        });
-        metaFieldsHtml += '<select class="edit-meta-' + f.key + '">' + opts + '</select>';
-      } else if (f.type === 'date') {
-        metaFieldsHtml +=
-          '<input type="date" class="edit-meta-' + f.key + '"' +
-          ' value="' + escapeAttr(curVal) + '" title="' + escapeAttr(f.label) + '">';
-      } else if (f.type === 'url') {
-        metaFieldsHtml +=
-          '<input type="url" class="edit-meta-' + f.key + '"' +
-          ' placeholder="' + escapeAttr(f.placeholder || f.label) + '"' +
-          ' value="' + escapeAttr(curVal) + '">';
-      } else {
-        metaFieldsHtml +=
-          '<input type="text" class="edit-meta-' + f.key + '"' +
-          ' placeholder="' + escapeAttr(f.placeholder || f.label) + '"' +
-          ' value="' + escapeAttr(curVal) + '">';
-      }
-    });
-
-    var editFormHtml =
-      '<div class="edit-form">' +
-      '  <input type="text" class="edit-name" value="' + escapeAttr(currentName) + '">' +
-      '  <textarea class="edit-desc">' + escapeHtml(currentDesc) + '</textarea>' +
-      metaFieldsHtml +
-      '  <div class="form-actions">' +
-      '    <button class="btn-primary" onclick="IdeasApp.saveEdit(\'' + id + '\')">Save</button>' +
-      '    <button class="btn-secondary" onclick="IdeasApp.cancelEdit(\'' + id + '\')">Cancel</button>' +
-      '  </div>' +
-      '</div>';
-
-    card.insertAdjacentHTML('beforeend', editFormHtml);
-    card.querySelector('.edit-name').focus();
-  }
-
-  async function saveEdit(id) {
-    var card = document.querySelector('.idea-card[data-id="' + id + '"]');
-    var nameVal = card.querySelector('.edit-name').value.trim();
-    var descVal = card.querySelector('.edit-desc').value.trim();
-
-    if (!nameVal) return;
-
-    var meta = {};
-    METADATA_FIELDS.forEach(function (f) {
-      var el = card.querySelector('.edit-meta-' + f.key);
-      if (el) {
-        var val = el.value.trim();
-        if (val) meta[f.key] = val;
-      }
-    });
-
-    var result = await supabase
-      .from('ideas')
-      .update({ name: nameVal, description: descVal, metadata: meta })
-      .eq('id', id);
-
-    if (result.error) {
-      alert('Error updating idea: ' + result.error.message);
-      return;
-    }
-    loadIdeas();
-  }
-
-  function cancelEdit(id) {
-    var card = document.querySelector('.idea-card[data-id="' + id + '"]');
-    card.classList.remove('editing');
-    var form = card.querySelector('.edit-form');
-    if (form) form.remove();
-  }
-
   // --- Utilities ---
 
   function escapeHtml(str) {
@@ -444,9 +379,6 @@
 
   // Expose functions needed by inline onclick handlers
   window.IdeasApp = {
-    editIdea: editIdea,
-    deleteIdea: deleteIdea,
-    saveEdit: saveEdit,
-    cancelEdit: cancelEdit,
+    viewIdea: viewIdea,
   };
 })();

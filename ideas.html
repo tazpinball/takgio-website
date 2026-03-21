@@ -45,6 +45,14 @@
 
     <div class="ideas-container">
 
+      <!-- Stage Chart -->
+      <div class="chart-section">
+        <h2>Ideas by Stage</h2>
+        <div class="chart-wrapper">
+          <canvas id="stage-chart"></canvas>
+        </div>
+      </div>
+
       <!-- Add Idea -->
       <div class="add-idea-section">
         <h2>Add an Idea</h2>
@@ -130,10 +138,10 @@
         </form>
       </div>
 
-      <!-- Ideas List -->
+      <!-- Ideas List (compact table) -->
       <div class="ideas-list-section">
         <h2>All Ideas</h2>
-        <div id="ideas-list" class="ideas-list">
+        <div id="ideas-list" class="ideas-table-wrapper">
           <div class="ideas-empty">Loading...</div>
         </div>
       </div>
@@ -141,6 +149,8 @@
     </div>
   </div>
 
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
   <!-- Supabase JS CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <!-- App config and logic -->
