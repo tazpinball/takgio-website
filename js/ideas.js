@@ -345,7 +345,9 @@
           backgroundColor: colors,
           borderRadius: 4,
           borderSkipped: false,
-          barThickness: 24
+          barThickness: 28,
+          barPercentage: 0.7,
+          categoryPercentage: 0.85
         }]
       },
       options: {

@@ -131,7 +131,7 @@
 .ideas-container {
   max-width: 960px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 1rem 0.5rem;
 }
 
 /* ===== Stage Chart ===== */
@@ -139,7 +139,7 @@
   background: linear-gradient(145deg, #ffffff, #f8f9fc);
   border-radius: 10px;
   padding: 1.5rem 1.5rem 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.03);
 }
 
@@ -153,7 +153,7 @@
 
 .chart-wrapper {
   position: relative;
-  height: 310px;
+  height: 360px;
 }
 
 /* ===== Add Idea Form (Collapsible) ===== */
@@ -161,7 +161,7 @@
   background: #fff;
   border-radius: 8px;
   padding: 1rem 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -345,11 +345,15 @@
 .ideas-table tbody tr {
   cursor: pointer;
   transition: all 0.15s;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 2px solid #e0e0e0;
 }
 
 .ideas-table tbody tr:last-child {
   border-bottom: none;
+}
+
+[data-theme="dark"] .ideas-table tbody tr {
+  border-bottom: 2px solid #252545;
 }
 
 .ideas-table tbody tr:hover {
@@ -744,10 +748,6 @@
 
 [data-theme="dark"] .th-sortable:hover {
   color: #7a9cff;
-}
-
-[data-theme="dark"] .ideas-table tbody tr {
-  border-bottom-color: #1a1a35;
 }
 
 [data-theme="dark"] .ideas-table tbody tr:hover {
