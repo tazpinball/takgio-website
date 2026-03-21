@@ -503,6 +503,7 @@
       '<th>Idea</th>' +
       '<th>Industry</th>' +
       '<th>Client / Contact</th>' +
+      '<th>Link</th>' +
       '<th>Added</th>' +
       '</tr></thead>' +
       '<tbody>' +
@@ -518,9 +519,19 @@
     var stageColor = STAGE_COLORS[stage] || '#6c757d';
     var industry = meta.industry || '';
     var client = meta.client || '';
+    var link = meta.link || '';
     var dateStr = idea.created_at
       ? new Date(idea.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
       : '';
+
+    // Truncate link display to 25 chars
+    var linkHtml = '';
+    if (link) {
+      var displayLink = link.length > 25 ? link.substring(0, 25) + '...' : link;
+      linkHtml = '<a href="' + escapeAttr(link) + '" target="_blank" rel="noopener" class="idea-row-link" onclick="event.stopPropagation()" title="' + escapeAttr(link) + '">' + escapeHtml(displayLink) + '</a>';
+    } else {
+      linkHtml = '<span class="text-muted">—</span>';
+    }
 
     // Subtle row tint based on stage color (10% opacity)
     var rowStyle = stage
@@ -537,6 +548,7 @@
       '<td class="idea-row-name">' + escapeHtml(idea.name) + '</td>' +
       '<td>' + (industry ? escapeHtml(industry) : '<span class="text-muted">—</span>') + '</td>' +
       '<td>' + (client ? escapeHtml(client) : '<span class="text-muted">—</span>') + '</td>' +
+      '<td>' + linkHtml + '</td>' +
       '<td class="idea-row-date">' + escapeHtml(dateStr) + '</td>' +
       '</tr>'
     );

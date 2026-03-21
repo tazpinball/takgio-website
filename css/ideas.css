@@ -369,6 +369,21 @@
   color: #1a1a2e;
 }
 
+.idea-row-link {
+  font-size: 0.82rem;
+  color: #4a6cf7;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.idea-row-link:hover {
+  text-decoration: underline;
+}
+
+[data-theme="dark"] .idea-row-link {
+  color: #7a9cff;
+}
+
 .idea-row-date {
   font-size: 0.8rem;
   color: #999;
@@ -862,11 +877,13 @@
     grid-template-columns: 1fr 1fr;
   }
 
-  /* Table: hide Industry + Added columns on mobile */
+  /* Table: hide Industry, Link, Added columns on mobile */
   .ideas-table thead th:nth-child(3),
   .ideas-table tbody td:nth-child(3),
   .ideas-table thead th:nth-child(5),
-  .ideas-table tbody td:nth-child(5) {
+  .ideas-table tbody td:nth-child(5),
+  .ideas-table thead th:nth-child(6),
+  .ideas-table tbody td:nth-child(6) {
     display: none;
   }
 
