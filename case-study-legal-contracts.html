@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Study: Legal Contract Analysis — TAKGIO</title>
+  <meta name="description" content="How TAKGIO built a Claude-powered contract analysis platform for a mid-market law firm, reducing initial review time by 85% and increasing transaction volume by 40%.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>T</text></svg>">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="logo">TAKGIO</a>
+      <nav class="site-nav" id="site-nav">
+        <a href="/">Home</a>
+        <a href="/services.html">Services</a>
+        <a href="/case-studies.html">Case Studies</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <a href="/case-studies.html" class="case-study-back">&larr; All Case Studies</a>
+        <div class="case-study-detail">
+          <span class="tag tag-legal">Legal &amp; Compliance</span>
+          <h3>Contract Analysis Platform for a Mid-Market Law Firm</h3>
+          <p class="case-study-meta">Contract Intelligence &middot; Production Deployment &middot; 5-Month Engagement</p>
+
+          <!-- Key Metrics -->
+          <div class="case-study-highlight">
+            <div class="stat-grid">
+              <div class="stat-item">
+                <div class="stat-value">85%</div>
+                <div class="stat-label">Reduction in initial review time</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">23%</div>
+                <div class="stat-label">More risk issues identified vs. manual</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">40%</div>
+                <div class="stat-label">More transactions processed per quarter</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">$340K</div>
+                <div class="stat-label">Estimated annual revenue increase</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Client Background -->
+          <div class="case-study-section">
+            <h4>Client Background</h4>
+            <p>The client is a 40-attorney law firm based in the mid-Atlantic region, specializing in commercial real estate transactions. The firm handles approximately 200 transactions per year, ranging from single-property acquisitions to multi-site portfolio deals. Their client base includes regional developers, institutional investors, and commercial property management companies.</p>
+            <p>The firm's real estate practice group consists of 12 attorneys (4 partners, 8 associates) supported by 6 paralegals. On a typical transaction, associates perform the initial contract review, flag issues for partner review, and prepare redline markups. This initial review is the most time-intensive and lowest-leverage part of the workflow — it requires careful reading of every clause but rarely involves complex legal judgment.</p>
+          </div>
+
+          <!-- The Challenge -->
+          <div class="case-study-section">
+            <h4>The Challenge</h4>
+            <p>The firm's growth was constrained by a bottleneck in their contract review pipeline. Each commercial real estate agreement — purchase and sale agreements, lease agreements, operating agreements, and loan documents — required 3-4 hours of associate time for initial review. During high-volume deal periods (typically Q4 and Q1), the pipeline backed up and the firm was forced to either decline work or deliver reviews on compressed timelines that increased the risk of missed issues.</p>
+            <p>The specific pain points included:</p>
+            <ul>
+              <li>Associates spent the majority of their initial review time on mechanical tasks — checking for standard provisions, comparing terms against the firm's playbook, and identifying deviations from market norms — rather than on the nuanced legal analysis that justified their billing rate</li>
+              <li>Review quality was inconsistent across associates, with junior associates missing issues that senior associates would catch. The firm tracked this informally and estimated that roughly 15% of initial reviews required significant rework after partner review</li>
+              <li>The firm's institutional knowledge about risk patterns — which clauses to watch for in specific deal types, which counterparties had non-standard positions, which provisions had caused problems in past transactions — existed primarily in the heads of senior partners and wasn't systematically applied during initial reviews</li>
+              <li>Standard turnaround for an initial contract review was 2-3 business days, which put the firm at a competitive disadvantage against larger firms with deeper associate benches</li>
+            </ul>
+            <p>The managing partner had evaluated several legal AI tools, but found that general-purpose contract analysis products didn't understand the specific patterns of commercial real estate transactions. They flagged generic legal issues but missed the industry-specific risks that mattered most to the firm's clients — estoppel certificate requirements, tenant improvement allowance structures, CAM reconciliation provisions, and the like.</p>
+          </div>
+
+          <!-- Our Approach -->
+          <div class="case-study-section">
+            <h4>Our Approach</h4>
+            <p>We started with a two-week deep dive into the firm's existing review process. We reviewed 50+ completed contract reviews — including the initial associate markup, partner revisions, and final negotiated documents — to understand what the firm considered a thorough review, what issues got flagged most frequently, and where the gaps appeared between associate work and partner expectations.</p>
+            <p>This analysis revealed that roughly 70% of the issues flagged during contract review fell into well-defined categories that could be codified: missing standard provisions, deviations from market terms, unfavorable risk allocation, ambiguous language in specific clause types, and conflicts between different sections of the same agreement. The remaining 30% required genuine legal judgment about deal-specific context — the kind of analysis that should be done by attorneys, not automated.</p>
+            <p>We built the platform in three phases:</p>
+            <ul>
+              <li><strong>Phase 1 — Playbook Digitization (Weeks 3-6):</strong> We worked with the firm's senior partners to codify their contract review playbook into a structured knowledge base. This included standard provision checklists for each agreement type, acceptable and unacceptable ranges for key terms (indemnification caps, representation survival periods, deposit structures), and a catalogue of risk patterns the firm had encountered across thousands of past transactions. This playbook became the foundation against which Claude evaluates every contract.</li>
+              <li><strong>Phase 2 — Core Analysis Engine (Weeks 7-12):</strong> We built the contract analysis pipeline using Claude's long context window to process full agreements (often 80-150 pages with exhibits) in a single pass. The system reads the entire document, identifies each material provision, evaluates it against the firm's playbook, and generates a structured review memo. The memo follows the same format the firm's associates use — organized by deal section, with each issue categorized by severity (critical, significant, minor, informational) and accompanied by specific language recommendations.</li>
+              <li><strong>Phase 3 — Cross-Document Intelligence (Weeks 13-20):</strong> We added the ability to compare incoming contracts against the firm's database of previously reviewed agreements. When the system encounters a clause it has seen before in a prior deal — especially from the same counterparty — it surfaces the prior negotiation outcome and any notes from the partners. This layer effectively gives every associate access to the institutional memory that previously existed only in the heads of senior partners.</li>
+            </ul>
+          </div>
+
+          <!-- Technical Implementation -->
+          <div class="case-study-section">
+            <h4>Technical Implementation</h4>
+            <p>Claude's extended context window was the enabling technology for this product. Commercial real estate agreements, with their exhibits, schedules, and ancillary documents, routinely exceed 100 pages. The ability to process the entire document in a single context — rather than chunking it and losing cross-reference awareness — is what allows the system to catch conflicts between provisions in different sections and identify missing cross-references.</p>
+            <p>The firm's playbook is structured as a hierarchical knowledge base, organized by agreement type, clause category, and risk level. When Claude analyzes a contract, it loads the relevant playbook sections alongside the document, effectively giving it the same reference material a senior associate would have open during a review. The system generates its analysis in a structured JSON format that maps to the firm's existing review memo template, ensuring output consistency and enabling downstream automation.</p>
+            <p>We implemented a two-tier confidence system. For issues where Claude's analysis confidence is high (standard provision checks, numerical term comparisons, missing clause identification), the system includes them directly in the review memo. For issues where Claude's analysis is more nuanced or context-dependent, the system flags them for attorney review with an explanation of the concern and relevant playbook guidance. This approach ensures that the system augments attorney judgment rather than replacing it.</p>
+            <p>The feedback loop captures every instance where an attorney modifies, removes, or adds to the system's analysis. These corrections are reviewed monthly and used to refine the playbook and improve Claude's analysis accuracy. After five months, the system's "accepted without modification" rate for flagged issues reached 89%.</p>
+          </div>
+
+          <!-- Results in Detail -->
+          <div class="case-study-section">
+            <h4>Results</h4>
+            <p>We measured outcomes over the first full quarter of production deployment:</p>
+            <ul>
+              <li><strong>Initial review time dropped from 3-4 hours to approximately 30 minutes.</strong> Associates now spend their review time validating and supplementing the AI-generated analysis rather than building it from scratch. The 30-minute review is focused on deal-specific judgment calls and client-specific considerations — the high-value work that associates should be doing.</li>
+              <li><strong>The system identified 23% more flaggable issues than manual review alone.</strong> A blind comparison of 25 contracts reviewed both manually (by associates) and by the system showed that the AI caught issues — particularly cross-reference conflicts and subtle deviations from market terms — that associates consistently missed during manual review. Partners confirmed that the majority of these additional flags were substantive.</li>
+              <li><strong>The firm processed 40% more transactions in its first quarter with the system.</strong> The freed-up associate capacity allowed the practice group to take on deals they would have previously declined or deferred. Revenue for the real estate practice group increased by approximately $340K on an annualized basis.</li>
+              <li><strong>Associate rework rates dropped from 15% to under 4%.</strong> Because the system applies the playbook consistently and surfaces partner-level risk patterns to every review, the quality gap between junior and senior associate work narrowed significantly.</li>
+              <li><strong>Review turnaround improved from 2-3 days to same-day.</strong> Clients now receive initial issue lists and redline recommendations within hours of document submission, giving the firm a meaningful competitive advantage in deal responsiveness.</li>
+            </ul>
+          </div>
+
+          <hr class="case-study-divider">
+
+          <div class="case-study-tags">
+            <span class="tag tag-tech">Claude</span>
+            <span class="tag tag-tech">Contract Analysis</span>
+            <span class="tag tag-tech">Risk Assessment</span>
+            <span class="tag tag-tech">Knowledge Base</span>
+            <span class="tag tag-tech">Long Context</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-alt">
+      <div class="container" style="text-align: center;">
+        <h2>Want results like these?</h2>
+        <p style="max-width: 500px; margin: 0 auto var(--space-lg);">Every project starts with a conversation about your specific challenges. Let's explore what AI can do for your team.</p>
+        <a href="/contact.html" class="btn btn-primary btn-lg">Start a Conversation</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="logo">TAKGIO</span>
+          <p>AI-powered products for Construction and Legal/Compliance.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <a href="/about.html">About</a>
+          <a href="/services.html">Services</a>
+          <a href="/case-studies.html">Case Studies</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+        <div class="footer-links">
+          <h4>Industries</h4>
+          <a href="/services.html#construction">Construction</a>
+          <a href="/services.html#legal">Legal &amp; Compliance</a>
+        </div>
+        <div class="footer-cta">
+          <h4>Get in touch</h4>
+          <p>Ready to explore AI for your business?</p>
+          <a href="/contact.html" class="btn btn-white">Contact Us</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 TAKGIO. All rights reserved.</p>
+        <p>Powered by Claude from Anthropic</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+</body>
+</html>

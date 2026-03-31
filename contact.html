@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — TAKGIO</title>
+  <meta name="description" content="Get in touch with TAKGIO. Whether you're exploring AI for construction or legal, we'd love to hear about your challenges.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>T</text></svg>">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="logo">TAKGIO</a>
+      <nav class="site-nav" id="site-nav">
+        <a href="/">Home</a>
+        <a href="/services.html">Services</a>
+        <a href="/case-studies.html">Case Studies</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="hero hero-sm">
+      <div class="container">
+        <h1>Get In Touch</h1>
+        <p>Whether you're exploring AI for your business or want to discuss a specific challenge, we'd love to hear from you.</p>
+      </div>
+    </section>
+
+    <!-- Contact Form + Info -->
+    <section class="section">
+      <div class="container">
+        <div class="contact-grid">
+
+          <!-- Form -->
+          <div>
+            <!--
+              FORM SETUP INSTRUCTIONS:
+              This form uses Formspree (https://formspree.io) for submission handling.
+              1. Create a free Formspree account
+              2. Create a new form and copy your form ID
+              3. Replace YOUR_FORM_ID below with your actual Formspree form ID
+
+              Alternative: If you prefer not to use Formspree, replace the form
+              with a simple mailto link:
+              <a href="mailto:ted@takgio.com" class="btn btn-primary btn-lg">Email Us</a>
+            -->
+            <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+              <div class="form-group">
+                <label for="name">Name *</label>
+                <input type="text" id="name" name="name" required placeholder="Your name">
+              </div>
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required placeholder="you@company.com">
+              </div>
+              <div class="form-group">
+                <label for="company">Company</label>
+                <input type="text" id="company" name="company" placeholder="Your company name">
+              </div>
+              <div class="form-group">
+                <label for="industry">Industry</label>
+                <select id="industry" name="industry">
+                  <option value="" disabled selected>Select your industry</option>
+                  <option value="construction">Construction</option>
+                  <option value="legal">Legal &amp; Compliance</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="message">Message *</label>
+                <textarea id="message" name="message" required placeholder="Tell us about the challenge you're looking to solve, or just say hello."></textarea>
+              </div>
+              <div>
+                <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Contact Info Sidebar -->
+          <div class="contact-info">
+            <div class="contact-info-item">
+              <h3>Email</h3>
+              <p><a href="mailto:info@takgio.com">info@takgio.com</a></p>
+            </div>
+            <div class="contact-info-item">
+              <h3>Response Time</h3>
+              <p>We typically respond within one business day.</p>
+            </div>
+            <div class="contact-info-item">
+              <h3>Anthropic Partners</h3>
+              <p>If you're reaching out from Anthropic's partner team, we'd be glad to connect. Please mention "Claude Partner Network" in your message.</p>
+            </div>
+            <div class="contact-info-item">
+              <h3>What to expect</h3>
+              <p>After you reach out, we'll schedule a brief discovery call to understand your workflow and challenges. No sales pitch — just an honest conversation about whether AI is the right fit.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="logo">TAKGIO</span>
+          <p>AI-powered products for Construction and Legal/Compliance.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <a href="/about.html">About</a>
+          <a href="/services.html">Services</a>
+          <a href="/case-studies.html">Case Studies</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+        <div class="footer-links">
+          <h4>Industries</h4>
+          <a href="/services.html#construction">Construction</a>
+          <a href="/services.html#legal">Legal &amp; Compliance</a>
+        </div>
+        <div class="footer-cta">
+          <h4>Get in touch</h4>
+          <p>Ready to explore AI for your business?</p>
+          <a href="/contact.html" class="btn btn-white">Contact Us</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 TAKGIO. All rights reserved.</p>
+        <p>Powered by Claude from Anthropic</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+</body>
+</html>

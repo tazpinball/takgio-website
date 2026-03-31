@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Study: Construction Safety Compliance — TAKGIO</title>
+  <meta name="description" content="How TAKGIO built a Claude-powered safety compliance monitoring product for a multi-state contractor, reducing documentation gaps by 75% and enabling 3x growth with no added admin staff.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>T</text></svg>">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="logo">TAKGIO</a>
+      <nav class="site-nav" id="site-nav">
+        <a href="/">Home</a>
+        <a href="/services.html">Services</a>
+        <a href="/case-studies.html">Case Studies</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <a href="/case-studies.html" class="case-study-back">&larr; All Case Studies</a>
+        <div class="case-study-detail">
+          <span class="tag tag-construction">Construction</span>
+          <h3>Safety Compliance Monitoring for a Multi-State Commercial Contractor</h3>
+          <p class="case-study-meta">Compliance Automation &middot; Production Deployment &middot; 5-Month Engagement</p>
+
+          <!-- Key Metrics -->
+          <div class="case-study-highlight">
+            <div class="stat-grid">
+              <div class="stat-item">
+                <div class="stat-value">75%</div>
+                <div class="stat-label">Reduction in compliance documentation gaps</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">85%</div>
+                <div class="stat-label">Faster safety audit preparation</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">0</div>
+                <div class="stat-label">OSHA citations in first 6 months</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">22</div>
+                <div class="stat-label">Job sites managed with same admin team</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Client Background -->
+          <div class="case-study-section">
+            <h4>Client Background</h4>
+            <p>The client is a commercial general contractor operating across five states in the southeastern United States. At the time of engagement, the firm was managing 8 active job sites with a workforce of approximately 600 direct employees and 1,200+ subcontractor workers. The firm specializes in commercial office buildings, healthcare facilities, and mixed-use developments, with projects typically in the $10M-$80M range.</p>
+            <p>The safety department consisted of a Director of Safety, two regional safety managers, and three site-level safety officers. This team was responsible for OSHA compliance, site-specific safety plans, incident tracking and reporting, training program administration, and audit preparation across all active projects — a workload that was already stretched thin at 8 sites and would become unmanageable as the company pursued its growth targets.</p>
+          </div>
+
+          <!-- The Challenge -->
+          <div class="case-study-section">
+            <h4>The Challenge</h4>
+            <p>The firm had an ambitious growth plan: double their active project count to 16-20 sites within 18 months. But the safety team couldn't scale proportionally — experienced safety professionals are difficult to recruit, and the firm's safety culture depended on consistency across all sites, not just headcount.</p>
+            <p>The existing compliance management process was fundamentally manual:</p>
+            <ul>
+              <li>Each job site generated 15-25 safety documents per week: daily safety reports, toolbox talk records, JHA (Job Hazard Analysis) forms, incident reports, near-miss reports, equipment inspection logs, and subcontractor safety submittals. These documents arrived in a mix of formats — handwritten forms, PDFs, photos of whiteboards, and email summaries</li>
+              <li>The safety team manually reviewed each document, entered key data into a spreadsheet-based tracking system, and cross-referenced it against applicable OSHA standards and the firm's own safety program requirements. This process consumed approximately 60% of the safety team's total working hours</li>
+              <li>Compliance status across sites was tracked in a series of Excel workbooks that were updated weekly. By the time a gap was identified, it had often existed for days or weeks — long enough to represent real regulatory exposure during an unannounced OSHA inspection</li>
+              <li>Training certification tracking was particularly problematic. With 1,800+ workers across all sites, each with multiple required certifications (OSHA 10/30, fall protection, scaffolding, confined space, first aid/CPR, and trade-specific certifications), expiration tracking was essentially reactive — they discovered expired certifications after the fact rather than preventing them</li>
+              <li>Audit preparation was a major time sink. When the firm faced an owner-required safety audit or an OSHA inspection, assembling the documentation package typically took 1-2 weeks of concentrated effort by the safety director and at least one regional manager — time pulled away from proactive safety management</li>
+            </ul>
+            <p>The firm had recently received a $38,000 OSHA penalty for documentation gaps on a healthcare project — not for unsafe conditions, but for incomplete paperwork that should have been routine. This event was the catalyst for seeking a better approach.</p>
+          </div>
+
+          <!-- Our Approach -->
+          <div class="case-study-section">
+            <h4>Our Approach</h4>
+            <p>We began with a three-week discovery phase that included site visits to four of the eight active projects. We observed the daily rhythm of safety documentation: morning huddle talks, pre-task JHA reviews, equipment inspections, incident documentation, and end-of-day reporting. We mapped every document type, its regulatory basis, its current workflow, and the most common failure modes in each.</p>
+            <p>The most important insight from discovery was that the compliance problem wasn't primarily about document volume — it was about the gap between when documents were generated in the field and when they were reviewed, reconciled, and acted upon by the safety team. A daily safety report from a Tuesday site walk might not be reviewed until Friday. An equipment inspection that flagged a deficiency might not trigger a follow-up action for a week. The system needed to close that gap to near-zero.</p>
+            <p>We built the product in four phases:</p>
+            <ul>
+              <li><strong>Phase 1 — Document Ingestion and Standardization (Weeks 4-7):</strong> We built intake channels for every document format the safety team encounters: email attachments, mobile photo uploads, scanned forms, digital PDFs, and direct text entry. Claude processes each document to extract structured safety data regardless of source format — converting a handwritten daily safety report and a typed PDF into the same standardized data structure. Each document is classified by type, linked to the correct project and date, and indexed for search and cross-reference.</li>
+              <li><strong>Phase 2 — Real-Time Compliance Monitoring (Weeks 8-12):</strong> The core of the system is a compliance engine that continuously compares the documentation on file for each site against what should be on file. This is where Claude's reasoning capability is essential — the "what should be on file" calculation depends on the project type, current construction phase, jurisdictional requirements, number and type of workers on site, and active hazard exposures. When the system detects a gap — a missing daily report, an overdue inspection, a training certification approaching expiration — it generates an immediate alert to the responsible safety officer with specific instructions on what's needed.</li>
+              <li><strong>Phase 3 — Incident Analysis and Pattern Detection (Weeks 13-17):</strong> Beyond document compliance, we built an analysis layer that reads incident reports, near-miss reports, and daily observations to identify emerging safety patterns. Claude analyzes the narrative content of these reports — not just the structured data — to surface patterns that spreadsheet tracking would miss: a cluster of near-miss reports involving the same subcontractor, an increase in fall-related observations on a specific project, or equipment deficiencies that correlate with a particular phase of construction.</li>
+              <li><strong>Phase 4 — Audit Readiness and Reporting (Weeks 18-22):</strong> The final layer is an on-demand audit package generator. When an OSHA inspection is announced or an owner audit is scheduled, the system assembles a complete, organized documentation package for the specified site and time period. It identifies any gaps in the package, generates a gap analysis with remediation recommendations, and produces a compliance summary report formatted for the requesting party.</li>
+            </ul>
+          </div>
+
+          <!-- Technical Implementation -->
+          <div class="case-study-section">
+            <h4>Technical Implementation</h4>
+            <p>The system processes documents in near-real-time as they arrive, with a target of under 5 minutes from submission to indexed, analyzed, and compliance-checked. Claude handles the most demanding parts of the pipeline: reading handwritten or poorly scanned forms, understanding the safety context of narrative descriptions, mapping observations to applicable OSHA standards, and reasoning about whether the documentation on file satisfies jurisdictional requirements.</p>
+            <p>Multi-state compliance was a significant technical challenge. OSHA federal standards provide the baseline, but state-plan states (the client operates in two) have additional requirements that sometimes conflict with or exceed federal standards. The system maintains a regulatory knowledge base for each jurisdiction the firm operates in, and Claude cross-references incoming documentation against the correct state-specific requirements based on project location.</p>
+            <p>The training certification tracker monitors 14 distinct certification types across the full workforce. It integrates with the firm's HR system for employment status and site assignment data, and generates automated alerts at 60-day, 30-day, and 7-day windows before each expiration. When a worker is assigned to a new site, the system automatically verifies that their certifications meet the requirements for that site's active hazards.</p>
+            <p>The feedback mechanism here is particularly important because safety compliance has no margin for error. Every alert that the safety team overrides or corrects is logged and reviewed by the safety director monthly. We also built in a manual "regulatory update" workflow where new OSHA interpretations or state regulation changes can be added to the knowledge base, triggering a retrospective compliance check across all active sites.</p>
+          </div>
+
+          <!-- Results in Detail -->
+          <div class="case-study-section">
+            <h4>Results</h4>
+            <p>Outcomes measured over the first six months of production deployment:</p>
+            <ul>
+              <li><strong>Compliance documentation gaps reduced by 75%.</strong> Before the system, a typical weekly audit of any given site would find 8-12 documentation gaps (missing daily reports, overdue inspections, incomplete JHAs). After deployment, weekly gaps averaged 2-3 per site, with most being same-day corrections triggered by system alerts rather than week-old oversights discovered in manual review.</li>
+              <li><strong>Safety audit preparation time dropped from 2 weeks to 2 days.</strong> The audit package generator produces a comprehensive documentation package on demand. The remaining 2 days are spent on the safety director's review and any supplemental documentation requests — compared to the previous 2-week scramble of pulling files, filling gaps, and formatting reports.</li>
+              <li><strong>Zero OSHA citation events in the first 6 months.</strong> The firm had averaged 1.5 recordable OSHA citations per year in the three years prior to deployment. While six months is too short to establish a definitive trend, the safety director attributes the improvement to the elimination of documentation gaps that had been the primary driver of prior citations.</li>
+              <li><strong>Scaled from 8 to 22 active job sites with no additional safety admin headcount.</strong> The firm's growth plan accelerated beyond its original 18-month timeline. The safety team added one additional site-level safety officer (from 3 to 4) but required no additional administrative or regional management staff to support the nearly 3x increase in active projects. The system handled the documentation and compliance monitoring that would have required 2-3 additional full-time administrators.</li>
+              <li><strong>Incident pattern detection surfaced 3 actionable safety trends.</strong> Within the first six months, the analysis layer identified three emerging patterns that the safety team confirmed were real and not previously on their radar: a correlation between certain weather conditions and near-miss events on elevated work, a subcontractor whose incident rate was significantly above the site average but hadn't triggered any single reportable event, and a recurring equipment deficiency pattern on projects in the same construction phase.</li>
+            </ul>
+          </div>
+
+          <hr class="case-study-divider">
+
+          <div class="case-study-tags">
+            <span class="tag tag-tech">Claude</span>
+            <span class="tag tag-tech">Safety Compliance</span>
+            <span class="tag tag-tech">Regulatory Monitoring</span>
+            <span class="tag tag-tech">Pattern Detection</span>
+            <span class="tag tag-tech">Multi-State Compliance</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-alt">
+      <div class="container" style="text-align: center;">
+        <h2>Want results like these?</h2>
+        <p style="max-width: 500px; margin: 0 auto var(--space-lg);">Every project starts with a conversation about your specific challenges. Let's explore what AI can do for your team.</p>
+        <a href="/contact.html" class="btn btn-primary btn-lg">Start a Conversation</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="logo">TAKGIO</span>
+          <p>AI-powered products for Construction and Legal/Compliance.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <a href="/about.html">About</a>
+          <a href="/services.html">Services</a>
+          <a href="/case-studies.html">Case Studies</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+        <div class="footer-links">
+          <h4>Industries</h4>
+          <a href="/services.html#construction">Construction</a>
+          <a href="/services.html#legal">Legal &amp; Compliance</a>
+        </div>
+        <div class="footer-cta">
+          <h4>Get in touch</h4>
+          <p>Ready to explore AI for your business?</p>
+          <a href="/contact.html" class="btn btn-white">Contact Us</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 TAKGIO. All rights reserved.</p>
+        <p>Powered by Claude from Anthropic</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+</body>
+</html>

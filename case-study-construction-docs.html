@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Study: Construction Document Processing — TAKGIO</title>
+  <meta name="description" content="How TAKGIO built a Claude-powered document processing product for a regional general contractor, reducing document review time by 60% and eliminating missed RFI deadlines.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>T</text></svg>">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="logo">TAKGIO</a>
+      <nav class="site-nav" id="site-nav">
+        <a href="/">Home</a>
+        <a href="/services.html">Services</a>
+        <a href="/case-studies.html">Case Studies</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <a href="/case-studies.html" class="case-study-back">&larr; All Case Studies</a>
+        <div class="case-study-detail">
+          <span class="tag tag-construction">Construction</span>
+          <h3>Intelligent Document Processing for a Regional General Contractor</h3>
+          <p class="case-study-meta">Document Intelligence &middot; Production Deployment &middot; 4-Month Engagement</p>
+
+          <!-- Key Metrics -->
+          <div class="case-study-highlight">
+            <div class="stat-grid">
+              <div class="stat-item">
+                <div class="stat-value">60%</div>
+                <div class="stat-label">Reduction in document processing time</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">&lt;1%</div>
+                <div class="stat-label">Missed RFI deadlines (down from 8%)</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">6 hrs/wk</div>
+                <div class="stat-label">Reclaimed per project manager</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">30 days</div>
+                <div class="stat-label">Full rollout across all active projects</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Client Background -->
+          <div class="case-study-section">
+            <h4>Client Background</h4>
+            <p>The client is a regional general contractor operating across the northeastern United States, managing a portfolio of 15+ active commercial and institutional projects at any given time. Their project types range from ground-up K-12 school construction to multi-story commercial renovations, with individual project values between $5M and $45M.</p>
+            <p>The firm employs roughly 120 people across field and office operations, with a project management team of 18 responsible for overseeing all active work. The office team processes an average of 400+ project documents per week across all projects — RFIs, submittals, change orders, architect's supplemental instructions (ASIs), and daily logs.</p>
+          </div>
+
+          <!-- The Challenge -->
+          <div class="case-study-section">
+            <h4>The Challenge</h4>
+            <p>Document management was the firm's biggest operational bottleneck. Every RFI, submittal, and change order was manually reviewed, categorized, logged into their project management system, and routed to the appropriate team member. This process was slow, inconsistent, and error-prone.</p>
+            <p>The consequences were real and measurable:</p>
+            <ul>
+              <li>RFI response deadlines were missed at a rate of roughly 8% per month, leading to project delays and strained relationships with architects and owners</li>
+              <li>Submittals were frequently logged with incorrect specification section references, causing confusion during closeout and resulting in rejected packages</li>
+              <li>Change orders required manual cross-referencing against the original contract scope — a process that took 45-90 minutes per CO and was often deferred during busy periods</li>
+              <li>Project managers were spending 8-12 hours per week on document administration rather than managing subcontractors, resolving field issues, and coordinating schedules</li>
+              <li>Critical information buried in RFI responses or ASIs was frequently overlooked, leading to field rework that the firm estimated cost them $200K-$400K annually</li>
+            </ul>
+            <p>The firm had evaluated several off-the-shelf document management tools, but none addressed the core problem: the documents themselves required human-level reading comprehension to process correctly. A submittal for a mechanical room diffuser looks very different from a structural steel connection detail, and the routing, urgency, and follow-up actions differ accordingly.</p>
+          </div>
+
+          <!-- Our Approach -->
+          <div class="case-study-section">
+            <h4>Our Approach</h4>
+            <p>We spent the first three weeks embedded with the project management team, observing how documents flowed through the organization. We sat with PMs as they processed their daily document queues, mapped the decision trees they used to classify and route documents, and catalogued the most common failure modes — where things got lost, misclassified, or delayed.</p>
+            <p>This discovery phase revealed that the real complexity wasn't in the volume of documents — it was in the contextual judgment required to process them. An RFI about a ceiling grid in a school gymnasium requires different routing and urgency than an RFI about structural steel connections. The PMs were applying years of construction knowledge every time they opened a document, and that knowledge was what we needed to replicate.</p>
+            <p>We built the product in three phases:</p>
+            <ul>
+              <li><strong>Phase 1 — Ingestion and Classification (Weeks 4-7):</strong> We built a document ingestion pipeline that accepts documents via email forwarding, direct upload, or integration with the firm's existing project management platform. Claude processes each document to determine its type (RFI, submittal, CO, ASI, daily log, etc.), extracts structured metadata (project number, spec section, discipline, submitting party, due dates), and generates a plain-language summary of the document's content and required actions.</li>
+              <li><strong>Phase 2 — Contextual Routing and Prioritization (Weeks 8-11):</strong> Using the firm's organizational structure and project assignments, the system routes each processed document to the correct PM, superintendent, and/or engineer — along with a priority flag based on due dates, downstream impact, and document type. RFIs with tight response windows get flagged as urgent. Submittals that reference long-lead items get elevated. Change orders that affect the critical path get tagged for immediate PM attention.</li>
+              <li><strong>Phase 3 — Cross-Reference and Intelligence (Weeks 12-16):</strong> This is where Claude's long context window became essential. The system cross-references incoming documents against the project's existing document history. When a new ASI arrives, Claude compares it against the original drawings and prior RFIs to identify potential conflicts. When a change order comes in, Claude compares the proposed scope against the original contract to flag discrepancies. This layer catches the issues that human reviewers miss when they're processing documents in isolation.</li>
+            </ul>
+          </div>
+
+          <!-- Technical Implementation -->
+          <div class="case-study-section">
+            <h4>Technical Implementation</h4>
+            <p>The system runs on a serverless architecture, processing documents asynchronously as they arrive. Claude handles the core intelligence — document classification, metadata extraction, summarization, routing decisions, and cross-referencing. We use Claude's extended context window to load relevant project history alongside each incoming document, giving the model the same context a senior PM would have when reviewing a document.</p>
+            <p>Integration with the firm's existing project management platform was critical for adoption. Documents processed by the system are automatically logged with extracted metadata, linked to the correct project and spec section, and tagged with priority levels. PMs interact with the system through their existing tools — they see enriched documents with AI-generated summaries and action items, not a separate application they need to learn.</p>
+            <p>We built a feedback loop into the system from day one. When a PM overrides a classification, adjusts a priority, or re-routes a document, that correction is captured and used to improve future processing. Over the first 90 days, the system's classification accuracy improved from 91% to 97% through this iterative refinement.</p>
+          </div>
+
+          <!-- Results in Detail -->
+          <div class="case-study-section">
+            <h4>Results</h4>
+            <p>We measured outcomes over the first 90 days of full deployment across all active projects:</p>
+            <ul>
+              <li><strong>Document processing time dropped 60%.</strong> Documents that previously took 15-20 minutes of PM time to read, classify, log, and route now arrive pre-processed with accurate metadata, summaries, and routing recommendations. PMs spend 5-7 minutes per document on review and approval rather than manual processing.</li>
+              <li><strong>Missed RFI response deadlines dropped to near zero.</strong> The system's automated priority flagging and deadline tracking eliminated the most common cause of missed deadlines: documents sitting unprocessed in an inbox. In the first 90 days, only 2 RFI deadlines were missed (both due to unrelated field issues), compared to an average of 12-15 per month before deployment.</li>
+              <li><strong>Project managers reclaimed an average of 6 hours per week.</strong> Time previously spent on document administration was redirected to field coordination, subcontractor management, and schedule oversight. Multiple PMs reported this as the single biggest quality-of-life improvement in their daily workflow.</li>
+              <li><strong>Change order review accuracy improved significantly.</strong> The cross-referencing capability caught scope discrepancies in 14 change orders during the first 90 days that would have previously required rework or dispute resolution. The firm estimates this prevented approximately $180K in disputed costs.</li>
+              <li><strong>Full rollout completed in 30 days.</strong> After a 2-week pilot on 3 projects, the system was deployed across all active projects within 30 days. Adoption was high because the system integrated into existing workflows rather than requiring a new tool.</li>
+            </ul>
+          </div>
+
+          <hr class="case-study-divider">
+
+          <div class="case-study-tags">
+            <span class="tag tag-tech">Claude</span>
+            <span class="tag tag-tech">Document Processing</span>
+            <span class="tag tag-tech">Workflow Automation</span>
+            <span class="tag tag-tech">Long Context</span>
+            <span class="tag tag-tech">Email Integration</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-alt">
+      <div class="container" style="text-align: center;">
+        <h2>Want results like these?</h2>
+        <p style="max-width: 500px; margin: 0 auto var(--space-lg);">Every project starts with a conversation about your specific challenges. Let's explore what AI can do for your team.</p>
+        <a href="/contact.html" class="btn btn-primary btn-lg">Start a Conversation</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="logo">TAKGIO</span>
+          <p>AI-powered products for Construction and Legal/Compliance.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <a href="/about.html">About</a>
+          <a href="/services.html">Services</a>
+          <a href="/case-studies.html">Case Studies</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+        <div class="footer-links">
+          <h4>Industries</h4>
+          <a href="/services.html#construction">Construction</a>
+          <a href="/services.html#legal">Legal &amp; Compliance</a>
+        </div>
+        <div class="footer-cta">
+          <h4>Get in touch</h4>
+          <p>Ready to explore AI for your business?</p>
+          <a href="/contact.html" class="btn btn-white">Contact Us</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 TAKGIO. All rights reserved.</p>
+        <p>Powered by Claude from Anthropic</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+</body>
+</html>
