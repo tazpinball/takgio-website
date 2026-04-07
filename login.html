@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>TAKGIO — Sign In</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>T</text></svg>">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body data-page="login">
+
+  <div class="login-page">
+    <div class="login-card">
+      <h1 class="login-logo">TAKGIO</h1>
+      <p class="login-subtitle">Project Dashboard</p>
+
+      <form id="login-form" class="login-form">
+        <div class="form-field">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" placeholder="you@takgio.com" required autocomplete="email">
+        </div>
+        <div class="form-field">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" placeholder="Password" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn-login" id="btn-login">Sign In</button>
+        <div id="login-error" class="login-error"></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

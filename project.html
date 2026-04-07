@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>TAKGIO — Project</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>T</text></svg>">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="dash-header">
+    <a href="/dashboard.html" class="logo">TAKGIO</a>
+    <nav class="dash-nav">
+      <a href="/dashboard.html">Dashboard</a>
+      <a href="/tasks.html">My Tasks</a>
+    </nav>
+    <div class="dash-user">
+      <span class="dash-user-name" id="user-name"></span>
+      <button class="btn-theme-toggle" id="btn-theme">Vivid</button>
+      <button class="btn-logout" id="btn-logout">Sign Out</button>
+    </div>
+  </header>
+
+  <main class="dash-content">
+    <a href="/dashboard.html" class="detail-back">&larr; Back to Dashboard</a>
+
+    <div id="project-content">
+      <div class="loading">Loading project...</div>
+    </div>
+  </main>
+
+  <!-- Edit Project Modal -->
+  <div class="modal-overlay" id="modal-edit-project" style="display:none;">
+    <div class="modal">
+      <h2>Edit Project</h2>
+      <form class="modal-form" id="form-edit-project">
+        <div class="form-field">
+          <label for="edit-name">Project Name *</label>
+          <input type="text" id="edit-name" required>
+        </div>
+        <div class="form-field">
+          <label for="edit-desc">Description</label>
+          <textarea id="edit-desc"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="edit-stage">Stage</label>
+            <select id="edit-stage">
+              <option value="Idea">Idea</option>
+              <option value="Active">Active</option>
+              <option value="Paused">Paused</option>
+              <option value="Completed">Completed</option>
+              <option value="Live">Live</option>
+              <option value="Discarded">Discarded</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="edit-priority">Priority</label>
+            <select id="edit-priority">
+              <option value="">—</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row-3">
+          <div class="form-field">
+            <label for="edit-category">Category</label>
+            <input type="text" id="edit-category">
+          </div>
+          <div class="form-field">
+            <label for="edit-industry">Industry</label>
+            <input type="text" id="edit-industry">
+          </div>
+          <div class="form-field">
+            <label for="edit-client">Client / Contact</label>
+            <input type="text" id="edit-client">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="edit-tech">Tech Stack (comma-separated)</label>
+            <input type="text" id="edit-tech">
+          </div>
+          <div class="form-field">
+            <label for="edit-version">Version</label>
+            <input type="text" id="edit-version" placeholder="e.g. 1.0.0">
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-modal-secondary" id="btn-cancel-edit">Cancel</button>
+          <button type="submit" class="btn-modal-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/project-detail.js"></script>
+</body>
+</html>

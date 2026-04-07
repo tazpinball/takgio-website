@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>TAKGIO — My Tasks</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>T</text></svg>">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="dash-header">
+    <a href="/dashboard.html" class="logo">TAKGIO</a>
+    <nav class="dash-nav">
+      <a href="/dashboard.html">Dashboard</a>
+      <a href="/tasks.html" class="active">My Tasks</a>
+    </nav>
+    <div class="dash-user">
+      <span class="dash-user-name" id="user-name"></span>
+      <button class="btn-theme-toggle" id="btn-theme">Vivid</button>
+      <button class="btn-logout" id="btn-logout">Sign Out</button>
+    </div>
+  </header>
+
+  <main class="dash-content">
+    <h2 style="margin-bottom: 1.5rem;">My Tasks</h2>
+
+    <div class="dash-filters" style="margin-bottom: 1.5rem;">
+      <select class="filter-select" id="filter-task-status">
+        <option value="Open">Open</option>
+        <option value="">All</option>
+        <option value="Completed">Completed</option>
+      </select>
+    </div>
+
+    <div id="tasks-content">
+      <div class="loading">Loading tasks...</div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/my-tasks.js"></script>
+</body>
+</html>

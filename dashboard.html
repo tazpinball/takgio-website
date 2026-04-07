@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>TAKGIO — Dashboard</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>T</text></svg>">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="dash-header">
+    <a href="/dashboard.html" class="logo">TAKGIO</a>
+    <nav class="dash-nav">
+      <a href="/dashboard.html" class="active">Dashboard</a>
+      <a href="/tasks.html">My Tasks</a>
+    </nav>
+    <div class="dash-user">
+      <span class="dash-user-name" id="user-name"></span>
+      <button class="btn-theme-toggle" id="btn-theme">Vivid</button>
+      <button class="btn-logout" id="btn-logout">Sign Out</button>
+    </div>
+  </header>
+
+  <main class="dash-content">
+
+    <!-- Overview -->
+    <div class="overview-bar">
+      <div class="overview-stats">
+        <div class="overview-stat">
+          <span class="overview-number" id="stat-total">—</span>
+          <span class="overview-label">Total</span>
+        </div>
+        <div class="overview-stat">
+          <span class="overview-number overview-number-active" id="stat-active">—</span>
+          <span class="overview-label">Active</span>
+        </div>
+        <div class="overview-stat">
+          <span class="overview-number overview-number-live" id="stat-live">—</span>
+          <span class="overview-label">Live</span>
+        </div>
+        <div class="overview-stat">
+          <span class="overview-number overview-number-stale" id="stat-stale">—</span>
+          <span class="overview-label">Attention</span>
+        </div>
+      </div>
+      <div class="overview-chart">
+        <canvas id="stage-chart"></canvas>
+      </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="dash-toolbar">
+      <div class="dash-filters">
+        <select class="filter-select" id="filter-stage">
+          <option value="">All Stages</option>
+          <option value="Idea">Idea</option>
+          <option value="Active">Active</option>
+          <option value="Paused">Paused</option>
+          <option value="Completed">Completed</option>
+          <option value="Live">Live</option>
+          <option value="Discarded">Discarded</option>
+        </select>
+        <select class="filter-select" id="filter-priority">
+          <option value="">All Priorities</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+        <select class="filter-select" id="filter-sort">
+          <option value="stage" selected>Stage</option>
+          <option value="updated">Last Updated</option>
+          <option value="priority">Priority</option>
+          <option value="name">Name</option>
+          <option value="created">Newest First</option>
+        </select>
+      </div>
+      <button class="btn-new-project" id="btn-new-project">+ New Project</button>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="projects-grid" id="projects-grid">
+      <div class="loading">Loading projects...</div>
+    </div>
+
+  </main>
+
+  <!-- New Project Modal -->
+  <div class="modal-overlay" id="modal-new-project" style="display:none;">
+    <div class="modal">
+      <h2>New Project</h2>
+      <form class="modal-form" id="form-new-project">
+        <div class="form-field">
+          <label for="new-name">Project Name *</label>
+          <input type="text" id="new-name" required placeholder="e.g. AI Tutor">
+        </div>
+        <div class="form-field">
+          <label for="new-desc">Description</label>
+          <textarea id="new-desc" placeholder="What is this project and why does it matter?"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="new-stage">Stage</label>
+            <select id="new-stage">
+              <option value="Idea" selected>Idea</option>
+              <option value="Active">Active</option>
+              <option value="Paused">Paused</option>
+              <option value="Completed">Completed</option>
+              <option value="Live">Live</option>
+              <option value="Discarded">Discarded</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="new-priority">Priority</label>
+            <select id="new-priority">
+              <option value="">—</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row-3">
+          <div class="form-field">
+            <label for="new-category">Category</label>
+            <input type="text" id="new-category" placeholder="e.g. Product">
+          </div>
+          <div class="form-field">
+            <label for="new-industry">Industry</label>
+            <input type="text" id="new-industry" placeholder="e.g. Construction">
+          </div>
+          <div class="form-field">
+            <label for="new-client">Client / Contact</label>
+            <input type="text" id="new-client" placeholder="e.g. ABC Corp">
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="new-tech">Tech Stack (comma-separated)</label>
+          <input type="text" id="new-tech" placeholder="e.g. Vercel, Supabase, LiveKit">
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-modal-secondary" id="btn-cancel-new">Cancel</button>
+          <button type="submit" class="btn-modal-primary">Create Project</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
