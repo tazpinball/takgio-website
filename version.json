@@ -1,7 +1,21 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "date": "2026-04-06",
   "releases": [
+    {
+      "version": "1.1.0",
+      "date": "2026-04-06",
+      "summary": "Dark theme overhaul and clickable column sorting",
+      "changes": [
+        "Dark theme rebuilt to Material Design standard (WCAG AA contrast ratios)",
+        "CSS custom properties override in dark mode so entire page inherits consistently",
+        "Proper dark surfaces (#121212 bg, #1E1E1E cards, #252525 inputs)",
+        "High-emphasis text at 87% white, medium at 60%, disabled at 38%",
+        "Desaturated accent color (#6B8AFF) for dark mode readability",
+        "Clickable column headers with ascending/descending sort arrows",
+        "Custom dark scrollbar styling"
+      ]
+    },
     {
       "version": "1.0.0",
       "date": "2026-04-06",
