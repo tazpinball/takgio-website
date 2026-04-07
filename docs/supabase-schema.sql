@@ -31,6 +31,7 @@ CREATE TABLE updates (
   project_id UUID REFERENCES projects(id) ON DELETE CASCADE NOT NULL,
   content TEXT NOT NULL,
   time_spent TEXT,
+  hours NUMERIC DEFAULT NULL,
   tools TEXT[] DEFAULT '{}',
   version TEXT,
   release_notes TEXT,

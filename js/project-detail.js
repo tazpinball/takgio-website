@@ -159,13 +159,32 @@
       linksHtml +
       '</div>' +
 
+      // Hours stats bar
+      (function () {
+        var stats = calcHoursStats();
+        return '<div class="project-hours-bar">' +
+          '<div class="overview-stat">' +
+          '  <span class="overview-number">' + formatHours(stats.total) + 'h</span>' +
+          '  <span class="overview-label">Total</span>' +
+          '</div>' +
+          '<div class="overview-stat">' +
+          '  <span class="overview-number overview-number-active">' + formatHours(stats.today) + 'h</span>' +
+          '  <span class="overview-label">Today</span>' +
+          '</div>' +
+          '<div class="overview-stat">' +
+          '  <span class="overview-number overview-number-live">' + formatHours(stats.week) + 'h</span>' +
+          '  <span class="overview-label">This Week</span>' +
+          '</div>' +
+          '</div>';
+      })() +
+
       // Update form
       '<div class="update-form-section">' +
       '  <h3>Add Update</h3>' +
       '  <form class="update-form" id="form-add-update">' +
       '    <textarea id="update-content" placeholder="What was done?" required></textarea>' +
       '    <div class="update-form-row">' +
-      '      <input type="text" id="update-time" placeholder="Time spent (e.g. 4 hours)">' +
+      '      <input type="number" id="update-hours" placeholder="Hours (e.g. 2.5)" step="0.25" min="0">' +
       '      <input type="text" id="update-tools" placeholder="Tools used (comma-separated)">' +
       '    </div>' +
       '    <div class="update-form-row">' +
@@ -199,6 +218,34 @@
     document.getElementById('btn-delete-project').addEventListener('click', deleteProject);
     document.getElementById('form-add-update').addEventListener('submit', addUpdate);
     document.getElementById('btn-new-task').addEventListener('click', promptNewTask);
+  }
+
+  // --- Hours Stats ---
+  function calcHoursStats() {
+    var now = new Date();
+    var todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var weekStart = new Date(todayStart);
+    weekStart.setDate(weekStart.getDate() - weekStart.getDay());
+
+    var total = 0;
+    var today = 0;
+    var week = 0;
+
+    updates.forEach(function (u) {
+      var h = parseFloat(u.hours) || 0;
+      if (h === 0) return;
+      total += h;
+      var d = new Date(u.created_at);
+      if (d >= todayStart) today += h;
+      if (d >= weekStart) week += h;
+    });
+
+    return { total: total, today: today, week: week };
+  }
+
+  function formatHours(n) {
+    if (n === 0) return '0';
+    return n % 1 === 0 ? n.toString() : n.toFixed(1);
   }
 
   // --- Activity Timeline ---
@@ -267,7 +314,8 @@
 
     var metaHtml = '';
     var metaTags = [];
-    if (u.time_spent) metaTags.push('<span class="meta-tag">&#9202; ' + esc(u.time_spent) + '</span>');
+    if (u.hours) metaTags.push('<span class="meta-tag">&#9202; ' + u.hours + 'h</span>');
+    else if (u.time_spent) metaTags.push('<span class="meta-tag">&#9202; ' + esc(u.time_spent) + '</span>');
     if (u.tools && u.tools.length > 0) {
       u.tools.forEach(function (t) {
         metaTags.push('<span class="meta-tag">' + esc(t) + '</span>');
@@ -393,10 +441,15 @@
       ? toolsInput.split(',').map(function (t) { return t.trim(); }).filter(Boolean)
       : [];
 
+    var hoursInput = document.getElementById('update-hours').value;
+    var hours = hoursInput ? parseFloat(hoursInput) : null;
+    var timeSpent = hours ? (hours === 1 ? '1 hour' : hours + ' hours') : null;
+
     var newUpdate = {
       project_id: project.id,
       content: content,
-      time_spent: document.getElementById('update-time').value.trim() || null,
+      time_spent: timeSpent,
+      hours: hours,
       tools: toolsArr,
       version: document.getElementById('update-version').value.trim() || null,
       release_notes: document.getElementById('update-release-notes').value.trim() || null,
