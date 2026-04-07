@@ -1,7 +1,18 @@
 {
-  "version": "1.1.1",
+  "version": "1.2.0",
   "date": "2026-04-06",
   "releases": [
+    {
+      "version": "1.2.0",
+      "date": "2026-04-06",
+      "summary": "Compact spacing across all public site pages",
+      "changes": [
+        "Reduced spacing variables: --space-lg from 2rem to 1.25rem, --space-xl from 3rem to 2rem, --space-2xl from 4rem to 2.5rem, --space-3xl from 6rem to 3.5rem",
+        "Tighter hero section, section headers, card icons, and footer padding",
+        "Desktop breakpoint sections use --space-2xl instead of --space-3xl",
+        "Applies to all public pages: Home, Services, Case Studies, About, Contact"
+      ]
+    },
     {
       "version": "1.1.1",
       "date": "2026-04-06",
