@@ -49,14 +49,37 @@
     await loadProjects();
   }
 
-  // --- Version ---
+  // --- Version & Release Notes ---
+  var versionData = null;
+
   async function loadVersion() {
     try {
       var resp = await fetch('/version.json?t=' + Date.now());
-      var data = await resp.json();
+      versionData = await resp.json();
       var el = document.getElementById('version-badge');
-      if (el) el.textContent = 'v' + data.version;
+      if (el) el.textContent = 'v' + versionData.version;
     } catch (e) { /* silent */ }
+  }
+
+  function openReleaseNotes() {
+    if (!versionData || !versionData.releases) return;
+    var container = document.getElementById('release-notes-content');
+    var html = '';
+    versionData.releases.forEach(function (r) {
+      html += '<div class="release-entry">';
+      html += '<div class="release-header">';
+      html += '<strong>v' + escapeHtml(r.version) + '</strong>';
+      html += '<span class="release-date">' + escapeHtml(r.date) + '</span>';
+      html += '</div>';
+      html += '<div class="release-summary">' + escapeHtml(r.summary) + '</div>';
+      html += '<ul class="release-changes">';
+      r.changes.forEach(function (c) {
+        html += '<li>' + escapeHtml(c) + '</li>';
+      });
+      html += '</ul></div>';
+    });
+    container.innerHTML = html;
+    document.getElementById('modal-release-notes').style.display = 'flex';
   }
 
   // --- Theme ---
@@ -91,6 +114,21 @@
 
     document.getElementById('btn-theme').addEventListener('click', function () {
       setTheme(getTheme() === 'vivid' ? 'dark' : 'vivid');
+    });
+
+    // Version / Release Notes
+    document.getElementById('version-badge').addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      openReleaseNotes();
+    });
+
+    document.getElementById('btn-close-releases').addEventListener('click', function () {
+      document.getElementById('modal-release-notes').style.display = 'none';
+    });
+
+    document.getElementById('modal-release-notes').addEventListener('click', function (e) {
+      if (e.target === this) this.style.display = 'none';
     });
 
     document.getElementById('btn-new-project').addEventListener('click', function () {

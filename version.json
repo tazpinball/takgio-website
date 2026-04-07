@@ -1,7 +1,16 @@
 {
-  "version": "1.1.0",
+  "version": "1.1.1",
   "date": "2026-04-06",
   "releases": [
+    {
+      "version": "1.1.1",
+      "date": "2026-04-06",
+      "summary": "Clickable version badge opens release notes",
+      "changes": [
+        "Click version number next to TAKGIO to view full release history",
+        "Release notes modal shows version, date, summary, and change list for each release"
+      ]
+    },
     {
       "version": "1.1.0",
       "date": "2026-04-06",

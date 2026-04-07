@@ -126,6 +126,64 @@
   margin-left: 0.15rem;
 }
 
+.version-clickable {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.version-clickable:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* Release Notes */
+.release-entry {
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.release-entry:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.release-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.release-header strong {
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+
+.release-date {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.release-summary {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.release-changes {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.release-changes li {
+  color: var(--color-text-secondary);
+}
+
 .dash-header .logo {
   font-size: 1.3rem;
   font-weight: 800;
