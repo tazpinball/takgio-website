@@ -117,6 +117,15 @@
   z-index: 100;
 }
 
+.version-badge {
+  font-size: 0.55rem;
+  font-weight: 500;
+  opacity: 0.5;
+  letter-spacing: 0;
+  vertical-align: super;
+  margin-left: 0.15rem;
+}
+
 .dash-header .logo {
   font-size: 1.3rem;
   font-weight: 800;
@@ -309,26 +318,6 @@
   gap: 0;
 }
 
-/* Stage group sections */
-.stage-group {
-  margin-bottom: 0.5rem;
-}
-
-.stage-group-header {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.2rem 0;
-  margin-bottom: 0;
-  border-bottom: 2px solid var(--color-border);
-}
-
-.stage-group-count {
-  font-size: 0.72rem;
-  color: var(--color-text-muted);
-  font-weight: 500;
-}
-
 /* Compact project rows */
 .project-row {
   display: flex;
@@ -363,6 +352,15 @@
 
 .project-row-header:hover {
   background: transparent;
+}
+
+.sortable-col {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sortable-col:hover {
+  color: var(--color-text);
 }
 
 .project-row-name {
@@ -1033,12 +1031,8 @@
 }
 
 [data-theme="dark"] .project-row-meta,
-[data-theme="dark"] .stage-group-count {
+[data-theme="dark"] .project-row-updated {
   color: #666;
-}
-
-[data-theme="dark"] .stage-group-header {
-  border-bottom-color: #1e1e3a;
 }
 
 [data-theme="dark"] .project-row {

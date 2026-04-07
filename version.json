@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0",
+  "date": "2026-04-06",
+  "releases": [
+    {
+      "version": "1.0.0",
+      "date": "2026-04-06",
+      "summary": "Project Dashboard launch",
+      "changes": [
+        "Replaced Ideas page with full project lifecycle dashboard",
+        "Supabase Auth login (individual accounts for Ted, Ritchie, Steve)",
+        "Dashboard with sortable project list, clickable column headers, doughnut chart, overview stats",
+        "Project detail pages with timeline, updates, tasks, and stage transitions",
+        "My Tasks page for personal task queue across projects",
+        "Six lifecycle stages: Idea, Active, Paused, Completed, Live, Discarded",
+        "Staleness detection for Active projects (14+ days without update)",
+        "Vivid/Dark theme toggle",
+        "Strategy doc and database schema in docs/"
+      ]
+    }
+  ]
+}

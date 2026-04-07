@@ -33,6 +33,8 @@
   };
   var PRIORITY_ORDER = { 'High': 0, 'Medium': 1, 'Low': 2 };
   var STAGE_SORT_ORDER = { 'Active': 0, 'Idea': 1, 'Paused': 2, 'Completed': 3, 'Live': 4, 'Discarded': 5 };
+  var currentSortCol = 'stage';
+  var currentSortAsc = true;
   var STALENESS_DAYS = 14;
 
   // --- Init ---
@@ -43,7 +45,18 @@
     document.getElementById('user-name').textContent = AuthGuard.getDisplayName(currentUser);
     initTheme();
     bindEvents();
+    loadVersion();
     await loadProjects();
+  }
+
+  // --- Version ---
+  async function loadVersion() {
+    try {
+      var resp = await fetch('/version.json?t=' + Date.now());
+      var data = await resp.json();
+      var el = document.getElementById('version-badge');
+      if (el) el.textContent = 'v' + data.version;
+    } catch (e) { /* silent */ }
   }
 
   // --- Theme ---
@@ -95,7 +108,11 @@
 
     document.getElementById('filter-stage').addEventListener('change', renderProjects);
     document.getElementById('filter-priority').addEventListener('change', renderProjects);
-    document.getElementById('filter-sort').addEventListener('change', renderProjects);
+    document.getElementById('filter-sort').addEventListener('change', function () {
+      currentSortCol = this.value;
+      currentSortAsc = true;
+      renderProjects();
+    });
   }
 
   function closeNewModal() {
@@ -247,42 +264,38 @@
       return;
     }
 
-    var sortBy = document.getElementById('filter-sort').value;
-    var headerHtml = '<div class="project-row project-row-header">' +
-      '<span class="project-row-name">Project</span>' +
-      '<span class="project-row-col project-row-stage">Stage</span>' +
-      '<span class="project-row-col project-row-priority">Priority</span>' +
-      '<span class="project-row-col project-row-updated">Updated</span>' +
-      '</div>';
-    if (sortBy === 'stage') {
-      grid.innerHTML = headerHtml + renderGroupedByStage(sorted);
-    } else {
-      grid.innerHTML = headerHtml + sorted.map(renderProjectRow).join('');
+    function arrow(col) {
+      if (currentSortCol !== col) return '';
+      return currentSortAsc ? ' ▲' : ' ▼';
     }
-  }
 
-  function renderGroupedByStage(projects) {
-    var groups = {};
-    projects.forEach(function (p) {
-      var stage = p.stage || 'Idea';
-      if (!groups[stage]) groups[stage] = [];
-      groups[stage].push(p);
-    });
+    var headerHtml = '<div class="project-row project-row-header">' +
+      '<span class="project-row-name sortable-col" data-sort="name">Project' + arrow('name') + '</span>' +
+      '<span class="project-row-col project-row-stage sortable-col" data-sort="stage">Stage' + arrow('stage') + '</span>' +
+      '<span class="project-row-col project-row-priority sortable-col" data-sort="priority">Priority' + arrow('priority') + '</span>' +
+      '<span class="project-row-col project-row-updated sortable-col" data-sort="updated">Updated' + arrow('updated') + '</span>' +
+      '</div>';
 
-    var html = '';
-    var order = ['Active', 'Idea', 'Paused', 'Completed', 'Live', 'Discarded'];
-    order.forEach(function (stage) {
-      if (!groups[stage] || groups[stage].length === 0) return;
-      var stageClass = STAGE_CLASSES[stage] || 'stage-idea';
-      html += '<div class="stage-group">';
-      html += '<div class="stage-group-header">';
-      html += '<span class="stage-badge ' + stageClass + '">' + escapeHtml(stage) + '</span>';
-      html += '<span class="stage-group-count">' + groups[stage].length + '</span>';
-      html += '</div>';
-      html += groups[stage].map(renderProjectRow).join('');
-      html += '</div>';
+    grid.innerHTML = headerHtml + sorted.map(renderProjectRow).join('');
+
+    // Attach click handlers to column headers
+    grid.querySelectorAll('.sortable-col').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var col = el.getAttribute('data-sort');
+        if (currentSortCol === col) {
+          currentSortAsc = !currentSortAsc;
+        } else {
+          currentSortCol = col;
+          currentSortAsc = true;
+        }
+        // Sync the dropdown
+        var dropdown = document.getElementById('filter-sort');
+        if (dropdown.querySelector('option[value="' + col + '"]')) {
+          dropdown.value = col;
+        }
+        renderProjects();
+      });
     });
-    return html;
   }
 
   function applyFilters(projects) {
@@ -297,28 +310,28 @@
   }
 
   function applySort(projects) {
-    var sortBy = document.getElementById('filter-sort').value;
     var sorted = projects.slice();
+    var dir = currentSortAsc ? 1 : -1;
 
-    if (sortBy === 'stage') {
+    if (currentSortCol === 'stage') {
       sorted.sort(function (a, b) {
         var sa = STAGE_SORT_ORDER[a.stage] !== undefined ? STAGE_SORT_ORDER[a.stage] : 99;
         var sb2 = STAGE_SORT_ORDER[b.stage] !== undefined ? STAGE_SORT_ORDER[b.stage] : 99;
-        if (sa !== sb2) return sa - sb2;
+        if (sa !== sb2) return (sa - sb2) * dir;
         return new Date(b.updated_at) - new Date(a.updated_at);
       });
-    } else if (sortBy === 'updated') {
-      sorted.sort(function (a, b) { return new Date(b.updated_at) - new Date(a.updated_at); });
-    } else if (sortBy === 'priority') {
+    } else if (currentSortCol === 'updated') {
+      sorted.sort(function (a, b) { return (new Date(b.updated_at) - new Date(a.updated_at)) * dir; });
+    } else if (currentSortCol === 'priority') {
       sorted.sort(function (a, b) {
         var pa = PRIORITY_ORDER[a.priority] !== undefined ? PRIORITY_ORDER[a.priority] : 99;
         var pb = PRIORITY_ORDER[b.priority] !== undefined ? PRIORITY_ORDER[b.priority] : 99;
-        return pa - pb;
+        return (pa - pb) * dir;
       });
-    } else if (sortBy === 'name') {
-      sorted.sort(function (a, b) { return a.name.localeCompare(b.name); });
-    } else if (sortBy === 'created') {
-      sorted.sort(function (a, b) { return new Date(b.created_at) - new Date(a.created_at); });
+    } else if (currentSortCol === 'name') {
+      sorted.sort(function (a, b) { return a.name.localeCompare(b.name) * dir; });
+    } else if (currentSortCol === 'created') {
+      sorted.sort(function (a, b) { return (new Date(b.created_at) - new Date(a.created_at)) * dir; });
     }
 
     return sorted;
