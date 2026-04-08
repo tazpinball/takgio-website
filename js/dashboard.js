@@ -33,7 +33,7 @@
   };
   var PRIORITY_ORDER = { 'High': 0, 'Medium': 1, 'Low': 2 };
   var STAGE_SORT_ORDER = { 'Active': 0, 'Idea': 1, 'Paused': 2, 'Completed': 3, 'Live': 4, 'Discarded': 5 };
-  var currentSortCol = 'stage';
+  var currentSortCol = 'updated';
   var currentSortAsc = true;
   var STALENESS_DAYS = 14;
 

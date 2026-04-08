@@ -1,7 +1,15 @@
 {
-  "version": "2.1.1",
+  "version": "2.1.2",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "2.1.2",
+      "date": "2026-04-08",
+      "summary": "Default dashboard sort by last updated",
+      "changes": [
+        "Dashboard now sorts by Updated (most recent first) by default instead of Stage"
+      ]
+    },
     {
       "version": "2.1.1",
       "date": "2026-04-08",
