@@ -40,8 +40,6 @@
 }
 
 /* 2. Global Reset
-   IMPORTANT: ideas.html and idea-detail.html depend on this reset
-   and the body font-family / line-height. Do not remove.
    ---------------------------------------- */
 * {
   margin: 0;
