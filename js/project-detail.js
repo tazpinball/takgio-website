@@ -179,7 +179,15 @@
           '</div>' +
           '<div class="update-action-buttons">' +
           '  <button type="button" class="btn-manual-update" id="btn-manual-update">&#x270F; Perform Manual Update</button>' +
-          (p.github_repo ? '  <button type="button" class="btn-ai-update" id="btn-ai-update">&#x2728; Generate AI Update</button>' : '') +
+          (function () {
+            if (!p.github_repo) return '';
+            var todayStr = new Date().toISOString().slice(0, 10);
+            var alreadyRan = updates.some(function (u) {
+              return u.update_type === 'claude' && u.created_at && u.created_at.slice(0, 10) === todayStr;
+            });
+            if (alreadyRan) return '  <button type="button" class="btn-ai-update" disabled title="AI update already generated today">&#x2714; AI Updated Today</button>';
+            return '  <button type="button" class="btn-ai-update" id="btn-ai-update">&#x2728; Generate AI Update</button>';
+          })() +
           '</div>' +
           '</div>';
       })() +

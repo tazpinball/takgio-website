@@ -1,7 +1,16 @@
 {
-  "version": "1.6.0",
+  "version": "1.6.1",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "1.6.1",
+      "date": "2026-04-08",
+      "summary": "Limit AI update to once per day per project",
+      "changes": [
+        "Generate AI Update button disabled if a Claude update already exists for today",
+        "Button shows 'AI Updated Today' with checkmark when already used"
+      ]
+    },
     {
       "version": "1.6.0",
       "date": "2026-04-08",
