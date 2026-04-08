@@ -1,7 +1,15 @@
 {
-  "version": "1.8.0",
+  "version": "1.8.1",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "1.8.1",
+      "date": "2026-04-08",
+      "summary": "Fix New Task modal — wrong escape function name",
+      "changes": [
+        "Fixed escapeHtml → esc() call in task modal dropdown rendering"
+      ]
+    },
     {
       "version": "1.8.0",
       "date": "2026-04-08",

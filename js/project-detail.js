@@ -562,7 +562,7 @@
     var select = document.getElementById('task-assignee');
     select.innerHTML = '<option value="">Select a team member</option>';
     teamMembers.forEach(function (name) {
-      select.innerHTML += '<option value="' + escapeHtml(name) + '">' + escapeHtml(name) + '</option>';
+      select.innerHTML += '<option value="' + esc(name) + '">' + esc(name) + '</option>';
     });
     document.getElementById('form-new-task').reset();
     document.getElementById('modal-new-task').style.display = 'flex';
