@@ -450,13 +450,14 @@
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + token
+          'Authorization': 'Bearer ' + token,
+          'apikey': SUPABASE_ANON_KEY
         },
         body: JSON.stringify({ project_id: project.id })
       });
 
       var data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Failed to generate update');
+      if (!res.ok) throw new Error(data.error || data.message || 'Failed to generate update');
 
       await loadProject(project.id);
     } catch (err) {

@@ -1,7 +1,16 @@
 {
-  "version": "1.4.0",
+  "version": "1.4.1",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "1.4.1",
+      "date": "2026-04-08",
+      "summary": "Fix AI update button: add apikey header for Supabase gateway",
+      "changes": [
+        "Added apikey header to Edge Function fetch request",
+        "Improved error messages to show server-side details"
+      ]
+    },
     {
       "version": "1.4.0",
       "date": "2026-04-08",
