@@ -36,7 +36,7 @@
       return;
     }
 
-    await loadProject(id);
+    await Promise.all([loadProject(id), loadTeamMembers()]);
   }
 
   // --- Theme ---
@@ -67,6 +67,11 @@
       if (e.target === this) closeEditModal();
     });
     document.getElementById('form-edit-project').addEventListener('submit', saveProject);
+    document.getElementById('btn-cancel-task').addEventListener('click', closeNewTaskModal);
+    document.getElementById('modal-new-task').addEventListener('click', function (e) {
+      if (e.target === this) closeNewTaskModal();
+    });
+    document.getElementById('form-new-task').addEventListener('submit', createTask);
   }
 
   // --- Load Project + related data ---
@@ -238,7 +243,7 @@
     document.getElementById('btn-cancel-update').addEventListener('click', function () {
       document.getElementById('form-add-update').style.display = 'none';
     });
-    document.getElementById('btn-new-task').addEventListener('click', promptNewTask);
+    document.getElementById('btn-new-task').addEventListener('click', openNewTaskModal);
     var btnAi = document.getElementById('btn-ai-update');
     if (btnAi) btnAi.addEventListener('click', generateAIUpdate);
   }
@@ -536,19 +541,49 @@
   }
 
   // --- Tasks CRUD ---
-  async function promptNewTask() {
-    // Simple prompt-based task creation for now
-    var desc = prompt('Task description:');
-    if (!desc) return;
+  var teamMembers = [];
 
-    var assigneeName = prompt('Assign to (name):');
-    if (!assigneeName) return;
+  async function loadTeamMembers() {
+    var results = await Promise.all([
+      sb.from('projects').select('created_by_name'),
+      sb.from('updates').select('created_by_name'),
+      sb.from('tasks').select('assigned_to_name')
+    ]);
 
-    // For now, store by name. When user accounts are set up, this could look up the user ID.
+    var names = {};
+    (results[0].data || []).forEach(function (r) { if (r.created_by_name) names[r.created_by_name] = true; });
+    (results[1].data || []).forEach(function (r) { if (r.created_by_name && r.created_by_name !== 'Claude') names[r.created_by_name] = true; });
+    (results[2].data || []).forEach(function (r) { if (r.assigned_to_name) names[r.assigned_to_name] = true; });
+
+    teamMembers = Object.keys(names).sort();
+  }
+
+  function openNewTaskModal() {
+    var select = document.getElementById('task-assignee');
+    select.innerHTML = '<option value="">Select a team member</option>';
+    teamMembers.forEach(function (name) {
+      select.innerHTML += '<option value="' + escapeHtml(name) + '">' + escapeHtml(name) + '</option>';
+    });
+    document.getElementById('form-new-task').reset();
+    document.getElementById('modal-new-task').style.display = 'flex';
+    document.getElementById('task-desc').focus();
+  }
+
+  function closeNewTaskModal() {
+    document.getElementById('modal-new-task').style.display = 'none';
+  }
+
+  async function createTask(e) {
+    e.preventDefault();
+
+    var desc = document.getElementById('task-desc').value.trim();
+    var assigneeName = document.getElementById('task-assignee').value;
+    if (!desc || !assigneeName) return;
+
     var newTask = {
       project_id: project.id,
-      description: desc.trim(),
-      assigned_to_name: assigneeName.trim(),
+      description: desc,
+      assigned_to_name: assigneeName,
       assigned_by: currentUser.id,
       assigned_by_name: AuthGuard.getDisplayName(currentUser),
       status: 'Open'
@@ -560,6 +595,7 @@
       return;
     }
 
+    closeNewTaskModal();
     await loadProject(project.id);
   }
 

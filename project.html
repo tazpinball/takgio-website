@@ -100,6 +100,29 @@
     </div>
   </div>
 
+  <!-- New Task Modal -->
+  <div class="modal-overlay" id="modal-new-task" style="display:none;">
+    <div class="modal">
+      <h2>New Task</h2>
+      <form class="modal-form" id="form-new-task">
+        <div class="form-field">
+          <label for="task-desc">Description *</label>
+          <textarea id="task-desc" required placeholder="What needs to be done?"></textarea>
+        </div>
+        <div class="form-field">
+          <label for="task-assignee">Assign to *</label>
+          <select id="task-assignee" required>
+            <option value="">Select a team member</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-modal-secondary" id="btn-cancel-task">Cancel</button>
+          <button type="submit" class="btn-modal-primary">Create Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="js/supabase-config.js"></script>
   <script src="js/auth.js"></script>

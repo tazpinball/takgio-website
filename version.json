@@ -1,7 +1,17 @@
 {
-  "version": "1.7.4",
+  "version": "1.8.0",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "1.8.0",
+      "date": "2026-04-08",
+      "summary": "New Task modal with team member dropdown",
+      "changes": [
+        "Replaced browser prompt() dialogs with a proper modal form for creating tasks",
+        "Assignee field is now a dropdown populated from existing team members in the database",
+        "Team members loaded automatically from projects, updates, and tasks tables"
+      ]
+    },
     {
       "version": "1.7.4",
       "date": "2026-04-08",
