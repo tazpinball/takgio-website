@@ -1090,6 +1090,15 @@
   text-align: center;
 }
 
+.task-row-project {
+  width: 140px;
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .task-row-actions {
   width: 130px;
   flex-shrink: 0;

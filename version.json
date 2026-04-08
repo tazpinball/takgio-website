@@ -1,7 +1,19 @@
 {
-  "version": "1.9.1",
+  "version": "2.0.0",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "2.0.0",
+      "date": "2026-04-08",
+      "summary": "Tasks page shows all team tasks with assignee filter",
+      "changes": [
+        "Tasks page now shows ALL tasks across the team, not just the current user's",
+        "Added assignee as the first column in each task row",
+        "Added 'All Team Members' dropdown filter to view tasks by person",
+        "Added project name column linking back to the project detail page",
+        "Page title changed from 'My Tasks' to 'Tasks'"
+      ]
+    },
     {
       "version": "1.9.1",
       "date": "2026-04-08",

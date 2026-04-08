@@ -43,17 +43,13 @@
       setTheme(getTheme() === 'vivid' ? 'dark' : 'vivid');
     });
     document.getElementById('filter-task-status').addEventListener('change', renderTasks);
+    document.getElementById('filter-task-assignee').addEventListener('change', renderTasks);
   }
 
   // --- Load Tasks ---
   async function loadTasks() {
     var container = document.getElementById('tasks-content');
     container.innerHTML = '<div class="loading">Loading tasks...</div>';
-
-    // Load tasks assigned to the current user, plus the associated project name
-    // We match on both assigned_to (UUID) and assigned_to_name (display name)
-    // to handle tasks created before user IDs were linked
-    var displayName = AuthGuard.getDisplayName(currentUser);
 
     var result = await sb
       .from('tasks')
@@ -65,11 +61,18 @@
       return;
     }
 
-    // Filter to tasks assigned to the current user (by UUID or name)
-    allTasks = (result.data || []).filter(function (t) {
-      return t.assigned_to === currentUser.id ||
-        (t.assigned_to_name && t.assigned_to_name.toLowerCase() === displayName.toLowerCase());
+    allTasks = result.data || [];
+
+    // Populate assignee filter dropdown
+    var names = {};
+    allTasks.forEach(function (t) { if (t.assigned_to_name) names[t.assigned_to_name] = true; });
+    var select = document.getElementById('filter-task-assignee');
+    var currentFilter = select.value;
+    select.innerHTML = '<option value="">All Team Members</option>';
+    Object.keys(names).sort().forEach(function (name) {
+      select.innerHTML += '<option value="' + escapeHtml(name) + '">' + escapeHtml(name) + '</option>';
     });
+    select.value = currentFilter;
 
     renderTasks();
   }
@@ -78,16 +81,20 @@
   function renderTasks() {
     var container = document.getElementById('tasks-content');
     var statusFilter = document.getElementById('filter-task-status').value;
+    var assigneeFilter = document.getElementById('filter-task-assignee').value;
 
     var filtered = allTasks;
     if (statusFilter) {
-      filtered = allTasks.filter(function (t) { return t.status === statusFilter; });
+      filtered = filtered.filter(function (t) { return t.status === statusFilter; });
+    }
+    if (assigneeFilter) {
+      filtered = filtered.filter(function (t) { return t.assigned_to_name === assigneeFilter; });
     }
 
     if (filtered.length === 0) {
       var msg = allTasks.length === 0
-        ? 'No tasks assigned to you.'
-        : 'No tasks match the current filter.';
+        ? 'No tasks yet.'
+        : 'No tasks match the current filters.';
       container.innerHTML = '<div class="empty-state"><p>' + msg + '</p></div>';
       return;
     }
@@ -102,8 +109,9 @@
 
     return (
       '<div class="task-row">' +
+      '  <span class="task-row-assignee">' + escapeHtml(t.assigned_to_name || 'Unassigned') + '</span>' +
       '  <span class="task-row-desc">' + escapeHtml(t.description) + '</span>' +
-      '  <span class="task-row-assignee"><a href="/project.html?id=' + escapeAttr(projectId) + '" style="color:var(--color-accent); text-decoration:none;">' + escapeHtml(projectName) + '</a></span>' +
+      '  <span class="task-row-project"><a href="/project.html?id=' + escapeAttr(projectId) + '" style="color:var(--color-accent); text-decoration:none;">' + escapeHtml(projectName) + '</a></span>' +
       '  <span class="task-row-date">' + formatDate(t.created_at) + '</span>' +
       '  <span class="task-row-status"><span class="task-status-badge ' + statusClass + '">' + escapeHtml(t.status) + '</span></span>' +
       (t.status === 'Open'
