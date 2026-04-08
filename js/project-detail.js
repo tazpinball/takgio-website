@@ -440,18 +440,17 @@
       }
 
       return (
-        '<div class="task-card">' +
-        '  <div class="task-card-header">' +
-        '    <span class="task-card-body">' + esc(t.description) + '</span>' +
-        '    <span class="task-status-badge ' + statusClass + '">' + esc(t.status) + '</span>' +
-        '  </div>' +
-        '  <div class="task-card-meta">' +
-        '    Assigned to ' + esc(t.assigned_to_name || 'Unassigned') +
-        '    by ' + esc(t.assigned_by_name || 'Unknown') +
-        '    &middot; ' + formatDate(t.created_at) +
-        '  </div>' +
-        responsesHtml +
-        actionsHtml +
+        '<div class="task-row">' +
+        '  <span class="task-row-desc">' + esc(t.description) + '</span>' +
+        '  <span class="task-row-assignee">' + esc(t.assigned_to_name || 'Unassigned') + '</span>' +
+        '  <span class="task-row-date">' + formatDate(t.created_at) + '</span>' +
+        '  <span class="task-row-status"><span class="task-status-badge ' + statusClass + '">' + esc(t.status) + '</span></span>' +
+        (t.status === 'Open'
+          ? '  <span class="task-row-actions">' +
+            '<button class="btn-edit" style="font-size:0.75rem; padding:0.2rem 0.5rem;" onclick="ProjectDetail.respondToTask(\'' + t.id + '\')">Respond</button>' +
+            '<button class="btn-modal-secondary" style="font-size:0.75rem; padding:0.2rem 0.5rem;" onclick="ProjectDetail.completeTask(\'' + t.id + '\')">Complete</button>' +
+            '</span>'
+          : '  <span class="task-row-actions"></span>') +
         '</div>'
       );
     }).join('');
