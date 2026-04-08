@@ -183,7 +183,6 @@ Based on this information, produce a JSON object with exactly these fields:
 
 {
   "content": "A 2-4 sentence summary of what was accomplished. Focus on features built, bugs fixed, and meaningful progress. Write in past tense. Be specific about what changed.",
-  "hours": <number — estimate total development hours based on commit timestamps and volume. Look at the time span between first and last commit plus commit complexity. Round to nearest 0.5.>,
   "tools": ["tool1", "tool2"],
   "version": "x.y.z or null",
   "release_notes": "A 1-2 sentence summary of what changed from a user perspective."
@@ -191,6 +190,7 @@ Based on this information, produce a JSON object with exactly these fields:
 
 For "tools": list the 3-5 most significant frameworks/libraries used (from dependencies and commit context). Skip generic ones like "Node.js" or "npm".
 For "version": use the repo's package.json version if available, otherwise null.
+Do NOT include an "hours" field — hours are tracked manually by the team.
 
 Return ONLY the raw JSON object. No markdown fences, no explanation.`;
 
@@ -224,7 +224,6 @@ Return ONLY the raw JSON object. No markdown fences, no explanation.`;
     // Parse the JSON response
     let parsed: {
       content: string;
-      hours: number;
       tools: string[];
       version: string | null;
       release_notes: string | null;
@@ -242,19 +241,10 @@ Return ONLY the raw JSON object. No markdown fences, no explanation.`;
       return jsonResponse({ error: "AI response missing content field." }, 502);
     }
 
-    // --- Insert update ---
-    const hours = parsed.hours ? Math.round(parsed.hours * 4) / 4 : null; // round to 0.25
-    const timeSpent = hours
-      ? hours === 1
-        ? "1 hour"
-        : hours + " hours"
-      : null;
-
+    // --- Insert update (no hours — tracked manually) ---
     const updateRow = {
       project_id,
       content: parsed.content,
-      hours,
-      time_spent: timeSpent,
       tools: parsed.tools || [],
       version: parsed.version || null,
       release_notes: parsed.release_notes || null,

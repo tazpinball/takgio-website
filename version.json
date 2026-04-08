@@ -1,7 +1,16 @@
 {
-  "version": "2.2.0",
+  "version": "2.2.1",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "2.2.1",
+      "date": "2026-04-08",
+      "summary": "AI updates no longer include hours — hours are manual only",
+      "changes": [
+        "Removed hours estimation from AI-generated updates to prevent inflated Today/This Week stats",
+        "Hours should only come from manual updates where the user enters them"
+      ]
+    },
     {
       "version": "2.2.0",
       "date": "2026-04-08",
