@@ -1,7 +1,17 @@
 {
-  "version": "1.6.1",
+  "version": "1.7.0",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "1.7.0",
+      "date": "2026-04-08",
+      "summary": "Show latest update snippet on dashboard project list",
+      "changes": [
+        "Dashboard project rows now show a one-line snippet of the latest update below the project name",
+        "Updates fetched in parallel with projects for fast loading",
+        "Snippet truncated to 120 characters with ellipsis"
+      ]
+    },
     {
       "version": "1.6.1",
       "date": "2026-04-08",

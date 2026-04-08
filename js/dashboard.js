@@ -159,18 +159,32 @@
   }
 
   // --- Load Projects ---
+  var latestUpdates = {}; // project_id -> latest update content
+
   async function loadProjects() {
     var grid = document.getElementById('projects-grid');
     grid.innerHTML = '<div class="loading">Loading projects...</div>';
 
-    var result = await sb.from('projects').select('*').order('updated_at', { ascending: false });
+    var results = await Promise.all([
+      sb.from('projects').select('*').order('updated_at', { ascending: false }),
+      sb.from('updates').select('project_id, content, created_at, update_type').order('created_at', { ascending: false })
+    ]);
 
-    if (result.error) {
-      grid.innerHTML = '<div class="empty-state"><p>Error loading projects: ' + escapeHtml(result.error.message) + '</p></div>';
+    if (results[0].error) {
+      grid.innerHTML = '<div class="empty-state"><p>Error loading projects: ' + escapeHtml(results[0].error.message) + '</p></div>';
       return;
     }
 
-    allProjects = result.data || [];
+    allProjects = results[0].data || [];
+
+    // Build map of latest update per project
+    latestUpdates = {};
+    (results[1].data || []).forEach(function (u) {
+      if (!latestUpdates[u.project_id]) {
+        latestUpdates[u.project_id] = u;
+      }
+    });
+
     updateStats();
     updateChart();
     renderProjects();
@@ -395,9 +409,19 @@
 
     var stageBadgeHtml = '<span class="stage-badge ' + stageClass + '">' + escapeHtml(project.stage || 'Idea') + '</span>';
 
+    var latest = latestUpdates[project.id];
+    var snippetHtml = '';
+    if (latest) {
+      var snippet = latest.content.length > 120 ? latest.content.slice(0, 120) + '…' : latest.content;
+      snippetHtml = '<span class="project-row-snippet">' + escapeHtml(snippet) + '</span>';
+    }
+
     return (
       '<a href="/project.html?id=' + project.id + '" class="project-row">' +
-      '  <span class="project-row-name">' + escapeHtml(project.name) + '</span>' +
+      '  <span class="project-row-name">' +
+      '    <span class="project-row-title">' + escapeHtml(project.name) + '</span>' +
+      snippetHtml +
+      '  </span>' +
       '  <span class="project-row-col project-row-stage">' + stageBadgeHtml + '</span>' +
       '  <span class="project-row-col project-row-priority">' + (priorityHtml || '<span class="priority-badge priority-none">—</span>') + '</span>' +
       '  <span class="project-row-col project-row-updated">' + (updatedStr || '') + (staleHtml ? ' ' + staleHtml : '') + '</span>' +
