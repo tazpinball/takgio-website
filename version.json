@@ -1,7 +1,21 @@
 {
-  "version": "1.3.1",
+  "version": "1.4.0",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "1.4.0",
+      "date": "2026-04-08",
+      "summary": "AI-powered project status updates via one-click button",
+      "changes": [
+        "Added 'Generate AI Update' button on project detail page (purple, matches Claude branding)",
+        "Supabase Edge Function reads GitHub repo commits and docs, calls Anthropic API to compose update",
+        "Auto-estimates hours worked from commit timestamps and volume",
+        "Extracts tools, version, and release notes from repo data",
+        "Updates appear in timeline with existing purple dot and '(via Claude)' label",
+        "Button only appears for projects with a github_repo configured",
+        "Added github_repo column to projects table"
+      ]
+    },
     {
       "version": "1.3.1",
       "date": "2026-04-08",

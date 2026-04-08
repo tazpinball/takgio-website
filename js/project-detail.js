@@ -193,6 +193,7 @@
       '    </div>' +
       '    <div class="update-form-actions">' +
       '      <button type="submit" class="btn-modal-primary">Post Update</button>' +
+      (p.github_repo ? '      <button type="button" class="btn-ai-update" id="btn-ai-update">&#x2728; Generate AI Update</button>' : '') +
       '    </div>' +
       '  </form>' +
       '</div>' +
@@ -218,6 +219,8 @@
     document.getElementById('btn-delete-project').addEventListener('click', deleteProject);
     document.getElementById('form-add-update').addEventListener('submit', addUpdate);
     document.getElementById('btn-new-task').addEventListener('click', promptNewTask);
+    var btnAi = document.getElementById('btn-ai-update');
+    if (btnAi) btnAi.addEventListener('click', generateAIUpdate);
   }
 
   // --- Hours Stats ---
@@ -427,6 +430,44 @@
         '</div>'
       );
     }).join('');
+  }
+
+  // --- Generate AI Update ---
+  async function generateAIUpdate() {
+    var btn = document.getElementById('btn-ai-update');
+    if (!btn || btn.disabled) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Generating\u2026';
+    btn.classList.add('btn-ai-loading');
+
+    try {
+      var session = await sb.auth.getSession();
+      var token = session.data.session?.access_token;
+      if (!token) { alert('You must be logged in.'); return; }
+
+      var res = await fetch(SUPABASE_URL + '/functions/v1/generate-project-update', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({ project_id: project.id })
+      });
+
+      var data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to generate update');
+
+      await loadProject(project.id);
+    } catch (err) {
+      alert('Error: ' + err.message);
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = '\u2728 Generate AI Update';
+        btn.classList.remove('btn-ai-loading');
+      }
+    }
   }
 
   // --- Add Update ---

@@ -18,6 +18,7 @@ CREATE TABLE projects (
   tech_stack TEXT[] DEFAULT '{}',
   version TEXT,
   external_links JSONB DEFAULT '[]',
+  github_repo TEXT,
   created_by UUID REFERENCES auth.users(id),
   created_by_name TEXT,
   created_at TIMESTAMPTZ DEFAULT now(),
