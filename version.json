@@ -1,7 +1,17 @@
 {
-  "version": "1.4.1",
+  "version": "1.5.0",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "1.5.0",
+      "date": "2026-04-08",
+      "summary": "Collapsible update form with separate Manual and AI update buttons",
+      "changes": [
+        "Replaced 'Add Update' form with two action buttons: Perform Manual Update and Generate AI Update",
+        "Manual update form hidden by default, toggles open on click with Cancel to close",
+        "Generate AI Update button now at top level alongside Manual Update button"
+      ]
+    },
     {
       "version": "1.4.1",
       "date": "2026-04-08",

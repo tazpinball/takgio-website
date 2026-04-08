@@ -178,10 +178,13 @@
           '</div>';
       })() +
 
-      // Update form
+      // Update actions
       '<div class="update-form-section">' +
-      '  <h3>Add Update</h3>' +
-      '  <form class="update-form" id="form-add-update">' +
+      '  <div class="update-action-buttons">' +
+      '    <button type="button" class="btn-manual-update" id="btn-manual-update">&#x270F; Perform Manual Update</button>' +
+      (p.github_repo ? '    <button type="button" class="btn-ai-update" id="btn-ai-update">&#x2728; Generate AI Update</button>' : '') +
+      '  </div>' +
+      '  <form class="update-form" id="form-add-update" style="display:none;">' +
       '    <textarea id="update-content" placeholder="What was done?" required></textarea>' +
       '    <div class="update-form-row">' +
       '      <input type="number" id="update-hours" placeholder="Hours (e.g. 2.5)" step="0.25" min="0">' +
@@ -193,7 +196,7 @@
       '    </div>' +
       '    <div class="update-form-actions">' +
       '      <button type="submit" class="btn-modal-primary">Post Update</button>' +
-      (p.github_repo ? '      <button type="button" class="btn-ai-update" id="btn-ai-update">&#x2728; Generate AI Update</button>' : '') +
+      '      <button type="button" class="btn-modal-secondary" id="btn-cancel-update">Cancel</button>' +
       '    </div>' +
       '  </form>' +
       '</div>' +
@@ -218,6 +221,13 @@
     document.getElementById('btn-edit-project').addEventListener('click', openEditModal);
     document.getElementById('btn-delete-project').addEventListener('click', deleteProject);
     document.getElementById('form-add-update').addEventListener('submit', addUpdate);
+    document.getElementById('btn-manual-update').addEventListener('click', function () {
+      var form = document.getElementById('form-add-update');
+      form.style.display = form.style.display === 'none' ? '' : 'none';
+    });
+    document.getElementById('btn-cancel-update').addEventListener('click', function () {
+      document.getElementById('form-add-update').style.display = 'none';
+    });
     document.getElementById('btn-new-task').addEventListener('click', promptNewTask);
     var btnAi = document.getElementById('btn-ai-update');
     if (btnAi) btnAi.addEventListener('click', generateAIUpdate);

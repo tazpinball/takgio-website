@@ -965,6 +965,29 @@
   gap: 0.5rem;
 }
 
+.update-action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.btn-manual-update {
+  padding: 0.6rem 1.2rem;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-manual-update:hover {
+  background: #3a5ce5;
+}
+
 .btn-ai-update {
   padding: 0.6rem 1.2rem;
   background: #8b5cf6;
@@ -1206,6 +1229,14 @@
 [data-theme="dark"] .btn-delete:hover {
   background: #EF5350;
   color: #fff;
+}
+
+[data-theme="dark"] .btn-manual-update {
+  background: var(--color-accent);
+}
+
+[data-theme="dark"] .btn-manual-update:hover {
+  background: #5A7AFF;
 }
 
 [data-theme="dark"] .btn-ai-update {
