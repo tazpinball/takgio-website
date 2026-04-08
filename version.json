@@ -1,7 +1,15 @@
 {
-  "version": "1.7.2",
+  "version": "1.7.3",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "1.7.3",
+      "date": "2026-04-08",
+      "summary": "Increase Last Update snippet to 250 characters",
+      "changes": [
+        "Last Update column now shows up to 250 characters before truncating"
+      ]
+    },
     {
       "version": "1.7.2",
       "date": "2026-04-08",

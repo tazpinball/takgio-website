@@ -411,7 +411,7 @@
     var stageBadgeHtml = '<span class="stage-badge ' + stageClass + '">' + escapeHtml(project.stage || 'Idea') + '</span>';
 
     var latest = latestUpdates[project.id];
-    var snippetText = latest ? (latest.content.length > 100 ? latest.content.slice(0, 100) + '…' : latest.content) : '—';
+    var snippetText = latest ? (latest.content.length > 250 ? latest.content.slice(0, 250) + '…' : latest.content) : '—';
 
     return (
       '<a href="/project.html?id=' + project.id + '" class="project-row">' +
