@@ -1,7 +1,19 @@
 {
-  "version": "1.5.1",
+  "version": "1.6.0",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "1.6.0",
+      "date": "2026-04-08",
+      "summary": "Compact spacing across project detail page for maximum content density",
+      "changes": [
+        "Reduced padding and margins throughout: detail top card, hours bar, update form, timeline entries, tasks section",
+        "Tighter back link, badges, description, and fields grid spacing",
+        "Compact timeline cards with less padding between entries",
+        "Dashboard overview bar also compacted",
+        "Font sizes preserved for readability"
+      ]
+    },
     {
       "version": "1.5.1",
       "date": "2026-04-08",
