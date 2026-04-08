@@ -323,10 +323,10 @@
 
     var headerHtml = '<div class="project-row project-row-header">' +
       '<span class="project-row-name sortable-col" data-sort="name">Project' + arrow('name') + '</span>' +
-      '<span class="project-row-col project-row-lastupdate">Last Update</span>' +
       '<span class="project-row-col project-row-stage sortable-col" data-sort="stage">Stage' + arrow('stage') + '</span>' +
       '<span class="project-row-col project-row-priority sortable-col" data-sort="priority">Priority' + arrow('priority') + '</span>' +
       '<span class="project-row-col project-row-updated sortable-col" data-sort="updated">Updated' + arrow('updated') + '</span>' +
+      '<span class="project-row-col project-row-lastupdate">Last Update</span>' +
       '</div>';
 
     grid.innerHTML = headerHtml + sorted.map(renderProjectRow).join('');
@@ -416,10 +416,10 @@
     return (
       '<a href="/project.html?id=' + project.id + '" class="project-row">' +
       '  <span class="project-row-name">' + escapeHtml(project.name) + '</span>' +
-      '  <span class="project-row-col project-row-lastupdate">' + escapeHtml(snippetText) + '</span>' +
       '  <span class="project-row-col project-row-stage">' + stageBadgeHtml + '</span>' +
       '  <span class="project-row-col project-row-priority">' + (priorityHtml || '<span class="priority-badge priority-none">—</span>') + '</span>' +
       '  <span class="project-row-col project-row-updated">' + (updatedStr || '') + (staleHtml ? ' ' + staleHtml : '') + '</span>' +
+      '  <span class="project-row-col project-row-lastupdate">' + escapeHtml(snippetText) + '</span>' +
       '</a>'
     );
   }

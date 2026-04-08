@@ -396,9 +396,9 @@
 /* Compact project rows */
 .project-row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.75rem;
-  padding: 0.25rem 0.5rem;
+  padding: 0.35rem 0.5rem;
   border-bottom: 1px solid var(--color-border-light, rgba(0,0,0,0.06));
   text-decoration: none;
   color: inherit;
@@ -446,18 +446,17 @@
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 0;
-  width: 160px;
+  width: 180px;
   flex-shrink: 0;
 }
 
 .project-row-lastupdate {
   flex: 1;
   min-width: 0;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   color: var(--color-text-secondary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  line-height: 1.35;
   text-align: left !important;
 }
 

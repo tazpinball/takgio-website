@@ -1,7 +1,17 @@
 {
-  "version": "1.7.1",
+  "version": "1.7.2",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "1.7.2",
+      "date": "2026-04-08",
+      "summary": "Move Last Update to last column with auto-wrap",
+      "changes": [
+        "Last Update column moved to the right (after Updated)",
+        "Text wraps naturally instead of truncating with ellipsis",
+        "Rows align to top for multi-line content"
+      ]
+    },
     {
       "version": "1.7.1",
       "date": "2026-04-08",
