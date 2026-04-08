@@ -1,7 +1,15 @@
 {
-  "version": "2.1.0",
+  "version": "2.1.1",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "2.1.1",
+      "date": "2026-04-08",
+      "summary": "Fix dashboard syntax error in task count rendering",
+      "changes": [
+        "Fixed var declarations that were placed inside the return string concatenation"
+      ]
+    },
     {
       "version": "2.1.0",
       "date": "2026-04-08",

@@ -429,12 +429,12 @@
     var updateText = latest ? (latest.release_notes || latest.content) : '';
     var snippetText = updateText ? (updateText.length > 250 ? updateText.slice(0, 250) + '…' : updateText) : '—';
 
-    return (
-      '<a href="/project.html?id=' + project.id + '" class="project-row">' +
-      '  <span class="project-row-name">' + escapeHtml(project.name) + '</span>' +
     var taskCount = openTaskCounts[project.id] || 0;
     var taskHtml = taskCount > 0 ? '<span class="task-count-badge">' + taskCount + '</span>' : '—';
 
+    return (
+      '<a href="/project.html?id=' + project.id + '" class="project-row">' +
+      '  <span class="project-row-name">' + escapeHtml(project.name) + '</span>' +
       '  <span class="project-row-col project-row-stage">' + stageBadgeHtml + '</span>' +
       '  <span class="project-row-col project-row-priority">' + (priorityHtml || '<span class="priority-badge priority-none">—</span>') + '</span>' +
       '  <span class="project-row-col project-row-tasks">' + taskHtml + '</span>' +
