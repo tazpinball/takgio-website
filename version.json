@@ -1,7 +1,17 @@
 {
-  "version": "2.1.2",
+  "version": "2.2.0",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "2.2.0",
+      "date": "2026-04-08",
+      "summary": "Team members table for task assignment and filtering",
+      "changes": [
+        "Task assignee dropdown now pulls from team_members table instead of activity-based names",
+        "Tasks page filter also uses team_members table",
+        "New team members appear immediately without needing prior activity"
+      ]
+    },
     {
       "version": "2.1.2",
       "date": "2026-04-08",

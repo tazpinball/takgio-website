@@ -63,14 +63,13 @@
 
     allTasks = result.data || [];
 
-    // Populate assignee filter dropdown
-    var names = {};
-    allTasks.forEach(function (t) { if (t.assigned_to_name) names[t.assigned_to_name] = true; });
+    // Populate assignee filter dropdown from team_members table
+    var teamResult = await sb.from('team_members').select('display_name').eq('active', true).order('display_name');
     var select = document.getElementById('filter-task-assignee');
     var currentFilter = select.value;
     select.innerHTML = '<option value="">All Team Members</option>';
-    Object.keys(names).sort().forEach(function (name) {
-      select.innerHTML += '<option value="' + escapeHtml(name) + '">' + escapeHtml(name) + '</option>';
+    (teamResult.data || []).forEach(function (m) {
+      select.innerHTML += '<option value="' + escapeHtml(m.display_name) + '">' + escapeHtml(m.display_name) + '</option>';
     });
     select.value = currentFilter;
 

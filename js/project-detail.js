@@ -543,18 +543,8 @@
   var teamMembers = [];
 
   async function loadTeamMembers() {
-    var results = await Promise.all([
-      sb.from('projects').select('created_by_name'),
-      sb.from('updates').select('created_by_name'),
-      sb.from('tasks').select('assigned_to_name')
-    ]);
-
-    var names = {};
-    (results[0].data || []).forEach(function (r) { if (r.created_by_name) names[r.created_by_name] = true; });
-    (results[1].data || []).forEach(function (r) { if (r.created_by_name && r.created_by_name !== 'Claude') names[r.created_by_name] = true; });
-    (results[2].data || []).forEach(function (r) { if (r.assigned_to_name) names[r.assigned_to_name] = true; });
-
-    teamMembers = Object.keys(names).sort();
+    var result = await sb.from('team_members').select('display_name').eq('active', true).order('display_name');
+    teamMembers = (result.data || []).map(function (r) { return r.display_name; });
   }
 
   function openNewTaskModal() {
