@@ -323,6 +323,7 @@
 
     var headerHtml = '<div class="project-row project-row-header">' +
       '<span class="project-row-name sortable-col" data-sort="name">Project' + arrow('name') + '</span>' +
+      '<span class="project-row-col project-row-lastupdate">Last Update</span>' +
       '<span class="project-row-col project-row-stage sortable-col" data-sort="stage">Stage' + arrow('stage') + '</span>' +
       '<span class="project-row-col project-row-priority sortable-col" data-sort="priority">Priority' + arrow('priority') + '</span>' +
       '<span class="project-row-col project-row-updated sortable-col" data-sort="updated">Updated' + arrow('updated') + '</span>' +
@@ -410,18 +411,12 @@
     var stageBadgeHtml = '<span class="stage-badge ' + stageClass + '">' + escapeHtml(project.stage || 'Idea') + '</span>';
 
     var latest = latestUpdates[project.id];
-    var snippetHtml = '';
-    if (latest) {
-      var snippet = latest.content.length > 120 ? latest.content.slice(0, 120) + '…' : latest.content;
-      snippetHtml = '<span class="project-row-snippet">' + escapeHtml(snippet) + '</span>';
-    }
+    var snippetText = latest ? (latest.content.length > 100 ? latest.content.slice(0, 100) + '…' : latest.content) : '—';
 
     return (
       '<a href="/project.html?id=' + project.id + '" class="project-row">' +
-      '  <span class="project-row-name">' +
-      '    <span class="project-row-title">' + escapeHtml(project.name) + '</span>' +
-      snippetHtml +
-      '  </span>' +
+      '  <span class="project-row-name">' + escapeHtml(project.name) + '</span>' +
+      '  <span class="project-row-col project-row-lastupdate">' + escapeHtml(snippetText) + '</span>' +
       '  <span class="project-row-col project-row-stage">' + stageBadgeHtml + '</span>' +
       '  <span class="project-row-col project-row-priority">' + (priorityHtml || '<span class="priority-badge priority-none">—</span>') + '</span>' +
       '  <span class="project-row-col project-row-updated">' + (updatedStr || '') + (staleHtml ? ' ' + staleHtml : '') + '</span>' +

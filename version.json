@@ -1,7 +1,17 @@
 {
-  "version": "1.7.0",
+  "version": "1.7.1",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "1.7.1",
+      "date": "2026-04-08",
+      "summary": "Last Update shown as a separate column on the dashboard",
+      "changes": [
+        "Added 'Last Update' column between Project name and Stage",
+        "Shows truncated latest update text (100 chars) for each project",
+        "Reverted subtitle approach in favor of dedicated column"
+      ]
+    },
     {
       "version": "1.7.0",
       "date": "2026-04-08",
