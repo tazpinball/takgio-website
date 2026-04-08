@@ -1,7 +1,15 @@
 {
-  "version": "1.7.3",
+  "version": "1.7.4",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "1.7.4",
+      "date": "2026-04-08",
+      "summary": "Last Update column prefers release notes over raw content",
+      "changes": [
+        "Dashboard Last Update column now shows release_notes when available, falls back to content"
+      ]
+    },
     {
       "version": "1.7.3",
       "date": "2026-04-08",

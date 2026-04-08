@@ -167,7 +167,7 @@
 
     var results = await Promise.all([
       sb.from('projects').select('*').order('updated_at', { ascending: false }),
-      sb.from('updates').select('project_id, content, created_at, update_type').order('created_at', { ascending: false })
+      sb.from('updates').select('project_id, content, release_notes, created_at, update_type').order('created_at', { ascending: false })
     ]);
 
     if (results[0].error) {
@@ -411,7 +411,8 @@
     var stageBadgeHtml = '<span class="stage-badge ' + stageClass + '">' + escapeHtml(project.stage || 'Idea') + '</span>';
 
     var latest = latestUpdates[project.id];
-    var snippetText = latest ? (latest.content.length > 250 ? latest.content.slice(0, 250) + '…' : latest.content) : '—';
+    var updateText = latest ? (latest.release_notes || latest.content) : '';
+    var snippetText = updateText ? (updateText.length > 250 ? updateText.slice(0, 250) + '…' : updateText) : '—';
 
     return (
       '<a href="/project.html?id=' + project.id + '" class="project-row">' +
