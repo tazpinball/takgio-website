@@ -100,41 +100,18 @@
     var projectName = t.projects ? t.projects.name : 'Unknown Project';
     var projectId = t.projects ? t.projects.id : '';
 
-    var responsesHtml = '';
-    if (t.task_responses && t.task_responses.length > 0) {
-      responsesHtml = t.task_responses.map(function (r) {
-        return '<div style="margin-top:0.5rem; padding-top:0.5rem; border-top:1px solid var(--color-border); font-size:0.85rem;">' +
-          '<strong>' + escapeHtml(r.created_by_name || 'Someone') + ':</strong> ' + escapeHtml(r.content) +
-          (r.file_url ? ' <a href="' + escapeAttr(r.file_url) + '" target="_blank" rel="noopener" style="font-size:0.8rem;">[attachment]</a>' : '') +
-          '<div style="font-size:0.72rem; color:var(--color-text-muted); margin-top:0.15rem;">' + formatDate(r.created_at) + '</div>' +
-          '</div>';
-      }).join('');
-    }
-
-    var actionsHtml = '';
-    if (t.status === 'Open') {
-      actionsHtml =
-        '<div style="margin-top:0.75rem; display:flex; gap:0.5rem;">' +
-        '  <button class="btn-edit" style="font-size:0.78rem; padding:0.25rem 0.6rem;" onclick="MyTasks.respond(\'' + t.id + '\')">Respond</button>' +
-        '  <button class="btn-modal-secondary" style="font-size:0.78rem; padding:0.25rem 0.6rem;" onclick="MyTasks.complete(\'' + t.id + '\')">Mark Complete</button>' +
-        '</div>';
-    }
-
     return (
-      '<div class="task-card">' +
-      '  <div class="task-card-header">' +
-      '    <div>' +
-      '      <div class="task-card-body">' + escapeHtml(t.description) + '</div>' +
-      '      <div class="task-card-meta" style="margin-top:0.35rem;">' +
-      '        <a href="/project.html?id=' + escapeAttr(projectId) + '" style="color:var(--color-accent); text-decoration:none; font-weight:500;">' + escapeHtml(projectName) + '</a>' +
-      '        &middot; From ' + escapeHtml(t.assigned_by_name || 'Unknown') +
-      '        &middot; ' + formatDate(t.created_at) +
-      '      </div>' +
-      '    </div>' +
-      '    <span class="task-status-badge ' + statusClass + '">' + escapeHtml(t.status) + '</span>' +
-      '  </div>' +
-      responsesHtml +
-      actionsHtml +
+      '<div class="task-row">' +
+      '  <span class="task-row-desc">' + escapeHtml(t.description) + '</span>' +
+      '  <span class="task-row-assignee"><a href="/project.html?id=' + escapeAttr(projectId) + '" style="color:var(--color-accent); text-decoration:none;">' + escapeHtml(projectName) + '</a></span>' +
+      '  <span class="task-row-date">' + formatDate(t.created_at) + '</span>' +
+      '  <span class="task-row-status"><span class="task-status-badge ' + statusClass + '">' + escapeHtml(t.status) + '</span></span>' +
+      (t.status === 'Open'
+        ? '  <span class="task-row-actions">' +
+          '<button class="btn-edit" style="font-size:0.75rem; padding:0.2rem 0.5rem;" onclick="MyTasks.respond(\'' + t.id + '\')">Respond</button>' +
+          '<button class="btn-modal-secondary" style="font-size:0.75rem; padding:0.2rem 0.5rem;" onclick="MyTasks.complete(\'' + t.id + '\')">Complete</button>' +
+          '</span>'
+        : '  <span class="task-row-actions"></span>') +
       '</div>'
     );
   }

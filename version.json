@@ -1,7 +1,16 @@
 {
-  "version": "1.9.0",
+  "version": "1.9.1",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "1.9.1",
+      "date": "2026-04-08",
+      "summary": "Compact task rows on My Tasks page",
+      "changes": [
+        "My Tasks page now uses the same compact single-line row format as the project detail page",
+        "Shows description, project name (linked), date, status, and actions all inline"
+      ]
+    },
     {
       "version": "1.9.0",
       "date": "2026-04-08",
