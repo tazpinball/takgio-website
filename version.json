@@ -1,7 +1,18 @@
 {
-  "version": "2.0.0",
+  "version": "2.1.0",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "2.1.0",
+      "date": "2026-04-08",
+      "summary": "Open tasks count column on dashboard",
+      "changes": [
+        "Added 'Tasks' column to dashboard showing open task count per project",
+        "Red badge displays the count, dash shown when zero",
+        "Column is sortable (click header to sort by task count)",
+        "Open tasks fetched in parallel with projects and updates"
+      ]
+    },
     {
       "version": "2.0.0",
       "date": "2026-04-08",

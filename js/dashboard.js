@@ -160,6 +160,7 @@
 
   // --- Load Projects ---
   var latestUpdates = {}; // project_id -> latest update content
+  var openTaskCounts = {}; // project_id -> count of open tasks
 
   async function loadProjects() {
     var grid = document.getElementById('projects-grid');
@@ -167,7 +168,8 @@
 
     var results = await Promise.all([
       sb.from('projects').select('*').order('updated_at', { ascending: false }),
-      sb.from('updates').select('project_id, content, release_notes, created_at, update_type').order('created_at', { ascending: false })
+      sb.from('updates').select('project_id, content, release_notes, created_at, update_type').order('created_at', { ascending: false }),
+      sb.from('tasks').select('project_id, status').eq('status', 'Open')
     ]);
 
     if (results[0].error) {
@@ -183,6 +185,12 @@
       if (!latestUpdates[u.project_id]) {
         latestUpdates[u.project_id] = u;
       }
+    });
+
+    // Build map of open task counts per project
+    openTaskCounts = {};
+    (results[2].data || []).forEach(function (t) {
+      openTaskCounts[t.project_id] = (openTaskCounts[t.project_id] || 0) + 1;
     });
 
     updateStats();
@@ -325,6 +333,7 @@
       '<span class="project-row-name sortable-col" data-sort="name">Project' + arrow('name') + '</span>' +
       '<span class="project-row-col project-row-stage sortable-col" data-sort="stage">Stage' + arrow('stage') + '</span>' +
       '<span class="project-row-col project-row-priority sortable-col" data-sort="priority">Priority' + arrow('priority') + '</span>' +
+      '<span class="project-row-col project-row-tasks sortable-col" data-sort="tasks">Tasks' + arrow('tasks') + '</span>' +
       '<span class="project-row-col project-row-updated sortable-col" data-sort="updated">Updated' + arrow('updated') + '</span>' +
       '<span class="project-row-col project-row-lastupdate">Last Update</span>' +
       '</div>';
@@ -383,6 +392,12 @@
       });
     } else if (currentSortCol === 'name') {
       sorted.sort(function (a, b) { return a.name.localeCompare(b.name) * dir; });
+    } else if (currentSortCol === 'tasks') {
+      sorted.sort(function (a, b) {
+        var ta = openTaskCounts[a.id] || 0;
+        var tb = openTaskCounts[b.id] || 0;
+        return (tb - ta) * dir;
+      });
     } else if (currentSortCol === 'created') {
       sorted.sort(function (a, b) { return (new Date(b.created_at) - new Date(a.created_at)) * dir; });
     }
@@ -417,8 +432,12 @@
     return (
       '<a href="/project.html?id=' + project.id + '" class="project-row">' +
       '  <span class="project-row-name">' + escapeHtml(project.name) + '</span>' +
+    var taskCount = openTaskCounts[project.id] || 0;
+    var taskHtml = taskCount > 0 ? '<span class="task-count-badge">' + taskCount + '</span>' : '—';
+
       '  <span class="project-row-col project-row-stage">' + stageBadgeHtml + '</span>' +
       '  <span class="project-row-col project-row-priority">' + (priorityHtml || '<span class="priority-badge priority-none">—</span>') + '</span>' +
+      '  <span class="project-row-col project-row-tasks">' + taskHtml + '</span>' +
       '  <span class="project-row-col project-row-updated">' + (updatedStr || '') + (staleHtml ? ' ' + staleHtml : '') + '</span>' +
       '  <span class="project-row-col project-row-lastupdate">' + escapeHtml(snippetText) + '</span>' +
       '</a>'
