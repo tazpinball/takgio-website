@@ -1,7 +1,16 @@
 {
-  "version": "1.5.0",
+  "version": "1.5.1",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "1.5.1",
+      "date": "2026-04-08",
+      "summary": "Move update buttons into hours stats bar",
+      "changes": [
+        "Moved Perform Manual Update and Generate AI Update buttons into the hours stats bar",
+        "Hours on the left, action buttons on the right within the same card"
+      ]
+    },
     {
       "version": "1.5.0",
       "date": "2026-04-08",

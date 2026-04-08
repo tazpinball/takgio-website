@@ -159,31 +159,33 @@
       linksHtml +
       '</div>' +
 
-      // Hours stats bar
+      // Hours stats bar + update action buttons
       (function () {
         var stats = calcHoursStats();
         return '<div class="project-hours-bar">' +
-          '<div class="overview-stat">' +
-          '  <span class="overview-number">' + formatHours(stats.total) + 'h</span>' +
-          '  <span class="overview-label">Total</span>' +
+          '<div class="hours-stats">' +
+          '  <div class="overview-stat">' +
+          '    <span class="overview-number">' + formatHours(stats.total) + 'h</span>' +
+          '    <span class="overview-label">Total</span>' +
+          '  </div>' +
+          '  <div class="overview-stat">' +
+          '    <span class="overview-number overview-number-active">' + formatHours(stats.today) + 'h</span>' +
+          '    <span class="overview-label">Today</span>' +
+          '  </div>' +
+          '  <div class="overview-stat">' +
+          '    <span class="overview-number overview-number-live">' + formatHours(stats.week) + 'h</span>' +
+          '    <span class="overview-label">This Week</span>' +
+          '  </div>' +
           '</div>' +
-          '<div class="overview-stat">' +
-          '  <span class="overview-number overview-number-active">' + formatHours(stats.today) + 'h</span>' +
-          '  <span class="overview-label">Today</span>' +
-          '</div>' +
-          '<div class="overview-stat">' +
-          '  <span class="overview-number overview-number-live">' + formatHours(stats.week) + 'h</span>' +
-          '  <span class="overview-label">This Week</span>' +
+          '<div class="update-action-buttons">' +
+          '  <button type="button" class="btn-manual-update" id="btn-manual-update">&#x270F; Perform Manual Update</button>' +
+          (p.github_repo ? '  <button type="button" class="btn-ai-update" id="btn-ai-update">&#x2728; Generate AI Update</button>' : '') +
           '</div>' +
           '</div>';
       })() +
 
-      // Update actions
+      // Update form (hidden by default)
       '<div class="update-form-section">' +
-      '  <div class="update-action-buttons">' +
-      '    <button type="button" class="btn-manual-update" id="btn-manual-update">&#x270F; Perform Manual Update</button>' +
-      (p.github_repo ? '    <button type="button" class="btn-ai-update" id="btn-ai-update">&#x2728; Generate AI Update</button>' : '') +
-      '  </div>' +
       '  <form class="update-form" id="form-add-update" style="display:none;">' +
       '    <textarea id="update-content" placeholder="What was done?" required></textarea>' +
       '    <div class="update-form-row">' +

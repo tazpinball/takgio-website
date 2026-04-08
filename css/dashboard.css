@@ -317,12 +317,18 @@
 /* ===== Project Hours Bar ===== */
 .project-hours-bar {
   display: flex;
-  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
   background: var(--color-bg-white);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 1rem 1.5rem;
   margin-bottom: 1rem;
+}
+
+.hours-stats {
+  display: flex;
+  gap: 2rem;
 }
 
 /* ===== Toolbar ===== */
@@ -968,7 +974,6 @@
 .update-action-buttons {
   display: flex;
   gap: 0.5rem;
-  margin-bottom: 0.75rem;
 }
 
 .btn-manual-update {
