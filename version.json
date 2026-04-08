@@ -1,7 +1,16 @@
 {
-  "version": "2.2.1",
+  "version": "2.3.0",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "2.3.0",
+      "date": "2026-04-08",
+      "summary": "Simplified hours stats to Total Hours only",
+      "changes": [
+        "Removed Today and This Week hours stats — only Total Hours remains",
+        "Today/This Week were unreliable since hours are tied to update post time, not when work was done"
+      ]
+    },
     {
       "version": "2.2.1",
       "date": "2026-04-08",

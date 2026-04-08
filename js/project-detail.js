@@ -171,15 +171,7 @@
           '<div class="hours-stats">' +
           '  <div class="overview-stat">' +
           '    <span class="overview-number">' + formatHours(stats.total) + 'h</span>' +
-          '    <span class="overview-label">Total</span>' +
-          '  </div>' +
-          '  <div class="overview-stat">' +
-          '    <span class="overview-number overview-number-active">' + formatHours(stats.today) + 'h</span>' +
-          '    <span class="overview-label">Today</span>' +
-          '  </div>' +
-          '  <div class="overview-stat">' +
-          '    <span class="overview-number overview-number-live">' + formatHours(stats.week) + 'h</span>' +
-          '    <span class="overview-label">This Week</span>' +
+          '    <span class="overview-label">Total Hours</span>' +
           '  </div>' +
           '</div>' +
           '<div class="update-action-buttons">' +
@@ -250,25 +242,11 @@
 
   // --- Hours Stats ---
   function calcHoursStats() {
-    var now = new Date();
-    var todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    var weekStart = new Date(todayStart);
-    weekStart.setDate(weekStart.getDate() - weekStart.getDay());
-
     var total = 0;
-    var today = 0;
-    var week = 0;
-
     updates.forEach(function (u) {
-      var h = parseFloat(u.hours) || 0;
-      if (h === 0) return;
-      total += h;
-      var d = new Date(u.created_at);
-      if (d >= todayStart) today += h;
-      if (d >= weekStart) week += h;
+      total += parseFloat(u.hours) || 0;
     });
-
-    return { total: total, today: today, week: week };
+    return { total: total };
   }
 
   function formatHours(n) {
