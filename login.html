@@ -28,6 +28,21 @@
         <button type="submit" class="btn-login" id="btn-login">Sign In</button>
         <div id="login-error" class="login-error"></div>
       </form>
+
+      <!-- Password Reset Form (hidden by default) -->
+      <form id="reset-form" class="login-form" style="display:none;">
+        <p style="font-size:0.9rem; color:var(--color-text-secondary); margin-bottom:1rem;">Set your new password below.</p>
+        <div class="form-field">
+          <label for="reset-password">New Password</label>
+          <input type="password" id="reset-password" placeholder="New password" required minlength="6" autocomplete="new-password">
+        </div>
+        <div class="form-field">
+          <label for="reset-confirm">Confirm Password</label>
+          <input type="password" id="reset-confirm" placeholder="Confirm password" required minlength="6" autocomplete="new-password">
+        </div>
+        <button type="submit" class="btn-login" id="btn-reset">Update Password</button>
+        <div id="reset-error" class="login-error"></div>
+      </form>
     </div>
   </div>
 

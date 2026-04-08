@@ -15,6 +15,50 @@
   // --- Login page logic ---
   var loginForm = document.getElementById('login-form');
   if (loginForm) {
+    // Listen for auth state changes (handles recovery token from email link)
+    sb.auth.onAuthStateChange(function (event, session) {
+      if (event === 'PASSWORD_RECOVERY') {
+        // Show reset form, hide login form
+        loginForm.style.display = 'none';
+        var resetForm = document.getElementById('reset-form');
+        if (resetForm) {
+          resetForm.style.display = '';
+          document.querySelector('.login-subtitle').textContent = 'Reset Password';
+        }
+      }
+    });
+
+    // Password reset form
+    var resetForm = document.getElementById('reset-form');
+    if (resetForm) {
+      resetForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var password = document.getElementById('reset-password').value;
+        var confirm = document.getElementById('reset-confirm').value;
+        var errorEl = document.getElementById('reset-error');
+        var btn = document.getElementById('btn-reset');
+
+        errorEl.textContent = '';
+        if (password !== confirm) {
+          errorEl.textContent = 'Passwords do not match.';
+          return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = 'Updating...';
+
+        var result = await sb.auth.updateUser({ password: password });
+        if (result.error) {
+          errorEl.textContent = result.error.message;
+          btn.disabled = false;
+          btn.textContent = 'Update Password';
+          return;
+        }
+
+        window.location.href = '/dashboard.html';
+      });
+    }
+
     loginForm.addEventListener('submit', async function (e) {
       e.preventDefault();
       var email = document.getElementById('login-email').value.trim();

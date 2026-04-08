@@ -1,7 +1,17 @@
 {
-  "version": "2.3.0",
+  "version": "2.3.1",
   "date": "2026-04-08",
   "releases": [
+    {
+      "version": "2.3.1",
+      "date": "2026-04-08",
+      "summary": "Password recovery flow on login page",
+      "changes": [
+        "Login page now handles password recovery tokens from Supabase email links",
+        "Shows a Set New Password form when recovery token is detected",
+        "Password confirmation with validation before updating"
+      ]
+    },
     {
       "version": "2.3.0",
       "date": "2026-04-08",
