@@ -1,7 +1,18 @@
 {
-  "version": "2.3.1",
-  "date": "2026-04-08",
+  "version": "2.4.0",
+  "date": "2026-04-09",
   "releases": [
+    {
+      "version": "2.4.0",
+      "date": "2026-04-09",
+      "summary": "Collapsible task groups and cleaner activity timeline",
+      "changes": [
+        "Tasks section now shows summary counts by status (Open, Completed) with collapsible groups",
+        "Click a status group header to expand/collapse task rows",
+        "All groups start collapsed by default to keep the page compact",
+        "Removed task created/completed entries from the activity timeline — only updates and stage transitions shown"
+      ]
+    },
     {
       "version": "2.3.1",
       "date": "2026-04-08",

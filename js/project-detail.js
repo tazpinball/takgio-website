@@ -238,6 +238,22 @@
     document.getElementById('btn-new-task').addEventListener('click', openNewTaskModal);
     var btnAi = document.getElementById('btn-ai-update');
     if (btnAi) btnAi.addEventListener('click', generateAIUpdate);
+
+    // Bind task group expand/collapse toggles
+    var groupHeaders = document.querySelectorAll('.task-group-header');
+    groupHeaders.forEach(function (header) {
+      header.addEventListener('click', function () {
+        var rows = header.nextElementSibling;
+        var chevron = header.querySelector('.task-group-chevron');
+        if (rows.style.display === 'none') {
+          rows.style.display = '';
+          chevron.textContent = '\u25BC';
+        } else {
+          rows.style.display = 'none';
+          chevron.textContent = '\u25B6';
+        }
+      });
+    });
   }
 
   // --- Hours Stats ---
@@ -275,22 +291,6 @@
       });
     });
 
-    // Include task events in timeline
-    tasks.forEach(function (t) {
-      entries.push({
-        type: 'task_created',
-        date: new Date(t.created_at),
-        data: t
-      });
-      if (t.completed_at) {
-        entries.push({
-          type: 'task_completed',
-          date: new Date(t.completed_at),
-          data: t
-        });
-      }
-    });
-
     // Sort newest first
     entries.sort(function (a, b) { return b.date - a.date; });
 
@@ -304,12 +304,6 @@
   function renderTimelineEntry(entry) {
     if (entry.type === 'transition') {
       return renderTransitionEntry(entry.data);
-    }
-    if (entry.type === 'task_created') {
-      return renderTaskTimelineEntry(entry.data, 'created');
-    }
-    if (entry.type === 'task_completed') {
-      return renderTaskTimelineEntry(entry.data, 'completed');
     }
     return renderUpdateEntry(entry.data);
   }
@@ -371,67 +365,74 @@
     );
   }
 
-  function renderTaskTimelineEntry(t, action) {
-    var text = action === 'created'
-      ? esc(t.assigned_by_name || 'Someone') + ' assigned a task to ' + esc(t.assigned_to_name || 'someone') + ': "' + esc(t.description) + '"'
-      : 'Task completed: "' + esc(t.description) + '"';
-
+  // --- Tasks ---
+  function renderTaskRow(t) {
+    var statusClass = t.status === 'Completed' ? 'task-completed' : 'task-open';
     return (
-      '<div class="timeline-entry">' +
-      '  <div class="timeline-dot dot-system"></div>' +
-      '  <div class="timeline-entry-card">' +
-      '    <div class="timeline-entry-header">' +
-      '      <span class="timeline-entry-system">' + text + '</span>' +
-      '      <span>' + formatDate(action === 'created' ? t.created_at : t.completed_at) + '</span>' +
-      '    </div>' +
-      '  </div>' +
+      '<div class="task-row">' +
+      '  <span class="task-row-desc">' + esc(t.description) + '</span>' +
+      '  <span class="task-row-assignee">' + esc(t.assigned_to_name || 'Unassigned') + '</span>' +
+      '  <span class="task-row-date">' + formatDate(t.created_at) + '</span>' +
+      '  <span class="task-row-status"><span class="task-status-badge ' + statusClass + '">' + esc(t.status) + '</span></span>' +
+      (t.status === 'Open'
+        ? '  <span class="task-row-actions">' +
+          '<button class="btn-edit" style="font-size:0.75rem; padding:0.2rem 0.5rem;" onclick="ProjectDetail.respondToTask(\'' + t.id + '\')">Respond</button>' +
+          '<button class="btn-modal-secondary" style="font-size:0.75rem; padding:0.2rem 0.5rem;" onclick="ProjectDetail.completeTask(\'' + t.id + '\')">Complete</button>' +
+          '</span>'
+        : '  <span class="task-row-actions"></span>') +
       '</div>'
     );
   }
 
-  // --- Tasks ---
   function renderTasks() {
     if (tasks.length === 0) {
       return '<div class="empty-state" style="padding:1.5rem;"><p>No tasks yet.</p></div>';
     }
 
-    return tasks.map(function (t) {
-      var statusClass = t.status === 'Completed' ? 'task-completed' : 'task-open';
-      var responsesHtml = '';
-      if (t.task_responses && t.task_responses.length > 0) {
-        responsesHtml = t.task_responses.map(function (r) {
-          return '<div style="margin-top:0.5rem; padding-top:0.5rem; border-top:1px solid var(--color-border); font-size:0.85rem;">' +
-            '<strong>' + esc(r.created_by_name || 'Someone') + ':</strong> ' + esc(r.content) +
-            (r.file_url ? ' <a href="' + escAttr(r.file_url) + '" target="_blank" rel="noopener" style="font-size:0.8rem;">[attachment]</a>' : '') +
-            '<div style="font-size:0.72rem; color:var(--color-text-muted); margin-top:0.15rem;">' + formatDate(r.created_at) + '</div>' +
-            '</div>';
-        }).join('');
-      }
+    // Group tasks by status
+    var groups = {};
+    tasks.forEach(function (t) {
+      var key = t.status || 'Unknown';
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(t);
+    });
 
-      var actionsHtml = '';
-      if (t.status === 'Open') {
-        actionsHtml =
-          '<div style="margin-top:0.5rem; display:flex; gap:0.5rem;">' +
-          '  <button class="btn-edit" style="font-size:0.78rem; padding:0.25rem 0.6rem;" onclick="ProjectDetail.respondToTask(\'' + t.id + '\')">Respond</button>' +
-          '  <button class="btn-modal-secondary" style="font-size:0.78rem; padding:0.25rem 0.6rem;" onclick="ProjectDetail.completeTask(\'' + t.id + '\')">Mark Complete</button>' +
-          '</div>';
-      }
+    // Ordered status list: Open first, Completed second, then any others
+    var statusOrder = ['Open', 'Completed'];
+    Object.keys(groups).forEach(function (key) {
+      if (statusOrder.indexOf(key) === -1) statusOrder.push(key);
+    });
 
-      return (
-        '<div class="task-row">' +
-        '  <span class="task-row-desc">' + esc(t.description) + '</span>' +
-        '  <span class="task-row-assignee">' + esc(t.assigned_to_name || 'Unassigned') + '</span>' +
-        '  <span class="task-row-date">' + formatDate(t.created_at) + '</span>' +
-        '  <span class="task-row-status"><span class="task-status-badge ' + statusClass + '">' + esc(t.status) + '</span></span>' +
-        (t.status === 'Open'
-          ? '  <span class="task-row-actions">' +
-            '<button class="btn-edit" style="font-size:0.75rem; padding:0.2rem 0.5rem;" onclick="ProjectDetail.respondToTask(\'' + t.id + '\')">Respond</button>' +
-            '<button class="btn-modal-secondary" style="font-size:0.75rem; padding:0.2rem 0.5rem;" onclick="ProjectDetail.completeTask(\'' + t.id + '\')">Complete</button>' +
-            '</span>'
-          : '  <span class="task-row-actions"></span>') +
-        '</div>'
+    // Summary bar with counts
+    var summaryParts = [];
+    statusOrder.forEach(function (status) {
+      if (!groups[status]) return;
+      var badgeClass = status === 'Completed' ? 'task-completed' : 'task-open';
+      summaryParts.push(
+        '<span class="task-status-badge ' + badgeClass + '">' + esc(status) + ': ' + groups[status].length + '</span>'
       );
-    }).join('');
+    });
+    var html = '<div class="task-summary-bar">' + summaryParts.join(' ') + '</div>';
+
+    // Collapsible groups
+    statusOrder.forEach(function (status) {
+      if (!groups[status]) return;
+      var badgeClass = status === 'Completed' ? 'task-completed' : 'task-open';
+      var count = groups[status].length;
+      html +=
+        '<div class="task-group">' +
+        '  <div class="task-group-header">' +
+        '    <span class="task-group-chevron">\u25B6</span>' +
+        '    <span class="task-status-badge ' + badgeClass + '">' + esc(status) + '</span>' +
+        '    <span class="task-group-count">(' + count + ')</span>' +
+        '  </div>' +
+        '  <div class="task-group-rows" style="display:none;">' +
+        groups[status].map(renderTaskRow).join('') +
+        '  </div>' +
+        '</div>';
+    });
+
+    return html;
   }
 
   // --- Generate AI Update ---
