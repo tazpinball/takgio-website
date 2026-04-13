@@ -1,7 +1,16 @@
 {
-  "version": "2.5.0",
+  "version": "2.5.1",
   "date": "2026-04-13",
   "releases": [
+    {
+      "version": "2.5.1",
+      "date": "2026-04-13",
+      "summary": "Default sort by stage and AI Updates column on dashboard",
+      "changes": [
+        "Dashboard now sorts by Stage by default (Idea → Building → UAT → Live → Paused → Discarded)",
+        "Added 'AI Updates' column with green checkmark for projects that have GitHub repo configured"
+      ]
+    },
     {
       "version": "2.5.0",
       "date": "2026-04-13",

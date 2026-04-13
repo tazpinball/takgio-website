@@ -33,7 +33,7 @@
   };
   var PRIORITY_ORDER = { 'High': 0, 'Medium': 1, 'Low': 2 };
   var STAGE_SORT_ORDER = { 'Idea': 0, 'Building': 1, 'UAT': 2, 'Live': 3, 'Paused': 4, 'Discarded': 5 };
-  var currentSortCol = 'updated';
+  var currentSortCol = 'stage';
   var currentSortAsc = true;
   var STALENESS_DAYS = 14;
 
@@ -334,6 +334,7 @@
       '<span class="project-row-col project-row-stage sortable-col" data-sort="stage">Stage' + arrow('stage') + '</span>' +
       '<span class="project-row-col project-row-priority sortable-col" data-sort="priority">Priority' + arrow('priority') + '</span>' +
       '<span class="project-row-col project-row-tasks sortable-col" data-sort="tasks">Tasks' + arrow('tasks') + '</span>' +
+      '<span class="project-row-col project-row-ai">AI Updates</span>' +
       '<span class="project-row-col project-row-updated sortable-col" data-sort="updated">Updated' + arrow('updated') + '</span>' +
       '<span class="project-row-col project-row-lastupdate">Last Update</span>' +
       '</div>';
@@ -438,6 +439,7 @@
       '  <span class="project-row-col project-row-stage">' + stageBadgeHtml + '</span>' +
       '  <span class="project-row-col project-row-priority">' + (priorityHtml || '<span class="priority-badge priority-none">—</span>') + '</span>' +
       '  <span class="project-row-col project-row-tasks">' + taskHtml + '</span>' +
+      '  <span class="project-row-col project-row-ai">' + (project.github_repo ? '<span class="ai-check">&#10003;</span>' : '—') + '</span>' +
       '  <span class="project-row-col project-row-updated">' + (updatedStr || '') + (staleHtml ? ' ' + staleHtml : '') + '</span>' +
       '  <span class="project-row-col project-row-lastupdate">' + escapeHtml(snippetText) + '</span>' +
       '</a>'
