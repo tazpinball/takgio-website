@@ -12,8 +12,8 @@
   var tasks = [];
 
   var STAGE_CLASSES = {
-    'Idea': 'stage-idea', 'Active': 'stage-active', 'Paused': 'stage-paused',
-    'Completed': 'stage-completed', 'Live': 'stage-live', 'Discarded': 'stage-discarded'
+    'Idea': 'stage-idea', 'Building': 'stage-building', 'UAT': 'stage-uat',
+    'Live': 'stage-live', 'Paused': 'stage-paused', 'Discarded': 'stage-discarded'
   };
   var PRIORITY_CLASSES = {
     'High': 'priority-high', 'Medium': 'priority-medium', 'Low': 'priority-low'

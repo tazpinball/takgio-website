@@ -528,10 +528,10 @@
 }
 
 .stage-idea { background: #6c757d; }
-.stage-active { background: #198754; }
+.stage-building { background: #198754; }
+.stage-uat { background: #8b5cf6; }
+.stage-live { background: #0d6efd; }
 .stage-paused { background: #ffc107; color: #333; }
-.stage-completed { background: #0d6efd; }
-.stage-live { background: #20c997; color: #0a3d2e; }
 .stage-discarded { background: #dc3545; }
 
 /* Priority badge */

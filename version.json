@@ -1,7 +1,20 @@
 {
-  "version": "2.4.0",
-  "date": "2026-04-09",
+  "version": "2.5.0",
+  "date": "2026-04-13",
   "releases": [
+    {
+      "version": "2.5.0",
+      "date": "2026-04-13",
+      "summary": "Revised project lifecycle stages: Idea → Building → UAT → Live",
+      "changes": [
+        "Renamed 'Active' stage to 'Building' to better reflect projects under development",
+        "Added new 'UAT' (User Acceptance Testing) stage between Building and Live",
+        "Removed 'Completed' stage (unused)",
+        "Updated stage colors: Building (green), UAT (purple), Live (blue)",
+        "Staleness detection now flags Building projects with no update in 14+ days",
+        "Updated all dropdowns, filters, stats bar, doughnut chart, and documentation"
+      ]
+    },
     {
       "version": "2.4.0",
       "date": "2026-04-09",

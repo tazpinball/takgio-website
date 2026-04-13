@@ -10,7 +10,7 @@ CREATE TABLE projects (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   name TEXT NOT NULL,
   description TEXT,
-  stage TEXT DEFAULT 'Idea' CHECK (stage IN ('Idea', 'Active', 'Paused', 'Completed', 'Live', 'Discarded')),
+  stage TEXT DEFAULT 'Idea' CHECK (stage IN ('Idea', 'Building', 'UAT', 'Live', 'Paused', 'Discarded')),
   priority TEXT CHECK (priority IN ('High', 'Medium', 'Low')),
   category TEXT,
   industry TEXT,

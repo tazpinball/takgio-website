@@ -9,21 +9,21 @@
   var allProjects = [];
   var stageChart = null;
 
-  var STAGE_ORDER = ['Idea', 'Active', 'Paused', 'Completed', 'Live', 'Discarded'];
+  var STAGE_ORDER = ['Idea', 'Building', 'UAT', 'Live', 'Paused', 'Discarded'];
   var STAGE_COLORS = {
     'Idea': '#6c757d',
-    'Active': '#198754',
+    'Building': '#198754',
+    'UAT': '#8b5cf6',
+    'Live': '#0d6efd',
     'Paused': '#ffc107',
-    'Completed': '#0d6efd',
-    'Live': '#20c997',
     'Discarded': '#dc3545'
   };
   var STAGE_CLASSES = {
     'Idea': 'stage-idea',
-    'Active': 'stage-active',
-    'Paused': 'stage-paused',
-    'Completed': 'stage-completed',
+    'Building': 'stage-building',
+    'UAT': 'stage-uat',
     'Live': 'stage-live',
+    'Paused': 'stage-paused',
     'Discarded': 'stage-discarded'
   };
   var PRIORITY_CLASSES = {
@@ -32,7 +32,7 @@
     'Low': 'priority-low'
   };
   var PRIORITY_ORDER = { 'High': 0, 'Medium': 1, 'Low': 2 };
-  var STAGE_SORT_ORDER = { 'Active': 0, 'Idea': 1, 'Paused': 2, 'Completed': 3, 'Live': 4, 'Discarded': 5 };
+  var STAGE_SORT_ORDER = { 'Idea': 0, 'Building': 1, 'UAT': 2, 'Live': 3, 'Paused': 4, 'Discarded': 5 };
   var currentSortCol = 'updated';
   var currentSortAsc = true;
   var STALENESS_DAYS = 14;
@@ -201,18 +201,18 @@
   // --- Stats ---
   function updateStats() {
     var total = allProjects.length;
-    var active = allProjects.filter(function (p) { return p.stage === 'Active'; }).length;
+    var active = allProjects.filter(function (p) { return p.stage === 'Building'; }).length;
     var live = allProjects.filter(function (p) { return p.stage === 'Live'; }).length;
     var stale = allProjects.filter(function (p) { return isStale(p); }).length;
 
     document.getElementById('stat-total').textContent = total;
-    document.getElementById('stat-active').textContent = active;
+    document.getElementById('stat-building').textContent = active;
     document.getElementById('stat-live').textContent = live;
     document.getElementById('stat-stale').textContent = stale;
   }
 
   function isStale(project) {
-    if (project.stage !== 'Active') return false;
+    if (project.stage !== 'Building') return false;
     if (!project.updated_at) return false;
     var updated = new Date(project.updated_at);
     var now = new Date();

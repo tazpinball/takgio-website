@@ -76,15 +76,15 @@ When a task or request is assigned to someone (e.g., Ted asks Ritchie to review 
 
 ### Stages
 
-Every project moves through a simple, non-bureaucratic lifecycle. There are no rigid gates — an idea can jump straight to Active if Ted starts building it the same day. The stages reflect reality, not process.
+Every project moves through a simple, non-bureaucratic lifecycle. There are no rigid gates — an idea can jump straight to Building if Ted starts building it the same day. The stages reflect reality, not process.
 
 | Stage | Meaning |
 |-------|---------|
 | **Idea** | Just a thought. Maybe a sentence and a category. No commitment, no active work. May include early research or a quick prototype to test viability. |
-| **Active** | This is a real project. Work is happening. Updates are being logged. |
+| **Building** | This is a real project. Work is happening. Updates are being logged. |
+| **UAT** | User Acceptance Testing. The build is feature-complete for the current scope and being tested before going live. |
+| **Live** | Deployed and running in production. Implies ongoing maintenance, monitoring, or iteration. |
 | **Paused** | Still viable, but deprioritized. Other things took precedence. Could resume at any time. |
-| **Completed** | The current scope of work is finished. The project shipped what it set out to build. If it gets deployed to production, it moves to Live. |
-| **Live** | Deployed and running in production. Supersedes Completed. Implies ongoing maintenance, monitoring, or iteration. A project that is both "done" and "running" is Live, not Completed. |
 | **Discarded** | Evaluated and intentionally killed. Not coming back. |
 
 ### Priority as a Separate Axis
