@@ -1,7 +1,20 @@
 {
-  "version": "2.5.1",
-  "date": "2026-04-13",
+  "version": "2.6.0",
+  "date": "2026-04-14",
   "releases": [
+    {
+      "version": "2.6.0",
+      "date": "2026-04-14",
+      "summary": "Education industry vertical and anonymous case study",
+      "changes": [
+        "Added Education as third industry vertical across the entire site (teal theme)",
+        "New Education section on Services page with 4 service cards: Adaptive Learning, Assessment, Curriculum Intelligence, Engagement Analytics",
+        "New anonymous case study: AI-Powered Personalized Learning Platform (based on real product, written to protect competitive details)",
+        "Case Studies page switched from 3-column to 2x2 grid layout for 4 cards",
+        "Updated Industries We Serve on homepage from 2-column to 3-column grid",
+        "Updated footers, taglines, and CTAs on all public pages to include Education"
+      ]
+    },
     {
       "version": "2.5.1",
       "date": "2026-04-13",

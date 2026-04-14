@@ -21,6 +21,8 @@
   --color-construction-bg: #fffbeb;
   --color-legal: #8b5cf6;
   --color-legal-bg: #f5f3ff;
+  --color-education: #0d9488;
+  --color-education-bg: #f0fdfa;
 
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
@@ -399,6 +401,14 @@ img { max-width: 100%; display: block; }
   color: var(--color-legal);
 }
 
+.card-education {
+  border-top: 3px solid var(--color-education);
+}
+.card-education .card-icon {
+  background: var(--color-education-bg);
+  color: var(--color-education);
+}
+
 /* Tags */
 .tag {
   display: inline-block;
@@ -417,6 +427,11 @@ img { max-width: 100%; display: block; }
 .tag-legal {
   background: var(--color-legal-bg);
   color: #6d28d9;
+}
+
+.tag-education {
+  background: var(--color-education-bg);
+  color: #0f766e;
 }
 
 .tag-tech {
