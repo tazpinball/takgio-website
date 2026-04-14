@@ -1,7 +1,16 @@
 {
-  "version": "2.7.0",
+  "version": "2.7.1",
   "date": "2026-04-14",
   "releases": [
+    {
+      "version": "2.7.1",
+      "date": "2026-04-14",
+      "summary": "About page updated for three industries",
+      "changes": [
+        "Updated About page text, stats, and team bios to reference all three industries (Construction, Legal, Education)",
+        "Industry verticals stat changed from 2 to 3"
+      ]
+    },
     {
       "version": "2.7.0",
       "date": "2026-04-14",
