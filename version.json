@@ -1,7 +1,21 @@
 {
-  "version": "2.6.0",
+  "version": "2.7.0",
   "date": "2026-04-14",
   "releases": [
+    {
+      "version": "2.7.0",
+      "date": "2026-04-14",
+      "summary": "Visual design refresh — dark gradient hero, card depth, tighter spacing, tech strip",
+      "changes": [
+        "Dark gradient hero on homepage with abstract blue glow effect and white text",
+        "Added 'Built with' tech strip below hero showing Claude, Vercel, and Supabase",
+        "Cards now have persistent subtle shadows with enhanced hover depth (lift + larger shadow)",
+        "Primary buttons use gradient fill with colored shadow for premium feel",
+        "Section-alt backgrounds use subtle gradient instead of flat color",
+        "Tighter mobile spacing — reduced section padding and grid gaps on small screens",
+        "Case study listing cards and featured cards also get enhanced shadow treatment"
+      ]
+    },
     {
       "version": "2.6.0",
       "date": "2026-04-14",

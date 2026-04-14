@@ -93,7 +93,7 @@ img { max-width: 100%; display: block; }
 
 .section-alt {
   padding: var(--space-2xl) 0;
-  background: var(--color-bg-subtle);
+  background: linear-gradient(180deg, var(--color-bg-subtle) 0%, var(--color-bg) 100%);
 }
 
 .section-navy {
@@ -152,14 +152,17 @@ img { max-width: 100%; display: block; }
 }
 
 .btn-primary {
-  background: var(--color-accent);
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
   color: #fff;
   border-color: var(--color-accent);
+  box-shadow: 0 2px 8px rgba(74, 108, 247, 0.25);
 }
 .btn-primary:hover {
-  background: var(--color-accent-hover);
+  background: linear-gradient(135deg, var(--color-accent-hover) 0%, #2e4ad4 100%);
   border-color: var(--color-accent-hover);
   color: #fff;
+  box-shadow: 0 4px 14px rgba(74, 108, 247, 0.35);
+  transform: translateY(-1px);
 }
 
 .btn-secondary {
@@ -342,10 +345,11 @@ img { max-width: 100%; display: block; }
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
-  transition: box-shadow 0.2s, transform 0.2s;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
 .card:hover {
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
 }
 
 .card-icon {
@@ -381,7 +385,7 @@ img { max-width: 100%; display: block; }
 }
 .card-link:hover { color: inherit; }
 .card-link .card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 /* Industry cards */
@@ -510,6 +514,42 @@ img { max-width: 100%; display: block; }
 }
 .hero-sm h1 {
   font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+/* Dark hero variant (homepage) */
+.hero-dark {
+  background: linear-gradient(135deg, #1a1a2e 0%, #1e2a4a 50%, #253b6e 100%);
+  position: relative;
+  overflow: hidden;
+}
+.hero-dark::after {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -10%;
+  width: 60%;
+  height: 180%;
+  background: radial-gradient(ellipse, rgba(74, 108, 247, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-dark .container {
+  position: relative;
+  z-index: 1;
+}
+.hero-dark h1 {
+  color: #ffffff;
+}
+.hero-dark p {
+  color: rgba(255, 255, 255, 0.7);
+}
+.hero-dark .btn-secondary {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.hero-dark .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
 }
 
 /* 10. Case Study Cards
@@ -697,11 +737,12 @@ img { max-width: 100%; display: block; }
   padding: var(--space-lg);
   text-decoration: none;
   color: inherit;
-  transition: box-shadow 0.25s, transform 0.25s;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
 .cs-listing-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
   color: inherit;
 }
 .cs-listing-card .tag { margin-bottom: var(--space-md); }
@@ -853,14 +894,15 @@ img { max-width: 100%; display: block; }
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
-  transition: box-shadow 0.2s, transform 0.2s;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
   text-decoration: none;
   color: inherit;
   display: block;
 }
 .featured-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
   color: inherit;
 }
 .featured-card .tag { margin-bottom: var(--space-md); }
@@ -879,7 +921,51 @@ img { max-width: 100%; display: block; }
   color: var(--color-accent);
 }
 
-/* 14. Claude Partnership Banner
+/* 14. Tech Strip (credibility bar)
+   ---------------------------------------- */
+.tech-strip {
+  padding: var(--space-lg) 0;
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+}
+.tech-strip p {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+  font-weight: 600;
+}
+.tech-strip-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xl);
+  flex-wrap: wrap;
+}
+.tech-strip-logos .tech-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.tech-strip-logos .tech-logo:hover {
+  color: var(--color-text-secondary);
+}
+.tech-strip-logos .tech-logo svg {
+  width: 22px;
+  height: 22px;
+  opacity: 0.6;
+}
+.tech-strip-logos .tech-logo:hover svg {
+  opacity: 0.85;
+}
+
+/* 15. Claude Partnership Banner
    ---------------------------------------- */
 .claude-banner {
   text-align: center;
@@ -893,7 +979,16 @@ img { max-width: 100%; display: block; }
   color: rgba(255,255,255,0.7);
 }
 
-/* 15. Responsive — Tablet (min-width: 640px)
+/* 15a. Responsive — Mobile tightening (max-width: 639px)
+   ---------------------------------------- */
+@media (max-width: 639px) {
+  .section, .section-alt, .section-navy { padding: var(--space-xl) 0; }
+  .hero-dark { padding: var(--space-xl) 0; }
+  .grid-2, .grid-3, .grid-4 { gap: var(--space-md); }
+  .section-header { margin-bottom: var(--space-md); }
+}
+
+/* 15b. Responsive — Tablet (min-width: 640px)
    ---------------------------------------- */
 @media (min-width: 640px) {
   .grid-2 { grid-template-columns: repeat(2, 1fr); }
