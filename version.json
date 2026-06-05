@@ -1,7 +1,16 @@
 {
-  "version": "2.9.1",
+  "version": "2.9.2",
   "date": "2026-06-05",
   "releases": [
+    {
+      "version": "2.9.2",
+      "date": "2026-06-05",
+      "summary": "Live booking link on contact page",
+      "changes": [
+        "Wired the contact-page 'Book an intro call' button to the live Google Calendar appointment schedule ('30 min with Ted', info@takgio.com — weekdays, Eastern, Google Meet auto-added)",
+        "Updated copy from 20-minute to 30-minute intro call; removed the placeholder Cal.com link"
+      ]
+    },
     {
       "version": "2.9.1",
       "date": "2026-06-05",
