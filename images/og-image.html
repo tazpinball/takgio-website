@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    /* Source for images/og-image.png — rendered at 1200x630 via headless Edge.
+       To regenerate: see the comment in version.json release notes or run
+       msedge --headless=new --screenshot --window-size=1200,630 file://.../og-image.html */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1200px; height: 630px; overflow: hidden; }
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      background: radial-gradient(1100px 700px at 78% -10%, #2a3a7a 0%, rgba(42,58,122,0) 55%),
+                  linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #ffffff;
+      position: relative;
+    }
+    .glow {
+      position: absolute; top: -180px; right: -120px;
+      width: 620px; height: 620px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(74,108,247,0.55) 0%, rgba(74,108,247,0) 65%);
+      filter: blur(8px);
+    }
+    .frame {
+      position: relative; z-index: 2;
+      height: 100%;
+      padding: 72px 80px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .top { display: flex; align-items: center; gap: 16px; }
+    .wordmark {
+      font-size: 40px; font-weight: 800; letter-spacing: 0.04em; color: #ffffff;
+    }
+    .dot-row { display: flex; gap: 10px; margin-left: 6px; }
+    .dot { width: 14px; height: 14px; border-radius: 50%; }
+    .dot.c { background: #f59e0b; }
+    .dot.l { background: #8b5cf6; }
+    .dot.e { background: #0d9488; }
+    h1 {
+      font-size: 76px; font-weight: 800; line-height: 1.08; letter-spacing: -0.01em;
+      max-width: 980px;
+    }
+    h1 .accent { color: #6b8aff; }
+    .sub {
+      margin-top: 26px;
+      font-size: 31px; font-weight: 400; line-height: 1.4;
+      color: rgba(255,255,255,0.72); max-width: 880px;
+    }
+    .bottom { display: flex; align-items: center; justify-content: space-between; }
+    .built {
+      font-size: 22px; color: rgba(255,255,255,0.6); font-weight: 500;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .built .star { color: #d97757; font-size: 26px; }
+    .url { font-size: 24px; font-weight: 600; color: #6b8aff; letter-spacing: 0.02em; }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="frame">
+    <div class="top">
+      <span class="wordmark">TAKGIO</span>
+      <span class="dot-row"><span class="dot c"></span><span class="dot l"></span><span class="dot e"></span></span>
+    </div>
+    <div>
+      <h1>AI-powered products for<br><span class="accent">Construction, Legal &amp; Education</span></h1>
+      <p class="sub">An AI product studio that turns document-heavy workflows into intelligent products.</p>
+    </div>
+    <div class="bottom">
+      <span class="built"><span class="star">✳</span> Built with Claude by Anthropic</span>
+      <span class="url">www.takgio.com</span>
+    </div>
+  </div>
+</body>
+</html>

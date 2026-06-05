@@ -1,7 +1,22 @@
 {
-  "version": "2.7.1",
-  "date": "2026-04-14",
+  "version": "2.8.0",
+  "date": "2026-06-05",
   "releases": [
+    {
+      "version": "2.8.0",
+      "date": "2026-06-05",
+      "summary": "Marketing & SEO foundation — social share cards, structured data, analytics, Insights blog, lead capture",
+      "changes": [
+        "Open Graph + Twitter Card meta on every public page so shared links render rich preview cards (image, title, description)",
+        "Branded 1200x630 social share image (images/og-image.png) used across all share cards",
+        "JSON-LD structured data: Organization + WebSite on the homepage, Article schema on all case studies and the new blog post",
+        "Canonical URLs on every public page; new sitemap.xml and robots.txt (internal app pages disallowed)",
+        "Google Analytics 4 wired in via js/analytics.js — paste your GA4 Measurement ID to switch it on (off until then, no phantom traffic)",
+        "New Insights blog: insights.html index plus a starter article on why document-heavy industries are the highest-ROI place to deploy AI; added to nav and footer",
+        "Newsletter email capture band in the footer site-wide (posts to Formspree, with spam honeypot)",
+        "Contact page: added a 'Book an intro call' booking callout (set your Cal.com/Calendly link) and the missing Education industry option; honeypot added to the contact form"
+      ]
+    },
     {
       "version": "2.7.1",
       "date": "2026-04-14",

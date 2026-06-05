@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Internal app pages — not for indexing
+Disallow: /dashboard.html
+Disallow: /login.html
+Disallow: /project.html
+Disallow: /tasks.html
+Disallow: /ideas.html
+
+Sitemap: https://www.takgio.com/sitemap.xml
