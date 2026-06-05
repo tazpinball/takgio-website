@@ -1186,3 +1186,161 @@ img { max-width: 100%; display: block; }
   .newsletter-form { flex: 0 1 440px; }
   .insights-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* 21. The TAKGIO Advantage — homepage animated showcase
+   ---------------------------------------- */
+.advantage { position: relative; overflow: hidden; }
+.advantage .section-header h2 { color: #fff; }
+.advantage .section-header p { color: rgba(255, 255, 255, 0.7); }
+
+.advantage-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.advantage-bg::before,
+.advantage-bg::after {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.45;
+}
+.advantage-bg::before {
+  background: radial-gradient(circle, rgba(74, 108, 247, 0.6), transparent 65%);
+  top: -180px;
+  left: -90px;
+  animation: advDrift1 16s ease-in-out infinite alternate;
+}
+.advantage-bg::after {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent 65%);
+  bottom: -220px;
+  right: -70px;
+  animation: advDrift2 20s ease-in-out infinite alternate;
+}
+.advantage .container { position: relative; z-index: 1; }
+
+@keyframes advDrift1 { from { transform: translate(0, 0); } to { transform: translate(90px, 50px); } }
+@keyframes advDrift2 { from { transform: translate(0, 0); } to { transform: translate(-80px, -60px); } }
+@keyframes advSwap { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes advFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+.advantage-grid { display: grid; gap: var(--space-lg); }
+
+/* Left: rotating proof panel */
+.adv-showcase {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  min-height: 340px;
+}
+.adv-tag { align-self: flex-start; margin-bottom: var(--space-xs); }
+.adv-metric { display: flex; align-items: flex-start; gap: 4px; line-height: 1; }
+.adv-num {
+  font-size: clamp(3.5rem, 9vw, 6rem);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.adv-suffix {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-top: 0.35em;
+}
+.adv-claim { color: #fff; font-size: 1.35rem; }
+.adv-desc { color: rgba(255, 255, 255, 0.68); font-size: 0.98rem; max-width: 46ch; flex: 1 1 auto; }
+
+.adv-dots { display: flex; gap: var(--space-sm); margin-top: var(--space-md); }
+.adv-dot {
+  flex: 1;
+  height: 4px;
+  padding: 0;
+  border: none;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.adv-dot.is-active { background: rgba(255, 255, 255, 0.25); }
+.adv-dot.is-active::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent);
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: advFill 4.2s linear forwards;
+}
+.adv-showcase.is-swapping .adv-metric,
+.adv-showcase.is-swapping .adv-claim,
+.adv-showcase.is-swapping .adv-desc { animation: advSwap 0.5s ease both; }
+
+/* Right: competitive comparison */
+.adv-compare {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-xl);
+  display: flex;
+  flex-direction: column;
+}
+.adv-compare-title { color: #fff; font-size: 1.1rem; margin-bottom: var(--space-sm); }
+.adv-compare-head,
+.adv-row {
+  display: grid;
+  grid-template-columns: 1fr 64px 64px;
+  gap: var(--space-md);
+  align-items: center;
+  padding: 0.65rem 0;
+}
+.adv-row { border-top: 1px solid rgba(255, 255, 255, 0.08); }
+.adv-compare-head span:not(:first-child) {
+  text-align: center;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.5);
+}
+.adv-compare-head .col-takgio { color: var(--color-accent); }
+.adv-row span:first-child { color: rgba(255, 255, 255, 0.85); font-size: 0.95rem; }
+.adv-mark { display: flex; justify-content: center; }
+.adv-mark .ico {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.adv-mark.no .ico { background: rgba(255, 255, 255, 0.07); color: rgba(255, 255, 255, 0.4); }
+.adv-mark.yes .ico { background: rgba(74, 108, 247, 0.2); color: #9db4ff; }
+
+/* Animated entrances (only when JS is active) */
+.advantage.js-anim .adv-rows .adv-row { opacity: 0; transform: translateY(8px); }
+.advantage.is-visible .adv-rows .adv-row { animation: advSwap 0.5s ease forwards; }
+.advantage.is-visible .adv-rows .adv-row:nth-child(2) { animation-delay: 0.06s; }
+.advantage.is-visible .adv-rows .adv-row:nth-child(3) { animation-delay: 0.12s; }
+.advantage.is-visible .adv-rows .adv-row:nth-child(4) { animation-delay: 0.18s; }
+.advantage.is-visible .adv-rows .adv-row:nth-child(5) { animation-delay: 0.24s; }
+
+@media (min-width: 1024px) {
+  .advantage-grid { grid-template-columns: 1fr 1fr; gap: var(--space-xl); align-items: stretch; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .advantage-bg::before,
+  .advantage-bg::after,
+  .adv-dot.is-active::after,
+  .adv-showcase.is-swapping .adv-metric,
+  .adv-showcase.is-swapping .adv-claim,
+  .adv-showcase.is-swapping .adv-desc,
+  .advantage.is-visible .adv-rows .adv-row { animation: none !important; }
+  .advantage.js-anim .adv-rows .adv-row { opacity: 1; transform: none; }
+}

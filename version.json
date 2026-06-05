@@ -1,7 +1,19 @@
 {
-  "version": "2.8.0",
+  "version": "2.9.0",
   "date": "2026-06-05",
   "releases": [
+    {
+      "version": "2.9.0",
+      "date": "2026-06-05",
+      "summary": "Animated 'TAKGIO Advantage' showcase on the homepage",
+      "changes": [
+        "New self-playing motion-graphic section below the hero (vanilla CSS/JS, no video file)",
+        "Auto-rotating proof panel cycles four real case-study results with animated count-up (Construction 60%, Legal 85%, Construction 75%, Education 3x); pauses on hover/focus, clickable progress dots",
+        "'TAKGIO vs. off-the-shelf AI' comparison with check/cross rows that stagger in on scroll",
+        "Animated drifting background glow for a premium feel; respects prefers-reduced-motion and stacks on mobile",
+        "Added js/showcase.js and showcase styles to css/styles.css"
+      ]
+    },
     {
       "version": "2.8.0",
       "date": "2026-06-05",
