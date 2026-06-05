@@ -10,7 +10,7 @@
    Until a real ID is set, analytics stays OFF (no script loads, no errors).
    ============================================ */
 (function () {
-  var MEASUREMENT_ID = 'G-XXXXXXXXXX'; // <-- replace with your GA4 Measurement ID
+  var MEASUREMENT_ID = 'G-SGJ5VGGZQD'; // GA4 property "TAKGIO Website" (owned by info@takgio.com)
 
   // Not configured yet — do nothing so the site never logs phantom traffic or errors.
   if (!MEASUREMENT_ID || MEASUREMENT_ID === 'G-XXXXXXXXXX') return;

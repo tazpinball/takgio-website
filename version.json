@@ -1,7 +1,16 @@
 {
-  "version": "2.9.0",
+  "version": "2.9.1",
   "date": "2026-06-05",
   "releases": [
+    {
+      "version": "2.9.1",
+      "date": "2026-06-05",
+      "summary": "Google Analytics 4 live",
+      "changes": [
+        "Connected the live GA4 Measurement ID (G-SGJ5VGGZQD) in js/analytics.js — analytics now active across all public pages",
+        "GA4 property 'TAKGIO Website' created under info@takgio.com (Eastern time zone, USD), web stream for www.takgio.com with Enhanced Measurement on"
+      ]
+    },
     {
       "version": "2.9.0",
       "date": "2026-06-05",
