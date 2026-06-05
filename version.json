@@ -1,7 +1,16 @@
 {
-  "version": "2.9.2",
+  "version": "2.10.0",
   "date": "2026-06-05",
   "releases": [
+    {
+      "version": "2.10.0",
+      "date": "2026-06-05",
+      "summary": "New Insights article: 90-day AI pilot playbook",
+      "changes": [
+        "Added insight-90-day-ai-pilot.html — 'How to Run a 90-Day AI Pilot That Actually Ships'",
+        "Featured it as the newest post on the Insights index and added it to sitemap.xml"
+      ]
+    },
     {
       "version": "2.9.2",
       "date": "2026-06-05",
