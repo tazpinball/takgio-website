@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TAKGIO — AI Product Studio for Construction, Legal & Education</title>
-  <meta name="description" content="TAKGIO builds AI-powered products for the Construction, Legal, and Education industries using Claude by Anthropic. Purpose-built solutions that transform how teams work.">
+  <title>TAKGIO — AI Product Studio for Construction, Legal, Education & Entertainment</title>
+  <meta name="description" content="TAKGIO builds AI-powered products across construction, legal, education, and entertainment — from document intelligence to Pinball Fantasy. Purpose-built, production-grade.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>T</text></svg>">
   <link rel="canonical" href="https://www.takgio.com/">
 
@@ -12,16 +12,16 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="TAKGIO">
   <meta property="og:url" content="https://www.takgio.com/">
-  <meta property="og:title" content="TAKGIO — AI Product Studio for Construction, Legal &amp; Education">
-  <meta property="og:description" content="TAKGIO builds AI-powered products for the Construction, Legal, and Education industries using Claude by Anthropic.">
+  <meta property="og:title" content="TAKGIO — AI products for Construction, Legal, Education &amp; Entertainment">
+  <meta property="og:description" content="TAKGIO builds AI-powered products across construction, legal, education, and entertainment — purpose-built and production-grade.">
   <meta property="og:image" content="https://www.takgio.com/images/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="TAKGIO — AI-powered products for Construction, Legal &amp; Education">
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="TAKGIO — AI Product Studio for Construction, Legal &amp; Education">
-  <meta name="twitter:description" content="AI-powered products for the Construction, Legal, and Education industries, built with Claude by Anthropic.">
+  <meta name="twitter:title" content="TAKGIO — AI products for Construction, Legal, Education &amp; Entertainment">
+  <meta name="twitter:description" content="AI-powered products across construction, legal, education &amp; entertainment — purpose-built, production-grade.">
   <meta name="twitter:image" content="https://www.takgio.com/images/og-image.png">
 
   <link rel="stylesheet" href="css/styles.css">
@@ -40,8 +40,8 @@
         "logo": "https://www.takgio.com/images/og-image.png",
         "image": "https://www.takgio.com/images/og-image.png",
         "email": "info@takgio.com",
-        "description": "AI product studio building Claude-powered products for the Construction, Legal, and Education industries.",
-        "knowsAbout": ["Artificial Intelligence", "Construction Technology", "Legal Technology", "Education Technology"]
+        "description": "AI product studio building AI-powered products across the construction, legal, education, and entertainment industries.",
+        "knowsAbout": ["Artificial Intelligence", "Construction Technology", "Legal Technology", "Education Technology", "Entertainment Technology"]
       },
       {
         "@type": "WebSite",
@@ -77,10 +77,19 @@
   <main>
 
     <!-- Hero -->
-    <section class="hero hero-dark">
+    <section class="hero hero-dark" id="home-hero">
+      <div class="hero-glow" aria-hidden="true"></div>
       <div class="container">
-        <h1>We build AI-powered products<br>for Construction, Legal &amp; Education</h1>
-        <p>TAKGIO is an AI product studio that designs, builds, and deploys Claude-powered solutions for the construction, legal/compliance, and education industries. We turn complex workflows into intelligent products.</p>
+        <p class="hero-kicker">An AI Product Studio</p>
+        <h1>We build AI products for<br><span class="hero-rotator" id="hero-rotator">Construction</span></h1>
+        <p class="hero-product" id="hero-product">Document intelligence that catches what gets missed.</p>
+        <div class="hero-dots" role="tablist" aria-label="Industries we serve">
+          <button class="hero-dot is-active" type="button" role="tab" aria-selected="true" aria-label="Construction"></button>
+          <button class="hero-dot" type="button" role="tab" aria-selected="false" aria-label="Legal &amp; Compliance"></button>
+          <button class="hero-dot" type="button" role="tab" aria-selected="false" aria-label="Education"></button>
+          <button class="hero-dot" type="button" role="tab" aria-selected="false" aria-label="Entertainment"></button>
+        </div>
+        <p class="hero-sub">From construction sites to courtrooms to classrooms to the pinball circuit — we design, build, and ship AI-powered products that go to production.</p>
         <div class="btn-group">
           <a href="/case-studies.html" class="btn btn-primary btn-lg">See Our Work</a>
           <a href="/contact.html" class="btn btn-secondary btn-lg">Get In Touch</a>
@@ -181,9 +190,9 @@
       <div class="container">
         <div class="section-header">
           <h2>Industries We Serve</h2>
-          <p>Deep domain expertise paired with cutting-edge AI to solve real problems in three of the most document-intensive industries.</p>
+          <p>Deep domain expertise paired with cutting-edge AI to solve real problems across four very different industries — and counting.</p>
         </div>
-        <div class="grid-3">
+        <div class="grid-4">
           <a href="/services.html#construction" class="card-link">
             <div class="card card-construction">
               <div class="card-icon">
@@ -209,6 +218,15 @@
               </div>
               <h3>Education</h3>
               <p>AI products for personalized learning, adaptive assessment, and student engagement. We help educators deliver individualized instruction at scale.</p>
+            </div>
+          </a>
+          <a href="/services.html#entertainment" class="card-link">
+            <div class="card card-entertainment">
+              <div class="card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><line x1="15" y1="13" x2="15.01" y2="13"/><line x1="18" y1="11" x2="18.01" y2="11"/><rect x="2" y="6" width="20" height="12" rx="2"/></svg>
+              </div>
+              <h3>Entertainment</h3>
+              <p>AI products for interactive entertainment and fan engagement — including Pinball Fantasy, our prediction-powered fantasy sports platform for competitive pinball.</p>
             </div>
           </a>
         </div>
@@ -325,6 +343,7 @@
           <a href="/services.html#construction">Construction</a>
           <a href="/services.html#legal">Legal &amp; Compliance</a>
           <a href="/services.html#education">Education</a>
+          <a href="/services.html#entertainment">Entertainment</a>
         </div>
         <div class="footer-cta">
           <h4>Get in touch</h4>
@@ -341,5 +360,6 @@
 
   <script src="js/nav.js"></script>
   <script src="js/showcase.js"></script>
+  <script src="js/hero.js"></script>
 </body>
 </html>

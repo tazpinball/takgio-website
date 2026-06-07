@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case Study: Pinball Fantasy — AI Fantasy Sports for Pinball — TAKGIO</title>
+  <meta name="description" content="How TAKGIO built Pinball Fantasy — a free fantasy-sports platform for competitive pinball powered by the TAZ prediction model, which projects player tournament finishes and sets fair, tier-based valuations.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>T</text></svg>">
+  <link rel="canonical" href="https://www.takgio.com/case-study-entertainment-pinball.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="TAKGIO">
+  <meta property="og:url" content="https://www.takgio.com/case-study-entertainment-pinball.html">
+  <meta property="og:title" content="Case Study: Pinball Fantasy — AI Fantasy Sports for Pinball — TAKGIO">
+  <meta property="og:description" content="A free fantasy-sports platform for competitive pinball, powered by TAKGIO's TAZ prediction model — draft a roster, score on real tournament finishes, climb a global leaderboard.">
+  <meta property="og:image" content="https://www.takgio.com/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="TAKGIO — AI-powered products for Construction, Legal, Education &amp; Entertainment">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Case Study: Pinball Fantasy — AI Fantasy Sports for Pinball">
+  <meta name="twitter:description" content="TAKGIO's prediction-powered fantasy platform for competitive pinball — draft a team, score on real tournament finishes, top the global leaderboard.">
+  <meta name="twitter:image" content="https://www.takgio.com/images/og-image.png">
+
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="/js/analytics.js"></script>
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Pinball Fantasy: AI-Powered Fantasy Sports for Competitive Pinball",
+    "description": "How TAKGIO built Pinball Fantasy — a free fantasy-sports platform for competitive pinball powered by the TAZ prediction model, which projects player tournament finishes and sets fair, tier-based valuations.",
+    "image": "https://www.takgio.com/images/og-image.png",
+    "url": "https://www.takgio.com/case-study-entertainment-pinball.html",
+    "mainEntityOfPage": "https://www.takgio.com/case-study-entertainment-pinball.html",
+    "author": { "@type": "Organization", "name": "TAKGIO", "url": "https://www.takgio.com/" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "TAKGIO",
+      "logo": { "@type": "ImageObject", "url": "https://www.takgio.com/images/og-image.png" }
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="logo">TAKGIO</a>
+      <nav class="site-nav" id="site-nav">
+        <a href="/">Home</a>
+        <a href="/services.html">Services</a>
+        <a href="/case-studies.html">Case Studies</a>
+        <a href="/insights.html">Insights</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <a href="/case-studies.html" class="case-study-back">&larr; All Case Studies</a>
+        <div class="case-study-detail">
+          <span class="tag tag-entertainment">Entertainment</span>
+          <h3>Pinball Fantasy: AI-Powered Fantasy Sports for Competitive Pinball</h3>
+          <p class="case-study-meta">Predictive Modeling &middot; Live Product &middot; Ongoing Development</p>
+
+          <!-- Key Facts -->
+          <div class="case-study-highlight">
+            <div class="stat-grid">
+              <div class="stat-item">
+                <div class="stat-value">Free</div>
+                <div class="stat-label">To play — bragging rights, not cash</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">5&nbsp;+&nbsp;C</div>
+                <div class="stat-label">Player roster with a double-scoring captain</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">100</div>
+                <div class="stat-label">Credit budget that forces real strategy</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">Global</div>
+                <div class="stat-label">Leaderboard tied to real tournament results</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Background -->
+          <div class="case-study-section">
+            <h4>Background</h4>
+            <p>Competitive pinball has a serious, global scene. Thousands of ranked players compete in sanctioned tournaments tracked by the IFPA (International Flipper Pinball Association), with rankings, records, and rivalries that rival any niche sport. What it didn't have was the thing that makes other sports stickier for fans: a fantasy layer — the draft-a-team, talk-trash, follow-every-result experience that turns spectators into participants.</p>
+            <p>TAKGIO built <strong>Pinball Fantasy</strong> to fill that gap: a free fantasy-sports platform where fans assemble virtual teams of real competitive players and score points based on how those players actually finish at real tournaments. No money, no prizes — just bragging rights and a global leaderboard.</p>
+          </div>
+
+          <!-- The Challenge -->
+          <div class="case-study-section">
+            <h4>The Challenge</h4>
+            <p>Fantasy sports live or die on two things: the quality of the projections, and the fairness of the economy built on top of them. Both are prediction problems.</p>
+            <ul>
+              <li><strong>Projecting finishes.</strong> To let fans draft intelligently, the platform has to estimate how each player is likely to finish at upcoming tournaments — from messy, uneven historical data and IFPA rankings, across players who compete at very different frequencies and levels.</li>
+              <li><strong>Pricing players fairly.</strong> A draft-with-a-budget game is only fun if the player valuations are honest. Overprice the stars and nobody can build a competitive team; underprice them and the game has no strategy. The credit costs have to fall out of the projections, not a gut feel.</li>
+              <li><strong>Keeping it strategic, not random.</strong> The scoring, budget, and captain mechanics all have to combine into a game where smart drafting is rewarded over the long run — without making the barrier to entry too high for casual fans.</li>
+            </ul>
+          </div>
+
+          <!-- Our Approach -->
+          <div class="case-study-section">
+            <h4>Our Approach — the TAZ prediction model</h4>
+            <p>At the core of Pinball Fantasy is the <strong>TAZ prediction model</strong>, TAKGIO's engine for projecting competitive pinball results. It ingests tournament history and IFPA ranking data and produces a projected finish for each player, which in turn drives that player's fantasy valuation.</p>
+            <p>From those projections we derive a tiered player pool — <strong>Stars</strong>, <strong>Mid-tier</strong>, and <strong>Value</strong> — and assign each player a credit cost. Fans can sort the pool by projection, cost, or IFPA ranking, so a newcomer and a hardcore stats follower can both build a team the way they think about the game. The model is the difference between a novelty and a game worth coming back to: the valuations have to feel right, and they do because they come from the data, not a hunch.</p>
+          </div>
+
+          <!-- How It Works -->
+          <div class="case-study-section">
+            <h4>How It Works</h4>
+            <ul>
+              <li><strong>Draft a roster.</strong> Pick five players plus a captain, staying under a 100-credit budget. The budget forces trade-offs — you can't just buy every star.</li>
+              <li><strong>Captain scores double.</strong> Your captain pick is a lever for both upside and risk, adding a layer of strategy beyond raw roster construction.</li>
+              <li><strong>Score on real results.</strong> Teams earn points based on each player's actual final finish at real tournaments. Entries lock when events begin.</li>
+              <li><strong>Climb the leaderboard.</strong> A global leaderboard tracks every team, and crew-sharing lets fans challenge friends head-to-head.</li>
+            </ul>
+          </div>
+
+          <!-- What Makes It Different -->
+          <div class="case-study-section">
+            <h4>What Makes It Different</h4>
+            <p>Most "fantasy" novelties bolt a leaderboard onto arbitrary scoring. Pinball Fantasy is built the other way around — the prediction model comes first, and the game is designed to reward people who understand it. That's the same philosophy behind everything TAKGIO builds: start with the real problem (here, projecting outcomes from imperfect data), solve it properly, and let the product flow from that.</p>
+            <p>It's also a deliberate stretch beyond our document-heavy roots. The same modeling discipline that powers contract analysis and construction document intelligence applies just as well to projecting a tournament bracket — proof that TAKGIO's AI work isn't confined to one kind of problem.</p>
+          </div>
+
+          <!-- Status -->
+          <div class="case-study-section">
+            <h4>Status</h4>
+            <p>Pinball Fantasy is live and actively being built out, with the player pool, projections, and competition flow already in place and more on the way. It's TAKGIO's first product in the entertainment vertical — and the start of a broader expansion into interactive, fan-facing experiences.</p>
+            <p><a href="https://tazpinball.com/fantasy/" target="_blank" rel="noopener">Visit Pinball Fantasy &rarr;</a></p>
+          </div>
+
+          <hr class="case-study-divider">
+
+          <div class="case-study-tags">
+            <span class="tag tag-tech">Predictive Modeling</span>
+            <span class="tag tag-tech">Fantasy Sports</span>
+            <span class="tag tag-tech">Ranking &amp; Valuation</span>
+            <span class="tag tag-tech">Live Product</span>
+            <span class="tag tag-tech">Entertainment</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-alt">
+      <div class="container" style="text-align: center;">
+        <h2>Have an idea that needs a model behind it?</h2>
+        <p style="max-width: 500px; margin: 0 auto var(--space-lg);">From document intelligence to fantasy sports, we build AI products around real prediction problems. Tell us about yours.</p>
+        <a href="/contact.html" class="btn btn-primary btn-lg">Start a Conversation</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-newsletter">
+        <div class="footer-newsletter-text">
+          <h4>Stay in the loop</h4>
+          <p>Occasional, practical notes on applied AI for construction, legal, education, and entertainment. No spam.</p>
+        </div>
+        <form class="newsletter-form" action="https://formspree.io/f/mreokggq" method="POST">
+          <input type="hidden" name="_subject" value="New newsletter signup">
+          <input type="hidden" name="source" value="newsletter">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <input type="email" name="email" required placeholder="you@company.com" aria-label="Email address">
+          <button type="submit" class="btn btn-white">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="logo">TAKGIO</span>
+          <p>AI-powered products for Construction, Legal/Compliance, Education, and Entertainment.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Company</h4>
+          <a href="/about.html">About</a>
+          <a href="/services.html">Services</a>
+          <a href="/case-studies.html">Case Studies</a>
+          <a href="/insights.html">Insights</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+        <div class="footer-links">
+          <h4>Industries</h4>
+          <a href="/services.html#construction">Construction</a>
+          <a href="/services.html#legal">Legal &amp; Compliance</a>
+          <a href="/services.html#education">Education</a>
+          <a href="/services.html#entertainment">Entertainment</a>
+        </div>
+        <div class="footer-cta">
+          <h4>Get in touch</h4>
+          <p>Ready to explore AI for your business?</p>
+          <a href="/contact.html" class="btn btn-white">Contact Us</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 TAKGIO. All rights reserved.</p>
+        <p>Powered by Claude from Anthropic</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+</body>
+</html>

@@ -1,7 +1,18 @@
 {
-  "version": "2.10.0",
+  "version": "2.11.0",
   "date": "2026-06-05",
   "releases": [
+    {
+      "version": "2.11.0",
+      "date": "2026-06-05",
+      "summary": "Entertainment vertical + animated homepage hero",
+      "changes": [
+        "New animated homepage hero: the headline cycles through Construction → Legal → Education → Entertainment, shifting color, product line, and background glow to match (js/hero.js); pauses on hover, respects reduced-motion, clickable dots",
+        "Added Entertainment as a 4th industry vertical sitewide (pink theme): homepage industries grid (now 4-up), Services section, footers, About",
+        "New case study: Pinball Fantasy — AI fantasy sports for competitive pinball, powered by the TAZ prediction model (case-study-entertainment-pinball.html), added to the Case Studies listing and sitemap",
+        "Broadened homepage/services/case-studies meta + Open Graph copy to include entertainment; softened single-vendor Claude phrasing in new copy"
+      ]
+    },
     {
       "version": "2.10.0",
       "date": "2026-06-05",
