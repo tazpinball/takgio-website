@@ -1426,3 +1426,20 @@ img { max-width: 100%; display: block; }
   .hero-rotator.is-swap,
   .hero-product.is-swap { animation: none; }
 }
+
+/* 23. Footer social icons
+   ---------------------------------------- */
+.footer-social { display: flex; gap: var(--space-sm); margin-top: var(--space-md); }
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.footer-social a:hover { background: rgba(255, 255, 255, 0.16); color: #fff; }
+.footer-social svg { width: 18px; height: 18px; display: block; }
