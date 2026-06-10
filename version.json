@@ -1,7 +1,15 @@
 {
-  "version": "2.13.0",
-  "date": "2026-06-09",
+  "version": "2.13.1",
+  "date": "2026-06-10",
   "releases": [
+    {
+      "version": "2.13.1",
+      "date": "2026-06-10",
+      "summary": "About page: Steve Caggiano's title updated to Sales & Marketing",
+      "changes": [
+        "Updated Steve Caggiano's role on about.html from 'Marketing' to 'Sales & Marketing'"
+      ]
+    },
     {
       "version": "2.13.0",
       "date": "2026-06-09",
