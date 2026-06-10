@@ -62,13 +62,14 @@
       <a href="/" class="logo">TAKGIO</a>
       <nav class="site-nav" id="site-nav">
         <a href="/">Home</a>
+        <a href="/products.html">Products</a>
         <a href="/services.html">Services</a>
         <a href="/case-studies.html">Case Studies</a>
         <a href="/insights.html">Insights</a>
         <a href="/about.html">About</a>
         <a href="/contact.html">Contact</a>
       </nav>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-nav">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -80,6 +81,11 @@
     <section class="hero hero-dark" id="home-hero">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="container">
+        <a class="hero-announce" href="https://www.annelisetutor.com" target="_blank" rel="noopener">
+          <span class="badge">New</span>
+          Ann Elise &mdash; our AI Organic Chemistry tutor &mdash; is live
+          <span class="arrow">&rarr;</span>
+        </a>
         <p class="hero-kicker">An AI Product Studio</p>
         <h1>We build AI products for<br><span class="hero-rotator" id="hero-rotator">Construction</span></h1>
         <p class="hero-product" id="hero-product">Document intelligence that catches what gets missed.</p>
@@ -217,7 +223,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 4 3 6 3s6-1 6-3v-5"/></svg>
               </div>
               <h3>Education</h3>
-              <p>AI products for personalized learning, adaptive assessment, and student engagement. We help educators deliver individualized instruction at scale.</p>
+              <p>AI products for personalized learning, adaptive assessment, and student engagement &mdash; including Ann Elise, our AI Organic Chemistry tutor that teaches instead of answers. Live now.</p>
             </div>
           </a>
           <a href="/services.html#entertainment" class="card-link">
@@ -271,9 +277,15 @@
       <div class="container">
         <div class="section-header">
           <h2>Featured Work</h2>
-          <p>Real AI deployments delivering measurable results for our clients.</p>
+          <p>Our own live products and client deployments — real AI delivering measured results in production.</p>
         </div>
-        <div class="grid-2">
+        <div class="grid-3">
+          <a href="https://www.annelisetutor.com" target="_blank" rel="noopener" class="featured-card">
+            <span class="tag tag-education">Education &middot; Our Product</span>
+            <h3>Ann Elise &mdash; AI Tutors That Actually Teach</h3>
+            <p>Our AI Organic Chemistry tutor guides students Socratically &mdash; it teaches, never just answers. Live now and free to start.</p>
+            <span class="read-more">Try it free &rarr;</span>
+          </a>
           <a href="/case-study-construction-docs.html" class="featured-card">
             <span class="tag tag-construction">Construction</span>
             <h3>Intelligent Document Processing for a Regional GC</h3>
@@ -337,6 +349,7 @@
         </div>
         <div class="footer-links">
           <h4>Company</h4>
+          <a href="/products.html">Products</a>
           <a href="/about.html">About</a>
           <a href="/services.html">Services</a>
           <a href="/case-studies.html">Case Studies</a>

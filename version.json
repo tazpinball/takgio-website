@@ -1,7 +1,22 @@
 {
-  "version": "2.12.0",
-  "date": "2026-06-05",
+  "version": "2.13.0",
+  "date": "2026-06-09",
   "releases": [
+    {
+      "version": "2.13.0",
+      "date": "2026-06-09",
+      "summary": "Products page + Ann Elise launch visibility + mobile UX fixes",
+      "changes": [
+        "New products.html showcasing Ann Elise (flagship, with feature bullets, brand panel, and 'Try Ann Elise Free' CTA), Pinball Fantasy, and In Development (AI Concrete Bidding with waitlist capture, Ann Elise LSAT Prep)",
+        "Added 'Products' to the header nav and footer Company column on all 13 public pages; products.html added to sitemap.xml with CollectionPage/SoftwareApplication structured data",
+        "Homepage Ann Elise visibility: 'New — Ann Elise is live' announcement pill in the hero (links to annelisetutor.com), Ann Elise featured card added to Featured Work (now 3-up), Education industry card and hero rotator now name Ann Elise",
+        "Education case study: added a 'now live as Ann Elise' callout linking to annelisetutor.com",
+        "Mobile fix: form and newsletter inputs raised to 16px to stop iOS Safari auto-zoom on focus",
+        "Mobile fix: hamburger toggle enlarged to a 44px tap target; hero dots to 32px; Advantage progress bars to 24px (visuals unchanged)",
+        "Mobile fix: reserved space for the rotating hero headline/product line so the CTAs no longer bounce every cycle; comparison grid no longer clips on 320-360px screens",
+        "Accessibility: nav toggle now manages aria-expanded/aria-controls and the menu closes on Escape"
+      ]
+    },
     {
       "version": "2.12.0",
       "date": "2026-06-05",
