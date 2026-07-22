@@ -1,7 +1,21 @@
 {
-  "version": "2.14.0",
+  "version": "2.15.0",
   "date": "2026-07-22",
   "releases": [
+    {
+      "version": "2.15.0",
+      "date": "2026-07-22",
+      "summary": "Dashboard redesign — summary bar, insight widgets, compact project table",
+      "changes": [
+        "Rebuilt the dashboard surface on a single design-token layer (one type scale, conventional stage colors, hairline borders, no drop shadows) after a research pass over Linear, Stripe, Mercury, HubSpot and Datadog dashboard patterns",
+        "New navy summary bar: total projects, Live / Building / Open tasks / Quiet-14d+ figures, and an auto-generated 'across <verticals>' line",
+        "Three insight widgets replace the stat row: Needs attention (quiet projects first, then most open tasks), Pipeline by stage (CSS bars), and Recent activity (cross-project update feed)",
+        "Compact project table: two-line name+category/industry cell, soft-pill stage badges, task chips, quiet-age highlighting; Priority and AI-Updates columns retired from the table (priority still drives filter/sort)",
+        "Stage badges restyled site-wide as soft pills with a status dot — also improves the project detail page, which shares the class",
+        "Removed the Chart.js dependency and the doughnut chart; the pipeline is now pure CSS. Column-header and dropdown sort/filter behavior preserved",
+        "Dark theme carried through the new surface with brightened status colors"
+      ]
+    },
     {
       "version": "2.14.0",
       "date": "2026-07-22",

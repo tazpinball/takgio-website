@@ -7,16 +7,16 @@
 
   var currentUser = null;
   var allProjects = [];
-  var stageChart = null;
 
   var STAGE_ORDER = ['Idea', 'Building', 'UAT', 'Live', 'Paused', 'Discarded'];
+  // Pipeline bar fills — conventional mapping (Live=green, Building=amber)
   var STAGE_COLORS = {
-    'Idea': '#6c757d',
-    'Building': '#198754',
-    'UAT': '#8b5cf6',
-    'Live': '#0d6efd',
-    'Paused': '#ffc107',
-    'Discarded': '#dc3545'
+    'Idea': '#6b7280',
+    'Building': '#b45309',
+    'UAT': '#6d28d9',
+    'Live': '#0b8457',
+    'Paused': '#6b7280',
+    'Discarded': '#c62b2b'
   };
   var STAGE_CLASSES = {
     'Idea': 'stage-idea',
@@ -91,13 +91,6 @@
     localStorage.setItem('dash_theme', theme);
     document.body.setAttribute('data-theme', theme);
     document.getElementById('btn-theme').textContent = theme === 'dark' ? 'Dark' : 'Vivid';
-    if (stageChart) {
-      var isDark = theme === 'dark';
-      stageChart.options.scales.x.ticks.color = isDark ? '#aaa' : '#aaa';
-      stageChart.options.scales.y.ticks.color = isDark ? '#ccc' : '#555';
-      stageChart.options.scales.x.grid.color = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)';
-      stageChart.update();
-    }
   }
 
   function initTheme() {
@@ -161,6 +154,7 @@
   // --- Load Projects ---
   var latestUpdates = {}; // project_id -> latest update content
   var openTaskCounts = {}; // project_id -> count of open tasks
+  var allUpdates = [];     // every update, newest first (for the activity feed)
 
   async function loadProjects() {
     var grid = document.getElementById('projects-grid');
@@ -179,9 +173,10 @@
 
     allProjects = results[0].data || [];
 
-    // Build map of latest update per project
+    // Build map of latest update per project + keep the full feed
+    allUpdates = results[1].data || [];
     latestUpdates = {};
-    (results[1].data || []).forEach(function (u) {
+    allUpdates.forEach(function (u) {
       if (!latestUpdates[u.project_id]) {
         latestUpdates[u.project_id] = u;
       }
@@ -193,120 +188,132 @@
       openTaskCounts[t.project_id] = (openTaskCounts[t.project_id] || 0) + 1;
     });
 
-    updateStats();
-    updateChart();
+    updateSummary();
+    renderWidgets();
     renderProjects();
   }
 
-  // --- Stats ---
-  function updateStats() {
-    var total = allProjects.length;
-    var active = allProjects.filter(function (p) { return p.stage === 'Building'; }).length;
-    var live = allProjects.filter(function (p) { return p.stage === 'Live'; }).length;
-    var stale = allProjects.filter(function (p) { return isStale(p); }).length;
-
-    document.getElementById('stat-total').textContent = total;
-    document.getElementById('stat-building').textContent = active;
-    document.getElementById('stat-live').textContent = live;
-    document.getElementById('stat-stale').textContent = stale;
+  // --- Helpers ---
+  function daysSince(project) {
+    if (!project.updated_at) return Infinity;
+    return (new Date() - new Date(project.updated_at)) / (1000 * 60 * 60 * 24);
   }
 
+  // "Quiet" = an in-flight project (not Live/Paused/Discarded) untouched for 14+ days
+  var ACTIVE_STAGES = { 'Idea': true, 'Building': true, 'UAT': true };
   function isStale(project) {
-    if (project.stage !== 'Building') return false;
-    if (!project.updated_at) return false;
-    var updated = new Date(project.updated_at);
-    var now = new Date();
-    var diffDays = (now - updated) / (1000 * 60 * 60 * 24);
-    return diffDays > STALENESS_DAYS;
+    return !!ACTIVE_STAGES[project.stage] && daysSince(project) > STALENESS_DAYS;
   }
 
-  // --- Chart ---
-  function updateChart() {
+  // --- Summary bar ---
+  function updateSummary() {
+    var total = allProjects.length;
+    var live = allProjects.filter(function (p) { return p.stage === 'Live'; }).length;
+    var building = allProjects.filter(function (p) { return p.stage === 'Building'; }).length;
+    var quiet = allProjects.filter(isStale).length;
+    var openTasks = Object.keys(openTaskCounts).reduce(function (sum, id) { return sum + openTaskCounts[id]; }, 0);
+
+    var verticals = {};
+    allProjects.forEach(function (p) { if (p.industry) verticals[p.industry] = true; });
+    var vNames = Object.keys(verticals);
+
+    document.getElementById('sum-total').textContent = total;
+    document.getElementById('sum-live').textContent = live;
+    document.getElementById('sum-building').textContent = building;
+    document.getElementById('sum-tasks').textContent = openTasks;
+    document.getElementById('sum-quiet').textContent = quiet;
+
+    var vEl = document.getElementById('sum-verticals');
+    vEl.textContent = vNames.length
+      ? 'across ' + listPhrase(vNames.map(function (v) { return v.toLowerCase(); }))
+      : ' ';
+  }
+
+  function listPhrase(items) {
+    if (items.length <= 1) return items.join('');
+    if (items.length === 2) return items[0] + ' and ' + items[1];
+    return items.slice(0, -1).join(', ') + ' and ' + items[items.length - 1];
+  }
+
+  // --- Widgets ---
+  function renderWidgets() {
+    renderAttention();
+    renderPipeline();
+    renderActivity();
+  }
+
+  function renderAttention() {
+    // Quiet projects first (by days desc), then any with the most open tasks.
+    var quiet = allProjects.filter(isStale).sort(function (a, b) { return daysSince(b) - daysSince(a); });
+    var quietIds = {};
+    quiet.forEach(function (p) { quietIds[p.id] = true; });
+    var busy = allProjects
+      .filter(function (p) { return !quietIds[p.id] && (openTaskCounts[p.id] || 0) > 0; })
+      .sort(function (a, b) { return (openTaskCounts[b.id] || 0) - (openTaskCounts[a.id] || 0); });
+
+    var rows = [];
+    quiet.forEach(function (p) {
+      rows.push({ name: p.name, id: p.id, cls: 'crit', label: Math.floor(daysSince(p)) + 'd quiet' });
+    });
+    busy.forEach(function (p) {
+      rows.push({ name: p.name, id: p.id, cls: 'warn', label: openTaskCounts[p.id] + ' open' });
+    });
+    rows = rows.slice(0, 5);
+
+    document.getElementById('attn-count').textContent = rows.length || '';
+    var html = rows.length
+      ? rows.map(function (r) {
+          return '<a class="dsh-item" href="/project.html?id=' + r.id + '" style="text-decoration:none;color:inherit">' +
+            '<span class="nm">' + escapeHtml(r.name) + '</span>' +
+            '<span class="dsh-pill ' + r.cls + '">' + escapeHtml(r.label) + '</span></a>';
+        }).join('')
+      : '<div class="dsh-empty">Everything’s been touched recently. Nice.</div>';
+    document.getElementById('attn-list').innerHTML = html;
+  }
+
+  function renderPipeline() {
     var counts = {};
     STAGE_ORDER.forEach(function (s) { counts[s] = 0; });
-    allProjects.forEach(function (p) {
-      if (counts[p.stage] !== undefined) counts[p.stage]++;
-    });
+    allProjects.forEach(function (p) { if (counts[p.stage] !== undefined) counts[p.stage]++; });
 
-    var labels = STAGE_ORDER;
-    var data = labels.map(function (s) { return counts[s]; });
-    var colors = labels.map(function (s) { return STAGE_COLORS[s]; });
+    // Always show the core flow; append Paused/Discarded only when non-zero
+    var shown = ['Idea', 'Building', 'UAT', 'Live'];
+    ['Paused', 'Discarded'].forEach(function (s) { if (counts[s] > 0) shown.push(s); });
 
-    var ctx = document.getElementById('stage-chart');
-    if (!ctx) return;
+    var max = Math.max(1, allProjects.length);
+    document.getElementById('pipe-total').textContent = allProjects.length + ' total';
+    document.getElementById('pipe-bars').innerHTML = shown.map(function (s) {
+      var pct = Math.round((counts[s] / max) * 100);
+      return '<div class="dsh-bl"><span class="lb">' + s + '</span>' +
+        '<span class="dsh-track"><i style="width:' + pct + '%;background:' + STAGE_COLORS[s] + '"></i></span>' +
+        '<span class="vv">' + counts[s] + '</span></div>';
+    }).join('');
+  }
 
-    if (stageChart) {
-      stageChart.data.datasets[0].data = data;
-      stageChart.update();
-      return;
-    }
+  function renderActivity() {
+    var names = {};
+    allProjects.forEach(function (p) { names[p.id] = p.name; });
+    var recent = allUpdates.slice(0, 5);
+    var html = recent.length
+      ? recent.map(function (u) {
+          var text = (u.release_notes || u.content || '').replace(/\s+/g, ' ').trim();
+          if (text.length > 60) text = text.slice(0, 60) + '…';
+          var label = (names[u.project_id] || 'Project') + (text ? ' — ' + text : '');
+          return '<a class="dsh-item" href="/project.html?id=' + u.project_id + '" style="text-decoration:none;color:inherit">' +
+            '<span class="nm">' + escapeHtml(label) + '</span>' +
+            '<span class="tm">' + escapeHtml(timeAgoShort(u.created_at)) + '</span></a>';
+        }).join('')
+      : '<div class="dsh-empty">No activity yet.</div>';
+    document.getElementById('activity-list').innerHTML = html;
+  }
 
-    // Filter out stages with 0 count for cleaner display
-    var filteredLabels = [];
-    var filteredData = [];
-    var filteredColors = [];
-    for (var i = 0; i < labels.length; i++) {
-      if (data[i] > 0) {
-        filteredLabels.push(labels[i]);
-        filteredData.push(data[i]);
-        filteredColors.push(colors[i]);
-      }
-    }
-
-    stageChart = new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels: filteredLabels,
-        datasets: [{
-          data: filteredData,
-          backgroundColor: filteredColors,
-          borderWidth: 2,
-          borderColor: getTheme() === 'dark' ? '#16162a' : '#fff'
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        cutout: '55%',
-        layout: { padding: 4 },
-        plugins: {
-          legend: {
-            position: 'right',
-            labels: {
-              boxWidth: 10,
-              boxHeight: 10,
-              padding: 6,
-              font: { size: 10 },
-              color: getTheme() === 'dark' ? '#aaa' : '#555',
-              generateLabels: function (chart) {
-                var dataset = chart.data.datasets[0];
-                return chart.data.labels.map(function (label, i) {
-                  return {
-                    text: label + ' (' + dataset.data[i] + ')',
-                    fillStyle: dataset.backgroundColor[i],
-                    strokeStyle: 'transparent',
-                    lineWidth: 0,
-                    index: i
-                  };
-                });
-              }
-            }
-          },
-          tooltip: {
-            backgroundColor: 'rgba(26,26,46,0.9)',
-            cornerRadius: 6,
-            padding: 8,
-            bodyFont: { size: 11 },
-            callbacks: {
-              label: function (ctx) {
-                return ' ' + ctx.label + ': ' + ctx.parsed + (ctx.parsed === 1 ? ' project' : ' projects');
-              }
-            }
-          }
-        },
-        animation: { duration: 400, easing: 'easeOutQuart' }
-      }
-    });
+  function timeAgoShort(dateStr) {
+    if (!dateStr) return '';
+    var diff = (new Date() - new Date(dateStr)) / 1000;
+    if (diff < 3600) return Math.max(1, Math.floor(diff / 60)) + 'm';
+    if (diff < 86400) return Math.floor(diff / 3600) + 'h';
+    if (diff < 604800) return Math.floor(diff / 86400) + 'd';
+    return Math.floor(diff / 604800) + 'w';
   }
 
   // --- Render Projects ---
@@ -329,17 +336,20 @@
       return currentSortAsc ? ' ▲' : ' ▼';
     }
 
-    var headerHtml = '<div class="project-row project-row-header">' +
-      '<span class="project-row-name sortable-col" data-sort="name">Project' + arrow('name') + '</span>' +
-      '<span class="project-row-col project-row-stage sortable-col" data-sort="stage">Stage' + arrow('stage') + '</span>' +
-      '<span class="project-row-col project-row-priority sortable-col" data-sort="priority">Priority' + arrow('priority') + '</span>' +
-      '<span class="project-row-col project-row-tasks sortable-col" data-sort="tasks">Tasks' + arrow('tasks') + '</span>' +
-      '<span class="project-row-col project-row-ai">AI Updates</span>' +
-      '<span class="project-row-col project-row-updated sortable-col" data-sort="updated">Updated' + arrow('updated') + '</span>' +
-      '<span class="project-row-col project-row-lastupdate">Last Update</span>' +
+    var headerHtml = '<div class="dsh-row dsh-thead">' +
+      '<span class="sortable-col" data-sort="name">Project' + arrow('name') + '</span>' +
+      '<span class="sortable-col" data-sort="stage">Stage' + arrow('stage') + '</span>' +
+      '<span class="sortable-col dsh-col-tasks" data-sort="tasks">Tasks' + arrow('tasks') + '</span>' +
+      '<span class="sortable-col" data-sort="updated">Updated' + arrow('updated') + '</span>' +
+      '<span class="dsh-col-snip">Last update</span>' +
       '</div>';
 
     grid.innerHTML = headerHtml + sorted.map(renderProjectRow).join('');
+
+    var countEl = document.getElementById('table-count');
+    if (countEl) countEl.textContent = sorted.length === allProjects.length
+      ? sorted.length
+      : sorted.length + ' of ' + allProjects.length;
 
     // Attach click handlers to column headers
     grid.querySelectorAll('.sortable-col').forEach(function (el) {
@@ -407,41 +417,33 @@
   }
 
   function renderProjectRow(project) {
-    var staleHtml = '';
-    if (isStale(project)) {
-      var days = Math.floor((new Date() - new Date(project.updated_at)) / (1000 * 60 * 60 * 24));
-      staleHtml = '<span class="stale-indicator">&#9679; ' + days + 'd</span>';
-    }
-
     var stageClass = STAGE_CLASSES[project.stage] || 'stage-idea';
-    var priorityHtml = '';
-    if (project.priority) {
-      var prioClass = PRIORITY_CLASSES[project.priority] || '';
-      priorityHtml = '<span class="priority-badge ' + prioClass + '">' + escapeHtml(project.priority) + '</span>';
-    }
-
-    var updatedStr = project.updated_at
-      ? timeAgo(new Date(project.updated_at))
-      : '';
-
     var stageBadgeHtml = '<span class="stage-badge ' + stageClass + '">' + escapeHtml(project.stage || 'Idea') + '</span>';
+
+    // Sub-line: category · industry (whichever exist)
+    var kindParts = [project.category, project.industry].filter(Boolean);
+    var kindHtml = kindParts.length ? '<span class="dsh-kd">' + escapeHtml(kindParts.join(' · ')) + '</span>' : '';
+
+    var taskCount = openTaskCounts[project.id] || 0;
+    var taskHtml = taskCount > 0
+      ? '<span class="dsh-chip">' + taskCount + '</span>'
+      : '<span class="dsh-cell z">—</span>';
+
+    var updatedStr = project.updated_at ? timeAgo(new Date(project.updated_at)) : '';
+    var quietClass = isStale(project) ? ' q' : '';
 
     var latest = latestUpdates[project.id];
     var updateText = latest ? (latest.release_notes || latest.content) : '';
-    var snippetText = updateText ? (updateText.length > 250 ? updateText.slice(0, 250) + '…' : updateText) : '—';
-
-    var taskCount = openTaskCounts[project.id] || 0;
-    var taskHtml = taskCount > 0 ? '<span class="task-count-badge">' + taskCount + '</span>' : '—';
+    updateText = (updateText || '').replace(/\s+/g, ' ').trim();
+    var snippetText = updateText ? (updateText.length > 90 ? updateText.slice(0, 90) + '…' : updateText) : '—';
 
     return (
-      '<a href="/project.html?id=' + project.id + '" class="project-row">' +
-      '  <span class="project-row-name">' + escapeHtml(project.name) + '</span>' +
-      '  <span class="project-row-col project-row-stage">' + stageBadgeHtml + '</span>' +
-      '  <span class="project-row-col project-row-priority">' + (priorityHtml || '<span class="priority-badge priority-none">—</span>') + '</span>' +
-      '  <span class="project-row-col project-row-tasks">' + taskHtml + '</span>' +
-      '  <span class="project-row-col project-row-ai">' + (project.github_repo ? '<span class="ai-check">&#10003;</span>' : '—') + '</span>' +
-      '  <span class="project-row-col project-row-updated">' + (updatedStr || '') + (staleHtml ? ' ' + staleHtml : '') + '</span>' +
-      '  <span class="project-row-col project-row-lastupdate">' + escapeHtml(snippetText) + '</span>' +
+      '<a href="/project.html?id=' + project.id + '" class="dsh-row">' +
+      '<span><span class="dsh-nm">' + escapeHtml(project.name) + '</span>' + kindHtml + '</span>' +
+      '<span>' + stageBadgeHtml + '</span>' +
+      '<span class="dsh-col-tasks">' + taskHtml + '</span>' +
+      '<span class="dsh-cell' + quietClass + '">' + escapeHtml(updatedStr) + '</span>' +
+      '<span class="dsh-snip dsh-col-snip">' + escapeHtml(snippetText) + '</span>' +
       '</a>'
     );
   }

@@ -27,62 +27,69 @@
 
   <main class="dash-content">
 
-    <!-- Overview -->
-    <div class="overview-bar">
-      <div class="overview-stats">
-        <div class="overview-stat">
-          <span class="overview-number" id="stat-total">—</span>
-          <span class="overview-label">Total</span>
-        </div>
-        <div class="overview-stat">
-          <span class="overview-number overview-number-active" id="stat-building">—</span>
-          <span class="overview-label">Building</span>
-        </div>
-        <div class="overview-stat">
-          <span class="overview-number overview-number-live" id="stat-live">—</span>
-          <span class="overview-label">Live</span>
-        </div>
-        <div class="overview-stat">
-          <span class="overview-number overview-number-stale" id="stat-stale">—</span>
-          <span class="overview-label">Attention</span>
-        </div>
+    <!-- Summary bar -->
+    <div class="dsh-summary" id="dsh-summary">
+      <div class="dsh-sum-lead">
+        <div class="dsh-sum-k">Portfolio</div>
+        <div class="dsh-sum-v"><span id="sum-total">—</span> projects</div>
+        <div class="dsh-sum-s" id="sum-verticals">&nbsp;</div>
       </div>
-      <div class="overview-chart">
-        <canvas id="stage-chart"></canvas>
+      <div class="dsh-sum-figs">
+        <div class="dsh-fig"><div class="n" id="sum-live">—</div><div class="l">Live</div></div>
+        <div class="dsh-fig"><div class="n" id="sum-building">—</div><div class="l">Building</div></div>
+        <div class="dsh-fig"><div class="n" id="sum-tasks">—</div><div class="l">Open tasks</div></div>
+        <div class="dsh-fig"><div class="n crit" id="sum-quiet">—</div><div class="l">Quiet 14d+</div></div>
       </div>
     </div>
 
-    <!-- Toolbar -->
-    <div class="dash-toolbar">
-      <div class="dash-filters">
-        <select class="filter-select" id="filter-stage">
-          <option value="">All Stages</option>
-          <option value="Idea">Idea</option>
-          <option value="Building">Building</option>
-          <option value="UAT">UAT</option>
-          <option value="Live">Live</option>
-          <option value="Paused">Paused</option>
-          <option value="Discarded">Discarded</option>
-        </select>
-        <select class="filter-select" id="filter-priority">
-          <option value="">All Priorities</option>
-          <option value="High">High</option>
-          <option value="Medium">Medium</option>
-          <option value="Low">Low</option>
-        </select>
-        <select class="filter-select" id="filter-sort">
-          <option value="stage" selected>Stage</option>
-          <option value="updated">Last Updated</option>
-          <option value="priority">Priority</option>
-          <option value="name">Name</option>
-          <option value="created">Newest First</option>
-        </select>
+    <!-- Widgets -->
+    <div class="dsh-widgets">
+      <div class="dsh-card">
+        <div class="dsh-card-h"><span class="dsh-card-t">Needs attention</span><span class="dsh-card-m" id="attn-count">—</span></div>
+        <div id="attn-list"></div>
       </div>
+      <div class="dsh-card">
+        <div class="dsh-card-h"><span class="dsh-card-t">Pipeline by stage</span><span class="dsh-card-m" id="pipe-total">—</span></div>
+        <div class="dsh-bars" id="pipe-bars"></div>
+      </div>
+      <div class="dsh-card">
+        <div class="dsh-card-h"><span class="dsh-card-t">Recent activity</span><span class="dsh-card-m">latest</span></div>
+        <div id="activity-list"></div>
+      </div>
+    </div>
+
+    <!-- Table heading + controls -->
+    <div class="dsh-table-head">
+      <h2>All projects</h2>
+      <span class="count" id="table-count"></span>
+      <span class="sp"></span>
+      <select class="filter-select" id="filter-stage">
+        <option value="">All Stages</option>
+        <option value="Idea">Idea</option>
+        <option value="Building">Building</option>
+        <option value="UAT">UAT</option>
+        <option value="Live">Live</option>
+        <option value="Paused">Paused</option>
+        <option value="Discarded">Discarded</option>
+      </select>
+      <select class="filter-select" id="filter-priority">
+        <option value="">All Priorities</option>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+      <select class="filter-select" id="filter-sort">
+        <option value="stage" selected>Stage</option>
+        <option value="updated">Last Updated</option>
+        <option value="priority">Priority</option>
+        <option value="name">Name</option>
+        <option value="created">Newest First</option>
+      </select>
       <button class="btn-new-project" id="btn-new-project">+ New Project</button>
     </div>
 
-    <!-- Projects Grid -->
-    <div class="projects-grid" id="projects-grid">
+    <!-- Projects table -->
+    <div class="dsh-table" id="projects-grid">
       <div class="loading">Loading projects...</div>
     </div>
 
@@ -160,7 +167,6 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="js/supabase-config.js"></script>
   <script src="js/auth.js"></script>
