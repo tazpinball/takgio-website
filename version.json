@@ -1,7 +1,21 @@
 {
-  "version": "2.13.1",
-  "date": "2026-06-10",
+  "version": "2.14.0",
+  "date": "2026-07-22",
   "releases": [
+    {
+      "version": "2.14.0",
+      "date": "2026-07-22",
+      "summary": "Brickture — photo-to-brick mobile app added to the Entertainment vertical",
+      "changes": [
+        "New case study: Brickture — an iOS and Android app that turns any photo into a buildable brick mosaic with a matched color palette, parts list, and build instructions (case-study-entertainment-brickture.html), added to the Case Studies listing and sitemap.xml",
+        "Products page: Brickture added to In Development with waitlist capture (source: brickture-waitlist), an anchor at #brickture, and a SoftwareApplication entry in the CollectionPage structured data; grid widened from 2 to 3 columns",
+        "Homepage: Entertainment industry card now leads with Brickture; hero rotator's Entertainment slide switched to Brickture (js/hero.js); meta description updated",
+        "Services page: Entertainment intro broadened beyond Pinball Fantasy; 'Interactive Experiences' card replaced with 'Vision & Creative Tools' covering the computer vision work behind Brickture",
+        "Trademark safety: Brickture described with generic brick language throughout, with a single LEGO(R) reference on products.html and the case study, each paired with a LEGO Group non-affiliation disclaimer",
+        "Copy consistency: newsletter blurb on the homepage and products page now names entertainment alongside the other three verticals",
+        "Brickture is pre-launch — all copy is framed as in-development with no performance claims or launch date"
+      ]
+    },
     {
       "version": "2.13.1",
       "date": "2026-06-10",
