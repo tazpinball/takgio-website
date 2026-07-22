@@ -1,7 +1,16 @@
 {
-  "version": "2.15.0",
+  "version": "2.15.1",
   "date": "2026-07-22",
   "releases": [
+    {
+      "version": "2.15.1",
+      "date": "2026-07-22",
+      "summary": "Project detail page fixes after the v2.15.0 dashboard redesign",
+      "changes": [
+        "Fixed a regression from v2.15.0: the project detail page's 'Total Hours' stat lost its styling when the dashboard overview bar was replaced. Restored .overview-stat/.overview-number/.overview-label (the hours bar is now their only consumer)",
+        "Harmonized the priority badge on the project detail page into the same soft-pill family as the restyled stage badge (matching radius, shared status-color tokens, no border), so the two badges read as one system in both light and dark themes"
+      ]
+    },
     {
       "version": "2.15.0",
       "date": "2026-07-22",
