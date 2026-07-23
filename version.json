@@ -1,7 +1,16 @@
 {
-  "version": "2.15.1",
+  "version": "2.15.2",
   "date": "2026-07-22",
   "releases": [
+    {
+      "version": "2.15.2",
+      "date": "2026-07-22",
+      "summary": "Security hardening from a review of the dashboard work",
+      "changes": [
+        "Removed an unused client-side password-hash constant from js/supabase-config.js (dead code predating Supabase Auth; a committed SHA-256 of a real password). Authentication is handled entirely by Supabase Auth",
+        "Edge function generate-project-update now validates project.github_repo against a strict ^owner/repo$ pattern before interpolating it into the GitHub API URL, so a crafted value can't redirect the privileged GITHUB_TOKEN to another repo or inject extra path/query segments"
+      ]
+    },
     {
       "version": "2.15.1",
       "date": "2026-07-22",

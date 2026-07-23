@@ -87,6 +87,16 @@ Deno.serve(async (req) => {
         400
       );
     }
+    // Guard: github_repo is set by dashboard users and is interpolated into the
+    // GitHub API URL below. Enforce a strict "owner/repo" shape so a crafted
+    // value can't redirect the privileged GITHUB_TOKEN to another repo or inject
+    // extra path/query segments.
+    if (!/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(project.github_repo)) {
+      return jsonResponse(
+        { error: "Invalid github_repo format; expected 'owner/repo'" },
+        400
+      );
+    }
 
     // --- Get last update date ---
     const { data: lastUpdateArr } = await sb
