@@ -1,5 +1,15 @@
 # TAKGIO Website — Project Rules
 
+
+## 🔴 Live state
+
+**`HANDOFF.md` is the canonical record of where this project actually is** — what is done,
+what is in flight, what is blocked. It is imported here, so it loads automatically every
+session. Read it before proposing work, and rewrite it at the end of every session (the
+`/handoff` skill does this). If it goes stale, sessions start forgetting again.
+
+@HANDOFF.md
+
 ## MANDATORY: Version Bump on Every Change
 
 **THIS IS A HARD REQUIREMENT. NO EXCEPTIONS.**
@@ -14,13 +24,55 @@ If you forget this, Ted will be upset. Do not skip it. Do not defer it. Do it ev
 
 ## Versioning Format
 
-- `version.json` at the project root contains the current version and full release history
-- Version displays in the dashboard header next to "TAKGIO"
-- Use semantic versioning: MAJOR.MINOR.PATCH
+- `version.json` at the project root holds the top-level `version` + `date` and the full `releases` array (newest first). Keep the top-level `version`/`date` in sync with the newest release entry.
+- Use semantic versioning: MAJOR.MINOR.PATCH.
+- `js/dashboard.js` fetches `/version.json` (cache-busted) and renders the current version into the clickable `#version-badge` next to "TAKGIO" in the dashboard header.
 
 ## Tech Stack
 
-- Vanilla HTML/CSS/JS (no frameworks)
-- Supabase (Auth, Database, RLS)
-- Chart.js for data visualization
-- Hosted on Vercel via GitHub (auto-deploy on push to master)
+- Vanilla HTML/CSS/JS — no frameworks, no build step, no `package.json`.
+- Supabase (Auth, Postgres, RLS) via the Supabase JS SDK loaded from CDN.
+- Chart.js (CDN) for dashboard data visualization.
+- Hosted on Vercel, auto-deploys on push to the `master` branch (see Deployment).
+
+## Project Structure
+
+Two surfaces live in one repo:
+
+**Public marketing site** (indexed, linked from `sitemap.xml`):
+- `index.html`, `about.html`, `services.html`, `products.html`, `contact.html`
+- `case-studies.html` + `case-study-*.html` (5 case studies)
+- `insights.html` + `insight-*.html`
+
+**Internal project dashboard** (Supabase-auth-gated, `noindex,nofollow`):
+- `login.html`, `dashboard.html`, `tasks.html`, `project.html`, `ideas.html`
+
+**Shared assets & code:**
+- `css/` — `styles.css` (site-wide), `dashboard.css` (dashboard only)
+- `js/` — `supabase-config.js` (SUPABASE_URL / SUPABASE_ANON_KEY, load first), `auth.js` (login + session gating), `dashboard.js`, `my-tasks.js`, `project-detail.js`, `nav.js`, `hero.js`, `showcase.js`, `analytics.js`
+- `images/` — graphics; `og-image.html` generates `og-image.png`
+- `marketing/social/` — social assets
+- `supabase/` — `config.toml` + `functions/generate-project-update/index.ts` (Deno/TS edge function that reads repo files from the GitHub API)
+- `docs/` — `supabase-schema.sql`, `migrate-ideas.sql`, `strategy-project-dashboard.md`
+- `version.json`, `robots.txt`, `sitemap.xml`
+
+## Local Development
+
+No build. Serve the static files from the project root, e.g.:
+
+```
+npx http-server . -p 8080 -c-1
+```
+
+`.claude/launch.json` defines two preview servers: `takgio-site` (port 8080) and `takgio-marketing` (port 8099).
+
+## Deployment
+
+- Push to `master` → Vercel auto-deploys within seconds. There is no `vercel.json`; Vercel serves the repo as static files.
+- NOTE: `README.md` says push to `main`, but the actual deploy branch is `master`. Use `master`.
+
+## Gotchas
+
+- `js/supabase-config.js` must load before `auth.js` and any module that uses `window.sb`.
+- Secrets live in `.env` (gitignored) and in Supabase edge-function config — never hardcode keys beyond the public anon key.
+- Adding a public page? Also add it to the header/footer nav on the other public pages and to `sitemap.xml` (match the existing pattern in `version.json` release notes).
