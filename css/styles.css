@@ -1648,3 +1648,203 @@ img { max-width: 100%; display: block; }
   .adv-compare { padding: var(--space-lg); }
   .adv-compare-head, .adv-row { grid-template-columns: 1fr 48px 48px; gap: var(--space-sm); }
 }
+
+/* 25. Recently shipped — app cards, brand panels, momentum strip
+   (home "Just shipped", products page, case studies)
+   ---------------------------------------- */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.status-pill::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.status-pill.is-live   { background: rgba(16, 185, 129, 0.14); color: #047857; }
+.status-pill.is-review { background: rgba(245, 158, 11, 0.16); color: #b45309; }
+.status-pill.is-dev    { background: rgba(74, 108, 247, 0.12); color: var(--color-accent); }
+
+.app-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+.app-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+.app-name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.phone-pair {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+.phone-pair img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* Brand panels — each app keeps its own palette */
+.panel-hoof {
+  background: radial-gradient(120% 80% at 50% 0%, #0f1a14 0%, #07090d 60%);
+  border: 1px solid rgba(57, 255, 158, 0.18);
+  border-top: 4px solid #39ff9e;
+}
+.panel-hoof .app-name { color: #fff; }
+.panel-hoof .app-name span { color: #39ff9e; }
+.panel-hoof .panel-byline { color: rgba(255, 255, 255, 0.5); }
+.panel-hoof .stat-value { color: #39ff9e; }
+.panel-hoof .stat-label { color: rgba(255, 255, 255, 0.6); }
+.panel-hoof .phone-pair img { border: 1px solid rgba(255, 255, 255, 0.1); }
+
+.panel-record {
+  background: #241d13;
+  border: 1px solid rgba(227, 180, 72, 0.22);
+  border-top: 4px solid #e3b448;
+}
+.panel-record .app-name { color: #f4efe3; }
+.panel-record .panel-byline { color: rgba(244, 239, 227, 0.55); }
+.panel-record .stat-value { color: #e3b448; }
+.panel-record .stat-label { color: rgba(244, 239, 227, 0.65); }
+
+.pf-hoof .product-bullets li::before { color: #00875a; }
+.pf-record .product-bullets li::before { color: #8f6510; }
+
+/* Home — Just shipped cards */
+.ship-kicker {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-sm);
+}
+.ship-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.ship-card .status-pill { align-self: flex-start; margin-bottom: var(--space-md); }
+.ship-card.panel-hoof .status-pill.is-live { background: rgba(57, 255, 158, 0.14); color: #39ff9e; }
+.ship-card.panel-record .status-pill.is-review { background: rgba(227, 180, 72, 0.16); color: #e3b448; }
+.ship-tagline {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: var(--space-md) 0 var(--space-sm);
+}
+.ship-card p { font-size: 0.95rem; line-height: 1.65; }
+.panel-hoof .ship-tagline { color: #fff; }
+.panel-hoof p { color: rgba(255, 255, 255, 0.72); }
+.panel-record .ship-tagline { color: #f4efe3; }
+.panel-record p { color: rgba(244, 239, 227, 0.75); }
+.ship-card .phone-pair { margin-top: auto; padding-top: var(--space-lg); }
+.ship-card .phone-pair img { max-height: 420px; object-fit: cover; object-position: top; }
+.ship-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-lg);
+  align-items: center;
+  margin-top: var(--space-lg);
+}
+.ship-actions a { font-weight: 600; font-size: 0.95rem; }
+.panel-hoof .ship-actions a { color: #39ff9e; }
+.panel-record .ship-actions a { color: #e3b448; }
+.ship-actions .btn-app {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-sm);
+  background: #fff;
+  color: #07090d;
+}
+.panel-hoof .ship-actions .btn-app { color: #07090d; }
+.panel-record .ship-actions .btn-app { color: #241d13; }
+.ship-actions .btn-app:hover { background: #e9ecef; }
+.ship-actions .btn-app svg { width: 18px; height: 18px; }
+
+/* Momentum strip — verified studio facts */
+.momentum {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+  margin-top: var(--space-2xl);
+  padding: var(--space-xl);
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+.momentum-item .num {
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.momentum-item .lbl {
+  font-size: 0.88rem;
+  color: var(--color-text-secondary);
+  margin-top: var(--space-xs);
+  line-height: 1.5;
+}
+.momentum-note {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-top: var(--space-md);
+  text-align: center;
+}
+
+/* "Now taking on new projects" pill */
+.open-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 100px;
+  background: rgba(16, 185, 129, 0.12);
+  color: #047857;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+}
+.open-pill::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+}
+
+@media (min-width: 1024px) {
+  .momentum { grid-template-columns: repeat(4, 1fr); }
+}

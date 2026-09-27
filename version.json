@@ -1,7 +1,21 @@
 {
-  "version": "2.15.2",
-  "date": "2026-07-22",
+  "version": "2.16.0",
+  "date": "2026-09-27",
   "releases": [
+    {
+      "version": "2.16.0",
+      "date": "2026-09-27",
+      "summary": "New from the studio — Hoof Harted (live on the App Store) and True Record (in App Store review) highlighted across the site; Meta AR glasses development and 'now taking on new projects' announced",
+      "changes": [
+        "Home: new 'New from the studio' section with brand-styled cards for Hoof Harted (Live on the App Store) and True Record (In App Store review), real app icons and screenshots, and a momentum strip of verified figures (20 days first commit to App Store; 16 days first commit to submission; 544 commits, all co-authored with Claude; now developing for Meta's AR glasses)",
+        "Home: hero announcement pill now points to the new apps; Legal and Entertainment industry cards mention True Record and Hoof Harted; closing CTA now 'Now taking on new projects'",
+        "Products: Hoof Harted and True Record feature blocks at the top (brand panels with screenshots, App Store link, True Record launch-news signup with source true-record-launch); Meta AR glasses card added to In Development (grid now 2x2); SoftwareApplication structured data for both apps",
+        "New case studies: case-study-entertainment-hoof-harted.html and case-study-legal-true-record.html, listed first on case-studies.html and added to sitemap.xml",
+        "About: studio copy and By the numbers updated with the September 2026 releases and Meta AR work; CTA says we're taking on new projects. Contact: 'Now taking on new projects' pill and AR mention",
+        "New styles (css/styles.css section 25): status pills, app header, phone screenshot pair, Hoof Harted and True Record brand panels, ship cards, momentum strip, open-for-projects pill",
+        "New images in images/products/: app icons (256px PNG) and four resized App Store screenshots (540px WebP)"
+      ]
+    },
     {
       "version": "2.15.2",
       "date": "2026-07-22",
