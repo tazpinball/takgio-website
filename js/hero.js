@@ -15,7 +15,7 @@
     { word: 'Construction',        color: '#f59e0b', product: 'Document intelligence that catches what gets missed.' },
     { word: 'Legal & Compliance',  color: '#a78bfa', product: 'Contract analysis in minutes, not hours.' },
     { word: 'Education',           color: '#2dd4bf', product: 'Ann Elise — our AI Organic Chemistry tutor. It teaches, never just answers.' },
-    { word: 'Entertainment',       color: '#f472b6', product: 'Brickture — any photo, rebuilt in bricks. Coming soon to iOS and Android.' }
+    { word: 'Entertainment',       color: '#f472b6', product: 'Brickture — snap an object, get it back in bricks. In beta on iOS and Android.' }
   ];
 
   var word = document.getElementById('hero-rotator');

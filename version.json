@@ -1,7 +1,21 @@
 {
-  "version": "2.16.0",
+  "version": "2.17.0",
   "date": "2026-09-27",
   "releases": [
+    {
+      "version": "2.17.0",
+      "date": "2026-09-27",
+      "summary": "Marketing pass: Hoof Harted 5.0-star rating and App Store reviews, ConcreteIQ promoted to live beta, Meta Ray-Ban Display named, Brickture copy corrected to the shipped product, stale Ann Elise/LSAT claims removed",
+      "changes": [
+        "Hoof Harted: 5.0-star App Store rating and two App Store review quotes on the products page, home ship card, and case study (new 'What Players Say' section; rating stat replaces 'iOS live')",
+        "Products: 'In Development' becomes 'In Beta & In Development' (grid-3) — ConcreteIQ card (live beta at concreteiqapp.com, the $144,219 missed-steel catch on a live $1.67M school bid, 'Request beta access' form source concreteiq-beta), Brickture (beta on iOS & Android), Apps for Meta Ray-Ban Display (registered in Meta's Wearables Developer Center; Counterpoint +263% / 94% share). Retired Ann Elise LSAT card removed",
+        "Ann Elise: removed 'LSAT prep coming soon' / 'LSAT next'; free tier in JSON-LD corrected to 3 sessions per month; notes the iOS TestFlight beta",
+        "Brickture corrected everywhere from '2D photo mosaic' to what ships: photo of a real object to a rotatable 3D brick model with instructions and parts list in ~90 s; case study rewritten (beta on TestFlight and Google Play, 20/20 stress-test photos, 9/10 chunky objects clearly recognizable); services card, hero rotator, case-studies listing, JSON-LD updated. Removed people/pets examples per Brickture's own copy rules",
+        "'Meta's AR glasses' renamed to Meta Ray-Ban Display on home, about, contact",
+        "css/styles.css: .stars, .rating-block, .ship-rating",
+        ".gitignore: docs/mockups/ kept local (Vercel would publish committed files)"
+      ]
+    },
     {
       "version": "2.16.0",
       "date": "2026-09-27",
