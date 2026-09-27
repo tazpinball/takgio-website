@@ -1,7 +1,15 @@
 {
-  "version": "2.21.0",
+  "version": "2.21.1",
   "date": "2026-09-27",
   "releases": [
+    {
+      "version": "2.21.1",
+      "date": "2026-09-27",
+      "summary": "Force social platforms to fetch the new share image",
+      "changes": [
+        "og:image and twitter:image now point to images/og-image.png?v=2.21 on every page that declares them, so LinkedIn, Facebook, X, and iMessage treat it as a new image instead of serving their cached copy of the June 2026 card"
+      ]
+    },
     {
       "version": "2.21.0",
       "date": "2026-09-27",
