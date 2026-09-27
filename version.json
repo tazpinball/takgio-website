@@ -1,7 +1,20 @@
 {
-  "version": "2.18.0",
+  "version": "2.19.0",
   "date": "2026-09-27",
   "releases": [
+    {
+      "version": "2.19.0",
+      "date": "2026-09-27",
+      "summary": "Denser, more animated home and products pages — bento portfolio, aurora hero with floating product collage, ticker, count-ups, animated ConcreteIQ blueprint and Meta Ray-Ban Display HUD",
+      "changes": [
+        "Home rebuilt as a dense layout: 2-column hero (pitch + count-up stats on the left, floating product collage on the right) over an animated aurora and grid; scrolling highlights ticker; bento grid replacing the separate Results, spotlight, and portfolio sections; merged market + CTA band. Home page height at 1366px: 6,041px -> 3,573px (-41%); at 375px: 11,687px -> 8,283px (-29%)",
+        "New graphics: animated ConcreteIQ blueprint that draws in and flags the missing tilt-up steel; Meta Ray-Ban Display glasses with a scanning HUD; cursor-tracking glow on tiles; shimmering headline; floating collage cards",
+        "js/home.js: scroll reveals (only below-the-fold content, with a scroll-sweep fallback so nothing can stay hidden), count-ups whose final values are already in the HTML, tile spotlight; all motion honors prefers-reduced-motion",
+        "Products: dark gradient header with jump-to-product chips; denser feature blocks. Height at 1366px: 5,389px -> 4,578px (-15%)",
+        "Site-wide: container widened from 1120px to 1240px on desktop; anchor jumps clear the sticky header (scroll-margin-top)",
+        "CSS sections 27 and 28; no new copy claims — every figure is the same verified number as v2.18"
+      ]
+    },
     {
       "version": "2.18.0",
       "date": "2026-09-27",
