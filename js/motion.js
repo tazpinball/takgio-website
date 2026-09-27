@@ -52,6 +52,31 @@
     requestAnimationFrame(step);
   }
 
+  // Contact form: ?topic=invest (or a [data-topic] link) preselects "I'm interested in"
+  var topic = document.getElementById('topic');
+  if (topic) {
+    var pick = function (v) {
+      if (!v) return;
+      for (var k = 0; k < topic.options.length; k++) if (topic.options[k].value === v) { topic.value = v; return; }
+    };
+    try { pick(new URLSearchParams(window.location.search).get('topic')); } catch (e) {}
+    Array.prototype.forEach.call(document.querySelectorAll('[data-topic]'), function (a) {
+      a.addEventListener('click', function () { pick(a.getAttribute('data-topic')); });
+    });
+  }
+
+  // Article reading-progress bar
+  var bar = document.querySelector('.read-progress span');
+  if (bar) {
+    var update = function () {
+      var d = document.documentElement, max = d.scrollHeight - d.clientHeight;
+      bar.style.width = (max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0) + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
+
   var counters = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
   var reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
 

@@ -17,7 +17,7 @@
   <meta property="og:image" content="https://www.takgio.com/images/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="TAKGIO — AI-powered products for Construction, Legal &amp; Education">
+  <meta property="og:image:alt" content="TAKGIO — We build AI products and ship them: ConcreteIQ, Brickture, and more, now building for Meta Ray-Ban Display">
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Contact TAKGIO — Let's Talk AI for Your Industry">
@@ -50,12 +50,18 @@
 
   <main>
 
-    <!-- Hero -->
-    <section class="hero hero-sm">
+    <!-- Header -->
+    <section class="p-hero">
+      <div class="h-aurora" aria-hidden="true"><span></span><span></span><span></span></div>
       <div class="container">
         <span class="open-pill">Now taking on new projects</span>
-        <h1>Get In Touch</h1>
-        <p>Whether you're exploring AI for your business, have an app you want built, or an idea for Meta Ray-Ban Display, we'd love to hear from you.</p>
+        <h1>Let's talk</h1>
+        <p>Building a product, exploring AI for your business, an idea for Meta Ray-Ban Display &mdash; or interested in investing in TAKGIO. We'd love to hear from you.</p>
+        <nav class="p-jump" aria-label="Ways to reach us">
+          <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1cL_7FA-W5ma4m19YylqyIVgaxJhMx-hu03omEf3oO2HqVQ-74bNlX1onGPAelEfHUA8HtG3PZ?gv=true" target="_blank" rel="noopener"><span class="p-dot">&#128197;</span>Book a 30-min call</a>
+          <a href="mailto:info@takgio.com"><span class="p-dot">@</span>info@takgio.com</a>
+          <a href="?topic=invest#contact-form" data-topic="invest"><span class="p-dot">$</span>Investor inquiries</a>
+        </nav>
       </div>
     </section>
 
@@ -66,18 +72,7 @@
 
           <!-- Form -->
           <div>
-            <!--
-              FORM SETUP INSTRUCTIONS:
-              This form uses Formspree (https://formspree.io) for submission handling.
-              1. Create a free Formspree account
-              2. Create a new form and copy your form ID
-              3. Replace YOUR_FORM_ID below with your actual Formspree form ID
-
-              Alternative: If you prefer not to use Formspree, replace the form
-              with a simple mailto link:
-              <a href="mailto:ted@takgio.com" class="btn btn-primary btn-lg">Email Us</a>
-            -->
-            <form class="contact-form" action="https://formspree.io/f/mreokggq" method="POST">
+            <form class="contact-form" id="contact-form" action="https://formspree.io/f/mreokggq" method="POST">
               <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
               <div class="form-group">
                 <label for="name">Name *</label>
@@ -92,12 +87,23 @@
                 <input type="text" id="company" name="company" placeholder="Your company name">
               </div>
               <div class="form-group">
+                <label for="topic">I'm interested in</label>
+                <select id="topic" name="topic">
+                  <option value="build" selected>Building a product with TAKGIO</option>
+                  <option value="invest">Investing in TAKGIO</option>
+                  <option value="ar">A Meta Ray-Ban Display / AR project</option>
+                  <option value="partner">A partnership</option>
+                  <option value="other">Something else</option>
+                </select>
+              </div>
+              <div class="form-group">
                 <label for="industry">Industry</label>
                 <select id="industry" name="industry">
                   <option value="" disabled selected>Select your industry</option>
                   <option value="construction">Construction</option>
                   <option value="legal">Legal &amp; Compliance</option>
                   <option value="education">Education</option>
+                  <option value="entertainment">Entertainment &amp; consumer apps</option>
                   <option value="other">Other</option>
                 </select>
               </div>
@@ -149,7 +155,7 @@
       <div class="footer-newsletter">
         <div class="footer-newsletter-text">
           <h4>Stay in the loop</h4>
-          <p>Occasional, practical notes on applied AI for construction, legal, and education. No spam.</p>
+          <p>Occasional, practical notes on applied AI for construction, legal, education, and entertainment. No spam.</p>
         </div>
         <form class="newsletter-form" action="https://formspree.io/f/mreokggq" method="POST">
           <input type="hidden" name="_subject" value="New newsletter signup">
@@ -199,5 +205,6 @@
   </footer>
 
   <script src="js/nav.js"></script>
+  <script src="js/motion.js"></script>
 </body>
 </html>

@@ -1,7 +1,20 @@
 {
-  "version": "2.20.0",
+  "version": "2.21.0",
   "date": "2026-09-27",
   "releases": [
+    {
+      "version": "2.21.0",
+      "date": "2026-09-27",
+      "summary": "Finishes the site refresh — Contact and Insights redesigned, new social-share image, investor inquiries routed through the contact form, stale copy fixed site-wide",
+      "changes": [
+        "New social-share image (images/og-image.png, source images/og-image.html): \"We build AI products — and we ship them\", ConcreteIQ $144,219 card, Brickture box art, 5.0-star and 20-days chips. Replaces the June image that said Construction, Legal & Education. og:image:alt updated on all 17 public pages",
+        "Contact: gradient header with quick paths (book a call, email, investor inquiries); new \"I am interested in\" field (build / invest / Meta Ray-Ban Display project / partnership / other) so investor messages arrive labelled; Entertainment added to Industry; form card + sticky dark info panel; removed a stale form-setup comment",
+        "Investor inquiries buttons (home, About) now open the contact form with \"Investing in TAKGIO\" preselected (contact.html?topic=invest) instead of a mailto link",
+        "Insights: gradient header, category-colored post tiles, dark closing band; both articles get a reading-progress bar and the new closing band",
+        "Footer newsletter copy on 11 pages now includes entertainment",
+        "js/motion.js: topic preselect + reading progress; CSS section 30; contact grid min-width fix for phones"
+      ]
+    },
     {
       "version": "2.20.0",
       "date": "2026-09-27",
