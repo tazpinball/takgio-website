@@ -1,7 +1,21 @@
 {
-  "version": "2.17.0",
+  "version": "2.18.0",
   "date": "2026-09-27",
   "releases": [
+    {
+      "version": "2.18.0",
+      "date": "2026-09-27",
+      "summary": "Home page becomes the pitch (Option B): ConcreteIQ and Brickture as flagships, Meta Ray-Ban Display as the next platform; pinball products removed from the site",
+      "changes": [
+        "Home rebuilt: dark pitch hero with proof bar (5 products shipped since March 2026; $144,219 caught by ConcreteIQ; 3,100+ commits built with Claude; 5.0-star App Store rating), Results row (ConcreteIQ, Brickture, Hoof Harted reviews), ConcreteIQ flagship spotlight, Brickture spotlight with banana2 box art, Meta Ray-Ban Display section with Counterpoint market data, 6-tile portfolio, kept The TAKGIO Advantage client results, cited market row (Gartner, Sensor Tower), Claude banner, Build with us / Invest with us CTA with not-an-offer line",
+        "Removed Pinball Fantasy / TAZ Predictions from every public page: products section and JSON-LD, case-studies listing, services, sitemap; deleted case-study-entertainment-pinball.html. Pinball is no longer a company focus",
+        "Products: ConcreteIQ (flagship) and Brickture promoted to full feature blocks at the top; Meta Ray-Ban Display gets its own section; ConcreteIQ added to JSON-LD",
+        "New case study: case-study-construction-concreteiq.html (the $144,219 catch, 11-minute drawing-set analysis, 92 line items), listed first and in the sitemap",
+        "Services: Entertainment section rebuilt around consumer apps (Brickture, kits, Hoof Harted, Meta Ray-Ban Display); Estimating card points to ConcreteIQ",
+        "About: studio story leads with ConcreteIQ, Brickture and Meta Ray-Ban Display; By the numbers updated; new Why TAKGIO thesis section",
+        "Removed unused js/hero.js (the rotating hero is gone); css section 26 for the pitch components; new images: ConcreteIQ logo and icon, Brickture icon, two Brickture box-art images"
+      ]
+    },
     {
       "version": "2.17.0",
       "date": "2026-09-27",
