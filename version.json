@@ -1,7 +1,18 @@
 {
-  "version": "2.21.1",
+  "version": "2.22.0",
   "date": "2026-09-27",
   "releases": [
+    {
+      "version": "2.22.0",
+      "date": "2026-09-27",
+      "summary": "Brand name is now written Takgio (not all caps) everywhere on the site",
+      "changes": [
+        "Replaced TAKGIO with Takgio across all public pages, internal dashboard titles, structured data (Organization name), og:site_name, share-image alt text, aria labels, the share-image source, and code comments (282 occurrences in 27 files)",
+        "Where CSS styles text in capitals: the home comparison column header is exempted (.col-takgio text-transform:none), and the About kicker now reads \"Why us\" so the brand never renders all-caps",
+        "Kept: historical version.json release notes, and the Google Analytics property name \"TAKGIO Website\" (the real name of the external account)",
+        "Not yet: the share image PNG still shows the old wordmark — it will be re-rendered with the new logo"
+      ]
+    },
     {
       "version": "2.21.1",
       "date": "2026-09-27",

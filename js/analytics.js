@@ -1,5 +1,5 @@
 /* ============================================
-   TAKGIO — Google Analytics 4
+   Takgio — Google Analytics 4
    --------------------------------------------
    SETUP (one-time, ~2 min):
    1. Go to https://analytics.google.com → Admin → Create Property (or use existing)

@@ -1,5 +1,5 @@
 /* ============================================
-   TAKGIO — Page motion (home, about, services, case studies)
+   Takgio — Page motion (home, about, services, case studies)
    - Scroll reveals: only elements that start below the fold are hidden,
      so nothing above the fold flickers on load.
    - Count-ups for [data-count] numbers (final value is already in the HTML,

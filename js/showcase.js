@@ -1,5 +1,5 @@
 /* ============================================
-   TAKGIO — "The TAKGIO Advantage" animated showcase (homepage)
+   Takgio — "The Takgio Advantage" animated showcase (homepage)
    Self-playing motion graphic: rotates proven results with count-up
    animation and staggers in the competitive comparison. No deps.
    Progressive enhancement: with JS off, the first slide + full

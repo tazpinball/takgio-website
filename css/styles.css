@@ -1,5 +1,5 @@
 /* ============================================
-   TAKGIO — Public Site Styles
+   Takgio — Public Site Styles
    Clean & modern design system (Stripe/Linear aesthetic)
    ============================================ */
 
@@ -1208,7 +1208,7 @@ img { max-width: 100%; height: auto; display: block; }
   .insights-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* 21. The TAKGIO Advantage — homepage animated showcase
+/* 21. The Takgio Advantage — homepage animated showcase
    ---------------------------------------- */
 .advantage { position: relative; overflow: hidden; }
 .advantage .section-header h2 { color: #fff; }
@@ -2218,7 +2218,7 @@ a.port:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
 @media (min-width: 1024px) { .h-close-grid { grid-template-columns: 1.1fr 1fr; gap: 40px; } }
 @media (max-width: 520px) { .h-mkt { grid-template-columns: 1fr; } }
 
-/* Tighter "TAKGIO Advantage" on the home page */
+/* Tighter "Takgio Advantage" on the home page */
 .advantage.h-compact { padding: 44px 0; }
 .advantage.h-compact .section-header { margin-bottom: 18px; }
 
@@ -2501,3 +2501,6 @@ section[id], article[id] { scroll-margin-top: 72px; }
 @media (max-width: 1023px) { .contact-info { position: static; } }
 .contact-grid > * { min-width: 0; }
 @media (max-width: 639px) { .contact-form, .contact-info { padding: 16px; } }
+
+/* Brand name is never all-caps (v2.22) */
+.adv-compare-head .col-takgio { text-transform: none; letter-spacing: 0; }
