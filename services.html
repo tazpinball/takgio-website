@@ -50,233 +50,124 @@
 
   <main>
 
-    <!-- Hero -->
-    <section class="hero hero-sm">
+    <!-- Header -->
+    <section class="p-hero">
+      <div class="h-aurora" aria-hidden="true"><span></span><span></span><span></span></div>
       <div class="container">
         <h1>AI Products Built for Your Industry</h1>
-        <p>We don't build generic AI tools. Every product starts with a deep understanding of your industry's workflows, documents, and pain points — then we build something purpose-fit.</p>
+        <p>We don't build generic AI tools. Every product starts with a deep understanding of your industry's workflows, documents, and pain points &mdash; then we build something purpose-fit, and ship it.</p>
+        <nav class="p-jump" aria-label="Jump to an industry">
+          <a href="#construction"><span class="p-dot pd-con">C</span>Construction</a>
+          <a href="#legal"><span class="p-dot pd-leg">L</span>Legal &amp; Compliance</a>
+          <a href="#education"><span class="p-dot pd-edu">E</span>Education</a>
+          <a href="#entertainment"><span class="p-dot pd-ent">E</span>Entertainment &amp; Consumer</a>
+        </nav>
+        <ol class="steps">
+          <li><span>1</span><div><b>Discover</b><p>We learn your workflows, documents, and domain language, and find where AI creates the most leverage.</p></div></li>
+          <li><span>2</span><div><b>Build</b><p>Claude-powered products shaped by real workflows &mdash; not hypothetical use cases.</p></div></li>
+          <li><span>3</span><div><b>Deploy &amp; iterate</b><p>Launch into production, measure real impact, and keep improving.</p></div></li>
+        </ol>
       </div>
     </section>
 
-    <!-- How We Work -->
-    <section class="section-alt">
-      <div class="container">
-        <div class="section-header">
-          <h2>How We Work</h2>
-          <p>A focused process that moves from understanding your domain to shipping production AI.</p>
-        </div>
-        <div class="grid-3">
-          <div class="process-step">
-            <div class="step-number">1</div>
-            <h3>Discover</h3>
-            <p>We immerse ourselves in your workflows, documents, and pain points. We learn the domain language, map the data landscape, and identify where AI creates the most leverage.</p>
-          </div>
-          <div class="process-step">
-            <div class="step-number">2</div>
-            <h3>Build</h3>
-            <p>We design and develop Claude-powered products tailored to your domain. Every feature is informed by real workflows — not hypothetical use cases.</p>
-          </div>
-          <div class="process-step">
-            <div class="step-number">3</div>
-            <h3>Deploy &amp; Iterate</h3>
-            <p>We launch into production, measure real impact, and continuously improve. AI products get better with use — we build for that from day one.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Construction -->
-    <section class="section" id="construction">
-      <div class="container">
-        <div class="section-header">
+    <section class="v-row v-con" id="construction">
+      <div class="container v-grid">
+        <div class="v-intro reveal">
           <span class="tag tag-construction">Construction</span>
           <h2>AI for Construction Teams</h2>
-          <p>Construction generates massive volumes of documents, communications, and compliance data. We build AI products that help teams process it faster and miss less.</p>
+          <p>Construction runs on documents, drawings, and compliance data. We build AI that processes it faster and misses less.</p>
+          <div class="v-proofs">
+              <a class="v-proof" href="/case-study-construction-concreteiq.html"><b>$144,219</b><span>of missing steel caught by ConcreteIQ &rarr;</span></a>
+              <a class="v-proof" href="/case-study-construction-docs.html"><b>60%</b><span>faster document processing for a regional GC &rarr;</span></a>
+          </div>
         </div>
-        <div class="grid-2">
-          <div class="card card-construction">
-            <div class="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
-            </div>
-            <h3>Document Intelligence</h3>
-            <p>Automated processing and analysis of RFIs, submittals, change orders, and project correspondence. Claude reads, classifies, and extracts key information so your team can focus on decisions, not data entry.</p>
-          </div>
-          <div class="card card-construction">
-            <div class="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <h3>Safety &amp; Compliance Automation</h3>
-            <p>AI-powered review of safety documentation, incident reports, and regulatory filings. Automatically flag gaps, track compliance status, and generate required documentation.</p>
-          </div>
-          <div class="card card-construction">
-            <div class="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            </div>
-            <h3>Project Communication Analysis</h3>
-            <p>Intelligent monitoring of project emails, meeting notes, and daily logs. Surface action items, track commitments, and identify risks buried in the communication stream.</p>
-          </div>
-          <div class="card card-construction">
-            <div class="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
-            </div>
-            <h3>Estimating &amp; Bid Support</h3>
-            <p>AI that reads the drawing set and prices the job &mdash; the work behind <a href="/case-study-construction-concreteiq.html">ConcreteIQ</a>, which caught $144,219 of steel missing from a hand-priced bid on a live school project.</p>
-          </div>
+        <div class="v-cards reveal">
+            <div class="v-card tile"><div class="v-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></div><div><h3>Document Intelligence</h3><p>Automated processing and analysis of RFIs, submittals, change orders, and project correspondence. Claude reads, classifies, and extracts key information so your team can focus on decisions, not data entry.</p></div></div>
+            <div class="v-card tile"><div class="v-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><h3>Safety &amp; Compliance Automation</h3><p>AI-powered review of safety documentation, incident reports, and regulatory filings. Automatically flag gaps, track compliance status, and generate required documentation.</p></div></div>
+            <div class="v-card tile"><div class="v-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><h3>Project Communication Analysis</h3><p>Intelligent monitoring of project emails, meeting notes, and daily logs. Surface action items, track commitments, and identify risks buried in the communication stream.</p></div></div>
+            <div class="v-card tile"><div class="v-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></div><div><h3>Estimating &amp; Bid Support</h3><p>AI that reads the drawing set and prices the job &mdash; the work behind <a href="/case-study-construction-concreteiq.html">ConcreteIQ</a>, which caught $144,219 of steel missing from a hand-priced bid on a live school project.</p></div></div>
         </div>
       </div>
     </section>
-
-    <!-- Legal & Compliance -->
-    <section class="section-alt" id="legal">
-      <div class="container">
-        <div class="section-header">
+    <section class="v-row v-leg pg-alt" id="legal">
+      <div class="container v-grid">
+        <div class="v-intro reveal">
           <span class="tag tag-legal">Legal &amp; Compliance</span>
           <h2>AI for Legal Teams</h2>
-          <p>Legal work is built on language — contracts, regulations, filings, correspondence. Claude's deep language understanding makes it a natural fit for legal AI products.</p>
+          <p>Legal work is built on language &mdash; contracts, regulations, filings. Claude's deep language understanding makes it a natural fit.</p>
+          <div class="v-proofs">
+              <a class="v-proof" href="/case-study-legal-contracts.html"><b>85%</b><span>faster contract review for a mid-market firm &rarr;</span></a>
+              <a class="v-proof" href="/case-study-legal-true-record.html"><b>16 days</b><span>True Record, first commit to App Store submission &rarr;</span></a>
+          </div>
         </div>
-        <div class="grid-2">
-          <div class="card card-legal">
-            <div class="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-            </div>
-            <h3>Contract Analysis &amp; Review</h3>
-            <p>Automated contract review that identifies risk clauses, missing provisions, non-standard terms, and obligation conflicts. Turn hours of manual review into minutes of focused decision-making.</p>
-          </div>
-          <div class="card card-legal">
-            <div class="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            </div>
-            <h3>Regulatory Change Monitoring</h3>
-            <p>Continuous monitoring of regulatory updates across jurisdictions. Automatically flag changes relevant to your practice areas and clients, with plain-language impact summaries.</p>
-          </div>
-          <div class="card card-legal">
-            <div class="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-            </div>
-            <h3>Compliance Documentation</h3>
-            <p>Intelligent generation and review of compliance documents, policies, and audit trails. Ensure consistency, completeness, and alignment with current regulatory requirements.</p>
-          </div>
-          <div class="card card-legal">
-            <div class="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-            </div>
-            <h3>Due Diligence Automation</h3>
-            <p>Accelerate M&A and transaction due diligence with AI-powered document review. Extract key terms, flag risks, and generate structured summaries across large document sets.</p>
-          </div>
+        <div class="v-cards reveal">
+            <div class="v-card tile"><div class="v-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><div><h3>Contract Analysis &amp; Review</h3><p>Automated contract review that identifies risk clauses, missing provisions, non-standard terms, and obligation conflicts. Turn hours of manual review into minutes of focused decision-making.</p></div></div>
+            <div class="v-card tile"><div class="v-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div><h3>Regulatory Change Monitoring</h3><p>Continuous monitoring of regulatory updates across jurisdictions. Automatically flag changes relevant to your practice areas and clients, with plain-language impact summaries.</p></div></div>
+            <div class="v-card tile"><div class="v-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div><h3>Compliance Documentation</h3><p>Intelligent generation and review of compliance documents, policies, and audit trails. Ensure consistency, completeness, and alignment with current regulatory requirements.</p></div></div>
+            <div class="v-card tile"><div class="v-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div><div><h3>Due Diligence Automation</h3><p>Accelerate M&A and transaction due diligence with AI-powered document review. Extract key terms, flag risks, and generate structured summaries across large document sets.</p></div></div>
         </div>
       </div>
     </section>
-
-    <!-- Education -->
-    <section class="section" id="education">
-      <div class="container">
-        <div class="section-header">
+    <section class="v-row v-edu" id="education">
+      <div class="container v-grid">
+        <div class="v-intro reveal">
           <span class="tag tag-education">Education</span>
           <h2>AI for Educators &amp; Learners</h2>
-          <p>Education is ripe for AI that meets learners where they are. We build products that personalize instruction, automate assessment, and help educators focus on what matters most — teaching.</p>
+          <p>AI that meets learners where they are &mdash; personalizing instruction and automating assessment so educators can focus on teaching.</p>
+          <div class="v-proofs">
+              <a class="v-proof" href="/products.html#ann-elise"><b>Live</b><span>Ann Elise, our AI Organic Chemistry tutor &rarr;</span></a>
+              <a class="v-proof" href="/case-study-education-platform.html"><b>3&times;</b><span>engagement on a personalized learning platform &rarr;</span></a>
+          </div>
         </div>
-        <div class="grid-2">
-          <div class="card card-education">
-            <div class="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-            </div>
-            <h3>Adaptive Learning Platforms</h3>
-            <p>AI-powered systems that adjust content, pacing, and difficulty in real time based on each learner's progress. Deliver truly personalized instruction without adding instructor workload.</p>
-          </div>
-          <div class="card card-education">
-            <div class="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-            </div>
-            <h3>Assessment &amp; Feedback Automation</h3>
-            <p>Intelligent grading and feedback that goes beyond right-or-wrong. Claude evaluates open-ended responses, explains reasoning, and gives students actionable guidance to improve.</p>
-          </div>
-          <div class="card card-education">
-            <div class="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-            </div>
-            <h3>Curriculum Intelligence</h3>
-            <p>AI-driven analysis of learning materials and outcomes to identify content gaps, optimize learning paths, and ensure alignment with standards and objectives.</p>
-          </div>
-          <div class="card card-education">
-            <div class="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
-            </div>
-            <h3>Student Engagement Analytics</h3>
-            <p>Understand how learners interact with content at a granular level. Surface patterns in engagement, identify at-risk students early, and measure what's actually driving learning outcomes.</p>
-          </div>
+        <div class="v-cards reveal">
+            <div class="v-card tile"><div class="v-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div><div><h3>Adaptive Learning Platforms</h3><p>AI-powered systems that adjust content, pacing, and difficulty in real time based on each learner's progress. Deliver truly personalized instruction without adding instructor workload.</p></div></div>
+            <div class="v-card tile"><div class="v-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div><h3>Assessment &amp; Feedback Automation</h3><p>Intelligent grading and feedback that goes beyond right-or-wrong. Claude evaluates open-ended responses, explains reasoning, and gives students actionable guidance to improve.</p></div></div>
+            <div class="v-card tile"><div class="v-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div><div><h3>Curriculum Intelligence</h3><p>AI-driven analysis of learning materials and outcomes to identify content gaps, optimize learning paths, and ensure alignment with standards and objectives.</p></div></div>
+            <div class="v-card tile"><div class="v-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></div><div><h3>Student Engagement Analytics</h3><p>Understand how learners interact with content at a granular level. Surface patterns in engagement, identify at-risk students early, and measure what's actually driving learning outcomes.</p></div></div>
         </div>
       </div>
     </section>
-
-    <!-- Entertainment & Consumer -->
-    <section class="section-alt" id="entertainment">
-      <div class="container">
-        <div class="section-header">
-          <span class="tag tag-entertainment">Entertainment</span>
+    <section class="v-row v-ent pg-alt" id="entertainment">
+      <div class="container v-grid">
+        <div class="v-intro reveal">
+          <span class="tag tag-entertainment">Entertainment &amp; Consumer</span>
           <h2>AI for Entertainment &amp; Consumer Apps</h2>
-          <p>Consumer products live or die on the experience. We build apps people pick up and show their friends &mdash; from Brickture, which turns a photo into a buildable brick model with kit ordering built in, to Hoof Harted, live on the App Store &mdash; and now experiences for Meta Ray-Ban Display.</p>
+          <p>Consumer products live or die on the experience. We build apps people pick up and show their friends &mdash; and now experiences for Meta Ray-Ban Display.</p>
+          <div class="v-proofs">
+              <a class="v-proof" href="/products.html#brickture"><b>Beta</b><span>Brickture on iOS &amp; Android, kit ordering built in &rarr;</span></a>
+              <a class="v-proof" href="/products.html#hoof-harted"><b>&#9733; 5.0</b><span>Hoof Harted on the App Store &rarr;</span></a>
+          </div>
         </div>
-        <div class="grid-2">
-          <div class="card card-entertainment">
-            <div class="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-            </div>
-            <h3>Vision &amp; Creative Tools</h3>
-            <p>Consumer apps that turn what a camera sees into something new &mdash; the computer vision and 3D work behind Brickture, which turns a photo of an object into a buildable brick model.</p>
-          </div>
-          <div class="card card-entertainment">
-            <div class="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-            </div>
-            <h3>From Digital Design to Physical Product</h3>
-            <p>Apps that end in something you can hold &mdash; parts lists, step-by-step instructions, and in-app ordering, like Brickture's kit ordering, now in beta.</p>
-          </div>
-          <div class="card card-entertainment">
-            <div class="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><line x1="15" y1="13" x2="15.01" y2="13"/><line x1="18" y1="11" x2="18.01" y2="11"/><rect x="2" y="6" width="20" height="12" rx="2"/></svg>
-            </div>
-            <h3>Social &amp; Party Games</h3>
-            <p>Games built for a room full of people &mdash; like Hoof Harted, which went from first commit to live on the App Store in 20 days and is rated 5.0 stars.</p>
-          </div>
-          <div class="card card-entertainment">
-            <div class="card-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="13" r="3.5"/><circle cx="18" cy="13" r="3.5"/><path d="M9.5 13h5"/><path d="M2.5 13V9l2-3"/><path d="M21.5 13V9l-2-3"/></svg>
-            </div>
-            <h3>Spatial &amp; Wearable AI</h3>
-            <p>Hands-free, heads-up experiences for AI glasses. We're now building for Meta Ray-Ban Display, and taking on partner projects there too.</p>
-          </div>
+        <div class="v-cards reveal">
+            <div class="v-card tile"><div class="v-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div><div><h3>Vision &amp; Creative Tools</h3><p>Consumer apps that turn what a camera sees into something new &mdash; the computer vision and 3D work behind Brickture, which turns a photo of an object into a buildable brick model.</p></div></div>
+            <div class="v-card tile"><div class="v-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div><div><h3>From Digital Design to Physical Product</h3><p>Apps that end in something you can hold &mdash; parts lists, step-by-step instructions, and in-app ordering, like Brickture's kit ordering, now in beta.</p></div></div>
+            <div class="v-card tile"><div class="v-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><line x1="15" y1="13" x2="15.01" y2="13"/><line x1="18" y1="11" x2="18.01" y2="11"/><rect x="2" y="6" width="20" height="12" rx="2"/></svg></div><div><h3>Social &amp; Party Games</h3><p>Games built for a room full of people &mdash; like Hoof Harted, which went from first commit to live on the App Store in 20 days and is rated 5.0 stars.</p></div></div>
+            <div class="v-card tile"><div class="v-ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="13" r="3.5"/><circle cx="18" cy="13" r="3.5"/><path d="M9.5 13h5"/><path d="M2.5 13V9l2-3"/><path d="M21.5 13V9l-2-3"/></svg></div><div><h3>Spatial &amp; Wearable AI</h3><p>Hands-free, heads-up experiences for AI glasses. We're now building for Meta Ray-Ban Display, and taking on partner projects there too.</p></div></div>
         </div>
       </div>
     </section>
 
-    <!-- Technology -->
-    <section class="section-navy">
-      <div class="container claude-banner">
-        <h2>Why We Build with Claude</h2>
-        <p>We chose Anthropic's Claude as the foundation for our products because of its unique strengths in the industries we serve.</p>
-        <div class="grid-3" style="margin-top: var(--space-xl); text-align: left;">
-          <div>
-            <h3>Long Context Processing</h3>
-            <p>Claude handles documents up to 200K tokens — essential for construction specs, contracts, and regulatory filings that can run hundreds of pages.</p>
-          </div>
-          <div>
-            <h3>Safety &amp; Reliability</h3>
-            <p>Anthropic's safety-first architecture means Claude is built for high-stakes environments where accuracy and responsible AI matter most.</p>
-          </div>
-          <div>
-            <h3>Enterprise Ready</h3>
-            <p>Production-grade APIs, consistent performance, and the enterprise support infrastructure that regulated industries require.</p>
+    <!-- Why Claude + CTA -->
+    <section class="pg-close">
+      <div class="h-aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="container pg-close-grid">
+        <div class="reveal">
+          <span class="ship-kicker pg-k-light">Why we build with Claude</span>
+          <h2>The right foundation for high-stakes work</h2>
+          <ul class="why-list">
+            <li><b>Long context.</b> Construction specs, contracts, and regulatory filings run hundreds of pages &mdash; Claude reads them in a single pass.</li>
+            <li><b>Safety &amp; reliability.</b> Anthropic's safety-first architecture is built for environments where accuracy and responsible AI matter most.</li>
+            <li><b>Enterprise ready.</b> Production-grade APIs and consistent performance that regulated industries require.</li>
+          </ul>
+        </div>
+        <div class="pg-cta reveal">
+          <span class="open-pill">Now taking on new projects</span>
+          <h3>Have a workflow that needs AI?</h3>
+          <p>Tell us about your challenge. We'll tell you honestly whether AI is the right fit &mdash; and if it is, how we'd build it.</p>
+          <div class="btn-group">
+            <a href="/contact.html" class="btn btn-primary">Start a conversation</a>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="section">
-      <div class="container" style="text-align: center;">
-        <h2>Have a workflow that needs AI?</h2>
-        <p style="max-width: 500px; margin: 0 auto var(--space-lg);">Tell us about your challenge. We'll tell you honestly whether AI is the right fit — and if it is, how we'd build it.</p>
-        <a href="/contact.html" class="btn btn-primary btn-lg">Start a Conversation</a>
       </div>
     </section>
 
@@ -338,5 +229,6 @@
   </footer>
 
   <script src="js/nav.js"></script>
+  <script src="js/motion.js"></script>
 </body>
 </html>

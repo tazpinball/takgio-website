@@ -1,7 +1,21 @@
 {
-  "version": "2.19.0",
+  "version": "2.20.0",
   "date": "2026-09-27",
   "releases": [
+    {
+      "version": "2.20.0",
+      "date": "2026-09-27",
+      "summary": "About, Services, and Case Studies get the dense, animated treatment — gradient headers, timeline, filterable case studies, sticky key-facts on every case study",
+      "changes": [
+        "About: gradient header with count-up stats; studio story beside an animated 2026 milestone timeline (verified dates); Why TAKGIO as 4 compact tiles; compact team cards and principles; dark Claude + CTA band. Height at 1366px 3,613 -> 2,493px (-31%)",
+        "Services: gradient header with industry jump chips and the Discover / Build / Deploy steps; each industry is a 2-column row (intro + linked proof figures | 2x2 capability cards); dark Why-Claude + CTA band. Height at 1366px 4,469 -> 2,770px (-38%). Replaced an unverifiable 200K-token claim with a plain description",
+        "Case studies: gradient header with working category filters; featured ConcreteIQ card with the animated blueprint; 3-column grid with Brickture box-art thumbnail. Height at 1366px 2,279 -> 2,159px (-5%)",
+        "All 8 case study pages: two columns on desktop with a sticky dark key-facts panel, larger headlines, card-style sections that animate in (-3% to -5%)",
+        "About no longer says TAKGIO \"is a Claude partner\" (Partner Network status unconfirmed); says built exclusively on Claude by Anthropic",
+        "Root-cause fix: global img rule now sets height:auto, so an img width/height attribute can no longer override aspect-ratio (caused the Hoof Harted tile and Brickture thumbnail stretch bugs)",
+        "js/home.js renamed js/motion.js and shared by home, about, services, case studies; adds the case-study filter (aria-pressed state)"
+      ]
+    },
     {
       "version": "2.19.0",
       "date": "2026-09-27",

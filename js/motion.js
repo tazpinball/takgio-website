@@ -1,5 +1,5 @@
 /* ============================================
-   TAKGIO — Home page motion (v2.19)
+   TAKGIO — Page motion (home, about, services, case studies)
    - Scroll reveals: only elements that start below the fold are hidden,
      so nothing above the fold flickers on load.
    - Count-ups for [data-count] numbers (final value is already in the HTML,
@@ -8,6 +8,28 @@
    ============================================ */
 (function () {
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Case-study filter chips: <button data-filter="construction"> toggles cards by data-cat
+  Array.prototype.forEach.call(document.querySelectorAll('.cs-filter'), function (bar) {
+    var buttons = Array.prototype.slice.call(bar.querySelectorAll('[data-filter]'));
+    var cards = Array.prototype.slice.call(document.querySelectorAll('[data-cat]'));
+    buttons.forEach(function (btn) {
+      btn.setAttribute('aria-pressed', btn.classList.contains('is-on') ? 'true' : 'false');
+      btn.addEventListener('click', function () {
+        var f = btn.getAttribute('data-filter');
+        buttons.forEach(function (b) {
+          var on = b === btn;
+          b.classList.toggle('is-on', on);
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        cards.forEach(function (c) {
+          var show = f === 'all' || c.getAttribute('data-cat') === f;
+          c.classList.toggle('is-hidden', !show);
+          if (show) { c.classList.remove('pre'); c.classList.add('in'); }
+        });
+      });
+    });
+  });
 
   function format(n, decimals) {
     return decimals ? n.toFixed(decimals) : Math.round(n).toLocaleString('en-US');
