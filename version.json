@@ -1,7 +1,17 @@
 {
-  "version": "2.24.0",
+  "version": "2.24.1",
   "date": "2026-09-28",
   "releases": [
+    {
+      "version": "2.24.1",
+      "date": "2026-09-28",
+      "summary": "Hoof Harted reviews quoted without reviewer names; True Record products panel uses the free-syllabus screen",
+      "changes": [
+        "Hoof Harted App Store reviews on index.html, products.html and the Hoof Harted case study are now cited as '5-star App Store review'. Takgio has no agreement to use the reviewers' names (Ted, 2026-09-28)",
+        "hoof-harted.html: adds the family-and-friends review (unnamed) to Proof, and a campaign-kit rule to quote reviews word for word without names",
+        "products.html True Record panel: the read-along screenshot (showed case text describing a killing) replaced by the free-syllabus screen; images/products/true-record-read-along.webp removed"
+      ]
+    },
     {
       "version": "2.24.0",
       "date": "2026-09-28",
