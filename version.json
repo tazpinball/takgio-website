@@ -1,7 +1,21 @@
 {
-  "version": "2.25.0",
+  "version": "2.26.0",
   "date": "2026-09-28",
   "releases": [
+    {
+      "version": "2.26.0",
+      "date": "2026-09-28",
+      "summary": "New site navigation, a Products hub with one card per product, and a sticky sub-menu on every product page",
+      "changes": [
+        "Header on all 23 public pages rebuilt: glass bar; Products, Services and Company open as dropdown panels (click, Enter or hover; Escape or an outside click closes); Case studies and Insights as direct links; Investors text link and a 'Start a project' button. The current section is marked with a teal dot",
+        "Products panel lists all six products with icon, status and a one-line pitch, plus the ConcreteIQ $144,219 case-study card; Services is organized by industry",
+        "Phones and tablets (under 1024px): compact bar with 'Start a project' and a menu button that opens a full-screen menu with collapsible sections and two pinned action buttons; page scroll is locked while it is open",
+        "products.html is now a hub: industry filters and six cards (ConcreteIQ and Brickture as the large flagships), each opening that product's own page. The long per-product sections and sign-up forms now live only on the product pages; old products.html#<product> anchors still land on the matching card, and site links that used them now point straight at the product pages",
+        "Product pages: sticky white sub-menu under the header with a product switcher, section links that highlight as you scroll (Overview, Who it's for, How it works, Pricing/Build paths, Proof, Market, Campaign kit), and the product's own call to action; previous/next product links at the foot",
+        "js/nav.js rewritten for the new header and sub-menu; menu images start loading as soon as the pointer or keyboard reaches the header",
+        "CSS: old header rules removed and replaced by sections 33 (header), 34 (product sub-menu) and 35 (Products hub). Fixed four invalid 'font: ... inherit' shorthands (including the case-study filter buttons) that browsers were silently ignoring"
+      ]
+    },
     {
       "version": "2.25.0",
       "date": "2026-09-28",
