@@ -1,7 +1,20 @@
 {
-  "version": "2.29.0",
+  "version": "2.30.0",
   "date": "2026-09-28",
   "releases": [
+    {
+      "version": "2.30.0",
+      "date": "2026-09-28",
+      "summary": "Contact page redesigned: one dark band with the copy beside a clean form card, and the page adapts to the topic, so every Investors link now lands on an investor page",
+      "changes": [
+        "contact.html: the old centred hero, emoji pills, stacked full-width fields and info sidebar are replaced by one dark band. The heading and copy sit on the left and the form card on the right (on phones the copy comes first, then the form, then the details)",
+        "Topic picker: five pill buttons (Building a product, Investing, Meta Ray-Ban Display, Partnership, Something else) replace the dropdown. The pick swaps the kicker, the intro line, the notes, the Company label and the message prompt, and shows Industry only for product and Meta Ray-Ban Display work. The swap is pure CSS (:has); ?topic= still preselects it (js/motion.js)",
+        "Investing (contact.html?topic=invest, where every Investors link lands): Investor relations kicker, the four home-page figures (5 products since March 2026, $144,219, 3,100+ commits, 5.0 App Store rating) with their source line, a Product demos button to https://demos.takgio.com (data-demos-link; the fixed-link rule in CLAUDE.md is now 23 pages, 25 links), See the portfolio, and the no-offer-of-securities notice from the home page. Company becomes Firm or fund",
+        "Book a 30-minute call and info@takgio.com are cards with line icons. The Anthropic partner-team note now shows only for Partnership, and What to expect only for Building a product",
+        "Form fields, their names and the Formspree address are unchanged, so submissions arrive at info@ exactly as before. Two-column Name/Email and Company/Industry rows, 46px fields with focus rings, a custom select arrow, Send message with the response-time note",
+        "css/styles.css: section 38 (contact); removed the old contact rules that only this page used (sections 12 and 19, the section 30 contact overrides, .p-dot). .p-jump stays for case-studies.html"
+      ]
+    },
     {
       "version": "2.29.0",
       "date": "2026-09-28",

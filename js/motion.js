@@ -52,17 +52,21 @@
     requestAnimationFrame(step);
   }
 
-  // Contact form: ?topic=invest (or a [data-topic] link) preselects "I'm interested in"
-  var topic = document.getElementById('topic');
-  if (topic) {
-    var pick = function (v) {
-      if (!v) return;
-      for (var k = 0; k < topic.options.length; k++) if (topic.options[k].value === v) { topic.value = v; return; }
+  // Contact form: ?topic=invest preselects the topic. CSS (:has on .ct) swaps the copy around the form;
+  // this only sets the radio and the message placeholder (each radio carries its own in data-ph).
+  var topics = Array.prototype.slice.call(document.querySelectorAll('.ct-topics input[name="topic"]'));
+  if (topics.length) {
+    var message = document.getElementById('message');
+    var syncPlaceholder = function () {
+      var on = topics.filter(function (r) { return r.checked; })[0];
+      if (on && message && on.getAttribute('data-ph')) message.placeholder = on.getAttribute('data-ph');
     };
-    try { pick(new URLSearchParams(window.location.search).get('topic')); } catch (e) {}
-    Array.prototype.forEach.call(document.querySelectorAll('[data-topic]'), function (a) {
-      a.addEventListener('click', function () { pick(a.getAttribute('data-topic')); });
-    });
+    try {
+      var wanted = new URLSearchParams(window.location.search).get('topic');
+      topics.forEach(function (r) { if (r.value === wanted) r.checked = true; });
+    } catch (e) {}
+    topics.forEach(function (r) { r.addEventListener('change', syncPlaceholder); });
+    syncPlaceholder();
   }
 
   // Campaign-kit copy buttons: <button class="pp-copybtn" data-copy="#id">

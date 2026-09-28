@@ -105,100 +105,108 @@
 
   <main>
 
-    <!-- Header -->
-    <section class="p-hero">
+    <!-- Contact v2.30: the topic picked in the form swaps the copy around it (CSS :has on .ct, see styles.css section 38).
+         ?topic=build|invest|ar|partner|other preselects it (js/motion.js). Field names are what Formspree emails to info@. -->
+    <section class="ct" id="contact-form" aria-labelledby="ct-title">
       <div class="h-aurora" aria-hidden="true"><span></span><span></span><span></span></div>
-      <div class="container">
-        <span class="open-pill">Now taking on new projects</span>
-        <h1>Let's talk</h1>
-        <p>Building a product, exploring AI for your business, an idea for Meta Ray-Ban Display &mdash; or interested in investing in Takgio. We'd love to hear from you.</p>
-        <nav class="p-jump" aria-label="Ways to reach us">
-          <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1cL_7FA-W5ma4m19YylqyIVgaxJhMx-hu03omEf3oO2HqVQ-74bNlX1onGPAelEfHUA8HtG3PZ?gv=true" target="_blank" rel="noopener"><span class="p-dot">&#128197;</span>Book a 30-min call</a>
-          <a href="mailto:info@takgio.com"><span class="p-dot">@</span>info@takgio.com</a>
-          <a href="?topic=invest#contact-form" data-topic="invest"><span class="p-dot">$</span>Investor inquiries</a>
-        </nav>
-      </div>
-    </section>
+      <div class="container ct-grid">
 
-    <!-- Contact Form + Info -->
-    <section class="section">
-      <div class="container">
-        <div class="contact-grid">
-
-          <!-- Form -->
-          <div>
-            <form class="contact-form" id="contact-form" action="https://formspree.io/f/mreokggq" method="POST">
-              <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
-              <div class="form-group">
-                <label for="name">Name *</label>
-                <input type="text" id="name" name="name" required placeholder="Your name">
-              </div>
-              <div class="form-group">
-                <label for="email">Email *</label>
-                <input type="email" id="email" name="email" required placeholder="you@company.com">
-              </div>
-              <div class="form-group">
-                <label for="company">Company</label>
-                <input type="text" id="company" name="company" placeholder="Your company name">
-              </div>
-              <div class="form-group">
-                <label for="topic">I'm interested in</label>
-                <select id="topic" name="topic">
-                  <option value="build" selected>Building a product with Takgio</option>
-                  <option value="invest">Investing in Takgio</option>
-                  <option value="ar">A Meta Ray-Ban Display / AR project</option>
-                  <option value="partner">A partnership</option>
-                  <option value="other">Something else</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="industry">Industry</label>
-                <select id="industry" name="industry">
-                  <option value="" disabled selected>Select your industry</option>
-                  <option value="construction">Construction</option>
-                  <option value="legal">Legal &amp; civic</option>
-                  <option value="education">Education</option>
-                  <option value="entertainment">Entertainment &amp; consumer apps</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="message">Message *</label>
-                <textarea id="message" name="message" required placeholder="Tell us about the challenge you're looking to solve, or just say hello."></textarea>
-              </div>
-              <div>
-                <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
-              </div>
-            </form>
-          </div>
-
-          <!-- Contact Info Sidebar -->
-          <div class="contact-info">
-            <!-- Booking: Google Calendar appointment schedule "30 min with Ted" (info@takgio.com) -->
-            <div class="booking-callout">
-              <h3>Prefer to grab time directly?</h3>
-              <p>Skip the form and book a 30-minute intro call at whatever time works for you.</p>
-              <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1cL_7FA-W5ma4m19YylqyIVgaxJhMx-hu03omEf3oO2HqVQ-74bNlX1onGPAelEfHUA8HtG3PZ?gv=true" class="btn btn-primary" target="_blank" rel="noopener">Book an intro call</a>
-            </div>
-            <div class="contact-info-item">
-              <h3>Email</h3>
-              <p><a href="mailto:info@takgio.com">info@takgio.com</a></p>
-            </div>
-            <div class="contact-info-item">
-              <h3>Response Time</h3>
-              <p>We typically respond within one business day.</p>
-            </div>
-            <div class="contact-info-item">
-              <h3>Anthropic Partners</h3>
-              <p>If you're reaching out from Anthropic's partner team, we'd be glad to connect. Please mention "Claude Partner Network" in your message.</p>
-            </div>
-            <div class="contact-info-item">
-              <h3>What to expect</h3>
-              <p>After you reach out, we'll schedule a brief discovery call to understand your workflow and challenges. No sales pitch — just an honest conversation about whether AI is the right fit.</p>
-            </div>
-          </div>
-
+        <div class="ct-head">
+          <p class="ct-kicker">
+            <span data-for="build">Now taking on new projects</span>
+            <span data-for="invest">Investor relations</span>
+            <span data-for="ar">Meta Ray-Ban Display</span>
+            <span data-for="partner">Partnerships</span>
+            <span data-for="other">General inquiries</span>
+          </p>
+          <h1 id="ct-title">Let&rsquo;s talk.</h1>
+          <p class="ct-lede" data-for="build">A product to build &mdash; industry AI or a consumer app. Tell us what you have in mind and we&rsquo;ll tell you honestly whether AI is the right fit.</p>
+          <p class="ct-lede" data-for="invest">Takgio is an AI product studio that ships, built on Claude by Anthropic. Tell us about yourself or your firm and we&rsquo;ll set up a conversation about Takgio&rsquo;s growth.</p>
+          <p class="ct-lede" data-for="ar">Apps for heads-up, hands-free AI glasses. Tell us what yours should do on Meta Ray-Ban Display.</p>
+          <p class="ct-lede" data-for="partner">Tell us who you are and the partnership you have in mind.</p>
+          <p class="ct-lede" data-for="other">Press, a question, or something else entirely &mdash; we&rsquo;d love to hear from you.</p>
         </div>
+
+        <form class="ct-form" action="https://formspree.io/f/mreokggq" method="POST">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+          <h2 class="ct-form-title">Send us a message</h2>
+          <fieldset class="ct-topics">
+            <legend>What&rsquo;s this about?</legend>
+            <label><input type="radio" name="topic" value="build" checked data-ph="What are you building, and what problem does it solve?"><span>Building a product</span></label>
+            <label><input type="radio" name="topic" value="invest" data-ph="A little about you or your firm, and what you&rsquo;d like to discuss."><span>Investing</span></label>
+            <label><input type="radio" name="topic" value="ar" data-ph="What should your app do on Meta Ray-Ban Display, and who will wear it?"><span>Meta Ray-Ban Display</span></label>
+            <label><input type="radio" name="topic" value="partner" data-ph="Who you are and the partnership you have in mind."><span>Partnership</span></label>
+            <label><input type="radio" name="topic" value="other" data-ph="How can we help?"><span>Something else</span></label>
+          </fieldset>
+          <div class="ct-row">
+            <div class="ct-field">
+              <label for="name">Name <em aria-hidden="true">*</em></label>
+              <input type="text" id="name" name="name" required autocomplete="name" placeholder="Your name">
+            </div>
+            <div class="ct-field">
+              <label for="email">Email <em aria-hidden="true">*</em></label>
+              <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@company.com">
+            </div>
+          </div>
+          <div class="ct-row">
+            <div class="ct-field">
+              <label for="company"><span data-for="build ar partner other">Company</span><span data-for="invest">Firm or fund</span></label>
+              <input type="text" id="company" name="company" autocomplete="organization" placeholder="Optional">
+            </div>
+            <div class="ct-field" data-for="build ar">
+              <label for="industry">Industry</label>
+              <select id="industry" name="industry">
+                <option value="" disabled selected>Select your industry</option>
+                <option value="construction">Construction</option>
+                <option value="legal">Legal &amp; civic</option>
+                <option value="education">Education</option>
+                <option value="entertainment">Entertainment &amp; consumer apps</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="ct-field">
+            <label for="message">Message <em aria-hidden="true">*</em></label>
+            <textarea id="message" name="message" required rows="5" placeholder="What are you building, and what problem does it solve?"></textarea>
+          </div>
+          <div class="ct-submit">
+            <button type="submit" class="btn btn-primary btn-lg">Send message<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+            <p>We typically respond within one business day.</p>
+          </div>
+        </form>
+
+        <div class="ct-rest">
+          <div class="ct-invest" data-for="invest">
+            <div class="h-stats">
+              <div><b>5</b><span>Products shipped since March 2026</span></div>
+              <div><b>$144,219</b><span>Missing steel ConcreteIQ surfaced on one live bid</span></div>
+              <div><b>3,100+</b><span>Commits since March 2026, built with Claude</span></div>
+              <div><b><i class="h-star">&#9733;</i> 5.0</b><span>App Store rating &mdash; Hoof Harted</span></div>
+            </div>
+            <div class="ct-actions">
+              <a href="https://demos.takgio.com" class="btn btn-primary" target="_blank" rel="noopener" data-demos-link>Product demos<svg class="btn-ext" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4.5 2.5h5v5M9.5 2.5 2.5 9.5"/></svg></a>
+              <a href="/#portfolio" class="btn btn-ghost">See the portfolio</a>
+            </div>
+            <p class="ct-fine">Figures from Takgio&rsquo;s repositories, App Store records, and product data, September 2026. Nothing on this site is an offer to sell, or a solicitation of an offer to buy, any securities.</p>
+          </div>
+          <p class="ct-note" data-for="build">What to expect: a brief discovery call to understand your workflow and challenges. No sales pitch.</p>
+          <p class="ct-note" data-for="partner">From Anthropic&rsquo;s partner team? Mention &ldquo;Claude Partner Network&rdquo; in your message.</p>
+          <ul class="ct-direct">
+            <li>
+              <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1cL_7FA-W5ma4m19YylqyIVgaxJhMx-hu03omEf3oO2HqVQ-74bNlX1onGPAelEfHUA8HtG3PZ?gv=true" target="_blank" rel="noopener">
+                <span class="ct-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
+                <span><b>Book a 30-minute call</b><small>Skip the form and pick a time that suits you</small></span>
+              </a>
+            </li>
+            <li>
+              <a href="mailto:info@takgio.com">
+                <span class="ct-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+                <span><b>info@takgio.com</b><small>Email us directly</small></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
       </div>
     </section>
 
