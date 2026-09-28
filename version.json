@@ -1,7 +1,19 @@
 {
-  "version": "2.30.0",
+  "version": "2.31.0",
   "date": "2026-09-28",
   "releases": [
+    {
+      "version": "2.31.0",
+      "date": "2026-09-28",
+      "summary": "Member of the Claude Partner Network: shown in the footer of every public page, on the home and About pages, and on the contact page",
+      "changes": [
+        "Anthropic confirmed to Ted by phone (2026-09-28) that the partnership is live and Takgio may say so publicly. Wording approved by Ted: \"Member of the Claude Partner Network\". No tier is stated and no Anthropic/Claude logo is used",
+        "Footer (all 23 public pages): \"Member of the Claude Partner Network · Powered by Claude from Anthropic\"",
+        "Home \"Our engine\" tile and the About \"Built exclusively on Claude by Anthropic\" band: a small Member of the Claude Partner Network badge (check mark + text; light and dark versions, css/styles.css section 39)",
+        "Contact page: the Investing intro now says Takgio is built on Claude by Anthropic and a member of the Claude Partner Network; the Partnership note (\"From Anthropic's partner team? Mention Claude Partner Network…\") now reads \"Takgio is a member of the Claude Partner Network.\"",
+        "Home structured data (JSON-LD Organization): memberOf Claude Partner Network (https://claude.com/partners)"
+      ]
+    },
     {
       "version": "2.30.0",
       "date": "2026-09-28",

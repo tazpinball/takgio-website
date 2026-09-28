@@ -2987,3 +2987,11 @@ section[id], article[id] { scroll-margin-top: 72px; }
 @media (prefers-reduced-motion: reduce) {
   .ct .h-aurora span { animation: none !important; }
 }
+
+/* 39. Claude Partner Network membership (v2.31) — "Member of the Claude Partner Network" (Ted, 2026-09-28).
+   Plain text + check mark, no Anthropic/Claude logo. Tier is not stated (never "Certified" until confirmed). */
+.cpn-pill { display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; padding: 6px 12px 6px 9px; border-radius: 999px;
+  font-size: .8rem; font-weight: 600; line-height: 1.2; color: #3446c9; background: rgba(255, 255, 255, .7); border: 1px solid rgba(74, 108, 247, .28); }
+.cpn-pill svg { width: 15px; height: 15px; flex: none; color: #0d9488; }
+.pg-close .cpn-pill { color: #fff; background: rgba(255, 255, 255, .07); border-color: rgba(255, 255, 255, .2); }
+.pg-close .cpn-pill svg { color: #2dd4bf; }
