@@ -1,7 +1,20 @@
 {
-  "version": "2.32.0",
+  "version": "2.33.0",
   "date": "2026-09-28",
   "releases": [
+    {
+      "version": "2.33.0",
+      "date": "2026-09-28",
+      "summary": "Official links & policies in the campaign kit of the other five product pages",
+      "changes": [
+        "ConcreteIQ: website https://concreteiqapp.com, interim Privacy Policy and Terms of Service (full versions due before general availability, as the pages say). No support page or support email exists yet, so none is listed",
+        "Hoof Harted: website https://happybirdsentertainment.com (the App Store listing's seller site), App Store link, Privacy Policy and Terms of Use (effective September 15, 2026), Support page, info@happybirdsentertainment.com",
+        "True Record: website https://intotherecord.app, Privacy Policy and Terms of Use (last updated September 25, 2026), Support, Delete your account, support@takgio.com",
+        "Ann Elise: website https://annelisetutor.com, Privacy Policy, Terms of Service and Refund & Cancellation Policy (effective June 15, 2026), Support, support@annelisetutor.com",
+        "Meta Ray-Ban Display: product page, partner inquiries link and info@takgio.com; no app is public yet, so no app policies are listed",
+        "Every link checked live on September 28, 2026 (all 24 web links in the six kits return 200; sites that answer every address with 200 were checked by content, so ConcreteIQ /support and /contact and Ann Elise /contact, which are only the sign-in or home screen, are not listed)"
+      ]
+    },
     {
       "version": "2.32.0",
       "date": "2026-09-28",
