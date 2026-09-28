@@ -1,7 +1,15 @@
 {
-  "version": "2.27.0",
+  "version": "2.27.1",
   "date": "2026-09-28",
   "releases": [
+    {
+      "version": "2.27.1",
+      "date": "2026-09-28",
+      "summary": "About timeline: Ann Elise's public launch dated June 10, 2026",
+      "changes": [
+        "About page timeline: Ann Elise launch 'Jun 11' corrected to 'Jun 10'. Sign-ups and billing went public on 2026-06-10 (Tutor project records); the v1.0.0 milestone commit followed the next morning"
+      ]
+    },
     {
       "version": "2.27.0",
       "date": "2026-09-28",
