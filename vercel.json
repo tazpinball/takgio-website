@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/services.html",
+      "destination": "/industries.html",
+      "permanent": true
+    },
+    {
+      "source": "/services",
+      "destination": "/industries.html",
+      "permanent": true
+    }
+  ]
+}

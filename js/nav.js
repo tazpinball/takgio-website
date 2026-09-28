@@ -102,7 +102,7 @@
   var page = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
   var PRODUCT_PAGES = ['products.html', 'concreteiq.html', 'brickture.html', 'hoof-harted.html', 'true-record.html', 'ann-elise.html', 'meta-ray-ban-display.html'];
   var section = PRODUCT_PAGES.indexOf(page) !== -1 ? 'products'
-    : page === 'services.html' ? 'services'
+    : page === 'industries.html' ? 'industries'
     : (page === 'case-studies.html' || page.indexOf('case-study-') === 0) ? 'case-studies'
     : (page === 'insights.html' || page.indexOf('insight-') === 0) ? 'insights'
     : (page === 'about.html' || page === 'contact.html') ? 'company' : '';

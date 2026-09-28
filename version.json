@@ -1,7 +1,22 @@
 {
-  "version": "2.26.0",
+  "version": "2.27.0",
   "date": "2026-09-28",
   "releases": [
+    {
+      "version": "2.27.0",
+      "date": "2026-09-28",
+      "summary": "Products and Services combined by industry: a new Industries page replaces Services; product pages link to it; the home page names the four industries and the next platform",
+      "changes": [
+        "New industries.html replaces services.html (301 redirect in a new vercel.json). One section per industry — Construction, Entertainment, Legal & civic, Education — with our products as cards linking to their pages, what we build for clients, and client results; a next-platform band for Meta Ray-Ban Display; the process steps and 'Why we build with Claude' carried over",
+        "Menu: 'Services' is now 'Industries' (Construction, Entertainment, Legal & civic, Education, Next platform, How we work). Footer: Company links to Industries; the Industries column links to the new page and adds Next platform",
+        "Product pages: industry tag in the hero (links to that industry) and a 'We build this for clients too' band above previous/next",
+        "Home: the 'Five products. Four industries. One next platform.' heading now has chips naming the four industries and the next platform, and every tile carries its industry label; the Meta tile is labeled 'The next platform'",
+        "Products page: 'Five products. One next platform.' (it counted Meta Ray-Ban Display as a sixth product); the AR filter is now 'Next platform'",
+        "Education client case study: removed the line saying the platform 'is now live as Ann Elise' — it is a separate client project (Ted, 2026-09-28); the Ann Elise page no longer links it as its case study",
+        "'Legal & civic' everywhere (was 'Legal & Compliance' / 'Legal/Compliance'), including the footer, case-study tags, the contact form and the home showcase",
+        "sitemap.xml: industries.html replaces services.html. CSS section 36"
+      ]
+    },
     {
       "version": "2.26.0",
       "date": "2026-09-28",

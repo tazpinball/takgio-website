@@ -16,7 +16,7 @@
     { tag: 'Construction', cls: 'tag-construction', value: 60, suffix: '%',
       claim: 'Faster document processing',
       desc: 'Claude reads, classifies, and routes RFIs, submittals, and change orders — cutting review time by 60% and driving missed deadlines to near zero.' },
-    { tag: 'Legal & Compliance', cls: 'tag-legal', value: 85, suffix: '%',
+    { tag: 'Legal & civic', cls: 'tag-legal', value: 85, suffix: '%',
       claim: 'Faster contract review',
       desc: 'Initial review drops from hours to minutes — while surfacing 23% more risk issues than manual review alone.' },
     { tag: 'Construction', cls: 'tag-construction', value: 75, suffix: '%',
