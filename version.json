@@ -1,7 +1,20 @@
 {
-  "version": "2.22.0",
+  "version": "2.23.0",
   "date": "2026-09-27",
   "releases": [
+    {
+      "version": "2.23.0",
+      "date": "2026-09-27",
+      "summary": "New Takgio logo (concept A, Spark) across the site — header, footer, favicons, app icons, share image",
+      "changes": [
+        "Wordmark: Sora 700 (SIL OFL) converted to SVG outlines with the font's own kerning (Ta -37, kg -21), dot of the i replaced by a blue-to-teal four-point spark; no web font is loaded",
+        "New images/brand/: takgio-wordmark(-white).svg, takgio-lockup(-white).svg, takgio-icon.svg, takgio-icon-512.png, takgio-icon-192.png, favicon-32.png, apple-touch-icon.png (full-bleed); /favicon.svg and /favicon.ico (16/32/48) at the root",
+        "Header and footer on all public pages use the white wordmark image (88x30 / 82x28) instead of text; every page (incl. internal) now has real favicons instead of the placeholder text T",
+        "Structured-data Organization/publisher logo now points to takgio-icon-512.png (was the share image)",
+        "Share image re-rendered with the logo lockup; og:image/twitter:image tag bumped to ?v=2.23 so social platforms refetch",
+        "CSS section 31 for logo sizing"
+      ]
+    },
     {
       "version": "2.22.0",
       "date": "2026-09-27",

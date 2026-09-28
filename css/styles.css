@@ -2504,3 +2504,9 @@ section[id], article[id] { scroll-margin-top: 72px; }
 
 /* Brand name is never all-caps (v2.22) */
 .adv-compare-head .col-takgio { text-transform: none; letter-spacing: 0; }
+
+/* 31. Brand — Takgio 'Spark' logo (v2.23) */
+.site-header .logo { display: inline-flex; align-items: center; letter-spacing: 0; }
+.site-header .logo img { height: 30px; width: auto; display: block; }
+.footer-brand .logo { display: inline-block; letter-spacing: 0; }
+.footer-brand .logo img { height: 28px; width: auto; display: block; }
