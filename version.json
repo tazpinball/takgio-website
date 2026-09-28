@@ -1,7 +1,18 @@
 {
-  "version": "2.28.1",
+  "version": "2.29.0",
   "date": "2026-09-28",
   "releases": [
+    {
+      "version": "2.29.0",
+      "date": "2026-09-28",
+      "summary": "Demos link to https://demos.takgio.com in the header of every public page and a Product demos button on the home page",
+      "changes": [
+        "Header (all 23 public pages): new top-level Demos item between Case studies and Insights, with a small arrow showing it opens another site. It appears in the desktop nav and in the phone menu. Opens in a new tab like the site's other outside links. Fits on one row at 1024px",
+        "Home hero: Product demos button beside See the portfolio and Work with us",
+        "The link is fixed at exactly https://demos.takgio.com and changes only on Ted's explicit instruction. Every Demos link carries data-demos-link, and CLAUDE.md has the rule plus a check command (23 pages, 24 links, 0 wrong) to run before every commit",
+        "css/styles.css: .sh-ext and .btn-ext size the arrow icons"
+      ]
+    },
     {
       "version": "2.28.1",
       "date": "2026-09-28",

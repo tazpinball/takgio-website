@@ -1940,6 +1940,7 @@ a.port:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
 .h-lead strong { color: #fff; }
 .h-hero .btn-ghost { color: #fff; border-color: rgba(255,255,255,.45); }
 .h-hero .btn-ghost:hover { background: rgba(255,255,255,.1); }
+.btn-ext { width: 13px; height: 13px; flex: none; }
 .h-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 24px; }
 .h-stats > div { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 12px 14px; backdrop-filter: blur(6px); }
 .h-stats b { display: block; font-size: 1.55rem; font-weight: 800; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; color: #fff; line-height: 1.1; }
@@ -2606,6 +2607,7 @@ section[id], article[id] { scroll-margin-top: 72px; }
 .sh-panel a:focus-visible { outline: 2px solid #2dd4bf; outline-offset: 2px; }
 .sh-chev { width: 12px; height: 12px; opacity: .7; transition: transform .2s ease; }
 .sh-item.is-open > .sh-trigger .sh-chev { transform: rotate(180deg); }
+.sh-ext { width: 11px; height: 11px; opacity: .7; } /* "opens another site" arrow on the Demos link */
 .sh-item.is-current > .sh-trigger, .sh-item.is-current > .sh-link { color: #fff; }
 .sh-item.is-current > .sh-trigger::after, .sh-item.is-current > .sh-link::after { content: ""; width: 5px; height: 5px; border-radius: 50%; background: #2dd4bf; order: 3; }
 

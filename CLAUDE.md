@@ -10,6 +10,23 @@ session. Read it before proposing work, and rewrite it at the end of every sessi
 
 @HANDOFF.md
 
+## 🔒 FIXED LINK: the Demos link is `https://demos.takgio.com`
+
+Ted's demo site for client and investor meetings. **The link target is fixed: `href="https://demos.takgio.com"`,
+character for character** (no trailing slash, no `www`, no `/demos` page, no redirect in between). It may
+change **only when Ted explicitly says so**. How it looks and where it lives on the site may change freely, but every
+Demos link must keep that exact href, and the site must never be left without one.
+
+- Every Demos anchor carries the attribute `data-demos-link`. As of v2.29.0 there are 24: the top-level header item
+  "Demos" on all 23 public pages (also in `docs\mockups\_generators\header_v228.html`, the header source the generators
+  copy) plus the "Product demos" button in the `index.html` hero.
+- Moving or restyling it: keep `data-demos-link` and the exact href on the new element, and update the counts here.
+- **Before every commit**, run this check (from the project root). It must print 23 / 24 / 0, or the updated counts:
+
+```
+echo "pages: $(grep -l data-demos-link *.html | wc -l) (want 23)  links: $(grep -o data-demos-link *.html | wc -l) (want 24)  wrong href: $(grep -oh '<a [^>]*data-demos-link[^>]*>' *.html | grep -vc 'href="https://demos.takgio.com"') (want 0)"
+```
+
 ## MANDATORY: Version Bump on Every Change
 
 **THIS IS A HARD REQUIREMENT. NO EXCEPTIONS.**
