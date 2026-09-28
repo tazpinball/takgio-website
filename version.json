@@ -1,7 +1,19 @@
 {
-  "version": "2.27.1",
+  "version": "2.28.0",
   "date": "2026-09-28",
   "releases": [
+    {
+      "version": "2.28.0",
+      "date": "2026-09-28",
+      "summary": "Logo spark intro: the Takgio logo appears at 4x, its spark spirals across the page and is pulled onto the i of the header logo like a magnet",
+      "changes": [
+        "js/spark.js (new), on every public page. 0-0.5 s: the wordmark at 4x mid-screen (spark lifts off at 0.25 s, big logo fades from 0.5 s); 0.25-1.875 s: the spark spirals toward the header logo, accelerating the whole way, loops tightening until it is pulled straight in; 1.875-2.125 s: arrives at 3x size and snaps to normal with a ring; to 5.375 s: twinkles, a second ring, then clears",
+        "The spiral is timed by distance along the path, so its speed only ever rises; the number of loops is fitted to each screen; the glowing trail is filled continuously",
+        "Plays once per visit (the first page opened), waits until a background tab is actually shown, never plays for visitors who ask for reduced motion, and never blocks clicks",
+        "Header logo is now the wordmark without its spark (images/brand/takgio-wordmark-white-nospark.svg, new) plus the spark as its own element over the i — identical to the old logo at rest (pixel-compared against the live site)",
+        "CSS section 37"
+      ]
+    },
     {
       "version": "2.27.1",
       "date": "2026-09-28",

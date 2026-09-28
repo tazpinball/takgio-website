@@ -2944,3 +2944,60 @@ section[id], article[id] { scroll-margin-top: 72px; }
 .t-ind-ar { background: rgba(167, 139, 250, .22); color: #ddd6fe; }
 @media (prefers-reduced-motion: reduce) { .in-chip, .in-res, .in-prod, .h-ichip { transition: none; } }
 .t-ann .t-ind-edu { background: var(--color-education-bg); color: #0f766e; }
+
+/* 37. Logo spark + intro (v2.28) — the header wordmark is drawn without its spark and the spark sits over the
+   dotless i as its own element, so js/spark.js can fly it in. At rest it matches the original logo exactly.
+   Geometry from images/brand/takgio-wordmark-white.svg: spark centre 75.361% / 14.681% of the logo box,
+   spark size 25.312% of the logo height. */
+.site-header .logo { position: relative; }
+.logo-spark { position: absolute; width: calc(28px * .25312); height: calc(28px * .25312); pointer-events: none;
+  left: calc(75.361% - 28px * .12656); top: calc(14.681% - 28px * .12656); line-height: 0; }
+.logo-spark svg, .sparkx-spark svg, .sparkx-flyer svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.logo-spark.is-hidden, .sparkx-spark.is-hidden { opacity: 0; }
+/* Capture, 3.5-3.75 s: arrives at 3x and snaps down to normal size */
+@keyframes sparkx-snap {
+  0%   { transform: scale(3); filter: drop-shadow(0 0 8px rgba(122,162,255,1)) brightness(1.8); }
+  70%  { transform: scale(.82); filter: drop-shadow(0 0 4px rgba(45,212,191,.9)) brightness(1.3); }
+  100% { transform: scale(1); filter: none; }
+}
+.logo-spark.is-snapping svg { animation: sparkx-snap .25s cubic-bezier(.3, 0, .3, 1) 1 both; transform-origin: 50% 50%; }
+/* 3.75-7 s: twinkles that fade out over 3.25 s (the ring pulses via .is-pinging) */
+@keyframes sparkx-settle {
+  0%   { transform: scale(1) rotate(0); filter: none; }
+  10%  { transform: scale(2.4) rotate(45deg); filter: drop-shadow(0 0 6px rgba(122,162,255,.95)) brightness(1.7); }
+  20%  { transform: scale(1) rotate(90deg); filter: none; }
+  36%  { transform: scale(2) rotate(135deg); filter: drop-shadow(0 0 5px rgba(45,212,191,.9)) brightness(1.5); }
+  48%  { transform: scale(1) rotate(180deg); filter: none; }
+  64%  { transform: scale(1.7) rotate(225deg); filter: drop-shadow(0 0 4px rgba(122,162,255,.85)) brightness(1.4); }
+  76%  { transform: scale(1) rotate(270deg); filter: none; }
+  88%  { transform: scale(1.35) rotate(315deg); filter: drop-shadow(0 0 3px rgba(45,212,191,.7)) brightness(1.2); }
+  100% { transform: scale(1) rotate(360deg); filter: none; }
+}
+.logo-spark.is-settling svg { animation: sparkx-settle 3.25s cubic-bezier(.45, 0, .55, 1) 1; transform-origin: 50% 50%; }
+.logo-spark.is-pinging::after { content: ""; position: absolute; inset: -250%; border-radius: 50%; border: 2px solid rgba(45, 212, 191, .9);
+  animation: sparkx-ping .9s ease-out forwards; }
+@keyframes sparkx-ping { from { transform: scale(.2); opacity: 1; } to { transform: scale(1.4); opacity: 0; } }
+
+/* The intro layer: never blocks clicks, removed from the page when it finishes */
+.sparkx { position: fixed; inset: 0; z-index: 300; pointer-events: none; }
+.sparkx-scrim { position: absolute; inset: 0; background: radial-gradient(60% 50% at 50% 42%, rgba(11, 13, 28, .78), rgba(11, 13, 28, .45) 70%, rgba(11, 13, 28, 0));
+  opacity: 0; transition: opacity .25s ease; }
+.sparkx-logo { position: absolute; left: 50%; top: 42%; height: 112px; transform: translate(-50%, -50%) scale(.92); opacity: 0;
+  transition: opacity .25s ease, transform .25s cubic-bezier(.2, .8, .2, 1); filter: drop-shadow(0 10px 40px rgba(0, 0, 0, .5)); }
+.sparkx-logo img { height: 112px; width: auto; display: block; }
+.sparkx-spark { position: absolute; width: calc(112px * .25312); height: calc(112px * .25312);
+  left: calc(75.361% - 112px * .12656); top: calc(14.681% - 112px * .12656); }
+.sparkx.is-in .sparkx-scrim { opacity: 1; }
+.sparkx.is-in .sparkx-logo { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.sparkx.is-out .sparkx-scrim, .sparkx.is-out .sparkx-logo { opacity: 0; transition-duration: .5s; }
+.sparkx.is-out .sparkx-logo { transform: translate(-50%, -50%) scale(1.04); }
+.sparkx-flyer { position: absolute; left: 0; top: 0; width: 46px; height: 46px; margin: -23px 0 0 -23px; opacity: 0; will-change: transform;
+  filter: drop-shadow(0 0 10px rgba(122, 162, 255, .9)) drop-shadow(0 0 22px rgba(45, 212, 191, .6)); }
+.sparkx-trail { position: absolute; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%;
+  background: radial-gradient(circle, #fff, rgba(45, 212, 191, .8) 40%, transparent 70%); animation: sparkx-fade .7s ease-out forwards; }
+@keyframes sparkx-fade { to { opacity: 0; transform: scale(.2); } }
+@media (max-width: 400px) {
+  .sparkx-logo, .sparkx-logo img { height: 84px; }
+  .sparkx-spark { width: calc(84px * .25312); height: calc(84px * .25312); left: calc(75.361% - 84px * .12656); top: calc(14.681% - 84px * .12656); }
+}
+@media (prefers-reduced-motion: reduce) { .sparkx { display: none; } .logo-spark.is-hidden { opacity: 1; } }
