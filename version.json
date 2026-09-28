@@ -1,7 +1,15 @@
 {
-  "version": "2.28.0",
+  "version": "2.28.1",
   "date": "2026-09-28",
   "releases": [
+    {
+      "version": "2.28.1",
+      "date": "2026-09-28",
+      "summary": "Hosted logo image for the standard Takgio email signature",
+      "changes": [
+        "images/brand/email/takgio-signature-logo.png (264x88, shown at 132x44): navy badge with the white Takgio wordmark and spark, transparent corners, readable in light and dark mail. Gmail loads signature images from a public URL, so the signature for mike@, ted@ and info@ points here"
+      ]
+    },
     {
       "version": "2.28.0",
       "date": "2026-09-28",
