@@ -65,6 +65,44 @@
     });
   }
 
+  // Campaign-kit copy buttons: <button class="pp-copybtn" data-copy="#id">
+  Array.prototype.forEach.call(document.querySelectorAll('[data-copy]'), function (btn) {
+    btn.addEventListener('click', function () {
+      var el = document.querySelector(btn.getAttribute('data-copy'));
+      if (!el) return;
+      var text = el.innerText.trim();
+      var flash = function (label, ms) {
+        var old = btn.getAttribute('data-label') || btn.textContent;
+        btn.setAttribute('data-label', old);
+        btn.textContent = label; btn.classList.add('done');
+        clearTimeout(btn._t);
+        btn._t = setTimeout(function () { btn.textContent = old; btn.classList.remove('done'); }, ms);
+      };
+      var done = function () { flash('Copied', 1600); };
+      // Browser refused both copy paths: select the text so the visitor can copy it by hand
+      var manual = function () {
+        var sel = window.getSelection(), range = document.createRange();
+        range.selectNodeContents(el); sel.removeAllRanges(); sel.addRange(range);
+        flash('Selected — press Ctrl+C', 3200);
+      };
+      // Older copy path: used when the Clipboard API is missing or refuses the write
+      var legacy = function () {
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+        if (ok) done(); else manual();
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, legacy);
+      } else {
+        legacy();
+      }
+    });
+  });
+
   // Article reading-progress bar
   var bar = document.querySelector('.read-progress span');
   if (bar) {

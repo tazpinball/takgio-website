@@ -1,7 +1,23 @@
 {
-  "version": "2.23.0",
-  "date": "2026-09-27",
+  "version": "2.24.0",
+  "date": "2026-09-28",
   "releases": [
+    {
+      "version": "2.24.0",
+      "date": "2026-09-28",
+      "summary": "A dedicated page with a full campaign kit for each product — ConcreteIQ, Brickture, Hoof Harted, True Record, Ann Elise, and Meta Ray-Ban Display — plus accuracy corrections to live claims",
+      "changes": [
+        "New pages: concreteiq.html, brickture.html, hoof-harted.html, true-record.html, ann-elise.html, meta-ray-ban-display.html — hero, key numbers, personas, benefits, how it works, pricing tables where live, proof, sourced market statistics, and a campaign kit (positioning, approved headlines, 25/50-word copy, messages, targeting, keywords, channels, CTAs, claims with sources, do/don't, downloadable assets, disclaimers)",
+        "Every figure traces to the product's own records or a fetched source; market statistics link to their sources",
+        "Linked from products.html (Product page & campaign kit buttons), the home bento tiles, a new Products column in the footer on all public pages, and sitemap.xml",
+        "Accuracy: ConcreteIQ's $144,219 is now described as surfaced by the gap its takeoff opened (the estimator found it chasing that gap); 209,781 lb credited to the rebar detailer; 'nothing slips through' framed as a design goal",
+        "Accuracy: Brickture timing is now about two minutes (was 90 seconds); real builds replace unlabeled box art on the home hero, bento, products panel, case-studies thumbnail and share image, with the illustration labeled as in testing",
+        "Accuracy: Ann Elise readiness and professor claims narrowed to what is live; Meta's 94% is now stated as its share of display-less AI-glasses shipments (Counterpoint's own wording)",
+        "Campaign-kit copy buttons (js/motion.js) fall back to the older copy command when the Clipboard API is refused, and select the text with a Ctrl+C prompt if both are refused",
+        "New screenshots in images/products/ (ConcreteIQ results and review with sample data, Hoof Harted home/line-up/how-it-works, True Record syllabus and dissents, real Brickture builds, Ann Elise icon)",
+        "CSS sections 32, 32b and 32c; share image re-rendered and tag bumped to ?v=2.24"
+      ]
+    },
     {
       "version": "2.23.0",
       "date": "2026-09-27",
