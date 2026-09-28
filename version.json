@@ -1,7 +1,20 @@
 {
-  "version": "2.24.1",
+  "version": "2.25.0",
   "date": "2026-09-28",
   "releases": [
+    {
+      "version": "2.25.0",
+      "date": "2026-09-28",
+      "summary": "Brickture is shown only with its banana2 build pictures, led by the lion; the 'box art' label is gone",
+      "changes": [
+        "Every Brickture image on the site is now a banana2 picture: lion (home hero card, case-studies card, Brickture page hero, share image), lion + elephant (home tile, products panel), lion + panda + elephant (Brickture page gallery and campaign-kit assets)",
+        "The real-build renders are removed from the site (brickture-build-lion.webp, brickture-build-elephant.webp)",
+        "The 'box art / illustration / in testing' captions are removed. Per Ted, the banana2 picture is what Brickture builds, not box art. Products bullet now reads 'A picture of every build, generated from your photo (in testing)'",
+        "Brickture page: Proof heading 'Builds, measured'; campaign kit uses the three pictures and no longer carries the box-art labeling rules",
+        "Images renamed to brickture-lion.webp, brickture-panda.webp, brickture-elephant.webp (elephant is new, from the Brickture repo's banana2 comparison); old boxart files removed",
+        "Share image re-rendered with the banana2 lion; tag bumped to ?v=2.25 on all pages"
+      ]
+    },
     {
       "version": "2.24.1",
       "date": "2026-09-28",
