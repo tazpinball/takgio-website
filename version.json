@@ -1,7 +1,18 @@
 {
-  "version": "2.31.0",
+  "version": "2.32.0",
   "date": "2026-09-28",
   "releases": [
+    {
+      "version": "2.32.0",
+      "date": "2026-09-28",
+      "summary": "Brickture campaign kit: an Official links & policies block with the website, Privacy Policy, Terms of Service, Support page and support email",
+      "changes": [
+        "brickture.html campaign kit: new full-width block above Downloadable assets listing Website (https://www.takgio.com/brickture.html), Privacy Policy, Terms of Service and Support (https://bricksnap-takgio.fly.dev/privacy, /terms, /support, the app's live, store-linked pages) and support@takgio.com, with a Copy button that copies all five, one per line",
+        "All five checked live on September 28, 2026: each page returns 200 with its Brickture title; Privacy Policy and Terms are effective September 17, 2026; support@takgio.com is the contact on all three pages",
+        "brickture.app is not listed: it currently serves a GoDaddy 'Launching Soon' placeholder, not the app's pages",
+        "css/styles.css: .pp-links table styles (label column, wrapping addresses on phones)"
+      ]
+    },
     {
       "version": "2.31.0",
       "date": "2026-09-28",

@@ -2437,6 +2437,16 @@ section[id], article[id] { scroll-margin-top: 72px; }
 .pp-claims { width: 100%; border-collapse: collapse; font-size: .82rem; }
 .pp-claims td { padding: 6px 8px; border-bottom: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.85); vertical-align: top; }
 .pp-claims td:last-child { color: rgba(255,255,255,.55); white-space: normal; }
+/* Official links & policies (v2.32): the product's own website, privacy, terms and support, as ad forms ask for them */
+.pp-links-block { margin-top: 12px; }
+.pp-links { width: 100%; border-collapse: collapse; font-size: .86rem; margin-top: 4px; }
+.pp-links th, .pp-links td { padding: 8px 8px; border-bottom: 1px solid rgba(255,255,255,.1); text-align: left; vertical-align: top; }
+.pp-links th { width: 150px; color: rgba(255,255,255,.6); font-weight: 600; white-space: nowrap; }
+.pp-links td { color: rgba(255,255,255,.9); overflow-wrap: anywhere; }
+.pp-links a { color: var(--pp-a); text-decoration: none; }
+.pp-links a:hover { text-decoration: underline; }
+.pp-kblock .pp-links-note { margin: 8px 0 0; font-size: .76rem; color: rgba(255,255,255,.5); }
+@media (max-width: 520px) { .pp-links th { width: auto; white-space: normal; } }
 .pp-assets { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
 .pp-assets a { display: block; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 8px; color: rgba(255,255,255,.8); font-size: .72rem; text-align: center; }
 .pp-assets a:hover { background: rgba(255,255,255,.12); color: #fff; }
