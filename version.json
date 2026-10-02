@@ -1,7 +1,21 @@
 {
-  "version": "2.33.0",
-  "date": "2026-09-28",
+  "version": "2.34.0",
+  "date": "2026-10-02",
   "releases": [
+    {
+      "version": "2.34.0",
+      "date": "2026-10-02",
+      "summary": "Hoof Harted marketing page: banners and QR codes to show full screen or download",
+      "changes": [
+        "New page /hoof-harted-marketing.html, also served at /marketing/hoof-harted: the pinball-tournament flyer and its QR code, each with Present (full screen), Download (the original PNG) and a copyable link, plus the app icon and screens from the campaign kit",
+        "Present fills the screen with one banner and nothing else: arrow keys switch, A auto-rotates, F goes full screen, Esc closes. ?show=flyer, ?show=qr or ?show=all&every=20 on the address opens straight into it",
+        "The flyer scans to Hoof Harted's App Store page with Apple's campaign tag ct=Pinball (checked by decoding the codes); the page lists that destination under each banner",
+        "The page is unlisted: noindex, not in the sitemap, not in the header or footer menus",
+        "Hoof Harted page: a Marketing item in the sticky sub-menu and a link row under the kit's Downloadable assets",
+        "New js/marketing.js (shared by every product's marketing page) and CSS section 40; js/nav.js keeps Products highlighted on marketing pages; vercel.json rewrites /marketing/hoof-harted to the page",
+        "The Demos link counts become 24 pages and 26 links (the new page carries the header)"
+      ]
+    },
     {
       "version": "2.33.0",
       "date": "2026-09-28",
