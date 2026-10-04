@@ -1,7 +1,19 @@
 {
-  "version": "2.34.0",
-  "date": "2026-10-02",
+  "version": "2.34.1",
+  "date": "2026-10-04",
   "releases": [
+    {
+      "version": "2.34.1",
+      "date": "2026-10-04",
+      "summary": "Hoof Harted download page on takgio.com; the QR and flyer now point to it",
+      "changes": [
+        "New download page at takgio.com/hoof (served from hoof-harted-download.html): iPhone and iPad go straight to the App Store, Android goes straight to Google Play, and a computer sees both buttons. It is unlisted: noindex, not in the sitemap",
+        "?c=<name> tags the visit: Apple's ct= campaign token on the App Store link and utm_campaign in Google Play's referrer. /hoof?c=Pinball keeps the existing App Store campaign \"Pinball\"; ?stay=1 shows the page without redirecting",
+        "The marketing page's QR code and flyer are redrawn to encode https://www.takgio.com/hoof?c=Pinball, replacing the code that went straight to the App Store. The flyer artwork is unchanged; the code inside it is a simpler 29x29 pattern with larger squares",
+        "Marketing page: the \"Scans to\" notes describe where the new code goes, and the QR screen's caption is now \"Scan to download Hoof Harted\"",
+        "vercel.json rewrites /hoof to the download page"
+      ]
+    },
     {
       "version": "2.34.0",
       "date": "2026-10-02",

@@ -15,6 +15,10 @@
     {
       "source": "/marketing/hoof-harted",
       "destination": "/hoof-harted-marketing.html"
+    },
+    {
+      "source": "/hoof",
+      "destination": "/hoof-harted-download.html"
     }
   ]
 }

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Hoof Harted &mdash; Takgio</title>
+  <meta name="description" content="Download Hoof Harted, the party scan game, from the App Store or Google Play.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/images/brand/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/images/brand/apple-touch-icon.png">
+  <link rel="canonical" href="https://www.takgio.com/hoof">
+  <style>
+    :root { color-scheme: dark; --a: #39ff9e; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100svh; display: grid; place-items: center; padding: 1.5rem; color: #fff;
+      background: radial-gradient(120% 80% at 50% 0%, #10231a, #07090d 70%);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    main { width: 100%; max-width: 26rem; text-align: center; }
+    .icon { width: 96px; height: 96px; border-radius: 22px; box-shadow: 0 12px 40px rgba(57, 255, 158, .25); }
+    h1 { font-size: clamp(2rem, 9vw, 2.8rem); line-height: 1.05; margin: 1.1rem 0 .4rem; letter-spacing: -.03em; }
+    .tag { color: var(--a); font-weight: 700; margin: 0 0 1.6rem; }
+    #status { color: #b6c2d4; min-height: 1.5em; margin: 0 0 1.2rem; }
+    .stores { display: grid; gap: .9rem; }
+    .stores a { display: flex; flex-direction: column; gap: .15rem; padding: 1.1rem 1.25rem; border-radius: .9rem; border: 1.5px solid rgba(255, 255, 255, .2);
+      background: rgba(255, 255, 255, .06); color: #fff; text-decoration: none; font-size: 1.2rem; font-weight: 700; }
+    .stores a span { font-size: .85rem; font-weight: 500; color: #b6c2d4; }
+    .stores a:hover, .stores a:focus-visible { border-color: var(--a); outline: none; }
+    .stores a.rec { border-color: var(--a); background: rgba(57, 255, 158, .12); }
+    .note { color: #8a97ab; font-size: .82rem; margin-top: 1.8rem; line-height: 1.5; }
+    .note a { color: #b6c2d4; }
+  </style>
+  <script defer src="/js/analytics.js"></script>
+</head>
+<body>
+  <main>
+    <img class="icon" src="/images/products/hoof-harted-icon.png" alt="" width="96" height="96">
+    <h1>Hoof Harted</h1>
+    <p class="tag">The party scan game that detects nothing.</p>
+    <p id="status" aria-live="polite">Choose your store.</p>
+    <div class="stores">
+      <a id="apple" href="https://apps.apple.com/app/apple-store/id6805927078?pt=129182533&amp;ct=site&amp;mt=8">App Store<span>iPhone</span></a>
+      <a id="android" href="https://play.google.com/store/apps/details?id=com.takgio.hoofharted&amp;pcampaignid=web_share">Google Play<span>Android</span></a>
+    </div>
+    <p class="note">For entertainment only &mdash; it detects nothing. <a href="/hoof-harted.html">About Hoof Harted</a></p>
+  </main>
+  <script>
+  /* Download page for QR codes and links: phones go straight to their store, a computer shows both buttons.
+     ?c=<campaign> tags the visit (Apple's ct= on the App Store link, utm_campaign in Google Play's referrer);
+     the QR on the Pinball flyer is /hoof?c=Pinball. ?stay=1 shows the page without redirecting.
+     The server sends the same page to every device, so the choice is made here, from the browser's own user agent. */
+  (function () {
+    var APPLE = 'https://apps.apple.com/app/apple-store/id6805927078?pt=129182533&ct=';   // + campaign + '&mt=8', the order the old QR used
+    var PLAY = 'https://play.google.com/store/apps/details?id=com.takgio.hoofharted&pcampaignid=web_share';
+    function pick(ua, touch) {
+      if (/iPad|iPhone|iPod/i.test(ua) || (/Macintosh/i.test(ua) && touch > 1)) return 'apple';   // iPadOS reports itself as a Mac
+      if (/Android/i.test(ua)) return 'android';
+      return null;
+    }
+    window.hoofPick = pick;
+    var q = new URLSearchParams(location.search);
+    var c = q.get('c');
+    if (!c || !/^[A-Za-z0-9_-]{1,40}$/.test(c)) c = 'site';
+    var links = {
+      apple: APPLE + encodeURIComponent(c) + '&mt=8',
+      android: PLAY + '&referrer=' + encodeURIComponent('utm_source=takgio&utm_campaign=' + c)
+    };
+    document.getElementById('apple').href = links.apple;
+    document.getElementById('android').href = links.android;
+    var store = pick(navigator.userAgent || '', navigator.maxTouchPoints || 0);
+    if (!store) return;
+    document.getElementById(store).className = 'rec';
+    if (q.get('stay')) return;
+    document.getElementById('status').textContent = store === 'apple' ? 'Opening the App Store…' : 'Opening Google Play…';
+    setTimeout(function () { location.replace(links[store]); }, 300);   // a moment for the visit to be counted
+  })();
+  </script>
+</body>
+</html>
