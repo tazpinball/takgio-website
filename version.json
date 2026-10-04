@@ -1,7 +1,17 @@
 {
-  "version": "2.35.0",
+  "version": "2.35.1",
   "date": "2026-10-04",
   "releases": [
+    {
+      "version": "2.35.1",
+      "date": "2026-10-04",
+      "summary": "Hoof Harted on Android: launch date October 1, and the same prices as the App Store",
+      "changes": [
+        "Case study timeline: \"Live on Google Play on October 1, 2026\"; the September 14 submission date is kept",
+        "Campaign kit, approved claims: \"Live on Google Play since Oct. 1, 2026; free to download\". The Pro price claim ($2.99/week or $9.99/month) now notes the same price applies on Google Play",
+        "Pricing section: \"Exactly as live on the App Store; the prices are the same on Google Play.\" Only the prices are extended to Google Play"
+      ]
+    },
     {
       "version": "2.35.0",
       "date": "2026-10-04",
