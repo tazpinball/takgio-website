@@ -1,7 +1,21 @@
 {
-  "version": "2.34.1",
+  "version": "2.35.0",
   "date": "2026-10-04",
   "releases": [
+    {
+      "version": "2.35.0",
+      "date": "2026-10-04",
+      "summary": "Hoof Harted is live on Google Play, and the site now says so",
+      "changes": [
+        "Hoof Harted page: the status pill reads \"Live on the App Store and Google Play\"; a \"Get it on Google Play\" button sits beside the App Store button; the sub-menu button is now \"Get the app\" and opens the download page",
+        "Hoof Harted page and campaign kit: free on iPhone and Android throughout (hero note, positioning statement, 25- and 50-word descriptions, footer line, Platform line). Google Play is added to the kit's calls to action, approved claims and official links. The \"iPhone only\" and \"don't advertise Android\" lines are removed. App Store-specific claims (13+ rating, 5.0 stars, Pro prices, September 16 launch) stay labeled as the App Store's",
+        "Structured data now lists iOS and Android, and the meta, Open Graph and Twitter descriptions say \"iPhone and Android\" and \"Free on the App Store and Google Play\"",
+        "Case study: the Live now note links to Google Play too; \"Android coming soon\" is replaced by Android live. The September 14 submission date is kept; no Android launch date is claimed",
+        "Home tile reads \"Live on iOS & Android\"; the case-studies card says it is live on the App Store and Google Play",
+        "Hoof Harted's status pill in the menu, the product switcher and the products hub now reads \"Live\" instead of \"App Store\" (32 places on 24 pages)",
+        "Google Play facts were read from its public listing on October 4, 2026: free to download (price 0 USD), in-app purchases of $2.99 to $9.99 per item, published by TAKGIO"
+      ]
+    },
     {
       "version": "2.34.1",
       "date": "2026-10-04",
