@@ -96,7 +96,7 @@
     transitions = results[2].data || [];
     tasks = results[3].data || [];
 
-    document.title = 'Takgio — ' + project.name;
+    document.title = 'takgio — ' + project.name;
     renderProject();
   }
 

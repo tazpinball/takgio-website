@@ -1,7 +1,19 @@
 {
-  "version": "2.35.1",
-  "date": "2026-10-04",
+  "version": "2.35.2",
+  "date": "2026-10-06",
   "releases": [
+    {
+      "version": "2.35.2",
+      "date": "2026-10-06",
+      "summary": "The brand name is now written in lowercase: \"takgio\"",
+      "changes": [
+        "Every visible \"Takgio\" on all 39 pages is now \"takgio\" (487 occurrences in text, page titles, meta and social tags, alt text, aria-labels and JSON-LD), including at the start of a sentence, at Ted's direction",
+        "The dashboard pages (login, dashboard, tasks, project) and the project-detail page title follow the same spelling",
+        "Aria-labels on the logo SVG files and favicon.svg now read \"takgio\"",
+        "Not changed: the logo artwork itself (the outlined wordmark still draws a capital T), the images that carry text, internal code comments, and the older release notes below",
+        "Legal names (TAKGIO INC) are untouched"
+      ]
+    },
     {
       "version": "2.35.1",
       "date": "2026-10-04",
