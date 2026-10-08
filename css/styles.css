@@ -3219,6 +3219,38 @@ section[id], article[id] { scroll-margin-top: 72px; }
 .cr-list .cr-field input[type=text], .cr-list .cr-field input[type=email], .cr-list .cr-field input[type=tel], .cr-list .cr-field input[type=url], .cr-list .cr-field select, .cr-list .cr-field textarea { padding: 6px 10px; font-size: .86rem; border-radius: 8px; }
 .cr-list .cr-field textarea { min-height: 50px; }
 .cr-list .cr-field .hint { font-size: .68rem; }
+/* a field's hint ("We'll send a link to confirm this address.") sits on the label line, right-aligned, instead of under the box */
+.cr-list .cr-field { grid-template-columns: auto minmax(0, 1fr); column-gap: 8px; }
+.cr-list .cr-field > label { grid-row: 1; grid-column: 1; }
+.cr-list .cr-field > .hint { grid-row: 1; grid-column: 2; justify-self: end; align-self: end; text-align: right; line-height: 1.2; }
+.cr-list .cr-field > input, .cr-list .cr-field > select, .cr-list .cr-field > textarea { grid-row: 2; grid-column: 1 / -1; }
+.cr-list .cr-field > fieldset { grid-column: 1 / -1; }
+@media (max-width: 619px) {
+  .p-hero.cr-hero { padding: 14px 0 10px; }
+  .cr-hero p { font-size: .8rem; line-height: 1.35; }
+  .cr-list { padding: 10px 0 18px; }
+  .cr-list .cr-empty { padding: 7px 12px; }
+  .cr-list .cr-empty h3 { font-size: .9rem; }
+  .cr-list .cr-empty p { font-size: .74rem; line-height: 1.3; }
+  .cr-list .cr-row.two { grid-template-columns: 1fr 1fr; }
+  .cr-list .cr-tiles { gap: 5px; margin-top: 8px; background: #fff; border: 1px solid var(--color-border); border-radius: 12px; padding: 7px 11px; }
+  .cr-list .cr-tile { padding: 0; border: 0; border-radius: 0; background: transparent; }
+  .cr-list .cr-tile, .cr-list .cr-open > div { line-height: 1.3; }   /* inline text takes its line height from the parent, so set it there */
+  .cr-list .cr-tile b, .cr-list .cr-tile span { display: inline; }
+  .cr-list .cr-tile b { font-size: .74rem; }
+  .cr-list .cr-tile b::after { content: ": "; }
+  .cr-list .cr-tile span { font-size: .71rem; line-height: 1.3; }
+  .cr-list .cr-open { padding: 8px 12px; gap: 6px; margin-top: 8px; }
+  .cr-list .cr-open h3 { font-size: .86rem; }
+  .cr-list .cr-open p { font-size: .72rem; line-height: 1.3; }
+  .cr-list .cr-open .btn { padding: 6px 14px; font-size: .84rem; justify-self: start; }
+  .cr-list .cr-general { margin-top: 8px; }
+  .cr-list .cr-form { padding: 8px 12px 12px; }
+  .cr-list #cr-form { gap: 6px; }
+  .cr-list .cr-field textarea { min-height: 40px; }
+  .cr-list .cr-consent { font-size: .72rem; }
+  .cr-list .cr-form .btn-lg { padding: 9px 12px; }
+}
 .cr-list .cr-radio { gap: 14px; font-size: .84rem; }
 .cr-list .cr-form input[type=file] { padding: 4px 8px; border-radius: 8px; font-size: .8rem; }
 .cr-list .cr-bot { margin: 0; padding: 4px; }
@@ -3227,8 +3259,8 @@ section[id], article[id] { scroll-margin-top: 72px; }
 @media (min-width: 900px) {
   .cr-list #cr-form { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 8px 12px; }
   .cr-list #cr-form > :nth-child(-n+8) { grid-column: span 4; }
-  .cr-list #cr-form > :nth-child(8) { grid-column: span 5; }
-  .cr-list #cr-form > :nth-child(9) { grid-column: span 7; }
+  .cr-list #cr-form > :nth-child(8) { grid-column: span 6; }
+  .cr-list #cr-form > :nth-child(9) { grid-column: span 6; }
   .cr-list #cr-form > :nth-child(10) { grid-column: span 4; }
   .cr-list #cr-form > :nth-child(11) { grid-column: span 5; }
   .cr-list #cr-form > :nth-child(12) { grid-column: span 3; }

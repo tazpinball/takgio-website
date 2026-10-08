@@ -1,7 +1,18 @@
 {
-  "version": "2.36.9",
+  "version": "2.36.10",
   "date": "2026-10-08",
   "releases": [
+    {
+      "version": "2.36.10",
+      "date": "2026-10-08",
+      "summary": "Careers page: the phone layout is now 50% shorter, and the form is a little tighter on desktop too",
+      "changes": [
+        "Phone (375 px): the main content is 1355 px, down from 2722 px, exactly 50% shorter (it was 1758 px after the previous change). The first-name/last-name and phone/state pairs stay side by side instead of stacking, the three info tiles share one card, the \"Don't see the right role?\" band, the empty state and the hero use tighter text and spacing, and the line spacing inside the tiles and band is no longer inherited loosely from the page",
+        "Field hints (\"We'll send a link to confirm this address.\", \"PDF or Word, up to 5 MB.\") now sit on the label line, right-aligned, instead of under the box. This also shortens the desktop form (352 px)",
+        "Desktop: the exams and AI-question boxes are now equal width so their labels never wrap and the two boxes always line up (checked at 1024 px: every row aligned). Desktop main content is 795 px, down from 1925 px",
+        "Not a bug, confirmed in the code: nothing in the form starts ticked. The green \"Success!\" box is Cloudflare's automatic bot check passing, not a checkbox"
+      ]
+    },
     {
       "version": "2.36.9",
       "date": "2026-10-08",
