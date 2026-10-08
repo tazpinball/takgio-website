@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Confirm your email — takgio</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/images/brand/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    body.apc-body { background: #f4f5f9; margin: 0; }
+    .apc-wrap { min-height: 100vh; display: grid; place-items: center; padding: 30px 16px; box-sizing: border-box; }
+    .apc-card { width: 100%; max-width: 440px; background: #fff; border: 1px solid var(--color-border); border-radius: 18px; padding: 30px 28px; box-shadow: 0 20px 50px rgba(15,23,42,.1); text-align: left; }
+    .apc-brand { font-weight: 800; font-size: 1.5rem; letter-spacing: -0.02em; color: #11142a; margin-bottom: 14px; }
+    .apc-card h1 { font-size: 1.4rem; margin: 0 0 8px; letter-spacing: -0.01em; }
+    .apc-card p { margin: 0 0 16px; color: var(--color-text-secondary); line-height: 1.5; }
+    .apc-btn { font: inherit; font-weight: 700; padding: 12px 22px; border-radius: 10px; border: 0; background: var(--color-accent); color: #fff; cursor: pointer; }
+    .apc-btn[disabled] { opacity: .7; cursor: default; }
+    .apc-btn[hidden] { display: none; }
+    .apc-err { color: #b91c1c; font-weight: 600; font-size: .9rem; min-height: 1.2em; margin: 12px 0 0; }
+    .apc-back { margin: 18px 0 0; font-size: .92rem; }
+  </style>
+</head>
+<body class="apc-body">
+  <main class="apc-wrap">
+    <div class="apc-card">
+      <div class="apc-brand">takgio</div>
+      <h1 id="apc-h">Confirm your email</h1>
+      <p id="apc-p">One moment&hellip;</p>
+      <button type="button" class="apc-btn" id="apc-btn" hidden>Confirm my email</button>
+      <p class="apc-err" id="apc-err" role="alert"></p>
+      <p class="apc-back"><a href="/careers.html">Back to Careers</a></p>
+    </div>
+  </main>
+  <script src="/js/careers-config.js"></script>
+  <script src="/js/application-confirm.js"></script>
+</body>
+</html>

@@ -9,6 +9,15 @@ accept nothing (`applyUrl` in `js/careers-config.js` is empty).
 3. **Deploy both functions** (`careers-apply` and `careers-confirm`) with JWT verification off, because a public form and an email link cannot send a login token: `supabase functions deploy careers-apply --no-verify-jwt`, and the same for `careers-confirm`. (Or create them in the Supabase dashboard under Edge Functions and paste the code.) `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are provided to functions by Supabase. Optional `SITE_URL` (defaults to https://www.takgio.com).
 4. Set `applyUrl` in `js/careers-config.js` to `https://pwmrbmjlgweahridxvgk.supabase.co/functions/v1/careers-apply`.
 
+## Important: functions cannot serve web pages
+Supabase rewrites any HTML a function returns to plain text (and adds a sandbox security policy), so a page can never render from
+`…supabase.co/functions/v1/…`. The "confirm your email" page is therefore `application-confirm.html` on the site
+(`js/application-confirm.js`); it posts the token to `careers-confirm`, which only ever returns JSON (or a redirect to that page).
+`js/careers-config.js` holds both function addresses (`applyUrl`, `confirmUrl`). Offline tests for both functions are in
+`supabase/functions/_tests/careers-harness.ts` (run with Deno; see the file's first lines). Deploying needs a Supabase access
+token (Ted types it into `supabase login --token`; delete it afterwards): `supabase functions deploy <name> --no-verify-jwt --use-api --project-ref pwmrbmjlgweahridxvgk`.
+The mail sender must be on the verified Resend domain: `MAIL_FROM` is `takgio careers <careers@mail.takgio.com>`.
+
 ## What it does
 Checks the fields, the resume (PDF or Word, up to 5 MB), the bot check, that the job is still open, and a limit of 3
 applications per email per hour; saves the application; stores the resume in the private `resumes` bucket; and emails the

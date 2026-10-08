@@ -61,7 +61,8 @@ Deno.serve(async (req) => {
   if (up.error) { await db.from("job_applications").delete().eq("id", app.id); return json({ error: "We could not store your resume. Please try again." }, 500); }
   await db.from("job_applications").update({ resume_path: path }).eq("id", app.id);
 
-  const link = `${Deno.env.get("SUPABASE_URL")}/functions/v1/careers-confirm?token=${app.confirm_token}`;
+  // Supabase will not render HTML from a function, so the link opens a page on the site (which holds the button), not the function.
+  const link = `${SITE}/application-confirm.html#t=${app.confirm_token}`;
   let sent = false;
   try {
     const mail = await fetch("https://api.resend.com/emails", {

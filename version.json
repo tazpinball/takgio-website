@@ -1,7 +1,19 @@
 {
-  "version": "2.36.6",
+  "version": "2.36.7",
   "date": "2026-10-08",
   "releases": [
+    {
+      "version": "2.36.7",
+      "date": "2026-10-08",
+      "summary": "Fix: the \"Confirm my email\" page now renders (it moved from the function to the site)",
+      "changes": [
+        "Found by the first real test application: pressing the link in the confirmation email showed the page's raw HTML source. Supabase rewrites any HTML returned by an Edge Function to plain text (documented, and visible in the response headers: Content-Type text/plain with a sandbox policy), so a page can never render from a function address",
+        "New page application-confirm.html (not indexed) with js/application-confirm.js: it shows a \"Confirm my email\" button and posts the token to the careers-confirm function. The token travels in the URL #fragment (never sent to a server) and is cleared from the address bar on load. Opening the page confirms nothing, so mail scanners still cannot confirm for the applicant. Shows clear messages for confirmed, already confirmed, an invalid or used link, and a failed request (the button stays usable)",
+        "careers-confirm now returns JSON only (with CORS for www.takgio.com); a plain GET of its old address redirects to the new page, so the confirmation email already sent still works. careers-apply's email now links straight to application-confirm.html. A failed notification email no longer affects the applicant's confirmation (it is logged)",
+        "js/careers-config.js gains confirmUrl. The offline function tests were extended: 43 checks pass. The page was checked in a browser for a valid link, no token, a server error, confirmed, already confirmed, and at 375 px with no sideways scroll",
+        "The functions must be redeployed for this to take effect (needs a new Supabase token from Ted); until then the live function still sends the old, broken link"
+      ]
+    },
     {
       "version": "2.36.6",
       "date": "2026-10-08",

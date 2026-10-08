@@ -2,7 +2,7 @@
 // replaced by in-memory stand-ins (no network, no secrets, nothing is written anywhere).
 // Run from the project root (Deno 2.x; if Deno is not installed:  npm install deno  in any scratch folder):
 //   deno run -A supabase/functions/_tests/careers-harness.ts "<absolute path to the project root>"
-// Folders that start with an underscore are not deployed by the Supabase CLI. Expect: 38 passed, 0 failed.
+// Folders that start with an underscore are not deployed by the Supabase CLI. Expect: 0 failed.
 // Runs the REAL careers-apply and careers-confirm code with Supabase / Resend / Turnstile replaced by in-memory stand-ins.
 // Usage: deno run -A harness.ts
 type Call = { method: string; url: string; body?: unknown; headers: Record<string, string> };
@@ -123,7 +123,7 @@ check("success: row saved with lower-cased email, job id, work_authorized=true",
 check("success: resume uploaded to the private 'resumes' bucket", calls.some((c) => c.method === "POST" && c.url.includes("/storage/v1/object/resumes/" + APP_ID + "/")));
 check("success: resume_path written back", dbCalls().some((c) => c.method === "PATCH" && JSON.stringify(c.body).includes("resume_path")));
 check("success: exactly one confirmation email, to the applicant, from MAIL_FROM", mails.length === 1 && mb?.to === "ada@example.com" && mb?.from === FULL.MAIL_FROM, JSON.stringify(mb));
-check("success: email link points at careers-confirm with the token", !!mb && String(mb.html).includes("https://mock.supabase.test/functions/v1/careers-confirm?token=" + TOKEN));
+check("success: email link opens the page on the site (not the function) with the token in the #fragment", !!mb && String(mb.html).includes("https://www.takgio.com/application-confirm.html#t=" + TOKEN) && !String(mb.html).includes("/functions/v1/"));
 check("success: Resend called with the API key", mails[0]?.headers["authorization"] === "Bearer re_test");
 
 reset(); state.resendStatus = 422; o = await out(await apply(formReq()));
@@ -139,23 +139,36 @@ reset(); o = await out(await apply(formReq({ job_id: null }))); check("general a
 console.log("careers-confirm");
 await import("file:///" + Deno.args[0].replace(/\\/g, "/") + "/supabase/functions/careers-confirm/index.ts?t=c");
 const confirm = handler;
-const U = (m: string, t = TOKEN) => new Request("https://mock.supabase.test/functions/v1/careers-confirm?token=" + t, { method: m });
+const PAGE = "https://www.takgio.com/application-confirm.html";
+const getReq = (t: string) => new Request("https://mock.supabase.test/functions/v1/careers-confirm?token=" + t, { method: "GET" });
+const postReq = (body: unknown, raw = false) => new Request("https://mock.supabase.test/functions/v1/careers-confirm", { method: "POST", headers: { "content-type": "application/json" }, body: raw ? String(body) : JSON.stringify(body) });
 const unconfirmed = { id: APP_ID, first_name: "Ada", last_name: "Lovelace", job_id: state.job.id, email_confirmed_at: null };
 
-reset(); setSecrets(FULL); o = await out(await confirm(U("GET", "not-a-token"))); check("GET with a malformed token -> 400", o.status === 400);
-reset(); state.app = { ...unconfirmed }; o = await out(await confirm(U("GET")));
-check("GET (a scanner opening the link): shows a button, confirms NOTHING", o.status === 200 && /<form method="post">/.test(o.text) && /Confirm my email/.test(o.text) && !dbCalls().some((c) => c.method === "PATCH") && mailCalls().length === 0, o.status + " patches=" + dbCalls().filter((c) => c.method === "PATCH").length);
-reset(); o = await out(await confirm(U("POST", "not-a-token"))); check("POST with a malformed token -> 400", o.status === 400);
-reset(); state.app = null; o = await out(await confirm(U("POST"))); check("POST with an unknown token -> 404", o.status === 404);
-reset(); state.app = { ...unconfirmed }; state.job.notify_email = null; o = await out(await confirm(U("POST")));
+reset(); setSecrets(FULL);
+r = await confirm(new Request("https://x.test/", { method: "OPTIONS", headers: { origin: "https://www.takgio.com" } }));
+check("OPTIONS answers with CORS for the site (allows content-type)", r.status === 200 && r.headers.get("access-control-allow-origin") === "https://www.takgio.com" && /content-type/i.test(r.headers.get("access-control-allow-headers") ?? ""));
+r = await confirm(getReq(TOKEN));
+check("GET (old email link or a scanner): redirects to the site page with the token, confirms NOTHING", r.status === 302 && r.headers.get("location") === PAGE + "#t=" + TOKEN && calls.length === 0, r.status + " " + r.headers.get("location") + " calls=" + calls.length);
+r = await confirm(getReq("not-a-token"));
+check("GET with a malformed token: redirects to the page WITHOUT a token", r.status === 302 && r.headers.get("location") === PAGE);
+r = await confirm(new Request("https://x.test/", { method: "PUT" })); check("PUT -> 405", r.status === 405);
+
+reset(); o = await out(await confirm(postReq("{{{", true))); check("POST with a body that is not JSON -> 400", o.status === 400 && calls.length === 0);
+reset(); o = await out(await confirm(postReq({ token: "not-a-token" }))); check("POST with a malformed token -> 400, no database call", o.status === 400 && dbCalls().length === 0);
+reset(); o = await out(await confirm(postReq({}))); check("POST with no token -> 400", o.status === 400);
+reset(); state.app = null; o = await out(await confirm(postReq({ token: TOKEN }))); check("POST with an unknown token -> 404", o.status === 404 && /not valid/.test(o.json?.error), o.status + " " + o.text);
+
+reset(); state.app = { ...unconfirmed }; state.job.notify_email = null; o = await out(await confirm(postReq({ token: TOKEN })));
 let mm = mailCalls()[0]?.body as Record<string, string> | undefined;
-check("POST confirms: marks email_confirmed_at", o.status === 200 && /you are confirmed/i.test(o.text) && dbCalls().some((c) => c.method === "PATCH" && JSON.stringify(c.body).includes("email_confirmed_at")), o.status + " " + o.text.slice(0, 80));
+check("POST confirms: 200 status 'confirmed' and email_confirmed_at is written", o.status === 200 && o.json?.status === "confirmed" && dbCalls().some((c) => c.method === "PATCH" && JSON.stringify(c.body).includes("email_confirmed_at")), o.status + " " + o.text);
 check("POST confirms: notifies DEFAULT_NOTIFY_EMAIL when the job has none", mailCalls().length === 1 && mm?.to === "ted@takgio.com" && /Claude Certification Opportunity/.test(String(mm?.html)), JSON.stringify(mm));
-reset(); state.app = { ...unconfirmed }; state.job.notify_email = "stephen@takgio.com"; o = await out(await confirm(U("POST"))); mm = mailCalls()[0]?.body as Record<string, string> | undefined;
+reset(); state.app = { ...unconfirmed }; state.job.notify_email = "stephen@takgio.com"; o = await out(await confirm(postReq({ token: TOKEN }))); mm = mailCalls()[0]?.body as Record<string, string> | undefined;
 check("POST confirms: the job's own notify_email wins", mm?.to === "stephen@takgio.com", JSON.stringify(mm));
-reset(); state.app = { ...unconfirmed, email_confirmed_at: "2026-10-08T00:00:00Z" }; o = await out(await confirm(U("POST")));
-check("already confirmed: says so, changes nothing, sends nothing", o.status === 200 && /already confirmed/i.test(o.text) && !dbCalls().some((c) => c.method === "PATCH") && mailCalls().length === 0);
-reset(); o = await out(await confirm(U("PUT"))); check("PUT -> 405", o.status === 405);
+reset(); state.app = { ...unconfirmed }; state.resendStatus = 500; o = await out(await confirm(postReq({ token: TOKEN })));
+check("notification email fails: the applicant is still confirmed (and the failure is logged)", o.status === 200 && o.json?.status === "confirmed");
+reset(); state.app = { ...unconfirmed, email_confirmed_at: "2026-10-08T00:00:00Z" }; o = await out(await confirm(postReq({ token: TOKEN })));
+check("already confirmed: says so, changes nothing, sends nothing", o.status === 200 && o.json?.status === "already" && !dbCalls().some((c) => c.method === "PATCH") && mailCalls().length === 0);
+check("confirm responses are JSON, never HTML (Supabase would rewrite HTML to plain text)", (await confirm(postReq({ token: TOKEN }))).headers.get("content-type")?.includes("application/json") === true);
 
 console.log(`\n${pass} passed, ${fail} failed`);
 Deno.exit(fail ? 1 : 0);
