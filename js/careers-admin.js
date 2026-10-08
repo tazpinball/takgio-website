@@ -59,7 +59,8 @@
       ev.preventDefault();
       var email = document.getElementById('e').value.trim(), err = document.getElementById('err');
       if (!email) { err.textContent = 'Type your email above first.'; return; }
-      sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + '/careers-admin.html' }).then(function (r) {
+      // No redirectTo: the project's Site URL is /login.html, the only allowed redirect, and that page already handles reset links
+      sb.auth.resetPasswordForEmail(email).then(function (r) {
         err.textContent = r.error ? r.error.message : 'If that address has access, a reset link is on its way.';
       });
     });
