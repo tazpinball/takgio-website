@@ -15,16 +15,28 @@
   // --- Login page logic ---
   var loginForm = document.getElementById('login-form');
   if (loginForm) {
+    // A recovery link signs the person in, so the "already logged in, go to the
+    // dashboard" redirect below would otherwise win and the reset form would never
+    // be usable. Read the link's marker now, before the client clears the URL hash.
+    // ?reset=1 lets someone who is already signed in reach the same form.
+    var recoveryMode = /[#&?]type=recovery(&|$)/.test(window.location.hash) ||
+                       /[?&]type=recovery(&|$)/.test(window.location.search);
+    var resetRequested = /[?&]reset=1(&|$)/.test(window.location.search);
+
+    function showResetForm() {
+      recoveryMode = true;
+      loginForm.style.display = 'none';
+      var form = document.getElementById('reset-form');
+      if (form) {
+        form.style.display = '';
+        document.querySelector('.login-subtitle').textContent = 'Reset Password';
+      }
+    }
+
     // Listen for auth state changes (handles recovery token from email link)
     sb.auth.onAuthStateChange(function (event, session) {
       if (event === 'PASSWORD_RECOVERY') {
-        // Show reset form, hide login form
-        loginForm.style.display = 'none';
-        var resetForm = document.getElementById('reset-form');
-        if (resetForm) {
-          resetForm.style.display = '';
-          document.querySelector('.login-subtitle').textContent = 'Reset Password';
-        }
+        showResetForm();
       }
     });
 
@@ -82,11 +94,12 @@
       window.location.href = '/dashboard.html';
     });
 
-    // If already logged in, redirect to dashboard
+    // If already logged in, redirect to dashboard (not while setting a password)
     sb.auth.getSession().then(function (res) {
-      if (res.data.session) {
-        window.location.href = '/dashboard.html';
-      }
+      if (!res.data.session) return;
+      if (resetRequested) { showResetForm(); return; }
+      if (recoveryMode) return;
+      window.location.href = '/dashboard.html';
     });
   }
 

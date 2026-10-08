@@ -1,7 +1,17 @@
 {
-  "version": "2.36.0",
+  "version": "2.36.1",
   "date": "2026-10-08",
   "releases": [
+    {
+      "version": "2.36.1",
+      "date": "2026-10-08",
+      "summary": "Fix: a password-reset link now opens the Reset Password form instead of jumping to the dashboard",
+      "changes": [
+        "login.html: a reset (recovery) link from email signs the person in, and the page's \"already signed in, go to the dashboard\" redirect then won the race, so the Reset Password form flashed and vanished and no password could be set. The page now notices it was opened from a recovery link (type=recovery in the URL) and skips that redirect while the reset form is showing (js/auth.js)",
+        "New: login.html?reset=1 shows the same Reset Password form to someone who is already signed in, so a password can be set or changed without waiting for another email",
+        "A plain visit to login.html while signed in still goes to the dashboard, and a visitor with no session still sees the normal sign-in form (both checked)"
+      ]
+    },
     {
       "version": "2.36.0",
       "date": "2026-10-08",
