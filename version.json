@@ -1,7 +1,18 @@
 {
-  "version": "2.36.4",
+  "version": "2.36.5",
   "date": "2026-10-08",
   "releases": [
+    {
+      "version": "2.36.5",
+      "date": "2026-10-08",
+      "summary": "Careers application functions: tested, and two weaknesses fixed before they go live",
+      "changes": [
+        "Both Edge Functions (careers-apply, careers-confirm) were run for the first time, offline, against stand-ins for Supabase, Resend and Cloudflare: 38 checks pass (validation, bot check, closed/draft/expired jobs, the 3-per-hour limit, the full success path, failure clean-up, confirm, already-confirmed). The tests are saved at supabase/functions/_tests/careers-harness.ts. Both also pass Deno's type-check",
+        "careers-apply: if the confirmation email cannot be sent (Resend refuses it, is unreachable, or the Resend secrets are missing) the application is no longer saved as a dead end that says \"check your email\". The half-finished application and its resume are removed and the applicant sees a clear message to check the address and try again. Missing email settings now refuse up front (503) instead of saving silently",
+        "careers-confirm: opening the link in the email now only shows a \"Confirm my email\" button, and pressing it (a POST) does the confirming. Before, any program that merely opened the link, such as a mail scanner, would have marked the address confirmed",
+        "Nothing is deployed yet and the application form still reads \"Applications open soon\"; the functions are not live"
+      ]
+    },
     {
       "version": "2.36.4",
       "date": "2026-10-08",

@@ -19,6 +19,10 @@ Deno.serve(async (req) => {
 
   if (clean(form.get("website"))) return json({ ok: true });            // trap field: bots fill it in, people never see it
 
+  // Without email sending nobody can ever be confirmed, so refuse up front rather than save an application that is a dead end.
+  const mailKey = Deno.env.get("RESEND_API_KEY"), mailFrom = Deno.env.get("MAIL_FROM");
+  if (!mailKey || !mailFrom) { console.error("careers-apply: RESEND_API_KEY or MAIL_FROM is not set"); return json({ error: "Applications are temporarily unavailable. Please try again later." }, 503); }
+
   const f = {
     first_name: clean(form.get("first_name"), 80), last_name: clean(form.get("last_name"), 80), email: clean(form.get("email"), 200).toLowerCase(),
     phone: clean(form.get("phone"), 40) || null, state: clean(form.get("state"), 40), link_url: clean(form.get("link_url"), 400),
@@ -57,14 +61,22 @@ Deno.serve(async (req) => {
   if (up.error) { await db.from("job_applications").delete().eq("id", app.id); return json({ error: "We could not store your resume. Please try again." }, 500); }
   await db.from("job_applications").update({ resume_path: path }).eq("id", app.id);
 
-  const key = Deno.env.get("RESEND_API_KEY"), from = Deno.env.get("MAIL_FROM");
-  if (key && from) {
-    const link = `${Deno.env.get("SUPABASE_URL")}/functions/v1/careers-confirm?token=${app.confirm_token}`;
-    await fetch("https://api.resend.com/emails", {
-      method: "POST", headers: { Authorization: `Bearer ${key}`, "content-type": "application/json" },
-      body: JSON.stringify({ from, to: f.email, subject: "Confirm your application to takgio",
+  const link = `${Deno.env.get("SUPABASE_URL")}/functions/v1/careers-confirm?token=${app.confirm_token}`;
+  let sent = false;
+  try {
+    const mail = await fetch("https://api.resend.com/emails", {
+      method: "POST", headers: { Authorization: `Bearer ${mailKey}`, "content-type": "application/json" },
+      body: JSON.stringify({ from: mailFrom, to: f.email, subject: "Confirm your application to takgio",
         html: `<p>Hi ${safe(f.first_name)},</p><p>Thanks for applying to takgio. Please confirm your email address so we can review your application:</p><p><a href="${link}">Confirm my email</a></p><p>If you did not apply, you can ignore this message.</p>` }),
     });
+    sent = mail.ok;
+    if (!sent) console.error("careers-apply: Resend refused the confirmation email", mail.status, await mail.text());
+  } catch (e) { console.error("careers-apply: could not reach Resend", String(e)); }
+  if (!sent) {
+    // Nothing was confirmed and nobody can confirm it: remove the half-finished application so the person can simply try again.
+    await db.storage.from("resumes").remove([path]);
+    await db.from("job_applications").delete().eq("id", app.id);
+    return json({ error: "We could not send your confirmation email. Please check the address and try again." }, 502);
   }
   return json({ ok: true });
 });
