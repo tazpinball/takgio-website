@@ -1,7 +1,16 @@
 {
-  "version": "2.36.3",
+  "version": "2.36.4",
   "date": "2026-10-08",
   "releases": [
+    {
+      "version": "2.36.4",
+      "date": "2026-10-08",
+      "summary": "Careers: the Cloudflare Turnstile bot-check site key is now in the site config",
+      "changes": [
+        "js/careers-config.js: turnstileSiteKey is set (a public value). The widget is registered in Cloudflare for www.takgio.com and takgio.com in Managed mode. The key was checked with Cloudflare's own widget: a correct key on an unregistered address returns 110200 (domain not authorized), a mistyped key returns 400020 (invalid sitekey)",
+        "No visible change yet: applyUrl is still empty, so the application form keeps showing \"Applications open soon\" until the careers-apply function is deployed and its secrets are set"
+      ]
+    },
     {
       "version": "2.36.3",
       "date": "2026-10-08",

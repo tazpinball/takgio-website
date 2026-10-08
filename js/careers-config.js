@@ -8,5 +8,5 @@
 // ============================================================
 window.CAREERS_CONFIG = {
   applyUrl: '',
-  turnstileSiteKey: ''
+  turnstileSiteKey: '0x4AAAAAAFRpO6AbCh7x9Hma'
 };
