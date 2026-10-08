@@ -7,6 +7,6 @@
 // See supabase/functions/careers-apply/README.md for the setup steps.
 // ============================================================
 window.CAREERS_CONFIG = {
-  applyUrl: '',
+  applyUrl: 'https://pwmrbmjlgweahridxvgk.supabase.co/functions/v1/careers-apply',
   turnstileSiteKey: '0x4AAAAAAFRpO6AbCh7x9Hma'
 };

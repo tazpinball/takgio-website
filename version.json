@@ -1,7 +1,18 @@
 {
-  "version": "2.36.5",
+  "version": "2.36.6",
   "date": "2026-10-08",
   "releases": [
+    {
+      "version": "2.36.6",
+      "date": "2026-10-08",
+      "summary": "Careers: applications are switched on (the form now sends to the live careers-apply function)",
+      "changes": [
+        "The two Edge Functions are deployed to the takgio-brainstorm-db project (careers-apply and careers-confirm, JWT check off because a public form and an email link cannot send a login). Their secrets are set: TURNSTILE_SECRET, RESEND_API_KEY, MAIL_FROM, DEFAULT_NOTIFY_EMAIL",
+        "js/careers-config.js: applyUrl now points at the careers-apply function, so the job pages and the general \"Send your resume\" form accept applications and show the Cloudflare bot check. Before this the forms read \"Applications open soon\"",
+        "Checked against the live functions with requests that save nothing: CORS limited to www.takgio.com, GET refused, trap field swallowed, empty form rejected, a fake bot token rejected by Cloudflare, the confirm link shows only a button, an unknown confirm token returns 404 after a real database lookup",
+        "No job is published yet, so only the general \"Send your resume\" form is reachable by visitors"
+      ]
+    },
     {
       "version": "2.36.5",
       "date": "2026-10-08",
