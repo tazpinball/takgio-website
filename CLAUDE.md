@@ -17,15 +17,15 @@ character for character** (no trailing slash, no `www`, no `/demos` page, no red
 change **only when Ted explicitly says so**. How it looks and where it lives on the site may change freely, but every
 Demos link must keep that exact href, and the site must never be left without one.
 
-- Every Demos anchor carries the attribute `data-demos-link`. As of v2.34.0 there are 26: the top-level header item
-  "Demos" on all 24 pages that carry the header (the 23 public pages plus the unlisted `hoof-harted-marketing.html`; also in `docs\mockups\_generators\header_v228.html`, the header source the generators
+- Every Demos anchor carries the attribute `data-demos-link`. As of v2.36.0 there are 28: the top-level header item
+  "Demos" on all 26 pages that carry the header (the 23 public pages, the unlisted `hoof-harted-marketing.html`, and the Careers pages `careers.html` and `job.html`; also in `docs\mockups\_generators\header_v228.html`, the header source the generators
   copy), the "Product demos" button in the `index.html` hero, and the "Product demos" button in the investor block of
   `contact.html` (shown when the topic is Investing, i.e. `contact.html?topic=invest`, where every "Investors" link lands).
 - Moving or restyling it: keep `data-demos-link` and the exact href on the new element, and update the counts here.
-- **Before every commit**, run this check (from the project root). It must print 24 / 26 / 0, or the updated counts:
+- **Before every commit**, run this check (from the project root). It must print 26 / 28 / 0, or the updated counts:
 
 ```
-echo "pages: $(grep -l data-demos-link *.html | wc -l) (want 24)  links: $(grep -o data-demos-link *.html | wc -l) (want 26)  wrong href: $(grep -oh '<a [^>]*data-demos-link[^>]*>' *.html | grep -vc 'href="https://demos.takgio.com"') (want 0)"
+echo "pages: $(grep -l data-demos-link *.html | wc -l) (want 26)  links: $(grep -o data-demos-link *.html | wc -l) (want 28)  wrong href: $(grep -oh '<a [^>]*data-demos-link[^>]*>' *.html | grep -vc 'href="https://demos.takgio.com"') (want 0)"
 ```
 
 ## MANDATORY: Version Bump on Every Change

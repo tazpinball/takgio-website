@@ -19,6 +19,14 @@
     {
       "source": "/hoof",
       "destination": "/hoof-harted-download.html"
+    },
+    {
+      "source": "/careers",
+      "destination": "/careers.html"
+    },
+    {
+      "source": "/careers/:slug",
+      "destination": "/job.html"
     }
   ]
 }

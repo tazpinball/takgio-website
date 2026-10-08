@@ -1,7 +1,21 @@
 {
-  "version": "2.35.2",
-  "date": "2026-10-06",
+  "version": "2.36.0",
+  "date": "2026-10-08",
   "releases": [
+    {
+      "version": "2.36.0",
+      "date": "2026-10-08",
+      "summary": "Careers: open positions, a job page with an application form, and a protected admin for posting jobs",
+      "changes": [
+        "New public pages: careers.html (open positions, grouped by team, with search and filters once there are five or more roles) and job.html, served at /careers/<job> through a vercel.json rewrite. Jobs come from the database view jobs_public; each job page adds the JobPosting markup Google Jobs reads",
+        "New protected admin at careers-admin.html (not linked anywhere, kept out of search): sign-in with a password and an authenticator-app code, then manage jobs, post or edit a job with a before-you-publish checklist, review applications, and (admins only) team access, an activity log, delete and CSV export",
+        "Roles: Editor (posts and edits jobs, reviews applicants) and Admin (also deletes, exports and manages access), kept in a new careers_editors table. The database enforces it with row-level rules that also require a two-step-verified session; the new tables do not use the dashboard's open rules",
+        "\"Careers\" added to the Company menu and the footer on every public page; js/nav.js highlights Company on the Careers pages; careers.html is in the sitemap",
+        "The application form shows \"Applications open soon\" and accepts nothing until js/careers-config.js points at the careers-apply function. The two functions (careers-apply, careers-confirm) and their setup notes are in supabase/functions and are NOT deployed. They need a Cloudflare Turnstile bot check and an email service (Resend) first",
+        "Database: docs/careers-schema.sql (jobs, job_applications, careers_editors, audit_log, the jobs_public view, a private resumes bucket) was run on the takgio-brainstorm-db project on 2026-10-08. New sign-ups are switched off in Supabase Auth",
+        "Demos-link counts are now 26 pages / 28 links (the Careers pages carry the header)"
+      ]
+    },
     {
       "version": "2.35.2",
       "date": "2026-10-06",

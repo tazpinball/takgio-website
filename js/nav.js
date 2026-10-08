@@ -107,7 +107,7 @@
     : page === 'industries.html' ? 'industries'
     : (page === 'case-studies.html' || page.indexOf('case-study-') === 0) ? 'case-studies'
     : (page === 'insights.html' || page.indexOf('insight-') === 0) ? 'insights'
-    : (page === 'about.html' || page === 'contact.html') ? 'company' : '';
+    : (page === 'about.html' || page === 'contact.html' || page === 'careers.html' || page === 'job.html' || window.location.pathname.toLowerCase().indexOf('/careers/') === 0) ? 'company' : '';
   items.forEach(function (it) {
     if (it.getAttribute('data-section') === section) {
       it.classList.add('is-current');
