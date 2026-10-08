@@ -1,7 +1,17 @@
 {
-  "version": "2.36.2",
+  "version": "2.36.3",
   "date": "2026-10-08",
   "releases": [
+    {
+      "version": "2.36.3",
+      "date": "2026-10-08",
+      "summary": "Careers admin: the \"no access\" screen now says which account you are signed in as, and a failed access check shows its error",
+      "changes": [
+        "When a signed-in account has no row in careers_editors, the screen now reads \"You're signed in as <email>, but that account hasn't been given access\" and suggests trying another account. Before, it only said \"this account\", which hid that a person had signed in with a different login than the one granted",
+        "If the access lookup itself fails (permissions, network), the page now shows \"Couldn't check your access\" with the error text, instead of treating the failure as \"no access\"",
+        "Checked against the stand-in sign-in: no access, a failed lookup, and the normal admin path"
+      ]
+    },
     {
       "version": "2.36.2",
       "date": "2026-10-08",

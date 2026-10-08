@@ -102,8 +102,11 @@
       });
     });
   }
-  function showNoAccess() {
-    shell('<h2>No careers access yet</h2><p style="margin:0 0 14px">You’re signed in, but this account hasn’t been given access to careers. Ask an admin to add you.</p><button class="cra-btn" id="out">Sign out</button>');
+  // `who` is the signed-in email, `problem` an error from the lookup (a failed lookup must not read as "no access")
+  function showNoAccess(who, problem) {
+    shell(problem
+      ? '<h2>Couldn’t check your access</h2><p style="margin:0 0 10px">' + (who ? 'Signed in as <b>' + esc(who) + '</b>. ' : '') + 'The access check failed, so nothing is shown.</p><p class="cra-err">' + esc(problem) + '</p><button class="cra-btn" id="out">Sign out</button>'
+      : '<h2>No careers access yet</h2><p style="margin:0 0 10px">' + (who ? 'You’re signed in as <b>' + esc(who) + '</b>, but that' : 'You’re signed in, but this') + ' account hasn’t been given access to careers. If you have another account, sign out and use that one; otherwise ask an admin to add you.</p><button class="cra-btn" id="out">Sign out</button>');
     document.getElementById('out').addEventListener('click', signOut);
   }
   function signOut() { sb.auth.signOut().then(function () { state = { user: null, role: null, name: '', jobs: [], apps: [], selApp: null }; showLogin(); }); }
@@ -121,7 +124,8 @@
         state.user = u.data.user;
         return sb.from('careers_editors').select('role,display_name').eq('user_id', state.user.id).maybeSingle();
       }).then(function (r) {
-        if (!r.data) return showNoAccess();
+        if (r.error) return showNoAccess(state.user && state.user.email, r.error.message);
+        if (!r.data) return showNoAccess(state.user && state.user.email);
         state.role = r.data.role; state.name = r.data.display_name || state.user.email;
         route();
       });
