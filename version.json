@@ -1,7 +1,17 @@
 {
-  "version": "2.36.1",
+  "version": "2.36.2",
   "date": "2026-10-08",
   "releases": [
+    {
+      "version": "2.36.2",
+      "date": "2026-10-08",
+      "summary": "Fix: the Careers admin showed a blank page in browsers with an ad or content blocker",
+      "changes": [
+        "careers-admin.html, js/careers-admin.js and css/careers-admin.css named every class and the page root with an \"ad-\" prefix (ad-body, ad-root, ad-login and so on, short for \"admin\"). Content blockers treat \"ad-\" names as advertising and hide them: in Ted's Chrome and Brave the whole page was clipped to nothing (clip-path: inset(100%) on the body) while the sign-in and authenticator screens were actually there, invisible. Renaming <body class=\"ad-body\"> alone removed the clip in a live test",
+        "Every \"ad-\" class and id in those three files is now \"cra-\" (cra-body, cra-root, cra-login and so on): 225 occurrences, no other file used them. No behaviour change",
+        "Checked in Ted's own Chrome from the local server (page visible, clip-path none) and against the stand-in sign-in for the code screen, first-time authenticator enrolment, no-access, and the Jobs, Applications, Team and Post-a-job screens"
+      ]
+    },
     {
       "version": "2.36.1",
       "date": "2026-10-08",
