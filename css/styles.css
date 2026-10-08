@@ -3178,3 +3178,59 @@ section[id], article[id] { scroll-margin-top: 72px; }
 .cr-body ul { margin: 0 0 10px; }
 .cr-body p { margin: 0 0 12px; }
 .cr-filters[hidden], .cr-empty[hidden], .cr-bot[hidden] { display: none; }
+
+/* 42b. Careers list page, compact layout (Ted, 2026-10-08: "more information in less space"). Scoped to careers.html through .cr-hero / .cr-list;
+   job pages keep the roomier layout above. The form is a 12-column grid on wide screens; its children are, in order:
+   1 trap field (out of flow), 2 names, 3 email, 4 phone + state, 5 link, 6 resume, 7 work authorization, 8 exams, 9 answer,
+   10 bot check, 11 consent, 12 submit, 13 message. If the form's markup in js/careers.js changes, revisit the spans below. */
+.p-hero.cr-hero { padding: 18px 0 12px; }
+.cr-hero h1 { font-size: clamp(1.45rem, 3vw, 1.85rem); margin: 0 0 4px; }
+.cr-hero p { font-size: .9rem; line-height: 1.45; max-width: 1000px; margin: 0 auto; }
+.cr-list { padding: 16px 0 26px; }
+.cr-list .cr-h2 { display: inline-block; font-size: 1.2rem; margin: 0 10px 8px 0; }
+.cr-list .cr-count { display: inline-block; margin: 0 0 8px; font-size: .84rem; }
+.cr-list .cr-filters { padding: 8px 10px; margin-bottom: 10px; border-radius: 12px; gap: 8px; }
+.cr-list .cr-dept { margin: 12px 0 6px; }
+.cr-list .cr-job { padding: 12px 16px; border-radius: 12px; gap: 8px; box-shadow: 0 4px 12px rgba(15,23,42,.05); }
+.cr-list .cr-job h3 { font-size: 1rem; margin: 0 0 4px; }
+.cr-list .cr-tag { font-size: .74rem; padding: 2px 9px; }
+.cr-list .cr-job.feature { padding: 14px 18px; }
+.cr-list .cr-job.feature h3 { font-size: 1.25rem; margin: 0 0 4px; }
+.cr-list .cr-job.feature .cr-sum { font-size: .92rem; line-height: 1.4; margin: 0 0 8px; max-width: none; }
+.cr-list .cr-empty { padding: 9px 16px; border-radius: 12px; display: flex; flex-wrap: wrap; gap: 2px 12px; align-items: baseline; }
+.cr-list .cr-empty h3 { margin: 0; font-size: 1rem; }
+.cr-list .cr-empty p { font-size: .88rem; }
+.cr-list .cr-tiles { gap: 8px; margin: 10px 0 0; }
+.cr-list .cr-tile { padding: 8px 12px; border-radius: 12px; }
+.cr-list .cr-tile b { font-size: .86rem; margin: 0 0 1px; }
+.cr-list .cr-tile span { font-size: .78rem; line-height: 1.4; }
+.cr-list .cr-open { margin-top: 10px; padding: 9px 16px; border-radius: 12px; gap: 8px; }
+.cr-list .cr-open h3 { display: inline; font-size: .98rem; margin: 0 8px 0 0; }
+.cr-list .cr-open p { display: inline; font-size: .86rem; }
+.cr-list .cr-open .btn { padding: 8px 16px; font-size: .88rem; }
+.cr-list .cr-general { max-width: none; margin-top: 10px; }
+.cr-list .cr-form { padding: 10px 16px 14px; border-radius: 14px; box-shadow: 0 8px 22px rgba(15,23,42,.08); }
+.cr-list .cr-form h2 { display: inline-block; font-size: 1.02rem; margin: 0 10px 6px 0; }
+.cr-list .cr-form .cr-close { display: inline-block; margin: 0 0 6px; font-size: .8rem; }
+.cr-list #cr-form { display: grid; gap: 8px; grid-template-columns: 1fr; align-items: start; }
+.cr-list .cr-row { gap: 8px; }
+.cr-list .cr-field { gap: 3px; margin-bottom: 0; }
+.cr-list .cr-field label, .cr-list .cr-field legend { font-size: .76rem; }
+.cr-list .cr-field input[type=text], .cr-list .cr-field input[type=email], .cr-list .cr-field input[type=tel], .cr-list .cr-field input[type=url], .cr-list .cr-field select, .cr-list .cr-field textarea { padding: 6px 10px; font-size: .86rem; border-radius: 8px; }
+.cr-list .cr-field textarea { min-height: 50px; }
+.cr-list .cr-field .hint { font-size: .68rem; }
+.cr-list .cr-radio { gap: 14px; font-size: .84rem; }
+.cr-list .cr-form input[type=file] { padding: 4px 8px; border-radius: 8px; font-size: .8rem; }
+.cr-list .cr-bot { margin: 0; padding: 4px; }
+.cr-list .cr-consent { margin: 0; font-size: .74rem; align-self: center; }
+.cr-list .cr-form .btn-lg { padding: 10px 14px; font-size: .95rem; }
+@media (min-width: 900px) {
+  .cr-list #cr-form { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 8px 12px; }
+  .cr-list #cr-form > :nth-child(-n+8) { grid-column: span 4; }
+  .cr-list #cr-form > :nth-child(8) { grid-column: span 5; }
+  .cr-list #cr-form > :nth-child(9) { grid-column: span 7; }
+  .cr-list #cr-form > :nth-child(10) { grid-column: span 4; }
+  .cr-list #cr-form > :nth-child(11) { grid-column: span 5; }
+  .cr-list #cr-form > :nth-child(12) { grid-column: span 3; }
+  .cr-list #cr-form > :nth-child(13) { grid-column: 1 / -1; }
+}

@@ -1,7 +1,19 @@
 {
-  "version": "2.36.8",
+  "version": "2.36.9",
   "date": "2026-10-08",
   "releases": [
+    {
+      "version": "2.36.9",
+      "date": "2026-10-08",
+      "summary": "Careers page: much denser layout, the same information in far less space",
+      "changes": [
+        "careers.html (the list page only; job pages are unchanged): the main content is 58% shorter on a desktop screen (1925 px to 805 px at a 1091 px window; the whole page 2474 px to 1355 px) and about 35% shorter on a phone (2722 px to 1758 px). Nothing was removed",
+        "The application form is now a three-across grid on wide screens (names, email, phone and state; link, resume, work authorization; exams and the AI question; bot check, consent and the Submit button on one row) at 389 px tall instead of 1033, and stays a single column below 900 px",
+        "A smaller hero, the \"Open positions\" heading and count on one line, a one-line empty state, a compact strip for the three info tiles, a one-row \"Don't see the right role?\" band, and tighter fields and spacing throughout",
+        "New CSS section 42b in css/styles.css (scoped by the classes cr-hero and cr-list on careers.html). The Careers generator script (docs/mockups/_generators/build_careers_pages.py) predates this and would overwrite careers.html if re-run: the live HTML is the source of truth",
+        "Checked in a real browser at desktop and 375 px (no sideways scroll, every field inside the screen, the exams and AI-question boxes line up)"
+      ]
+    },
     {
       "version": "2.36.8",
       "date": "2026-10-08",
