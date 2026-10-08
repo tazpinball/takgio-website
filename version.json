@@ -1,7 +1,18 @@
 {
-  "version": "2.36.7",
+  "version": "2.36.8",
   "date": "2026-10-08",
   "releases": [
+    {
+      "version": "2.36.8",
+      "date": "2026-10-08",
+      "summary": "Careers admin: deleting an applicant now also deletes their resume file",
+      "changes": [
+        "Found while cleaning up the first real test application: the admin's \"Delete applicant\" removed the database row but left the resume file in the private resumes bucket, so \"delete for good\" was not true for the resume. The button now removes the file first, then the row. If the file cannot be removed it stops with the error and keeps the record, so a resume is never left behind with nothing pointing at it; if storage says the file is missing or refuses, it asks before deleting the record anyway",
+        "docs/careers-schema.sql: a new storage rule \"admins delete resumes\" (admins only, two-step-verified session). It must be run once on the live database (two statements, given to Ted); until then the delete button will ask whether to delete the record anyway",
+        "Checked against the stand-in: normal delete (file removed, row removed), storage refusing (No keeps the record, Yes removes it), and a storage error (record kept, error shown)",
+        "The whole application flow was verified live with a real test application: submit, saved, confirmation email delivered, confirm page and button, notification delivered to ted@takgio.com"
+      ]
+    },
     {
       "version": "2.36.7",
       "date": "2026-10-08",

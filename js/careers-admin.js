@@ -346,8 +346,20 @@
       });
       var del = document.getElementById('a-del');
       if (del) del.addEventListener('click', function () {
-        if (!confirm('Delete this applicant for good?')) return;
-        sb.from('job_applications').delete().eq('id', sel.id).then(function (x) { if (x.error) toast(x.error.message, true); else { toast('Deleted'); state.selApp = null; viewApps(jobId); } });
+        if (!confirm('Delete this applicant for good? Their resume file is deleted too.')) return;
+        var dropRow = function () {
+          sb.from('job_applications').delete().eq('id', sel.id).then(function (x) { if (x.error) toast(x.error.message, true); else { toast('Deleted'); state.selApp = null; viewApps(jobId); } });
+        };
+        if (!sel.resume_path) return dropRow();
+        // The file goes first: if it cannot be removed, keep the record so the resume is never left behind with nothing pointing at it.
+        // (A storage delete that the database rules refuse comes back as an empty list, not an error, so check the list.)
+        sb.storage.from('resumes').remove([sel.resume_path]).then(function (rm) {
+          if (rm.error) { toast('Could not delete the resume file: ' + rm.error.message, true); return; }
+          if (!rm.data || !rm.data.length) {
+            if (!confirm('The resume file was not found or could not be removed. Delete the applicant record anyway?')) return;
+          }
+          dropRow();
+        });
       });
       var csv = document.getElementById('a-csv');
       if (csv) csv.addEventListener('click', function () {

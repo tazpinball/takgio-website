@@ -180,6 +180,10 @@ grant select on public.audit_log to authenticated;
 insert into storage.buckets (id, name, public) values ('resumes', 'resumes', false) on conflict (id) do nothing;
 drop policy if exists "editors read resumes" on storage.objects;
 create policy "editors read resumes" on storage.objects for select to authenticated using (bucket_id = 'resumes' and public.careers_is_editor());
+-- added 2026-10-08: the admin's "Delete applicant" must remove the resume file as well as the row (admins only, two-step session).
+-- Run these two statements on an existing project; a fresh install gets them with the rest of this file.
+drop policy if exists "admins delete resumes" on storage.objects;
+create policy "admins delete resumes" on storage.objects for delete to authenticated using (bucket_id = 'resumes' and public.careers_is_admin() and (select auth.jwt()->>'aal') = 'aal2');
 
 -- ---------- the two people (run AFTER both have accepted their invitation, so they exist in auth.users) ----------
 -- insert into public.careers_editors (user_id, role, display_name)
