@@ -1,7 +1,18 @@
 {
-  "version": "2.37.0",
+  "version": "2.37.1",
   "date": "2026-10-12",
   "releases": [
+    {
+      "version": "2.37.1",
+      "date": "2026-10-12",
+      "summary": "Safety-compliance case study now credited to System Software Group, before takgio",
+      "changes": [
+        "case-study-construction-safety.html: a note under the title says the engagement was delivered by System Software Group, which takgio co-founder Ted Takvorian founded and led as CEO for 20 years, before takgio was founded (links to the Leadership page). The meta line adds \"System Software Group\"",
+        "\"Our Approach\" is now \"The Approach\", and every \"we\" in the body now names the System Software Group team. The page description, Open Graph description and structured-data description say the same",
+        "case-studies.html: the listing card is labelled \"Before takgio: led by Ted Takvorian at System Software Group\"",
+        "CSS section 44 styles the note and the label. The other client case studies (documents, legal contracts, education) are takgio work and are unchanged"
+      ]
+    },
     {
       "version": "2.37.0",
       "date": "2026-10-12",
