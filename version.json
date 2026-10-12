@@ -1,7 +1,20 @@
 {
-  "version": "2.36.11",
+  "version": "2.37.0",
   "date": "2026-10-12",
   "releases": [
+    {
+      "version": "2.37.0",
+      "date": "2026-10-12",
+      "summary": "New Leadership page: Ted, Stephen and Richard, with Ted's full bio and career highlights",
+      "changes": [
+        "leadership.html: Ted (headshot, bio, six SSG/takgio highlights, career highlights as four numbers and a summary sentence), Stephen (headshot, bio, three highlights, LinkedIn) and Richard (initials, his existing public text; no placeholders). CSS section 43",
+        "Career highlights come from Ted's resumes: before July 2005 as an employee (UPS, Deutsche Bank); from 2005 as System Software Group engagements with the companies as SSG clients (Merck, Macquarie, Schroders, VMware). The combined numbers say what they add up",
+        "\"Leadership\" added to the Company menu and the footer on all 27 pages with the header (and the header source header_v228.html); js/nav.js highlights Company on the new page; added to sitemap.xml",
+        "About page: the founding-team cards now read Stephen Caggiano, Chief Revenue Officer and Richard Takvorian, Esq., General Counsel & Chief Financial Officer, and link to the Leadership page",
+        "Headshots images/team/ted-takvorian.webp and stephen-caggiano.webp (800x1000) added to the repo",
+        "Demos link check: 27 pages, 29 links, 0 wrong"
+      ]
+    },
     {
       "version": "2.36.11",
       "date": "2026-10-12",

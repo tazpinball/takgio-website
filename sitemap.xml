@@ -26,7 +26,13 @@
   </url>
   <url>
     <loc>https://www.takgio.com/about.html</loc>
-    <lastmod>2026-09-27</lastmod>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.takgio.com/leadership.html</loc>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
