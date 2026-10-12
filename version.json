@@ -1,7 +1,17 @@
 {
-  "version": "2.36.10",
-  "date": "2026-10-08",
+  "version": "2.36.11",
+  "date": "2026-10-12",
   "releases": [
+    {
+      "version": "2.36.11",
+      "date": "2026-10-12",
+      "summary": "About page: Ted's founding-team card now matches his LinkedIn profile",
+      "changes": [
+        "Title changed from \"President\" to \"Co-founder, President & Chief Executive Officer\" (the same title as LinkedIn)",
+        "Bio now says takgio was co-founded in October 2025 (Ted's date; Takgio Inc. was incorporated in May 2026) and adds that he founded System Software Group and led it as CEO for 20 years, through its acquisition by Bechtle AG in July 2025",
+        "Only Ted's card changed; the Steve/Stephen and Richard cards are untouched"
+      ]
+    },
     {
       "version": "2.36.10",
       "date": "2026-10-08",
