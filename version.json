@@ -1,7 +1,19 @@
 {
-  "version": "2.37.1",
+  "version": "2.38.0",
   "date": "2026-10-12",
   "releases": [
+    {
+      "version": "2.38.0",
+      "date": "2026-10-12",
+      "summary": "The brand name is written \"Takgio\" again, with a capital T (Ted, Oct 12)",
+      "changes": [
+        "Every visible \"takgio\" on the site is now \"Takgio\": 637 occurrences across the pages, scripts and logo-file labels (text, page titles, meta and social tags, alt text, aria-labels and structured data). This reverses v2.35.2",
+        "Not changed (they are addresses or code): takgio.com and every @takgio.com email, demos.takgio.com, linkedin.com/company/takgio, image and file paths, the Google Play app ID com.takgio.hoofharted, the bricksnap-takgio server address, the utm_source tag, element IDs and CSS classes, and the JavaScript name takgioSpark",
+        "The careers confirmation email (careers-apply function) now says \"Takgio\" in its subject and first line; this takes effect only after the function is redeployed",
+        "Legal name (Takgio Inc. / TAKGIO INC) and the logo artwork are unchanged; older release notes keep their original wording",
+        "Demos link check: 27 pages, 29 links, 0 wrong"
+      ]
+    },
     {
       "version": "2.37.1",
       "date": "2026-10-12",

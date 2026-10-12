@@ -67,8 +67,8 @@ Deno.serve(async (req) => {
   try {
     const mail = await fetch("https://api.resend.com/emails", {
       method: "POST", headers: { Authorization: `Bearer ${mailKey}`, "content-type": "application/json" },
-      body: JSON.stringify({ from: mailFrom, to: f.email, subject: "Confirm your application to takgio",
-        html: `<p>Hi ${safe(f.first_name)},</p><p>Thanks for applying to takgio. Please confirm your email address so we can review your application:</p><p><a href="${link}">Confirm my email</a></p><p>If you did not apply, you can ignore this message.</p>` }),
+      body: JSON.stringify({ from: mailFrom, to: f.email, subject: "Confirm your application to Takgio",
+        html: `<p>Hi ${safe(f.first_name)},</p><p>Thanks for applying to Takgio. Please confirm your email address so we can review your application:</p><p><a href="${link}">Confirm my email</a></p><p>If you did not apply, you can ignore this message.</p>` }),
     });
     sent = mail.ok;
     if (!sent) console.error("careers-apply: Resend refused the confirmation email", mail.status, await mail.text());

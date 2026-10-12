@@ -22,7 +22,7 @@
     return;
   }
 
-  say('Confirm your email', 'Press the button to confirm your email address for your takgio application.');
+  say('Confirm your email', 'Press the button to confirm your email address for your Takgio application.');
   btn.hidden = false;
 
   btn.addEventListener('click', function () {

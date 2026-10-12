@@ -128,8 +128,8 @@
     var ld = {
       '@context': 'https://schema.org/', '@type': 'JobPosting', title: j.title, description: html,
       datePosted: String(j.published_at || '').slice(0, 10), employmentType: et,
-      hiringOrganization: { '@type': 'Organization', name: 'takgio', sameAs: 'https://www.takgio.com' },
-      identifier: { '@type': 'PropertyValue', name: 'takgio', value: j.id }, directApply: true
+      hiringOrganization: { '@type': 'Organization', name: 'Takgio', sameAs: 'https://www.takgio.com' },
+      identifier: { '@type': 'PropertyValue', name: 'Takgio', value: j.id }, directApply: true
     };
     if (j.apply_close) ld.validThrough = j.apply_close + 'T23:59:00-05:00';
     if (j.location_type === 'remote') {
@@ -168,7 +168,7 @@
       '<div class="cr-field"><label for="ex">Which Claude certification exams have you taken, or plan to take?</label><input type="text" id="ex" name="exams" placeholder="Optional"' + dis + '></div>' +
       '<div class="cr-field"><label for="bu">' + esc((j && j.extra_question) || 'Tell us about something you built or learned with AI') + ' <em>*</em></label><textarea id="bu" name="answer" placeholder="Two or three sentences is plenty." required' + dis + '></textarea></div>' +
       '<div id="cr-turnstile" class="cr-bot"' + (cfg.turnstileSiteKey ? '' : ' hidden') + '></div>' +
-      '<label class="cr-consent"><input type="checkbox" name="consent" required' + dis + '><span>I agree that takgio may store my application to consider me for this and future roles.</span></label>' +
+      '<label class="cr-consent"><input type="checkbox" name="consent" required' + dis + '><span>I agree that Takgio may store my application to consider me for this and future roles.</span></label>' +
       '<button type="submit" class="btn btn-primary btn-lg" style="width:100%" id="cr-submit"' + dis + '>Submit application</button>' +
       '<div id="cr-msg" role="status" aria-live="polite"></div></form>';
   }
@@ -234,11 +234,11 @@
       (j.duties ? '<h2>What you’ll do</h2>' + rich(j.duties) : '') +
       (j.qualifications ? '<h2>Who should apply</h2>' + rich(j.qualifications) : '') +
       (skills ? '<div class="cr-skills">' + skills + '</div>' : '') +
-      '<p class="cr-eeo">takgio is an equal opportunity employer.</p>' +
+      '<p class="cr-eeo">Takgio is an equal opportunity employer.</p>' +
       '</article><aside class="cr-form" aria-labelledby="apply-title">' + formHtml(j) + '</aside></div>';
-    document.title = j.title + ' — takgio Careers';
+    document.title = j.title + ' — Takgio Careers';
     var desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute('content', 'takgio is hiring: ' + j.title + '. ' + (TYPE[j.employment_type] || '') + ', ' + locationText(j).replace(/&[a-z#0-9]+;/g, '') + '. Apply online.');
+    if (desc) desc.setAttribute('content', 'Takgio is hiring: ' + j.title + '. ' + (TYPE[j.employment_type] || '') + ', ' + locationText(j).replace(/&[a-z#0-9]+;/g, '') + '. Apply online.');
     var s = document.createElement('script'); s.type = 'application/ld+json'; s.textContent = JSON.stringify(jsonLd(j)); document.head.appendChild(s);
     wireForm(j.id);
   }
@@ -246,7 +246,7 @@
   function notFound() {
     var m = document.createElement('meta'); m.name = 'robots'; m.content = 'noindex'; document.head.appendChild(m);
     document.getElementById('cr-job').innerHTML = '<div class="cr-empty" style="margin-top:30px"><h3>This position is no longer open</h3><p>It may have been filled or closed. <a href="/careers.html">See our open positions</a>.</p></div>';
-    document.title = 'Position closed — takgio Careers';
+    document.title = 'Position closed — Takgio Careers';
   }
 
   // ---------------------------------------------------------- start

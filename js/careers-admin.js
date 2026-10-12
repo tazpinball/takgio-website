@@ -38,7 +38,7 @@
   // ------------------------------------------------------------ sign-in screens
   function shell(inner) {
     root.innerHTML = '<div class="cra-login"><div style="width:100%;display:grid;gap:22px;justify-items:center">' +
-      '<div style="text-align:center"><div class="cra-brand" style="color:#11142a;font-size:1.6rem">takgio</div><div style="color:var(--color-text-secondary);font-weight:600">Careers admin</div></div>' +
+      '<div style="text-align:center"><div class="cra-brand" style="color:#11142a;font-size:1.6rem">Takgio</div><div style="color:var(--color-text-secondary);font-weight:600">Careers admin</div></div>' +
       '<div class="cra-lcard" style="max-width:420px;width:100%">' + inner + '</div></div></div>';
   }
   function showLogin(msg) {
@@ -66,7 +66,7 @@
     });
   }
   function showCode(factorId) {
-    shell('<div class="tag">Step 2 of 2</div><h2>Enter your code</h2><p style="margin:0 0 10px;font-size:.9rem">Open your authenticator app and enter the 6-digit code for takgio.</p>' +
+    shell('<div class="tag">Step 2 of 2</div><h2>Enter your code</h2><p style="margin:0 0 10px;font-size:.9rem">Open your authenticator app and enter the 6-digit code for Takgio.</p>' +
       '<form id="f-code"><div class="cra-f"><input class="cra-code-in" id="c" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000" required></div>' +
       '<button class="cra-btn pri" style="width:100%" type="submit">Verify and sign in</button><p class="cra-err" id="err"></p></form>' +
       '<p class="cra-hint"><a href="#" id="out">Use a different account</a></p>');
@@ -85,7 +85,7 @@
       var stale = ((lf.data && lf.data.all) || []).filter(function (f) { return f.factor_type === 'totp' && f.status === 'unverified'; });
       return Promise.all(stale.map(function (f) { return sb.auth.mfa.unenroll({ factorId: f.id }); }));
     }).then(function () {
-      return sb.auth.mfa.enroll({ factorType: 'totp', friendlyName: 'takgio careers ' + new Date().toISOString().slice(0, 10) });
+      return sb.auth.mfa.enroll({ factorType: 'totp', friendlyName: 'Takgio careers ' + new Date().toISOString().slice(0, 10) });
     }).then(function (r) {
       if (r.error) { document.getElementById('enroll').innerHTML = '<p class="cra-err">' + esc(r.error.message) + '</p>'; return; }
       var d = r.data;
@@ -135,7 +135,7 @@
   // ------------------------------------------------------------ app shell + routing
   function topbar(active) {
     var a = function (k, label, extra) { return '<a href="#' + k + '" class="' + (k === active ? 'on' : '') + '">' + label + (extra || '') + '</a>'; };
-    return '<div class="cra-top"><div class="in"><div class="cra-brand">takgio<small>Careers admin</small></div><nav class="cra-nav">' +
+    return '<div class="cra-top"><div class="in"><div class="cra-brand">Takgio<small>Careers admin</small></div><nav class="cra-nav">' +
       a('jobs', 'Jobs') + a('apps', 'Applications') + (isAdmin() ? a('team', 'Team &amp; access', '<span class="pill">Admin</span>') : '') + '</nav>' +
       '<div class="cra-user"><span>Signed in as <b>' + esc(state.name) + '</b> &middot; ' + (isAdmin() ? 'Admin' : 'Editor') + '</span><a href="#" id="signout">Sign out</a></div></div></div>';
   }
@@ -231,7 +231,7 @@
         '<div class="cra-card"><h2>Pay</h2><div class="cra-r3"><div class="cra-f"><label>From</label><input type="number" step="0.01" min="0" id="f-pmin" placeholder="$" value="' + v('pay_min') + '"></div>' +
         '<div class="cra-f"><label>To</label><input type="number" step="0.01" min="0" id="f-pmax" placeholder="$" value="' + v('pay_max') + '"></div>' +
         '<div class="cra-f"><label>Per</label><select id="f-punit">' + opt('hour', 'Hour', j.pay_unit) + opt('year', 'Year', j.pay_unit) + '</select></div></div>' +
-        '<div class="cra-f"><label><input type="checkbox" id="f-showpay"' + (j.show_pay ? ' checked' : '') + '> Show pay on the posting</label><p class="hint">Internships at takgio are paid. The checklist warns before you publish an internship without pay.</p></div></div>' +
+        '<div class="cra-f"><label><input type="checkbox" id="f-showpay"' + (j.show_pay ? ' checked' : '') + '> Show pay on the posting</label><p class="hint">Internships at Takgio are paid. The checklist warns before you publish an internship without pay.</p></div></div>' +
         '<div class="cra-card"><h2>Description</h2><p class="cra-hint">Plain text. Leave a blank line between paragraphs, and start a line with “- ” for a bullet.</p>' +
         '<div class="cra-f"><label>About this opportunity *</label><textarea id="f-about">' + v('about') + '</textarea></div>' +
         '<div class="cra-f"><label>What you’ll do *</label><textarea id="f-duties">' + v('duties') + '</textarea></div>' +
