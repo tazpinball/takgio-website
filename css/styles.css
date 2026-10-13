@@ -3352,3 +3352,16 @@ section[id], article[id] { scroll-margin-top: 72px; }
 .case-study-detail .cs-origin { margin: 10px 0 0; padding: 10px 14px; border-left: 3px solid var(--color-accent); background: rgba(74,108,247,.06); border-radius: 8px; font-size: .95rem; color: var(--color-text-secondary); }
 .case-study-detail .cs-origin a { color: var(--color-accent); font-weight: 600; }
 .cs-listing-card .cs-origin-tag { margin: 4px 0 0; font-size: .8rem; font-weight: 700; color: var(--color-accent); }
+
+/* 45. Upcoming product card (v2.39): the unnamed property due-diligence product on products.html, laid out like .ph-meta.
+   No link, so no hover lift. */
+.ph-homes { background: radial-gradient(120% 140% at 0% 0%, #4a2412, #0d0b14 62%); } .ph-homes .ph-tl { color: #fdba74; }
+.ph-homes:hover { transform: none; box-shadow: 0 14px 40px rgba(11, 13, 28, .18); }
+.ph-homes .ph-sub { max-width: 560px; }
+.ph-homes .ph-house { width: min(300px, 78%); margin: 0 auto 22px; display: block; filter: drop-shadow(0 0 22px rgba(251, 146, 60, .28)); }
+@media (min-width: 700px) {
+  .ph-homes { grid-column: 1 / -1; flex-direction: row; align-items: center; }
+  .ph-homes .ph-top { flex: 1; padding: 24px; }
+  .ph-homes .ph-house { margin: 0 36px 0 0; }
+}
+@media (min-width: 1024px) { .ph-homes { grid-column: 1 / -1; min-height: 0; } }

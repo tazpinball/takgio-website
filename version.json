@@ -1,7 +1,19 @@
 {
-  "version": "2.38.0",
-  "date": "2026-10-12",
+  "version": "2.39.0",
+  "date": "2026-10-13",
   "releases": [
+    {
+      "version": "2.39.0",
+      "date": "2026-10-13",
+      "summary": "Products page: an \"Upcoming · in early development\" card for the next product, a property due-diligence report for home buyers (unnamed for now)",
+      "changes": [
+        "products.html: new card after the Meta Ray-Ban Display card, titled \"Property due diligence\", with the label \"Upcoming · in early development\", the tagline \"Before you buy it, know what you're really buying.\", one sentence on what it does, and three facts: homes first; Orange County, Florida, the first market; built with a licensed Florida Realtor",
+        "No product name (the final name is not chosen), no partner or brokerage named, no pricing or launch date. No link, so the card has no hover lift",
+        "New \"Real estate\" filter button on the Products page (handled by the existing filter in js/motion.js)",
+        "css/styles.css: section 45 (.ph-homes), full width on tablet and desktop like the Meta card, stacked on phones",
+        "Approved by Ted from docs/mockups/products-upcoming-property-card.html on 2026-10-13"
+      ]
+    },
     {
       "version": "2.38.0",
       "date": "2026-10-12",
