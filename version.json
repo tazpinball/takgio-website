@@ -1,7 +1,22 @@
 {
-  "version": "2.39.1",
+  "version": "2.40.0",
   "date": "2026-10-14",
   "releases": [
+    {
+      "version": "2.40.0",
+      "date": "2026-10-14",
+      "summary": "True Record is live on the App Store: every \"In review\" status on the site flipped to live",
+      "changes": [
+        "Confirmed against Apple's lookup before editing: True Record (id 6812451571, seller TAKGIO INC, version 1.0.0) released Oct 14, 2026.",
+        "Header Products dropdown, product-page switcher, Products page card and Industries card: True Record pill changed from \"In review\" to \"Live\" on all 27 header pages, and in docs/mockups/_generators/header_v228.html (gitignored).",
+        "true-record.html: pill \"Live on the App Store\"; primary button \"Get it on the App Store\" (https://apps.apple.com/us/app/true-record/id6812451571) with the intotherecord.app button kept as secondary; subnav button \"Get the app\"; removed the \"Tell me when it's live\" waitlist form and the \"launching when review completes\" note, replaced by \"Released on the App Store for iPhone on October 14, 2026\"; structured-data url now the App Store listing.",
+        "true-record.html campaign kit: call to action now \"Get the app\"; removed the \"don't say it's on the App Store until the listing is live\" rule; added the live date to the approved claims with its source. No price is claimed (the case study says the app has subscriptions).",
+        "index.html home tile: pill \"Live on the App Store\".",
+        "about.html 2026 timeline: added \"Oct 14: True Record goes live on the App Store\".",
+        "case-studies.html listing and case-study-legal-true-record.html: status line, meta line and callout now say live (green callout with the App Store link, as Hoof Harted's); added a Results bullet for the live date.",
+        "Demos check unchanged: 27 pages / 29 links / 0 wrong href. LinkedIn (Ted's profile and the company page) is not part of this release."
+      ]
+    },
     {
       "version": "2.39.1",
       "date": "2026-10-14",
