@@ -6,8 +6,9 @@
                   spiral's centre is drawn to the logo, and at the end it is pulled straight in (a magnet capture)
    1.875 - 2.125 s it arrives at 3x the spark's size and snaps down to normal; a ring pulses
    2.125 - 5.375 s the header spark twinkles, a second softer ring pulses, and everything clears
-   Plays once per visit (the first page opened), never for visitors who ask for reduced motion,
-   and never blocks clicks. The header markup (.logo-spark) is what makes the spark movable.
+   Home page only (Ted, 2026-10-14): index.html is the only page that loads this script; other pages keep the
+   static header spark. Plays once per visit (the first home-page view; sessionStorage), never for visitors who ask
+   for reduced motion, and never blocks clicks. The header markup (.logo-spark) is what makes the spark movable.
    ============================================ */
 (function () {
   var logo = document.querySelector('.site-header .logo');

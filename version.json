@@ -1,7 +1,18 @@
 {
-  "version": "2.39.0",
-  "date": "2026-10-13",
+  "version": "2.39.1",
+  "date": "2026-10-14",
   "releases": [
+    {
+      "version": "2.39.1",
+      "date": "2026-10-14",
+      "summary": "The logo spark intro plays on the home page only (Ted, Oct 14)",
+      "changes": [
+        "js/spark.js is now loaded by index.html only. Removed from the other 26 public pages (about, products, the product and case-study pages, industries, insights, contact, careers, job, leadership and the Hoof Harted marketing page)",
+        "On those pages the header logo is unchanged: the spark sits on the i at rest, exactly as before",
+        "Still once per visit (the first home-page view in a browser tab session) and never for visitors who ask for reduced motion",
+        "js/spark.js header comment updated to say so"
+      ]
+    },
     {
       "version": "2.39.0",
       "date": "2026-10-13",
