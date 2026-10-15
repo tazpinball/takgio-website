@@ -3394,3 +3394,13 @@ section[id], article[id] { scroll-margin-top: 72px; }
 /* Industries: Entertainment product list */
 .in-p-qr { background: radial-gradient(120% 90% at 0% 0%, #0b3a4a, #090a16 70%); }
 .in-p-qr .in-go { color: #22d3ee; }
+
+/* Pinball-QR "See it" gallery (v2.41.1): three phones, then wide screens, each captioned with its phase. */
+.pq-gallery { display: grid; gap: 16px; grid-template-columns: 1fr; margin-top: 26px; }
+@media (min-width: 700px) { .pq-gallery.three { grid-template-columns: repeat(3, 1fr); } .pq-gallery.two { grid-template-columns: repeat(2, 1fr); } }
+.pq-gallery figure { margin: 0; background: #fff; border: 1px solid var(--color-border); border-radius: 16px; padding: 12px; box-shadow: var(--shadow-sm); }
+.pq-gallery img { display: block; width: 100%; height: auto; border-radius: 10px; }
+.pq-phones img { max-width: 290px; margin: 0 auto; }
+.pq-gallery figcaption { font-size: .86rem; color: var(--color-text-secondary); margin-top: 12px; line-height: 1.5; }
+.pq-gallery figcaption b { display: block; color: var(--color-text); font-size: .98rem; margin-bottom: 4px; }
+.pq-gallery .status-pill { margin-left: 6px; vertical-align: 2px; }

@@ -1,7 +1,17 @@
 {
-  "version": "2.41.0",
+  "version": "2.41.1",
   "date": "2026-10-15",
   "releases": [
+    {
+      "version": "2.41.1",
+      "date": "2026-10-15",
+      "summary": "Pinball-QR page: a \"See it\" section with six pictures",
+      "changes": [
+        "pinball-qr.html: new \"See it\" section (also in the sub-nav) with six pictures, each tagged with its phase: the player report, the report page and the public status page (Phase 1), a coin-door card (Phase 1), the staff dashboard (Phase 2, in progress) and promotions (Phase 3, in progress). The section says they are design mockups with sample content.",
+        "The pictures are rendered from the design mockups in the Pinball-QR project, from sanitized copies: the first venue's name and logo, its owner and the real machine titles and makers were replaced with neutral and fictional ones, and sample copy that said repairs take about 30 to 35 minutes was removed so it cannot contradict the real figure of about 2 hours. The originals were not edited.",
+        "New images/products/pinball-qr-report, -ticket, -status, -card, -dashboard and -promotions (.webp, 49 to 76 KB each). CSS section 46 gains the .pq-gallery rules."
+      ]
+    },
     {
       "version": "2.41.0",
       "date": "2026-10-15",
