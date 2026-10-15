@@ -3369,7 +3369,8 @@ section[id], article[id] { scroll-margin-top: 72px; }
 /* 46. Pinball-QR (v2.41): the product page (pinball-qr.html), its Products-page card, its home-page tile and its Industries entry. Prefix pq-, ph-qr, t-qr, in-p-qr. */
 .pp-qr { --pp-a: #22d3ee; --pp-b: #f472b6; --pp-bg1: #0b2230; --pp-bg2: #090a16; }
 .pp-qr .pp-also-in { border-left-color: var(--color-entertainment); }
-.pq-art { display: block; width: 100%; max-width: 520px; height: auto; filter: drop-shadow(0 24px 40px rgba(0, 0, 0, .45)); }
+.pp-qr .pp-visual img { border: 0; border-radius: 0; box-shadow: none; background: none; }
+.pp-qr .pp-visual .pp-phone { width: 46%; max-width: 270px; }
 .pq-road { display: grid; gap: 16px; grid-template-columns: 1fr; margin-top: 22px; }
 @media (min-width: 900px) { .pq-road { grid-template-columns: repeat(3, 1fr); } }
 .pq-ph .pq-phase { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 8px; }
@@ -3377,11 +3378,12 @@ section[id], article[id] { scroll-margin-top: 72px; }
 /* Products page: a full-width card, laid out like .ph-meta, so the three-across row above it stays intact */
 .ph-qr { background: radial-gradient(120% 140% at 0% 0%, #0b3a4a, #090a16 65%); }
 .ph-qr .ph-tl { color: #22d3ee; }
-.ph-qr .ph-qr-art { display: block; width: 86%; max-width: 380px; height: auto; margin: 0 auto 20px; }
+.ph-qr .ph-qr-phones { display: flex; justify-content: center; align-items: flex-end; gap: 6px; padding: 14px 20px 0; }
+.ph-qr .ph-qr-phones img { display: block; width: 44%; max-width: 170px; height: auto; }
 @media (min-width: 700px) {
   .ph-qr { grid-column: 1 / -1; flex-direction: row; align-items: center; }
   .ph-qr .ph-top { flex: 1; padding: 24px; }
-  .ph-qr .ph-qr-art { width: 42%; margin: 0 32px 0 0; }
+  .ph-qr .ph-qr-phones { width: 42%; margin: 0 24px 0 0; padding: 18px 0; }
 }
 @media (min-width: 1024px) { .ph-qr { min-height: 0; } }
 /* Home page bento: Pinball-QR joins the row of three, and the "Our engine" tile becomes a full-width strip */

@@ -1,7 +1,17 @@
 {
-  "version": "2.41.1",
+  "version": "2.41.2",
   "date": "2026-10-15",
   "releases": [
+    {
+      "version": "2.41.2",
+      "date": "2026-10-15",
+      "summary": "Pinball-QR: the hand-drawn hero illustration is replaced by two real design screens",
+      "changes": [
+        "pinball-qr.html hero and the Products-page Pinball-QR card now show the real player report screen and the real public status page (transparent-background phones rendered from sanitized copies of the project's own design mockups), instead of an illustration drawn for the page.",
+        "Deleted images/products/pinball-qr-art.svg and the drawing code. New images/products/pinball-qr-hero-report.webp and pinball-qr-hero-status.webp. CSS section 46 updated (.pq-art removed; .pp-qr hero image overrides and .ph-qr-phones added).",
+        "Open: the small Pinball-QR icon is still a placeholder drawn for the page, because the product has no logo of its own."
+      ]
+    },
     {
       "version": "2.41.1",
       "date": "2026-10-15",
