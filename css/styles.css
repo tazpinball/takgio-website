@@ -3365,3 +3365,32 @@ section[id], article[id] { scroll-margin-top: 72px; }
   .ph-homes .ph-house { margin: 0 36px 0 0; }
 }
 @media (min-width: 1024px) { .ph-homes { grid-column: 1 / -1; min-height: 0; } }
+
+/* 46. Pinball-QR (v2.41): the product page (pinball-qr.html), its Products-page card, its home-page tile and its Industries entry. Prefix pq-, ph-qr, t-qr, in-p-qr. */
+.pp-qr { --pp-a: #22d3ee; --pp-b: #f472b6; --pp-bg1: #0b2230; --pp-bg2: #090a16; }
+.pp-qr .pp-also-in { border-left-color: var(--color-entertainment); }
+.pq-art { display: block; width: 100%; max-width: 520px; height: auto; filter: drop-shadow(0 24px 40px rgba(0, 0, 0, .45)); }
+.pq-road { display: grid; gap: 16px; grid-template-columns: 1fr; margin-top: 22px; }
+@media (min-width: 900px) { .pq-road { grid-template-columns: repeat(3, 1fr); } }
+.pq-ph .pq-phase { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 8px; }
+.pq-ph ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 7px; font-size: .92rem; color: var(--color-text-secondary); }
+/* Products page: a full-width card, laid out like .ph-meta, so the three-across row above it stays intact */
+.ph-qr { background: radial-gradient(120% 140% at 0% 0%, #0b3a4a, #090a16 65%); }
+.ph-qr .ph-tl { color: #22d3ee; }
+.ph-qr .ph-qr-art { display: block; width: 86%; max-width: 380px; height: auto; margin: 0 auto 20px; }
+@media (min-width: 700px) {
+  .ph-qr { grid-column: 1 / -1; flex-direction: row; align-items: center; }
+  .ph-qr .ph-top { flex: 1; padding: 24px; }
+  .ph-qr .ph-qr-art { width: 42%; margin: 0 32px 0 0; }
+}
+@media (min-width: 1024px) { .ph-qr { min-height: 0; } }
+/* Home page bento: Pinball-QR joins the row of three, and the "Our engine" tile becomes a full-width strip */
+.t-qr { background: linear-gradient(160deg, #0b2230, #090a16); color: #e6fbff; border-color: rgba(34, 211, 238, .35); }
+.t-qr h3 { color: #fff; }
+.t-qr p, .t-qr .t-big-row span { color: rgba(255, 255, 255, .75); }
+.t-qr .t-big-row b { color: #22d3ee; }
+.t-qr .t-link { color: #22d3ee; }
+@media (min-width: 1024px) { .t-qr { grid-column: span 4; } .t-claude { grid-column: span 12; } }
+/* Industries: Entertainment product list */
+.in-p-qr { background: radial-gradient(120% 90% at 0% 0%, #0b3a4a, #090a16 70%); }
+.in-p-qr .in-go { color: #22d3ee; }

@@ -1,7 +1,21 @@
 {
-  "version": "2.40.0",
-  "date": "2026-10-14",
+  "version": "2.41.0",
+  "date": "2026-10-15",
   "releases": [
+    {
+      "version": "2.41.0",
+      "date": "2026-10-15",
+      "summary": "Pinball-QR joins the products: its own page, the Products card, a home tile, and \"five products\" becomes \"six\"",
+      "changes": [
+        "New pinball-qr.html (and images/products/pinball-qr-icon.svg, pinball-qr-art.svg): QR-code problem reporting for pinball and arcade venues, live beta since October 9, 2026. Sections: the problem, who it's for, six benefits, three steps, a roadmap (Phase 1 live; Phases 2 and 3 in progress, not yet released), and proof.",
+        "Numbers on the page are Ted's, from his admin screens on Oct 15: 57 problems reported, 54 fixed and 3 waiting on parts, a typical repair about 2 hours, 84 report emails to the venue with none failed, 24 machines with cards (7 on day one), 6 weeks of development and discussion. The venue, its owner and its machines are not named; it is described as built for venues throughout the US.",
+        "Products page: a full-width Pinball-QR card, structured-data entry, page titles and descriptions. Home page: a Pinball-QR tile (the Our engine tile is now a full-width strip) and the Entertainment chip. Industries: Pinball-QR under Entertainment. About: an Oct 9 timeline entry. Sitemap and js/nav.js.",
+        "Header Products menu on every header page and in header_v228.html now lists Pinball-QR; the product switcher and Previous/Next links on the neighbouring product pages link to it.",
+        "\"Five products\" is now \"six\" on the home page (description, hero line, counter, headline), About (counter and two sentences), Products (descriptions, headline, lead, closing headline), Careers and Leadership.",
+        "Removed the claim that every product page has a full campaign kit (header menu footer on every page, and the Products page description and lead), because Pinball-QR's page has none.",
+        "CSS section 46. The new page carries the site header, so the Demos check is now 28 pages / 30 links / 0 wrong href."
+      ]
+    },
     {
       "version": "2.40.0",
       "date": "2026-10-14",

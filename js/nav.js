@@ -100,7 +100,7 @@
 
   // Current section in the header
   var page = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
-  var PRODUCT_PAGES = ['products.html', 'concreteiq.html', 'brickture.html', 'hoof-harted.html', 'true-record.html', 'ann-elise.html', 'meta-ray-ban-display.html'];
+  var PRODUCT_PAGES = ['products.html', 'concreteiq.html', 'brickture.html', 'hoof-harted.html', 'true-record.html', 'ann-elise.html', 'pinball-qr.html', 'meta-ray-ban-display.html'];
   // A product's marketing page (hoof-harted-marketing.html, or its /marketing/hoof-harted address) belongs to Products too
   var isMarketing = /-marketing\.html$/.test(page) || window.location.pathname.toLowerCase().indexOf('/marketing/') === 0;
   var section = (PRODUCT_PAGES.indexOf(page) !== -1 || isMarketing) ? 'products'
