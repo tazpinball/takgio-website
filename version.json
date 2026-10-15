@@ -1,7 +1,18 @@
 {
-  "version": "2.41.2",
+  "version": "2.41.3",
   "date": "2026-10-15",
   "releases": [
+    {
+      "version": "2.41.3",
+      "date": "2026-10-15",
+      "summary": "Pinball-QR page: pictures moved up under the numbers, page tightened, sample QR codes stamped",
+      "changes": [
+        "pinball-qr.html: the pictures now sit right under the numbers instead of near the bottom: the staff dashboard (Phase 2, in progress), the ticket page, the card and the promotions in a bento block. The report screen and status page stay in the hero, so six real pictures are on the page.",
+        "Tightened from eight content sections to six: removed \"Who it's for\" and \"Benefits\" (they repeated the problem cards and the steps) and folded their points into a four-step \"How it works\" and one sentence in \"The problem\". Shorter hero text and tighter section spacing.",
+        "The sample QR codes on the card picture now carry a red SAMPLE stamp, and the caption says they do not scan. Verified with a QR decoder (OpenCV): the published image decodes nothing, while a control code decodes.",
+        "Removed the now-unused pinball-qr-report.webp and pinball-qr-status.webp (the hero uses the pinball-qr-hero-* versions). CSS section 46 gains the .pq-bento rules."
+      ]
+    },
     {
       "version": "2.41.2",
       "date": "2026-10-15",
