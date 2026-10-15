@@ -1,7 +1,17 @@
 {
-  "version": "2.41.3",
+  "version": "2.41.4",
   "date": "2026-10-15",
   "releases": [
+    {
+      "version": "2.41.4",
+      "date": "2026-10-15",
+      "summary": "Pinball-QR is live, not a live beta: status wording corrected everywhere",
+      "changes": [
+        "Ted: \"It's not a live beta. It's live.\" The Pinball-QR status pill now reads \"Live\" (was \"Live beta\") in the header Products menu on every header page and header_v228.html, the product switchers, the Products card, the home tile, the Industries entry and the Pinball-QR page itself (hero pill, roadmap Phase 1 pill).",
+        "Copy that said \"since the beta went live\" now says \"since it went live\" (the page's numbers strip, proof section and 6-week note, the home tile), the About timeline says \"Pinball-QR goes live\", and the page description and structured data say \"Live at a pinball and arcade venue since October 9, 2026\".",
+        "Not changed: Brickture (Beta) and ConcreteIQ (Live beta), which really are beta."
+      ]
+    },
     {
       "version": "2.41.3",
       "date": "2026-10-15",
