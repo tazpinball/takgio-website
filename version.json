@@ -1,7 +1,21 @@
 {
-  "version": "2.41.4",
-  "date": "2026-10-15",
+  "version": "2.41.5",
+  "date": "2026-10-16",
   "releases": [
+    {
+      "version": "2.41.5",
+      "date": "2026-10-16",
+      "summary": "True Record campaign kit: corrected against the App Store page and the live catalog",
+      "changes": [
+        "Audited the kit's claims (Apple's public App Store page, Apple's lookup data, the live signed catalog, the IntoTheRecord project, git history, the five official links).",
+        "Age rating: \"17+\" is now \"18+ (the rating on the App Store page)\", because Apple's public page shows 18+ (the lookup data still says 17+). Added to the claims table with its source and date.",
+        "The syllabus is written by the Reporter of Decisions, not the Court (the app's own catalog labels it so): \"The Court's own syllabus, free\" is now \"The Reporter's syllabus, free\" in the headlines, the 50-word description, the step text and the screenshot caption, with a new Do line.",
+        "Links date: \"checked September 28\" is now \"checked October 16, 2026\" (all five return 200; privacy and terms are still last updated September 25), plus a note that the claims were re-verified Oct 16.",
+        "Contradictions resolved: the Don't line about \"official\" now bans calling True Record itself official and says \"official United States government documents\" is fine; the screenshots line now applies to ad creative and notes that the store listing's lead document names a member of Congress and should not be repeated in ads.",
+        "Added what the live listing advertises and the kit lacked: following the Supreme Court, a committee or a topic with free morning alerts; per-document speed; headphone controls; three text sizes; and that complete narrations and offline downloads are part of the subscription. The 50-word description no longer lists offline downloads next to the free items. Press window made concrete (Oct 29 to Dec 13). Catalog and abbreviation claims given their sources and scope.",
+        "Not changed: intotherecord.app (a separate site and project) still says \"Currently in beta\"; its fix is written there and not deployed."
+      ]
+    },
     {
       "version": "2.41.4",
       "date": "2026-10-15",
