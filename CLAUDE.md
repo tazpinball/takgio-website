@@ -17,16 +17,16 @@ character for character** (no trailing slash, no `www`, no `/demos` page, no red
 change **only when Ted explicitly says so**. How it looks and where it lives on the site may change freely, but every
 Demos link must keep that exact href, and the site must never be left without one.
 
-- Every Demos anchor carries the attribute `data-demos-link`. As of v2.42.0 there are 29: the top-level header item
-  "Demos" on all 28 pages that carry the header (the 25 public pages, including `pinball-qr.html`, `leadership.html`, the unlisted `hoof-harted-marketing.html`, and the Careers pages `careers.html` and `job.html`; also in `docs\mockups\_generators\header_v228.html`, the header source the generators
+- Every Demos anchor carries the attribute `data-demos-link`. As of v2.43.0 there are 32: the top-level header item
+  "Demos" on all 31 pages that carry the header (the 28 public pages, including `pinball-qr.html`, `leadership.html`, the unlisted `hoof-harted-marketing.html`, the Careers pages `careers.html` and `job.html`, and the News pages `news.html`, `ai-news.html` and `news-true-record-launch.html`; also in `docs\mockups\_generators\header_v228.html`, the header source the generators
   copy), and the "Product demos" button in the investor block of
   `contact.html` (shown when the topic is Investing, i.e. `contact.html?topic=invest`, where every "Investors" link lands).
   The `index.html` hero's "Product demos" button was removed in v2.42.0 at Ted's request (Oct 18: the header already has Demos).
 - Moving or restyling it: keep `data-demos-link` and the exact href on the new element, and update the counts here.
-- **Before every commit**, run this check (from the project root). It must print 28 / 29 / 0, or the updated counts:
+- **Before every commit**, run this check (from the project root). It must print 31 / 32 / 0, or the updated counts:
 
 ```
-echo "pages: $(grep -l data-demos-link *.html | wc -l) (want 28)  links: $(grep -o data-demos-link *.html | wc -l) (want 29)  wrong href: $(grep -oh '<a [^>]*data-demos-link[^>]*>' *.html | grep -vc 'href="https://demos.takgio.com"') (want 0)"
+echo "pages: $(grep -l data-demos-link *.html | wc -l) (want 31)  links: $(grep -o data-demos-link *.html | wc -l) (want 32)  wrong href: $(grep -oh '<a [^>]*data-demos-link[^>]*>' *.html | grep -vc 'href="https://demos.takgio.com"') (want 0)"
 ```
 
 ## MANDATORY: Version Bump on Every Change

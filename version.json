@@ -1,7 +1,20 @@
 {
-  "version": "2.42.0",
+  "version": "2.43.0",
   "date": "2026-10-19",
   "releases": [
+    {
+      "version": "2.43.0",
+      "date": "2026-10-19",
+      "summary": "News: Takgio News, a weekly AI news recap, the True Record press release, and news in the home ticker",
+      "changes": [
+        "New Takgio News page (/news.html): the True Record press release and seven dated milestones from the About timeline, as a compact list with filters (press releases, product launches, milestones) and a For press panel.",
+        "New press release page (/news/true-record-launch): True Record's launch, features, launch catalog, quality checks, pricing and availability, built only from the verified claims in the True Record campaign kit, with the independence statement and a share picture made from real app screens.",
+        "New AI news page (/ai-news.html): a weekly recap of the AI news that matters to the products we build, one week at a time with past weeks and topics; every story links to its primary source. It reads published weeks from the database, so a new week needs no site update.",
+        "Admin: an \"AI news\" tab in the existing invitation-only admin (two-step sign-in): add or import a week as a draft, check and edit each story, publish or unpublish it; only admins delete a whole week; every change is in the activity log. Database setup in docs/news-schema.sql, with the first five weeks (12 stories, Sept 14 to Oct 18) checked on their sources.",
+        "Home ticker: a NEWS item for the True Record release first, and the newest AI news stories with a ticker line added between the existing lines, each linking to its story.",
+        "Header: \"Insights\" is now a \"News\" menu (Takgio news, AI news we're watching, Insights) on every page; footer gets a News link; short addresses /news and /ai-news; three pages added to the sitemap."
+      ]
+    },
     {
       "version": "2.42.0",
       "date": "2026-10-19",

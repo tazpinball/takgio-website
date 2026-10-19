@@ -27,6 +27,18 @@
     {
       "source": "/careers/:slug",
       "destination": "/job.html"
+    },
+    {
+      "source": "/news",
+      "destination": "/news.html"
+    },
+    {
+      "source": "/ai-news",
+      "destination": "/ai-news.html"
+    },
+    {
+      "source": "/news/true-record-launch",
+      "destination": "/news-true-record-launch.html"
     }
   ]
 }

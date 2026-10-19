@@ -106,7 +106,8 @@
   var section = (PRODUCT_PAGES.indexOf(page) !== -1 || isMarketing) ? 'products'
     : page === 'industries.html' ? 'industries'
     : (page === 'case-studies.html' || page.indexOf('case-study-') === 0) ? 'case-studies'
-    : (page === 'insights.html' || page.indexOf('insight-') === 0) ? 'insights'
+    : (page === 'insights.html' || page.indexOf('insight-') === 0 || page === 'news.html' || page === 'ai-news.html' || page === 'news' || page === 'ai-news'
+       || page.indexOf('news-') === 0 || window.location.pathname.toLowerCase().indexOf('/news/') === 0) ? 'news'
     : (page === 'about.html' || page === 'leadership.html' || page === 'contact.html' || page === 'careers.html' || page === 'job.html' || window.location.pathname.toLowerCase().indexOf('/careers/') === 0) ? 'company' : '';
   items.forEach(function (it) {
     if (it.getAttribute('data-section') === section) {

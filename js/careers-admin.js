@@ -1,5 +1,6 @@
 // ============================================================
-// Careers admin: sign-in with a two-step code, manage jobs, post/edit a job, review applications, team & access.
+// Careers admin: sign-in with a two-step code, manage jobs, post/edit a job, review applications, team & access,
+// and the weekly AI news recap (v2.43; tables in docs/news-schema.sql).
 // Depends on: Supabase JS (CDN), supabase-config.js.
 // Who may do what is enforced by the DATABASE (see docs/careers-schema.sql), not by this page: every table needs a
 // two-step-verified session and a row in careers_editors. This page only shows or hides buttons to match.
@@ -136,7 +137,7 @@
   function topbar(active) {
     var a = function (k, label, extra) { return '<a href="#' + k + '" class="' + (k === active ? 'on' : '') + '">' + label + (extra || '') + '</a>'; };
     return '<div class="cra-top"><div class="in"><div class="cra-brand">Takgio<small>Careers admin</small></div><nav class="cra-nav">' +
-      a('jobs', 'Jobs') + a('apps', 'Applications') + (isAdmin() ? a('team', 'Team &amp; access', '<span class="pill">Admin</span>') : '') + '</nav>' +
+      a('jobs', 'Jobs') + a('apps', 'Applications') + a('news', 'AI news') + (isAdmin() ? a('team', 'Team &amp; access', '<span class="pill">Admin</span>') : '') + '</nav>' +
       '<div class="cra-user"><span>Signed in as <b>' + esc(state.name) + '</b> &middot; ' + (isAdmin() ? 'Admin' : 'Editor') + '</span><a href="#" id="signout">Sign out</a></div></div></div>';
   }
   function page(active, html) {
@@ -149,6 +150,8 @@
     var view = h[0] || 'jobs';
     if (view === 'edit') return viewEdit(h[1] || null);
     if (view === 'apps') return viewApps(h[1] || null);
+    if (view === 'news') return viewNews();
+    if (view === 'week' && h[1]) return viewWeek(h[1]);
     if (view === 'team' && isAdmin()) return viewTeam();
     return viewJobs();
   }
@@ -371,6 +374,137 @@
     });
   }
 
+
+  // ------------------------------------------------------------ AI news (weekly recap; docs/news-schema.sql)
+  var TOPICS = ['Claude', 'Smart glasses', 'Models', 'Voice', 'App stores', 'Industry'];
+  function monday(d) { var x = new Date(d + 'T12:00:00Z'); return x.getUTCDay() === 1; }
+  function weekLabel(ws) {
+    var a = new Date(ws + 'T12:00:00Z'), b = new Date(a.getTime() + 6 * 864e5);
+    return MONTHS[a.getUTCMonth()] + ' ' + a.getUTCDate() + ' – ' + (a.getUTCMonth() === b.getUTCMonth() ? '' : MONTHS[b.getUTCMonth()] + ' ') + b.getUTCDate() + ', ' + b.getUTCFullYear();
+  }
+  function thisMonday() { var d = new Date(); d.setUTCDate(d.getUTCDate() + ((8 - d.getUTCDay()) % 7 || 7) - 7); return d.toISOString().slice(0, 10); }
+
+  function viewNews() {
+    page('news', '<p class="cra-empty">Loading…</p>');
+    Promise.all([sb.from('ai_news_weeks').select('*').order('week_start', { ascending: false }), sb.from('ai_news_items').select('week_start')]).then(function (r) {
+      if (r[0].error) { page('news', '<p class="cra-err">' + esc(r[0].error.message) + '</p>'); return; }
+      var weeks = r[0].data || [], n = {};
+      (r[1].data || []).forEach(function (i) { n[i.week_start] = (n[i.week_start] || 0) + 1; });
+      var rows = weeks.map(function (w) {
+        var pub = w.status === 'published';
+        return '<tr><td><b>' + esc(weekLabel(w.week_start)) + '</b><br><small style="color:var(--color-text-secondary)">' + esc(w.brief) + '</small></td>' +
+          '<td><span class="st ' + (pub ? 'pub' : 'draft') + '">' + (pub ? 'Published' : 'Draft') + '</span></td><td>' + (n[w.week_start] || 0) + '</td><td>' + fmt(w.published_at) + '</td>' +
+          '<td class="cra-act"><a href="#week/' + w.week_start + '">Edit</a>' + (pub ? '<a href="/ai-news.html#w-' + w.week_start + '" target="_blank" rel="noopener">View live</a>' : '') + '</td></tr>';
+      }).join('');
+      page('news', '<div class="cra-bar"><h1 class="cra-h1">AI news</h1><div class="cra-pub"><button class="cra-btn" id="n-import">Import a week</button><button class="cra-btn pri" id="n-new">+ New week</button></div></div>' +
+        '<div class="cra-card cra-scroll">' + (weeks.length ? '<table class="cra-table"><tr><th>Week</th><th>Status</th><th>Stories</th><th>Published</th><th>Actions</th></tr>' + rows + '</table>'
+          : '<p class="cra-empty">No weeks yet.</p>') + '</div>' +
+        '<div class="cra-card"><h2>How a week goes live</h2><p style="margin:0;font-size:.9rem">Each week starts as a <b>draft</b>: nothing shows on the site. Check every story (open its source link), then press <b>Publish week</b>. The newest stories marked for the ticker appear on the home page by themselves.</p></div>' +
+        '<div class="cra-card" id="n-imp" hidden><h2>Import a week</h2><p class="cra-hint" style="margin:0 0 8px">Paste the week file you were sent (it starts with <code>{"week_start"</code>). It is added as a draft for you to check.</p>' +
+        '<div class="cra-f"><textarea id="n-json" style="min-height:220px;font-family:ui-monospace,Consolas,monospace;font-size:.82rem"></textarea></div><button class="cra-btn pri" id="n-go">Add as a draft</button><p class="cra-err" id="n-err"></p></div>');
+      document.getElementById('n-new').addEventListener('click', function () {
+        var ws = prompt('Week starting (a Monday, YYYY-MM-DD):', thisMonday()); if (!ws) return;
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(ws) || !monday(ws)) { toast('That date is not a Monday', true); return; }
+        sb.from('ai_news_weeks').insert({ week_start: ws, brief: 'One sentence that sums up the week.' }).then(function (x) {
+          if (x.error) toast(x.error.code === '23505' ? 'That week already exists' : x.error.message, true); else location.hash = '#week/' + ws;
+        });
+      });
+      document.getElementById('n-import').addEventListener('click', function () { document.getElementById('n-imp').hidden = false; document.getElementById('n-json').focus(); });
+      document.getElementById('n-go').addEventListener('click', function () {
+        var err = document.getElementById('n-err'); err.textContent = '';
+        var d; try { d = JSON.parse(document.getElementById('n-json').value); } catch (e) { err.textContent = 'That is not a valid week file: ' + e.message; return; }
+        var problem = validateWeek(d); if (problem) { err.textContent = problem; return; }
+        sb.from('ai_news_weeks').insert({ week_start: d.week_start, brief: d.brief }).then(function (x) {
+          if (x.error) { err.textContent = x.error.code === '23505' ? 'That week already exists. Open it and edit it instead.' : x.error.message; return; }
+          var items = d.items.map(function (i) { return { slug: i.slug, week_start: d.week_start, topic: i.topic, source: i.source, source_url: i.source_url, source_date: i.source_date, headline: i.headline, summary: i.summary, why: i.why, ticker: i.ticker || null }; });
+          sb.from('ai_news_items').insert(items).then(function (y) {
+            if (y.error) { err.textContent = 'The week was added, but its stories were not: ' + y.error.message; return; }
+            toast('Added as a draft'); location.hash = '#week/' + d.week_start;
+          });
+        });
+      });
+    });
+  }
+  function validateWeek(d) {
+    if (!d || !/^\d{4}-\d{2}-\d{2}$/.test(d.week_start || '') || !monday(d.week_start)) return 'week_start must be a Monday (YYYY-MM-DD).';
+    if (!d.brief) return 'The week needs its one-sentence summary (brief).';
+    if (!Array.isArray(d.items) || !d.items.length) return 'The week has no stories.';
+    for (var k = 0; k < d.items.length; k++) { var p = storyProblem(d.items[k]); if (p) return 'Story ' + (k + 1) + ': ' + p; }
+    return '';
+  }
+  function storyProblem(i) {
+    if (!/^[a-z0-9-]+$/.test(i.slug || '')) return 'the short name may only use a–z, 0–9 and dashes';
+    if (TOPICS.indexOf(i.topic) < 0) return 'the topic must be one of: ' + TOPICS.join(', ');
+    if (!i.source) return 'the source is missing';
+    if (!/^https:\/\//.test(i.source_url || '')) return 'the source link must start with https://';
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(i.source_date || '')) return 'the date must be YYYY-MM-DD';
+    if (!i.headline || !i.summary || !i.why) return 'the headline, summary and “why it matters” are all needed';
+    return '';
+  }
+
+  function viewWeek(ws) {
+    page('news', '<p class="cra-empty">Loading…</p>');
+    Promise.all([sb.from('ai_news_weeks').select('*').eq('week_start', ws).maybeSingle(), sb.from('ai_news_items').select('*').eq('week_start', ws).order('source_date', { ascending: false })]).then(function (r) {
+      if (r[0].error || !r[0].data) { page('news', '<p class="cra-err">' + esc((r[0].error && r[0].error.message) || 'That week was not found.') + '</p>'); return; }
+      var w = r[0].data, items = r[1].data || [], pub = w.status === 'published';
+      var cards = items.map(function (i) {
+        return '<div class="cra-card" data-id="' + i.id + '"><div class="cra-r3"><div class="cra-f"><label>Source</label><input type="text" data-k="source" value="' + esc(i.source) + '"></div>' +
+          '<div class="cra-f"><label>Date on the source</label><input type="date" data-k="source_date" value="' + esc(i.source_date) + '"></div>' +
+          '<div class="cra-f"><label>Topic</label><select data-k="topic">' + TOPICS.map(function (t) { return opt(t, t, i.topic); }).join('') + '</select></div></div>' +
+          '<div class="cra-f"><label>Headline (exactly as the source publishes it)</label><input type="text" data-k="headline" value="' + esc(i.headline) + '"></div>' +
+          '<div class="cra-f"><label>Source link</label><input type="text" data-k="source_url" value="' + esc(i.source_url) + '"><p class="hint"><a href="' + esc(i.source_url) + '" target="_blank" rel="noopener noreferrer">Open the source</a> and check the date and every fact before publishing.</p></div>' +
+          '<div class="cra-f"><label>Summary (our words)</label><textarea data-k="summary" style="min-height:70px">' + esc(i.summary) + '</textarea></div>' +
+          '<div class="cra-f"><label>Why it matters to us</label><textarea data-k="why" style="min-height:60px">' + esc(i.why) + '</textarea></div>' +
+          '<div class="cra-r2"><div class="cra-f"><label>Home-page ticker line (optional)</label><input type="text" data-k="ticker" maxlength="90" value="' + esc(i.ticker || '') + '"></div>' +
+          '<div class="cra-f"><label>Short name (used in links)</label><input type="text" data-k="slug" value="' + esc(i.slug) + '"></div></div>' +
+          '<div class="cra-pub"><button class="cra-btn pri" data-save>Save story</button><button class="cra-btn dng" data-del>Delete story</button></div></div>';
+      }).join('');
+      page('news', '<div class="cra-bar"><div><div style="font-size:.9rem"><a href="#news" style="font-weight:700;text-decoration:none">&larr; AI news</a></div><h1 class="cra-h1">' + esc(weekLabel(ws)) +
+        ' <span class="st ' + (pub ? 'pub' : 'draft') + '">' + (pub ? 'Published' : 'Draft') + '</span></h1></div><div class="cra-pub">' +
+        (pub ? '<a class="cra-btn" href="/ai-news.html#w-' + ws + '" target="_blank" rel="noopener">View live</a><button class="cra-btn" id="w-unpub">Unpublish</button>' : '<button class="cra-btn pri" id="w-pub">Publish week</button>') +
+        (isAdmin() ? '<button class="cra-btn dng" id="w-del">Delete week</button>' : '') + '</div></div>' +
+        '<div class="cra-card"><h2>The week in one sentence</h2><div class="cra-f"><textarea id="w-brief" style="min-height:70px">' + esc(w.brief) + '</textarea></div><button class="cra-btn" id="w-save">Save</button></div>' +
+        '<h2 style="font-size:1.1rem;margin:22px 0 12px">Stories (' + items.length + ')</h2>' + (cards || '<div class="cra-card"><p class="cra-empty">No stories yet.</p></div>') +
+        '<button class="cra-btn" id="w-add">+ Add a story</button>');
+      var setWeek = function (patch, msg) { sb.from('ai_news_weeks').update(patch).eq('week_start', ws).then(function (x) { if (x.error) toast(x.error.message, true); else { toast(msg); viewWeek(ws); } }); };
+      document.getElementById('w-save').addEventListener('click', function () { setWeek({ brief: document.getElementById('w-brief').value.trim() }, 'Saved'); });
+      var bp = document.getElementById('w-pub');
+      if (bp) bp.addEventListener('click', function () {
+        var bad = items.map(storyProblem).filter(Boolean);
+        if (!items.length) { toast('Add at least one story first', true); return; }
+        if (bad.length) { toast('Fix this first: ' + bad[0], true); return; }
+        if (confirm('Publish this week? Its ' + items.length + ' stories appear on takgio.com right away.')) setWeek({ status: 'published', published_at: w.published_at || new Date().toISOString() }, 'Published');
+      });
+      var bu = document.getElementById('w-unpub');
+      if (bu) bu.addEventListener('click', function () { if (confirm('Take this week off the site?')) setWeek({ status: 'draft' }, 'Unpublished'); });
+      var bd = document.getElementById('w-del');
+      if (bd) bd.addEventListener('click', function () {
+        if (!confirm('Delete this week and all its stories for good?')) return;
+        sb.from('ai_news_weeks').delete().eq('week_start', ws).select().then(function (x) {
+          if (x.error) toast(x.error.message, true); else if (!x.data || !x.data.length) toast('Not deleted (only admins can delete a week)', true); else { toast('Deleted'); location.hash = '#news'; }
+        });
+      });
+      document.getElementById('w-add').addEventListener('click', function () {
+        var slug = 'story-' + Date.now().toString(36);
+        sb.from('ai_news_items').insert({ slug: slug, week_start: ws, topic: 'Claude', source: 'Source name', source_url: 'https://', source_date: ws, headline: 'Headline', summary: 'Summary', why: 'Why it matters to us' })
+          .then(function (x) { if (x.error) toast(x.error.message, true); else viewWeek(ws); });
+      });
+      document.querySelectorAll('[data-id]').forEach(function (card) {
+        var id = card.getAttribute('data-id');
+        card.querySelector('[data-save]').addEventListener('click', function () {
+          var d = {}; card.querySelectorAll('[data-k]').forEach(function (f) { d[f.getAttribute('data-k')] = f.value.trim(); });
+          d.ticker = d.ticker || null;
+          var p = storyProblem(d); if (p) { toast('Fix this first: ' + p, true); return; }
+          sb.from('ai_news_items').update(d).eq('id', id).then(function (x) { if (x.error) toast(x.error.code === '23505' ? 'That short name is used by another story' : x.error.message, true); else toast('Saved'); });
+        });
+        card.querySelector('[data-del]').addEventListener('click', function () {
+          if (!confirm('Delete this story?')) return;
+          sb.from('ai_news_items').delete().eq('id', id).then(function (x) { if (x.error) toast(x.error.message, true); else viewWeek(ws); });
+        });
+      });
+    });
+  }
+
   // ------------------------------------------------------------ team & access (admins only)
   function viewTeam() {
     page('team', '<p class="cra-empty">Loading…</p>');
@@ -383,14 +517,14 @@
       }).join('');
       var items = log.map(function (l) {
         var verb = { insert: 'created', update: 'changed', delete: 'deleted' }[l.action] || l.action;
-        return '<li>' + esc((l.actor_email || 'Someone') + ' ' + verb + ' ' + (l.entity === 'jobs' ? 'a job' : l.entity === 'job_applications' ? 'an application' : l.entity) + (l.detail && l.detail.title ? ' “' + l.detail.title + '”' : '') + (l.detail && l.detail.status ? ' (' + l.detail.status + ')' : '')) +
+        return '<li>' + esc((l.actor_email || 'Someone') + ' ' + verb + ' ' + (l.entity === 'jobs' ? 'a job' : l.entity === 'job_applications' ? 'an application' : l.entity === 'ai_news_weeks' ? 'an AI news week' : l.entity === 'ai_news_items' ? 'an AI news story' : l.entity) + (l.detail && l.detail.title ? ' “' + l.detail.title + '”' : '') + (l.detail && l.detail.status ? ' (' + l.detail.status + ')' : '')) +
           '<small>' + esc(new Date(l.at).toLocaleString()) + '</small></li>';
       }).join('');
       page('team', '<div class="cra-bar"><h1 class="cra-h1">Team &amp; access</h1></div><div class="cra-grid"><div class="cra-card cra-scroll"><h2>People with careers access</h2>' +
         '<table class="cra-table"><tr><th>Name</th><th>Role</th><th>Added</th><th></th></tr>' + (rows || '<tr><td colspan="4" class="cra-empty">Nobody yet.</td></tr>') + '</table>' +
         '<p class="cra-hint" style="margin:10px 12px 0">To add someone: invite their email in Supabase (Authentication → Users), then ask an admin to give them a role here. Adding people from this page comes later.</p></div>' +
-        '<div class="cra-card"><h2>What each role can do</h2><ul class="cra-check"><li><span class="ok">✓</span><span><b>Editor:</b> create, edit, publish and unpublish jobs; review applicants and change their status</span></li>' +
-        '<li><span class="ok">✓</span><span><b>Admin:</b> everything an Editor can, plus delete jobs and applicants, download the full list, and manage who has access</span></li></ul></div></div>' +
+        '<div class="cra-card"><h2>What each role can do</h2><ul class="cra-check"><li><span class="ok">✓</span><span><b>Editor:</b> create, edit, publish and unpublish jobs; review applicants and change their status; add, edit, publish and delete AI news stories</span></li>' +
+        '<li><span class="ok">✓</span><span><b>Admin:</b> everything an Editor can, plus delete jobs, applicants and whole AI news weeks, download the full list, and manage who has access</span></li></ul></div></div>' +
         '<div class="cra-card"><h2>Activity</h2><ul class="cra-log">' + (items || '<li>Nothing recorded yet.</li>') + '</ul><p class="cra-hint" style="margin:10px 0 0">Every publish, edit and delete is recorded with who and when. Nobody can erase an entry.</p></div>');
       document.querySelector('.cra-wrap').addEventListener('click', function (e) {
         var a = e.target.closest('[data-role],[data-remove]'); if (!a) return; e.preventDefault();
@@ -405,5 +539,5 @@
   sb.auth.onAuthStateChange(function (event) { if (event === 'PASSWORD_RECOVERY') { shell('<h2>Set a new password</h2><form id="f-new"><div class="cra-f"><input type="password" id="np" minlength="8" required placeholder="New password (8+ characters)"></div><button class="cra-btn pri" style="width:100%" type="submit">Update password</button><p class="cra-err" id="err"></p></form>'); document.getElementById('f-new').addEventListener('submit', function (e) { e.preventDefault(); sb.auth.updateUser({ password: document.getElementById('np').value }).then(function (r) { if (r.error) document.getElementById('err').textContent = r.error.message; else afterAuth(); }); }); } });
   sb.auth.getSession().then(function (s) { if (!s.data.session) showLogin(); else afterAuth(); });
 
-  window.__adminTest = { slugify: slugify, esc: esc, fmt: fmt };
+  window.__adminTest = { slugify: slugify, esc: esc, fmt: fmt, weekLabel: weekLabel, validateWeek: validateWeek, monday: monday };
 })();
