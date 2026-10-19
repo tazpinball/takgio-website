@@ -1,7 +1,20 @@
 {
-  "version": "2.41.5",
-  "date": "2026-10-16",
+  "version": "2.42.0",
+  "date": "2026-10-19",
   "releases": [
+    {
+      "version": "2.42.0",
+      "date": "2026-10-19",
+      "summary": "Home hero: a rising reel of our real product pictures replaces the collage",
+      "changes": [
+        "The hero's right side is now a card reel in the style Ted picked from regrid.com: 17 cards, all the same 3:4 shape in slightly different sizes, every one rising at its own steady speed (40 to 110 px/s), fading at the top and bottom, full hero height on desktop and full width under the buttons on phones (9 cards there).",
+        "Every card is a real picture: ConcreteIQ's takeoff screen and the $144,219 card; Brickture's helmet, lighthouse, witch's boot, lion, elephant and panda (banana2 pictures; the lighthouse and boot are beta testers' builds, used with their permission); Hoof Harted and True Record app screens; Pinball-QR design mockups labelled \"Design preview\"; Ann Elise's own app icon.",
+        "The motion is a CSS animation; new js/hero-reel.js (home page only) fits each card's duration to the reel's height and pauses it off-screen. Reduced motion shows four still cards.",
+        "Removed the old collage, including its hand-drawn Meta glasses drawing (the Meta card stays on the Products page).",
+        "\"See the portfolio\" and \"Work with us\" now sit below the four stats; the hero's \"Product demos\" button is gone because the header already has Demos (Demos links: 28 pages, 29 links, all to https://demos.takgio.com).",
+        "New pictures in images/reel/ (10 files, about 140 KB in total)."
+      ]
+    },
     {
       "version": "2.41.5",
       "date": "2026-10-16",
