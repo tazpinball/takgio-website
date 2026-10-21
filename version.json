@@ -1,7 +1,17 @@
 {
-  "version": "2.44.1",
+  "version": "2.45.0",
   "date": "2026-10-21",
   "releases": [
+    {
+      "version": "2.45.0",
+      "date": "2026-10-21",
+      "summary": "Home reel: a Meta glasses \"Coming soon\" card",
+      "changes": [
+        "The rising card reel on the home page has an 18th card for Meta Ray-Ban Display: the line drawing of the glasses and display used on the Products page, with a \"Coming soon\" tag, the line \"Heads-up, hands-free AI.\" and the caption \"Meta glasses\". It is a drawing, not a product photo.",
+        "The card keeps its own steady speed (71 px/s) like every other card; its lane and start phase were chosen by simulation so the reel stays evenly filled (measured in Edge over 40 s: 63 to 96 percent of the visible reel covered, average 80). All 18 speeds measure exactly as set.",
+        "Phones still show nine cards, and this one is among them. With reduced motion the four static cards are unchanged."
+      ]
+    },
     {
       "version": "2.44.1",
       "date": "2026-10-21",

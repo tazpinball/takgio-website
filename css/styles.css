@@ -1894,6 +1894,13 @@ a.port:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
 .rl-iconface{position:absolute;z-index:1;inset:0;display:flex;flex-direction:column;align-items:center;padding:18% 12% 0;text-align:center}
 .rl-bigic{display:block;width:52%;aspect-ratio:1;border-radius:23%;background-size:cover;box-shadow:0 14px 30px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.25)}
 .rl-iconface p{margin:14px 0 0;font-size:15px;font-weight:700;line-height:1.3}
+/* v2.45: Meta glasses "Coming soon" card in the reel. Sizes use cqw (the card's own width) so the text scales with the card. */
+.rl-meta{container-type:inline-size;background:radial-gradient(90% 60% at 80% 18%,rgba(45,212,191,.28),transparent 70%),linear-gradient(160deg,var(--a),var(--b))}
+.rl-soonflag{display:inline-flex;align-items:center;gap:5px}.rl-soonflag i{width:6px;height:6px;border-radius:50%;background:#7aa2ff}
+.rl-metaface{position:absolute;z-index:1;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18% 9% 16%;text-align:center}
+.rl-kick{font-size:10px;font-size:6.2cqw;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#7ee7d9;margin-bottom:8cqw}
+.rl-glasses{width:92%;height:auto;display:block;filter:drop-shadow(0 0 22px rgba(45,212,191,.4))}
+.rl-metaface p{margin:14px 0 0;margin:8cqw 0 0;font-size:14px;font-size:8.4cqw;font-weight:700;line-height:1.3}
 @media (max-width:600px){.h-reel{--m:1.3}.rl-card:nth-child(n+10){display:none}.rl-num{font-size:22px}.rl-srow,.rl-sub{font-size:10.5px}.rl-cap{font-size:12px;gap:6px}.rl-ic{width:20px;height:20px}.rl-pill{display:none}.rl-iconface p{font-size:12.5px}}
 @media (min-width:1024px){
   .h-reel{align-self:stretch;height:auto;min-height:600px;--m:1;margin:-64px calc(min(0px,(1240px - 100vw) / 2) - 24px) -56px -12px;
