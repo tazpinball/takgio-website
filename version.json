@@ -1,7 +1,16 @@
 {
-  "version": "2.48.0",
+  "version": "2.48.1",
   "date": "2026-10-21",
   "releases": [
+    {
+      "version": "2.48.1",
+      "date": "2026-10-21",
+      "summary": "\"We pair working professionals with AI\" is now \"We pair human experts with AI\"",
+      "changes": [
+        "Home hero line, home search and share descriptions, home structured data, About and Products: \"pair(s) working professionals with AI\" -> \"pair(s) human experts with AI\"",
+        "Share picture images/og-image.png re-rendered from images/og-image.html with the new line; its cache-buster on all 30 pages is now ?v=2.48.1"
+      ]
+    },
     {
       "version": "2.48.0",
       "date": "2026-10-21",
