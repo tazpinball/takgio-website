@@ -1,7 +1,15 @@
 {
-  "version": "2.44.0",
+  "version": "2.44.1",
   "date": "2026-10-21",
   "releases": [
+    {
+      "version": "2.44.1",
+      "date": "2026-10-21",
+      "summary": "Home page: the hero's two buttons removed",
+      "changes": [
+        "Home hero: the 'See the portfolio' and 'Talk to us' buttons are removed at Ted's request. The header's 'See our products' button and the closing section remain."
+      ]
+    },
     {
       "version": "2.44.0",
       "date": "2026-10-21",
