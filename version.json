@@ -1,7 +1,17 @@
 {
-  "version": "2.45.0",
+  "version": "2.46.0",
   "date": "2026-10-21",
   "releases": [
+    {
+      "version": "2.46.0",
+      "date": "2026-10-21",
+      "summary": "Home headline: \"We turn human expertise into AI products.\"",
+      "changes": [
+        "Home hero headline is now \"We turn human expertise into AI products.\" (was \"We build AI products - and we ship them.\"), with a new line under it: we pair working professionals with AI, their knowledge is captured, checked against what they said and built into the product, with the goal of AI that keeps learning from the people who know the work.",
+        "Home page title, description and social-share titles and descriptions rewritten to match.",
+        "The share picture (images/og-image.png, used when a page is posted to LinkedIn or X) carries the new headline and now says six products (it said five); its alt text is updated on all pages and its address version bumped so LinkedIn and X re-fetch it."
+      ]
+    },
     {
       "version": "2.45.0",
       "date": "2026-10-21",
