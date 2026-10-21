@@ -1,7 +1,18 @@
 {
-  "version": "2.46.0",
+  "version": "2.47.0",
   "date": "2026-10-21",
   "releases": [
+    {
+      "version": "2.47.0",
+      "date": "2026-10-21",
+      "summary": "Site-wide brand pass: human expertise into AI products, with an expert model working alongside Claude",
+      "changes": [
+        "Home: new 'How a Takgio product works' band (a working expert, the expert model, Claude, a product people can trust) with ConcreteIQ as the product furthest along; the 'Our engine' tile now leads with 'Expert + Claude'; the Advantage section line and the structured-data description follow the new brand.",
+        "About: lead line, studio paragraph, the first 'How we build' card (now 'An expert model working with Claude'), the 'Domain-first' principle and the page description rewritten around the new brand.",
+        "Products: description, lead line and closing block rewritten ('built from human expertise'). Industries: heading 'Four industries. One method.' Careers, job and Contact pages and descriptions no longer say 'AI product studio that ships'.",
+        "Every page: the footer line and the Industries menu caption ('How we work: Human expertise, built into the product') follow the new brand."
+      ]
+    },
     {
       "version": "2.46.0",
       "date": "2026-10-21",
