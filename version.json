@@ -1,7 +1,19 @@
 {
-  "version": "2.47.0",
+  "version": "2.48.0",
   "date": "2026-10-21",
   "releases": [
+    {
+      "version": "2.48.0",
+      "date": "2026-10-21",
+      "summary": "Home hero: a new animated graphic for \"We turn human expertise into AI products\"; the product reel moves into the portfolio grid",
+      "changes": [
+        "New hero graphic (canvas, js/hero-xform.js): three experts' heads send documents, spreadsheets, CAD drawings, slides, music and conversations into a colourful AI model, which feeds Takgio's apps (ConcreteIQ, Brickture, BuyersGuide); the apps talk to each other",
+        "The \"Six products, in motion\" reel leaves the hero and becomes the first tile in the portfolio grid (reel and Brickture side by side, then ConcreteIQ and Hoof Harted, then Meta full width)",
+        "Pictures: images/hero/expert-head.webp and images/hero/app-model-figure.webp (licensed, per Ted), web-sized",
+        "Reduced motion shows one still frame; the graphic pauses when scrolled off screen",
+        "CSS block with prefixes t-reel, xg-, xc- appended to css/styles.css"
+      ]
+    },
     {
       "version": "2.47.0",
       "date": "2026-10-21",

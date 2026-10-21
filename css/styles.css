@@ -3613,3 +3613,35 @@ section[id], article[id] { scroll-margin-top: 72px; }
 .xm-proof a { color: var(--color-accent); font-weight: 600; }
 @media (max-width: 900px) { .xm-flow { grid-template-columns: 1fr 1fr; } .xm-step:not(:last-child)::after { display: none; } }
 @media (max-width: 560px) { .xm-flow { grid-template-columns: 1fr; gap: 14px; } .xm-band { padding: 34px 0 30px; } }
+
+/* ===== v2.48.0 home: hero graphic "human expertise into AI products" (canvas, js/hero-xform.js) and the reel as a portfolio tile ===== */
+.t-reel{padding:0;min-height:460px;background:radial-gradient(120% 90% at 85% 0,#1d2b72 0,#0b0d1c 58%);border-color:rgba(122,162,255,.35);display:block}
+.t-reel::before{display:none}
+.t-reel .h-reel{position:absolute!important;inset:0;margin:0!important;height:auto!important;min-height:0!important;align-self:auto;--m:1;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 11%,#000 89%,transparent 100%)!important;mask-image:linear-gradient(180deg,transparent 0,#000 11%,#000 89%,transparent 100%)!important}
+.t-reel-tag{position:absolute;left:18px;top:14px;z-index:5;font-size:.72rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#aeb8e8;
+  background:rgba(10,12,28,.75);border:1px solid rgba(255,255,255,.18);padding:4px 10px;border-radius:99px}
+@media (min-width:700px){.t-reel{grid-column:span 2}.t-ciq{grid-row:auto}}
+@media (min-width:1024px){
+  .h-bento{grid-auto-flow:row dense}
+  .t-reel{grid-column:span 7;grid-row:span 2}
+  .t-brick{grid-column:span 5;grid-row:span 2}
+  .t-ciq{grid-column:span 7;grid-row:span 1}
+  .t-hoof{grid-column:span 5}
+  .t-meta{grid-column:span 12}
+}
+.xg{position:relative;width:100%;aspect-ratio:66/56;max-width:660px;margin-left:auto;color:#fff;font-family:inherit}
+.xg-cap{position:absolute;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#8fa2e6;white-space:nowrap}
+.xg-c{overflow:visible;container-type:inline-size}
+.xg-c canvas{position:absolute;inset:0;width:100%;height:100%}
+.xg-c .xc-fig,.xg-c .xc-man{display:none!important}
+.xg-c .xc-head{top:1.5%}
+.xc-at{position:absolute;transform:translateX(-50%);z-index:2}
+/* the app labels scale with the graphic so each fits under its figure (8px floor for phones) */
+.xc-tag{position:relative;display:flex;align-items:center;gap:.8cqw;padding:.8cqw 1.3cqw;border-radius:99px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.26);
+  font-weight:700;font-size:max(8px,1.75cqw);line-height:1;white-space:nowrap;backdrop-filter:blur(5px);animation:xc-bob 5s ease-in-out infinite}
+.xc-tag i{width:1.1cqw;height:1.1cqw;border-radius:50%;box-shadow:0 0 10px currentColor}
+@keyframes xc-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@media (prefers-reduced-motion:reduce){.xc-tag{animation:none}}
+@media (max-width:1023px){.xg{max-width:520px;margin:12px auto 0}}
+@media (max-width:560px){.xg-cap{font-size:9px}}
