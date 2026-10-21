@@ -1,7 +1,23 @@
 {
-  "version": "2.43.0",
-  "date": "2026-10-19",
+  "version": "2.44.0",
+  "date": "2026-10-21",
   "releases": [
+    {
+      "version": "2.44.0",
+      "date": "2026-10-21",
+      "summary": "The site now presents Takgio as a product company: project-for-hire calls to action removed, client work moved to earlier engagements, and a How Takgio makes money section",
+      "changes": [
+        "Header on every page: the 'Now taking on new projects' line is now 'Six products, built by Takgio', and the 'Start a project' button (desktop and mobile) is now 'See our products' and goes to the Products page.",
+        "Closing call-to-action blocks on 16 pages: 'Now taking on new projects / Build with us' replaced by 'Get in touch / Talk to us. Invest with us.' with 'Contact us' and 'Investor inquiries'; the home page asks 'See what we've built. Invest with us.' and its hero button reads 'Talk to us'.",
+        "Product pages (ConcreteIQ, Brickture, Hoof Harted, True Record, Ann Elise, Pinball-QR): the 'We build X for clients too' block is now a plain pointer to the product's industry, with no services pitch.",
+        "Industries page: description and intro say Takgio builds and launches its own products; 'What we build for clients' is now 'Earlier engagements'; the how-we-work steps are written for products; the closing block no longer invites projects.",
+        "Case Studies: our own products first, a new 'Earlier engagements' heading above the four client case studies, and a closing block about our products.",
+        "About: new 'How Takgio makes money' section (subscriptions for consumer apps, planned seats or licences for professional tools); Ted's bio no longer mentions client relationships. Leadership: Stephen's bio drops 'client work'.",
+        "Contact: opens on 'Something else'; 'Building a product' is now 'A project with Takgio', with copy saying Takgio takes on outside projects selectively and the discovery-call wording removed.",
+        "Meta Ray-Ban Display, home, Products and Industries: 'we're taking on partner projects' removed from page copy and page descriptions (the approved campaign-kit wording on the Meta page is unchanged).",
+        "Hoof Harted case study: 'the same speed we bring to client work' is now 'to every product'."
+      ]
+    },
     {
       "version": "2.43.0",
       "date": "2026-10-19",
