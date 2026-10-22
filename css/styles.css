@@ -2146,6 +2146,8 @@ section[id], article[id] { scroll-margin-top: 72px; }
 .pg-stats b { display: block; font-size: 1.45rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1.15; }
 .pg-stats span { display: block; font-size: .74rem; color: rgba(255,255,255,.62); line-height: 1.35; }
 @media (min-width: 800px) { .pg-stats { grid-template-columns: repeat(4, 1fr); } }
+/* page-hero differentiators (About): a short bold phrase in place of a number */
+.pg-stats b.h-word { font-size: 1rem; letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 3px; }
 
 /* Bands */
 .pg-band { padding: 40px 0; background: var(--color-bg); }

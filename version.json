@@ -1,7 +1,17 @@
 {
-  "version": "2.49.0",
+  "version": "2.49.1",
   "date": "2026-10-22",
   "releases": [
+    {
+      "version": "2.49.1",
+      "date": "2026-10-22",
+      "summary": "About and Contact use the same differentiators as the home hero; no more products-shipped, commit or rating stats",
+      "changes": [
+        "About: A real expert first / In their own words / Tested on real work / $144,219 replace 6 products shipped, 20 days and 3,100+ commits",
+        "Contact (investor view): the same four replace 5 products shipped, 3,100+ commits and the Hoof Harted rating; the figures note now reads ConcreteIQ's project records, October 2026",
+        "Home engine tile: the 3,100+ commits line now says each app's knowledge comes from its expert, in their own words, tested on their real work"
+      ]
+    },
     {
       "version": "2.49.0",
       "date": "2026-10-22",
