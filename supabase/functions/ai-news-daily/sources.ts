@@ -1,7 +1,8 @@
 // The official sources the daily AI news job reads, and how to turn a post into plain text.
 // Every source is the company's own newsroom, blog or developer news. No news sites, no social media.
-// Checked from a server on Oct 22, 2026: all of these answer; OpenAI's articles refuse servers (only the feed's title and
-// one line come through), so OpenAI posts are skipped as "too little text" unless a partner's page carries the story.
+// Checked from a server on Oct 22, 2026: all of these answer. OpenAI is NOT listed: its feed reads, but its articles refuse
+// servers (HTTP 403), so no story from it could ever be checked against its source; in the first dry run the picker chose an
+// OpenAI post over the readable Google Cloud post on the same news. OpenAI news still arrives through partners' pages.
 
 export type Source = { name: string; kind: "rss" | "listing"; url: string; link?: RegExp };
 export type Post = { source: string; url: string; title: string; date: string | null; blurb: string };
@@ -9,7 +10,6 @@ export type Article = { title: string; date: string | null; text: string; words:
 
 export const SOURCES: Source[] = [
   { name: "Anthropic", kind: "listing", url: "https://www.anthropic.com/news", link: /^https:\/\/www\.anthropic\.com\/news\/[a-z0-9-]+$/ },
-  { name: "OpenAI", kind: "rss", url: "https://openai.com/news/rss.xml" },
   { name: "Google", kind: "rss", url: "https://blog.google/technology/ai/rss/" },
   { name: "Google Cloud", kind: "rss", url: "https://cloudblog.withgoogle.com/products/ai-machine-learning/rss/" },
   { name: "Apple Developer", kind: "rss", url: "https://developer.apple.com/news/rss/news.rss" },

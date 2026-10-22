@@ -83,7 +83,11 @@ Deno.serve(async (req) => {
       const v = await verify(ai, a.text, item);
       if (!v.supported) { note(p, "failed check", v.problems.join(" | ").slice(0, 500)); return; }
       ready.push({ post: p, title, row: { topic: s.topic, source: p.source, source_url: p.url, source_date: p.date, headline: title, summary: s.summary, why: s.why, ticker: s.ticker && s.ticker.length <= 90 ? s.ticker : null } });
-    } catch (e) { note(p, "error", String(e).slice(0, 300)); }
+    } catch (e) {
+      // a page that refuses servers or is gone (HTTP 4xx) will not change tomorrow: that is a decision, not a retry
+      const m = String(e).match(/HTTP (4\d\d)/);
+      if (m) note(p, "too little text", `the article page refused the request (HTTP ${m[1]})`); else note(p, "error", String(e).slice(0, 300));
+    }
   }));
   ready.sort((x, y) => (y.post.date ?? "").localeCompare(x.post.date ?? ""));
   const keep = ready.slice(0, MAX_STORIES);

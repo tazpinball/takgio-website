@@ -1,7 +1,17 @@
 {
-  "version": "2.50.0",
+  "version": "2.50.1",
   "date": "2026-10-22",
   "releases": [
+    {
+      "version": "2.50.1",
+      "date": "2026-10-22",
+      "summary": "Daily AI news: drop OpenAI as a direct source; a page that refuses servers is a final decision",
+      "changes": [
+        "The first dry run picked an OpenAI post whose page refuses servers over Google Cloud's readable post on the same news; OpenAI is no longer read directly (its news arrives through partners' pages)",
+        "An article page answering HTTP 4xx is recorded as \"too little text\" instead of being retried every day",
+        "Offline test: 29 checks"
+      ]
+    },
     {
       "version": "2.50.0",
       "date": "2026-10-22",

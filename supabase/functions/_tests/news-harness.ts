@@ -64,6 +64,7 @@ const FEED = `<?xml version="1.0"?><rss><channel>
 <item><title>Webinar recap: patients</title><link>https://news.test/webinar</link><pubDate>${rfc(0)}</pubDate><description>A recap.</description></item>
 <item><title>We are Hiring engineers</title><link>https://news.test/hiring</link><pubDate>${rfc(0)}</pubDate><description>Jobs.</description></item>
 <item><title>Old news from last month</title><link>https://news.test/old</link><pubDate>${rfc(20)}</pubDate><description>Old.</description></item>
+<item><title>A refused post</title><link>https://news.test/refused</link><pubDate>${rfc(0)}</pubDate><description>Refused.</description></item>
 <item><title>A thin post</title><link>https://news.test/thin</link><pubDate>${rfc(0)}</pubDate><description>Thin.</description></item>
 </channel></rss>`;
 const LISTING = `<html><body><a href="/news/listed-post">Listed</a><a href="/about">About</a></body></html>`; // relative links, as on the real page
@@ -90,9 +91,10 @@ globalThis.fetch = async (input: string | URL | Request, init?: RequestInit) => 
     if (url.pathname === "/gemini-9") return new Response(article("Gemini 9 adds nothing", 400, day(1)));
     if (url.pathname === "/webinar") return new Response(article("Webinar recap: patients", 400));
     if (url.pathname === "/thin") return new Response(article("A thin post", 40));
+    if (url.pathname === "/refused") return new Response("Forbidden", { status: 403 });
     return new Response("nope", { status: 404 });
   }
-  if (url.hostname === "openai.com") return new Response(FEED, { headers: { "content-type": "application/rss+xml" } });
+  if (url.hostname === "blog.google") return new Response(FEED, { headers: { "content-type": "application/rss+xml" } });
   if (url.hostname === "www.anthropic.com") return url.pathname === "/news/listed-post" ? new Response(article("Webinar recap: listed", 300)) : new Response(LISTING);
   if (url.hostname === "mock.supabase.test") {
     if (url.pathname === "/rest/v1/rpc/ai_news_cron_ok") return J((await req.json()).s === "cron-secret");
@@ -115,7 +117,7 @@ globalThis.fetch = async (input: string | URL | Request, init?: RequestInit) => 
     return J({ message: "unmocked " + req.method }, 500);
   }
   // every other official source "cannot be read" in this test
-  if (["blog.google", "cloudblog.withgoogle.com", "developer.apple.com", "about.fb.com", "developers.meta.com", "elevenlabs.io", "adsknews.autodesk.com"].includes(url.hostname)) return new Response("down", { status: 503 });
+  if (["cloudblog.withgoogle.com", "developer.apple.com", "about.fb.com", "developers.meta.com", "elevenlabs.io", "adsknews.autodesk.com"].includes(url.hostname)) return new Response("down", { status: 503 });
   return realFetch(input as string, init);
 };
 
@@ -153,6 +155,7 @@ check("run: an article judged not relevant on reading is remembered", seen["http
 check("run: a post the picker skipped is remembered", seen["https://news.test/hiring"] === "not relevant");
 check("run: a post older than the window is remembered as too old", seen["https://news.test/old"] === "too old");
 check("run: an article with too little text is not written up", seen["https://news.test/thin"] === "too little text");
+check("run: an article page that refuses servers is a final decision, not retried", seen["https://news.test/refused"] === "too little text");
 check("run: the listing source is read through its articles", seen["https://www.anthropic.com/news/listed-post"] === "not relevant" && !("https://www.anthropic.com/about" in seen), JSON.stringify(seen));
 check("run: one email, to the right person", mail.length === 1 && mail[0].to === "ted@takgio.test");
 check("run: the email has a pull link with this story's secret token", mail[0]?.html.includes(`/ai-news-pull.html#t=${items[0]?.pull_token}`));
