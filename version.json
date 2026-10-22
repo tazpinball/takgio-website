@@ -1,7 +1,20 @@
 {
-  "version": "2.48.1",
-  "date": "2026-10-21",
+  "version": "2.49.0",
+  "date": "2026-10-22",
   "releases": [
+    {
+      "version": "2.49.0",
+      "date": "2026-10-22",
+      "summary": "Home hero: a dual-model graphic that shows the Takgio method, four differentiators in place of the stats, and a simpler header",
+      "changes": [
+        "Hero graphic redrawn in three titled panels: Human expertise (an expert's head, people and books) streams documents, music and conversations into the Takgio expert model; Dual-model AI pairs it with a general-purpose LLM (warm and cool colour palettes, talking both ways); Takgio's apps (ConcreteIQ, Brickture, BuyersGuide) receive the result",
+        "Each panel has a short label (Real experts / Expert-guided AI / An expert in every app) with the full sentence on hover, or on tap on touch screens",
+        "Hero tiles now show what makes Takgio different: A real expert first, In their own words (1,400+ statements for ConcreteIQ), Tested on real work, and $144,219; removed 6 products shipped, 3,100+ commits and the Hoof Harted rating",
+        "Lead paragraph no longer counts products; ticker lines about commits and the rating replaced with expert lines",
+        "Header bar: removed the Investors and See our products links on every page (the menu already has both); the phone menu keeps its buttons",
+        "Hero tiles go four across only from 1280px; two by two on tablets and phones"
+      ]
+    },
     {
       "version": "2.48.1",
       "date": "2026-10-21",

@@ -1,9 +1,10 @@
-/* Home hero graphic "Human expertise into AI products" (canvas), v12. Story, left to right: three heads in a column, each a man
-   with a glowing brain facing the AI model (Ted's picture, flipped; human expertise), send Word, Excel, CAD and
-   PowerPoint documents in orderly streams into the AI models (a turning lattice that stands for Claude
-   or a model like it); and that flows into three glass figures facing left (Ted's picture, flipped), one per app
-   (ConcreteIQ, Brickture, BuyersGuide), which brighten as the knowledge arrives and talk to each other.
-   Design space 660 x 560, scaled to the container. Prefix xc- / xform. */
+/* Home hero graphic "Human expertise into AI products" (canvas), v22, after Ted's reference picture (Oct 22): three titled
+   panels. HUMAN EXPERTISE: an expert's head (Ted's licensed picture) with people around it and books below; Word, Excel,
+   CAD, PowerPoint, music, conversations and books stream into the TAKGIO GENERAL MODEL (a turning lattice) inside the
+   magenta HUB, below a GENERAL-PURPOSE LLM (the big lattice); the two talk both ways;
+   the two models talk both ways, and the hub feeds TAKGIO'S APPS: three glass figures (Ted's licensed picture, facing
+   left) with name pills (ConcreteIQ, Brickture, BuyersGuide), which brighten as knowledge arrives (they do not talk to each other).
+   Titles, captions, labels and cards are HTML over the canvas. Design space 660 x 560. Prefix xc- / xform. */
 (function (global) {
   var DW = 660, DH = 560;
   function bez(p, u) {
@@ -16,12 +17,6 @@
     g.addColorStop(0, 'rgba(' + rgb + ',1)'); g.addColorStop(.3, 'rgba(' + rgb + ',.45)'); g.addColorStop(1, 'rgba(' + rgb + ',0)');
     x.fillStyle = g; x.fillRect(0, 0, size, size); return c;
   }
-  // three glass figures (picture 524 x 694), one per app, staggered top left / middle right / bottom left like the brains
-  var FW = 131, FK = FW / 524, FH = 694 * FK; // v11: 25% larger than v10
-  var FIGS = [{ x: 380, y: 50 }, { x: 522, y: 185 }, { x: 380, y: 320 }];
-  function F(f, x, y) { return [f.x + x * FK, f.y + y * FK]; }
-  FIGS.forEach(function (f) { f.E = F(f, 120, 150); f.B = F(f, 285, 140); f.glow = 0; f.rip = []; }); // E: where knowledge enters, B: the brain
-
   // a document as a small picture, drawn once at 4x: a Word page, an Excel sheet, a PowerPoint slide or a CAD blueprint
   var DOC_R = 4, DOC_PAD = 5;
   function rr(x, X, Y, W, H, r) { x.beginPath(); x.moveTo(X + r, Y); x.arcTo(X + W, Y, X + W, Y + H, r); x.arcTo(X + W, Y + H, X, Y + H, r); x.arcTo(X, Y + H, X, Y, r); x.arcTo(X, Y, X + W, Y, r); x.closePath(); }
@@ -31,10 +26,16 @@
   }
   // the other things an expert knows from: music (a pair of beamed notes) and conversations (two speech bubbles)
   function makeIcon(kind) {
-    var music = kind === 'music', w = music ? 18 : 26, h = music ? 20 : 20, R = DOC_R, P = DOC_PAD;
+    var music = kind === 'music', book = kind === 'book', w = music ? 18 : book ? 18 : 26, h = book ? 23 : 20, R = DOC_R, P = DOC_PAD;
     var c = document.createElement('canvas'); c.width = (w + 2 * P) * R; c.height = (h + 2 * P) * R;
     var x = c.getContext('2d'); x.scale(R, R); x.translate(P, P);
-    if (music) {
+    if (book) {                       // a closed hardback: cover, spine, page edges, a gold title
+      x.shadowColor = 'rgba(0,0,0,.45)'; x.shadowBlur = 3 * R; x.shadowOffsetY = R;
+      rr(x, 1.5, 0, 16.5, 21, 1.6); x.fillStyle = '#6d5ce8'; x.fill();
+      x.shadowColor = 'transparent'; x.fillStyle = '#f4efe2'; x.fillRect(16, 1.2, 2, 18.6);
+      x.fillStyle = '#4c3fc0'; x.fillRect(1.5, 0, 2.6, 21);
+      x.fillStyle = '#ffd166'; x.fillRect(6.5, 5, 7.5, 1.4); x.fillRect(7.5, 7.6, 5.5, .9); x.fillRect(6.5, 15.5, 7.5, .7);
+    } else if (music) {
       var g = x.createLinearGradient(0, 0, w, h); g.addColorStop(0, '#ffd166'); g.addColorStop(1, '#ff7ab6');
       x.fillStyle = g; x.strokeStyle = g; x.shadowColor = 'rgba(255,170,150,.9)'; x.shadowBlur = 3 * R;
       [[4.2, 16.4], [14, 14.2]].forEach(function (n) { x.save(); x.translate(n[0], n[1]); x.rotate(-.45); x.beginPath(); x.ellipse(0, 0, 3.4, 2.4, 0, 0, 6.283); x.fill(); x.restore(); });
@@ -53,7 +54,7 @@
     return { c: c, w: w + 2 * P, h: h + 2 * P };
   }
   function makeDoc(kind) {
-    if (kind === 'music' || kind === 'chat') return makeIcon(kind);
+    if (kind === 'music' || kind === 'chat' || kind === 'book') return makeIcon(kind);
     var land = kind === 'ppt' || kind === 'cad', w = land ? 30 : 22, h = land ? 21 : 28, R = DOC_R, P = DOC_PAD;
     var c = document.createElement('canvas'); c.width = (w + 2 * P) * R; c.height = (h + 2 * P) * R;
     var x = c.getContext('2d'); x.scale(R, R); x.translate(P, P);
@@ -100,90 +101,138 @@
     return { c: c, w: w + 2 * P, h: h + 2 * P };
   }
 
+  // ---------- v14 layout: three panels (design space 660 x 560) ----------
+  var PANELS = [
+    { x: 4, w: 210, rgb: '90,140,255' },     // human expertise
+    { x: 223, w: 214, rgb: '232,92,220' },   // dual-model architecture
+    { x: 446, w: 210, rgb: '245,165,60' }    // Takgio's apps
+  ];
+  var PT = 4, PB = 556, HEAD_LINE = 66, FOOT_LINE = 494;
+  var HUB = { x: 240, y: 80, w: 180, h: 360 };
+  // the apps: three glass figures (Ted's licensed picture, 524 x 694, facing left), staggered inside the apps panel
+  var FW = 93.5, FK = FW / 524, FH = 694 * FK; // v16: 15% smaller than v15, same centres
+  var FIGS = [{ x: 472, y: 72 }, { x: 536, y: 205 }, { x: 472, y: 338 }]; // v22: less zigzag, centred as a group in the panel (x 472..629.5, middle 551)
+  function F(f, x, y) { return [f.x + x * FK, f.y + y * FK]; }
+  FIGS.forEach(function (f) { f.E = F(f, 120, 150); f.B = F(f, 285, 140); f.glow = 0; f.rip = []; }); // E: where knowledge enters, B: the brain
+
   function start(root) {
-    var cv = root.querySelector('canvas'), ctx = cv.getContext('2d'), fig = root.querySelector('img.xc-fig'), man = root.querySelector('img.xc-man');
+    var cv = root.querySelector('canvas'), ctx = cv.getContext('2d'), man = root.querySelector('img.xc-man'), fig = root.querySelector('img.xc-fig');
     var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     var S = 1, raf = 0, last = 0, T = 0, alive = true, visible = true, ready = false; // ready: everything below is set up, so a still frame may be drawn
-    var HUE_SPR = []; for (var hs = 0; hs < 12; hs++) { var hc = document.createElement('canvas').getContext('2d'); hc.fillStyle = 'hsl(' + hs * 30 + ',100%,62%)'; hc.fillRect(0, 0, 1, 1); var hd = hc.getImageData(0, 0, 1, 1).data; HUE_SPR.push(sprite(hd[0] + ',' + hd[1] + ',' + hd[2], 48)); }
-    function hueSpr(h) { return HUE_SPR[Math.round((((h % 360) + 360) % 360) / 30) % 12]; }
-    var spTeal = sprite('110,231,214', 64), spBlue = sprite('140,170,255', 64), spWhite = sprite('255,255,255', 64), spPeach = sprite('255,190,150', 64), spViolet = sprite('190,160,255', 64), spSky = sprite('120,190,255', 64);
+    var spTeal = sprite('110,231,214', 64), spBlue = sprite('140,170,255', 64), spWhite = sprite('255,255,255', 64), spPeach = sprite('255,190,150', 64),
+      spViolet = sprite('190,160,255', 64), spAmber = sprite('255,176,80', 64), spSky = sprite('120,190,255', 64);
 
-    // human expertise: Ted's picture of a man's head and brain (cut out at mid-neck, flipped to face the AI model),
-    // three times in a column; picture 880 x 940, drawn 140 design px tall
-    var HK = 119 / 940, HW = 880 * HK, HH = 119; // v11: 15% smaller than v10, same centres
-    var BRAINS = [{ x: 16, y: 90 }, { x: 16, y: 240 }, { x: 16, y: 390 }];
-    BRAINS.forEach(function (b) { b.e = 0; b.out = [b.x + 700 * HK, b.y + 240 * HK]; b.gb = [b.x + 420 * HK, b.y + 250 * HK]; });
+    // ---------- human expertise: Ted's picture of an expert's head (cut at mid-neck, facing the models), people around it ----------
+    // v21: 5% smaller again (121.1 tall) and centred left to right in the Human expertise panel (x 4..214, middle 109)
+    var HH = 121.1, HK = HH / 940, HW = 880 * HK;
+    var HEAD = { x: (PANELS[0].x + PANELS[0].w / 2) - HW / 2, y: 200 - HH / 2, e: 0 };
+    HEAD.out = [HEAD.x + 700 * HK, HEAD.y + 240 * HK]; HEAD.gb = [HEAD.x + 420 * HK, HEAD.y + 250 * HK];
+    var PEOPLE = [{ x: 30, y: 98, rgb: '120,190,255' }, { x: 97, y: 84, rgb: '255,170,90' }, { x: 164, y: 98, rgb: '240,120,220' }, { x: 20, y: 185, rgb: '110,231,214' }, { x: 22, y: 262, rgb: '255,150,120' }];
+    PEOPLE.forEach(function (p, i) { p.P = [[p.x, p.y], [p.x + (HEAD.gb[0] - p.x) * .4, p.y], [HEAD.gb[0], p.y + (HEAD.gb[1] - p.y) * .4], HEAD.gb]; p.u = i / PEOPLE.length; p.e = 0; });
+    var BOOKS = [{ x: 40, y: 352 }, { x: 40, y: 420 }];
 
-    // documents flow out of each brain, along its stream, into the AI model: one speed, evenly spaced, varied type and size
-    var KINDS = ['word', 'music', 'excel', 'chat', 'cad', 'ppt'], DOCS = {}; KINDS.forEach(function (k) { DOCS[k] = makeDoc(k); });
-    var SPEED = 68, GAP = 46; // design px per second, design px between documents
-    var streams = [];
-
-    // AI models: a slowly turning lattice with three small orbiting models
-    // v8: 10% smaller than v7 (outer ring 61 vs 68) with twice the dots (186 vs 93) in eleven rings, so about twice the
-    // connections; each ring's count follows its circumference
-    var LR = 61, LC = [290, 300], rings = [[0, 1]], nodes = [], edges = [];
-    (function () { var radii = [6, 12, 18, 24, 30, 36, 42, 48, 55, 61], sum = 0, left = 185; radii.forEach(function (r) { sum += r; });
-      radii.forEach(function (r, i) { var n = i === radii.length - 1 ? left : Math.round(185 * r / sum); rings.push([r, n]); left -= n; }); })();
-    rings.forEach(function (r, ri) { for (var i = 0; i < r[1]; i++) nodes.push({ r: r[0], a0: (i / r[1]) * 6.283 + ri * .35, e: 0, ri: ri, x: 0, y: 0, h: ((i / r[1]) * 360 + ri * 28) % 360 }); });
-    function placeNodes() {
-      for (var i = 0; i < nodes.length; i++) {
-        var n = nodes[i], dir = n.ri % 2 ? 1 : -1, a = n.a0 + T * .04 * dir;
-        n.x = LC[0] + Math.cos(a) * n.r * (1 + .02 * Math.sin(T * .6 + i)); n.y = LC[1] + Math.sin(a) * n.r * (1 + .02 * Math.cos(T * .5 + i));
+    // ---------- the Takgio expert model (a turning lattice) and the general-purpose HUMAN (a filament brain) ----------
+    // colour palettes for the two models; each colour also gets a glow sprite
+    function palette(cols) { return { cols: cols, spr: cols.map(function (c) { return sprite(c.join(','), 48); }) }; }
+    var WARM = palette([[255, 196, 55], [255, 160, 30], [255, 232, 80], [255, 122, 45], [122, 196, 82]]);   // gold, amber, yellow, warm orange, organic green
+    var COOL = palette([[35, 110, 255], [30, 225, 255], [185, 75, 255], [205, 214, 230]]);                 // electric blue, cyan, neon purple, silver
+    function palPos(pal, h) { var n = pal.cols.length; return (((h / 360) * n + T * .06) % n + n) % n; }
+    function palRgb(pal, h, white) {
+      var f = palPos(pal, h), i = Math.floor(f), t = f - i, a = pal.cols[i], b = pal.cols[(i + 1) % pal.cols.length], w = white || 0, o = [];
+      for (var c = 0; c < 3; c++) { var v = a[c] + (b[c] - a[c]) * t; o.push(Math.round(v + (255 - v) * w)); }
+      return 'rgb(' + o.join(',') + ')';
+    }
+    function palSpr(pal, h) { return pal.spr[Math.round(palPos(pal, h)) % pal.spr.length]; }
+    function makeLattice(cx, cy, radii, total, sz, pal) {
+      var L = { c: [cx, cy], R: radii[radii.length - 1], sz: sz, nodes: [], edges: [], energy: 0 }, rings = [[0, 1]], sum = 0, left = total;
+      radii.forEach(function (r) { sum += r; });
+      radii.forEach(function (r, i) { var n = i === radii.length - 1 ? left : Math.round(total * r / sum); rings.push([r, n]); left -= n; });
+      rings.forEach(function (r, ri) { for (var i = 0; i < r[1]; i++) L.nodes.push({ r: r[0], a0: (i / r[1]) * 6.283 + ri * .35, e: 0, ri: ri, x: 0, y: 0, h: ((i / r[1]) * 360 + ri * 28) % 360 }); });
+      L.place = function () {
+        for (var i = 0; i < L.nodes.length; i++) {
+          var n = L.nodes[i], dir = n.ri % 2 ? 1 : -1, a = n.a0 + T * .04 * dir;
+          n.x = cx + Math.cos(a) * n.r * (1 + .02 * Math.sin(T * .6 + i)); n.y = cy + Math.sin(a) * n.r * (1 + .02 * Math.cos(T * .5 + i));
+        }
+      };
+      L.place();
+      for (var i = 0; i < L.nodes.length; i++) {
+        var ds = [];
+        for (var j = 0; j < L.nodes.length; j++) if (j !== i) ds.push([Math.hypot(L.nodes[i].x - L.nodes[j].x, L.nodes[i].y - L.nodes[j].y), j]);
+        ds.sort(function (a, b) { return a[0] - b[0]; });
+        for (var k = 0; k < 3; k++) if (i < ds[k][1]) L.edges.push([i, ds[k][1]]);
       }
+      L.outer = L.nodes.filter(function (n) { return n.ri >= rings.length - 4; });
+      L.light = function () { L.outer[(Math.random() * L.outer.length) | 0].e = 1; var inner = L.nodes[(Math.random() * L.nodes.length) | 0]; inner.e = Math.max(inner.e, .6); };
+      L.update = function (dt) {
+        L.place();
+        var en = 0; for (var i = 0; i < L.nodes.length; i++) { L.nodes[i].e *= Math.pow(.25, dt); en += L.nodes[i].e; } L.energy = Math.min(1, en / (L.nodes.length / 13));
+        for (var le = 0; le < L.edges.length; le++) { var A = L.nodes[L.edges[le][0]], B = L.nodes[L.edges[le][1]]; if (A.e > .6 && B.e < A.e - .2) B.e += (A.e - B.e) * dt * 3; else if (B.e > .6 && A.e < B.e - .2) A.e += (B.e - A.e) * dt * 3; }
+      };
+      L.draw = function () {
+        var k = L.R / 61, en = L.energy;
+        glow(pal.spr[0], cx, cy, (108 + 18 * en) * k, .18 + .2 * en); glow(pal.spr[1], cx, cy, 63 * k, .1 + .16 * en);
+        ctx.lineWidth = Math.max(.8, S * .9 * sz);
+        for (var e = 0; e < L.edges.length; e++) {
+          var A2 = L.nodes[L.edges[e][0]], B2 = L.nodes[L.edges[e][1]], ee = Math.max(A2.e, B2.e), eh = (A2.h + B2.h) / 2 + (Math.abs(A2.h - B2.h) > 180 ? 180 : 0) + T * 10;
+          setAlpha(.3 + .55 * ee); ctx.strokeStyle = palRgb(pal, eh - T * 10, .1 + .35 * ee);
+          ctx.beginPath(); ctx.moveTo(A2.x * S, A2.y * S); ctx.lineTo(B2.x * S, B2.y * S); ctx.stroke();
+        }
+        for (var nq = 0; nq < L.nodes.length; nq++) { var nd = L.nodes[nq]; glow(palSpr(pal, nd.h), nd.x, nd.y, (4 + 4 * nd.e) * sz, .55 + .4 * nd.e); glow(spWhite, nd.x, nd.y, (1.5 + 2.5 * nd.e) * sz, .4 + .5 * nd.e); }
+        var sats = pal.spr, ox = L.R + 16, oy = ox * .42;
+        for (var sIdx = 0; sIdx < 3; sIdx++) { var sa = T * .55 + sIdx * 2.094; glow(sats[sIdx], cx + Math.cos(sa) * ox, cy + Math.sin(sa) * oy, 7, .85); glow(spWhite, cx + Math.cos(sa) * ox, cy + Math.sin(sa) * oy, 2.4, .9); }
+      };
+      return L;
     }
-    placeNodes();
-    for (var i = 0; i < nodes.length; i++) {
-      var ds = [];
-      for (var j = 0; j < nodes.length; j++) if (j !== i) ds.push([Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y), j]);
-      ds.sort(function (a, b) { return a[0] - b[0]; });
-      for (var k = 0; k < 3; k++) if (i < ds[k][1]) edges.push([i, ds[k][1]]);
-    }
-    var outerN = nodes.filter(function (n) { return n.ri >= 7; });
+    // the general-purpose LLM (the big lattice, general knowledge) above the Human AI model (Ted's name for the small lattice,
+    // which is the Takgio expert model: human expertise flows into it)
+    var GENERAL = makeLattice(330, 180, [5, 10, 15, 20, 26, 32, 38, 44], 130, .85, COOL);
 
-    // each app's own model: sparks sampled from the bright parts of the figure, which flash as knowledge arrives
+    // the Human AI model / Takgio expert model: the smaller turning lattice (outer radius 26.7, 81 dots)
+    var HUMAN = makeLattice(330, 330, [6.7, 13.3, 20, 26.7], 80, .7, WARM);
+
+    // ---------- flows ----------
+    var KINDS = ['word', 'music', 'excel', 'book', 'chat', 'cad', 'ppt'], DOCS = {}; KINDS.forEach(function (k) { DOCS[k] = makeDoc(k); });
+    var SPEED = 68, GAP = 46, streams = [];
+    function addStream(from, ey, si, src) {
+      var L = HUMAN, dy = Math.max(-.6 * L.R, Math.min(.6 * L.R, ey - L.c[1])), ex = L.c[0] - Math.sqrt(L.R * L.R - dy * dy) + L.R * .2;
+      var path = [from, [from[0] + 55, from[1]], [ex - 70, L.c[1] + dy], [ex, L.c[1] + dy]];
+      var len = 0, pv = path[0]; for (var t = 1; t <= 40; t++) { var pt = bez(path, t / 40); len += Math.hypot(pt[0] - pv[0], pt[1] - pv[1]); pv = pt; }
+      var n = Math.max(2, Math.round(len / GAP)), docs = [];
+      for (var d = 0; d < n; d++) docs.push({ k: KINDS[(si * 3 + d) % KINDS.length], s: .5 + ((si * 7 + d * 11) % 4) * .1, rot: (((si + d * 3) % 5) - 2) * .05 });
+      streams.push({ src: src, path: path, len: len, u: (si * .37) % (1 / n), shift: 0, docs: docs });
+    }
+    addStream(HEAD.out, HUMAN.c[1] - 10, 0, HEAD);
+    addStream([BOOKS[0].x + 22, BOOKS[0].y], HUMAN.c[1] + 2, 1, BOOKS[0]);
+    addStream([BOOKS[1].x + 22, BOOKS[1].y], HUMAN.c[1] + 12, 2, BOOKS[1]);
+    BOOKS.forEach(function (b) { b.e = 0; });
+
+    // the two models talk: a link between the expert model and the HUMAN's tile, pulses both ways
+    var LINK = [[330, GENERAL.c[1] + GENERAL.R], [336, GENERAL.c[1] + GENERAL.R + 22], [336, HUMAN.c[1] - HUMAN.R - 22], [330, HUMAN.c[1] - HUMAN.R]];
+    var talk = []; for (var q = 0; q < 6; q++) talk.push({ dir: q % 2, u: q / 6, v: .5 });
+    // the hub's output: to every app figure (8 pulses each, evenly spaced, one speed)
+    var OUTS = FIGS.map(function (f) { var s0 = [HUB.x + HUB.w - 8, HUB.y + HUB.h * .5]; return [s0, [s0[0] + 24, s0[1]], [f.E[0] - 30, f.E[1] + (f.E[1] < s0[1] ? 30 : -10)], f.E]; });
+    var outs = []; for (var o0 = 0; o0 < 24; o0++) outs.push({ c: o0 % 3, u: ((o0 / 3) | 0) / 8 + (o0 % 3) * .04, v: .3 });
+    // sparks sampled from the bright parts of the figure picture; a ripple runs through them as knowledge arrives
     var sparks = [], figReady = false;
     function figLoaded() {
       figReady = true;
       try {
         var oc = document.createElement('canvas'); oc.width = 131; oc.height = 174; var ox = oc.getContext('2d'); ox.drawImage(fig, 0, 0, 131, 174);
         var px = ox.getImageData(0, 0, 131, 174).data;
-        for (var t = 0; t < 4000 && sparks.length < 40; t++) {
+        for (var t = 0; t < 4000 && sparks.length < 34; t++) {
           var sx = (Math.random() * 131) | 0, sy = (Math.random() * 150) | 0, o = (sy * 131 + sx) * 4;
-          if (px[o] + px[o + 1] + px[o + 2] > 330) sparks.push({ x: sx * 4, y: sy * 4, e: 0, ph: Math.random() * 6.283, d: 0 });
+          if (px[o] + px[o + 1] + px[o + 2] > 330) sparks.push({ x: sx * 4, y: sy * 4, ph: Math.random() * 6.283, d: 0 });
         }
-        sparks.forEach(function (s) { s.d = Math.hypot(s.x - 120, s.y - 150); }); // distance from the entry point, for a ripple
+        sparks.forEach(function (sp) { sp.d = Math.hypot(sp.x - 120, sp.y - 150); });
       } catch (err) { /* a picture that cannot be read just goes without sparks */ }
       if (reduce && ready) frame(performance.now());
     }
     if (fig) { if (fig.complete && fig.naturalWidth) figLoaded(); else fig.addEventListener('load', figLoaded); }
+    var dust = []; for (var dd2 = 0; dd2 < 34; dd2++) dust.push({ x: Math.random() * DW, y: Math.random() * DH, s: .4 + Math.random() * .9, v: 3 + Math.random() * 6, ph: Math.random() * 6.283 });
+
     var manReady = false;
     function manLoaded() { manReady = true; if (reduce && ready) frame(performance.now()); }
     if (man) { if (man.complete && man.naturalWidth) manLoaded(); else man.addEventListener('load', manLoaded); }
-
-    // flows: each brain into the lattice, the lattice into each figure
-    BRAINS.forEach(function (b, si) {
-      var k = b.out, ey = LC[1] + (k[1] - LC[1]) * .3, ex = LC[0] - Math.sqrt(LR * LR - (ey - LC[1]) * (ey - LC[1])) + 12;
-      b.P1 = [k, [k[0] + 50, k[1]], [ex - 60, ey], [ex, ey]];
-      var len = 0, pv = b.P1[0]; for (var t = 1; t <= 40; t++) { var pt = bez(b.P1, t / 40); len += Math.hypot(pt[0] - pv[0], pt[1] - pv[1]); pv = pt; }
-      var n = Math.max(2, Math.round(len / GAP)), docs = [];
-      for (var d = 0; d < n; d++) docs.push({ k: KINDS[(si * 3 + d) % KINDS.length], s: .5 + ((si * 7 + d * 11) % 4) * .1, rot: (((si + d * 3) % 5) - 2) * .05 });
-      streams.push({ bi: si, path: b.P1, len: len, u: (si * .37) % (1 / n), shift: 0, docs: docs });
-    });
-
-    // the app minds talk to each other: arcs between their brains, with pulses going both ways
-    var LINKS = [[0, 1, 40], [1, 2, 40], [0, 2, -46]].map(function (l) {
-      var A = FIGS[l[0]].B, B = FIGS[l[1]].B, mx = (A[0] + B[0]) / 2 + l[2], my = (A[1] + B[1]) / 2;
-      return { a: l[0], b: l[1], P: [A, [mx, A[1] + (my - A[1]) * .3], [mx, B[1] - (B[1] - my) * .3], B] };
-    });
-    var talk = []; LINKS.forEach(function (lk, li) { for (var q = 0; q < 4; q++) talk.push({ l: li, dir: q % 2, u: (q * .27 + li * .11) % 1, v: .32 + q * .03 }); });
-    FIGS.forEach(function (f) { f.P2 = [[LC[0] + LR - 20, LC[1]], [LC[0] + LR + 22, LC[1]], [f.E[0] - 50, f.E[1] + (f.E[1] < LC[1] ? 40 : 0)], f.E]; });
-    var parts = [];
-    function mk(kind, u) { return { k: kind, u: u, b: (Math.random() * BRAINS.length) | 0, f: (Math.random() * FIGS.length) | 0, v: .13 + Math.random() * .1, off: (Math.random() - .5) * 2, ph: Math.random() * 6.283, sz: .8 + Math.random() * .7, a: .55 + Math.random() * .45 }; }
-    // the documents now carry knowledge from the brains to the AI model, so only the lattice-to-app flow uses light particles
-    // an even, steady flow to each figure (13 particles each, evenly spaced, one speed), so every figure glows steadily
-    for (var q2 = 0; q2 < 39; q2++) { var pq2 = mk('b', ((q2 / 3) | 0) / 13 + (q2 % 3) * .025); pq2.f = q2 % 3; pq2.v = .2; parts.push(pq2); }
-    var dust = []; for (var dd2 = 0; dd2 < 40; dd2++) dust.push({ x: Math.random() * DW, y: Math.random() * DH, s: .4 + Math.random() * .9, v: 3 + Math.random() * 6, ph: Math.random() * 6.283 });
 
     function resize() {
       var r = root.getBoundingClientRect(), dpr = Math.min(2, global.devicePixelRatio || 1);
@@ -198,15 +247,48 @@
       ctx.beginPath(); ctx.moveTo(pp[0][0] * S, pp[0][1] * S); ctx.bezierCurveTo(pp[1][0] * S, pp[1][1] * S, pp[2][0] * S, pp[2][1] * S, pp[3][0] * S, pp[3][1] * S);
       ctx.lineWidth = w * S; setAlpha(alpha); ctx.setLineDash(dash || []); ctx.lineDashOffset = off || 0; ctx.stroke(); ctx.setLineDash([]);
     }
-    function paper(pp, x, y, u) {     // u: 0 at the stream's start, 1 inside the brain
+    function roundRect(X, Y, W, H, r) { rr(ctx, X * S, Y * S, W * S, H * S, r * S); }
+    function panel(p) {
+      roundRect(p.x, PT, p.w, PB - PT, 12);
+      var g = ctx.createLinearGradient(0, PT * S, 0, PB * S); g.addColorStop(0, 'rgba(' + p.rgb + ',.10)'); g.addColorStop(1, 'rgba(' + p.rgb + ',.03)');
+      setAlpha(1); ctx.fillStyle = g; ctx.fill();
+      ctx.shadowColor = 'rgba(' + p.rgb + ',.9)'; ctx.shadowBlur = 10 * S; ctx.strokeStyle = 'rgba(' + p.rgb + ',1)'; ctx.lineWidth = 1.4 * S; setAlpha(.75); ctx.stroke(); ctx.shadowBlur = 0;
+      setAlpha(.35); ctx.lineWidth = 1 * S; ctx.beginPath(); ctx.moveTo((p.x + 10) * S, HEAD_LINE * S); ctx.lineTo((p.x + p.w - 10) * S, HEAD_LINE * S); ctx.moveTo((p.x + 10) * S, FOOT_LINE * S); ctx.lineTo((p.x + p.w - 10) * S, FOOT_LINE * S); ctx.stroke();
+    }
+    function person(p) {
+      var r = 12, e = p.e;
+      glow(spBlue, p.x, p.y, 20, .1 + .25 * e);
+      ctx.save(); ctx.translate(p.x * S, p.y * S);
+      ctx.beginPath(); ctx.arc(0, 0, r * S, 0, 6.283); setAlpha(.18 + .2 * e); ctx.fillStyle = 'rgba(' + p.rgb + ',1)'; ctx.fill();
+      ctx.save(); ctx.clip();
+      setAlpha(.95); ctx.fillStyle = 'rgba(' + p.rgb + ',1)';
+      ctx.beginPath(); ctx.arc(0, -3 * S, 4.2 * S, 0, 6.283); ctx.fill();
+      ctx.beginPath(); ctx.ellipse(0, 9.5 * S, 8 * S, 6.5 * S, 0, 0, 6.283); ctx.fill();
+      ctx.restore();
+      ctx.beginPath(); ctx.arc(0, 0, r * S, 0, 6.283); ctx.strokeStyle = 'rgba(' + p.rgb + ',1)'; ctx.lineWidth = 1.3 * S; setAlpha(.85); ctx.shadowColor = 'rgba(' + p.rgb + ',.9)'; ctx.shadowBlur = 8 * S; ctx.stroke(); ctx.shadowBlur = 0;
+      ctx.restore();
+    }
+    function book(b) {
+      ctx.save(); ctx.translate(b.x * S, b.y * S); ctx.scale(S, S);
+      ctx.strokeStyle = 'rgba(150,185,255,1)'; ctx.lineWidth = 1.4; ctx.shadowColor = 'rgba(120,170,255,.95)'; ctx.shadowBlur = 8 + 8 * b.e; setAlpha(.85 + .15 * b.e);
+      ctx.beginPath(); ctx.moveTo(0, -9); ctx.quadraticCurveTo(-9, -12, -18, -9); ctx.lineTo(-18, 10); ctx.quadraticCurveTo(-9, 7, 0, 10); ctx.quadraticCurveTo(9, 7, 18, 10); ctx.lineTo(18, -9); ctx.quadraticCurveTo(9, -12, 0, -9); ctx.lineTo(0, 10); ctx.stroke();
+      ctx.shadowBlur = 0; ctx.lineWidth = .8; setAlpha(.55); ctx.beginPath();
+      for (var l = 0; l < 3; l++) { ctx.moveTo(-15, -4 + l * 4.5); ctx.lineTo(-4, -4 + l * 4.5); ctx.moveTo(4, -4 + l * 4.5); ctx.lineTo(15, -4 + l * 4.5); }
+      ctx.stroke(); ctx.restore();
+    }
+    function paper(pp, x, y, u) {     // u: 0 at the stream's start, 1 inside the model
       var fade = Math.min(1, u * 8) * Math.min(1, (1 - u) * 7), sc = pp.s * (1 - .55 * Math.max(0, (u - .8) / .2)), D = DOCS[pp.k];
       ctx.save(); ctx.translate(x * S, y * S); ctx.rotate(pp.rot); setAlpha(fade);
       ctx.drawImage(D.c, -D.w / 2 * sc * S, -D.h / 2 * sc * S, D.w * sc * S, D.h * sc * S);
       ctx.restore();
     }
-    function head(b) {
-      glow(spPeach, b.gb[0], b.gb[1], 62 + 8 * b.e, .08 + .2 * b.e);
-      setAlpha(.92 + .08 * b.e); ctx.drawImage(man, b.x * S, b.y * S, HW * S, HH * S);
+    function pulses(list, path, rgbSpr, onArrive, size, dt) {
+      for (var i = 0; i < list.length; i++) {
+        var p = list[i]; if (!reduce) p.u += p.v * dt;
+        if (p.u >= 1) { p.u -= 1; onArrive(p); }
+        var uu = p.dir ? 1 - p.u : p.u, P = typeof path === 'function' ? path(p) : path, q = bez(P, uu), f = Math.min(1, p.u * 6, (1 - p.u) * 6);
+        glow(typeof rgbSpr === 'function' ? rgbSpr(p) : rgbSpr, q[0], q[1], size, f * .8); glow(spWhite, q[0], q[1], size * .38, f * .9);
+      }
     }
 
     function frame(now) {
@@ -214,97 +296,83 @@
       if (!alive) return;
       var dt = Math.min(.05, (now - last) / 1000 || .016); last = now; if (!reduce) T += dt;
       ctx.clearRect(0, 0, cv.width, cv.height);
-      ctx.globalCompositeOperation = 'lighter'; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.imageSmoothingQuality = 'high';
-      placeNodes();
-      var energy = 0; for (var i = 0; i < nodes.length; i++) { nodes[i].e *= Math.pow(.25, dt); energy += nodes[i].e; } energy = Math.min(1, energy / 14);
-      // light spreads a little along the lattice's connections
-      for (var le = 0; le < edges.length; le++) { var LA = nodes[edges[le][0]], LB = nodes[edges[le][1]]; if (LA.e > .6 && LB.e < LA.e - .2) LB.e += (LA.e - LB.e) * dt * 3; else if (LB.e > .6 && LA.e < LB.e - .2) LA.e += (LB.e - LA.e) * dt * 3; }
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.imageSmoothingQuality = 'high';
+      GENERAL.update(dt);
+      HUMAN.update(dt);
+      HEAD.e *= Math.pow(.35, dt); BOOKS.forEach(function (b) { b.e *= Math.pow(.35, dt); }); PEOPLE.forEach(function (p) { p.e *= Math.pow(.4, dt); });
       FIGS.forEach(function (f) { f.glow *= Math.pow(.4, dt); });
-      BRAINS.forEach(function (b) { b.e *= Math.pow(.35, dt); });
+
+      // panels
+      ctx.globalCompositeOperation = 'source-over';
+      PANELS.forEach(panel);
+      ctx.globalCompositeOperation = 'lighter';
 
       // stardust
-      for (var q = 0; q < dust.length; q++) { var du = dust[q]; if (!reduce) { du.y -= du.v * dt; if (du.y < -4) du.y = DH + 4; } glow(spWhite, du.x, du.y, 2.2 * du.s, .1 + .08 * Math.sin(T + du.ph)); }
+      for (var q0 = 0; q0 < dust.length; q0++) { var du = dust[q0]; if (!reduce) { du.y -= du.v * dt; if (du.y < -4) du.y = DH + 4; } glow(spWhite, du.x, du.y, 2 * du.s, .08 + .07 * Math.sin(T + du.ph)); }
 
-      // ---------- each app's own model: the glass figures ----------
+      // the hub
+      roundRect(HUB.x, HUB.y, HUB.w, HUB.h, 16); setAlpha(1); ctx.fillStyle = 'rgba(232,92,220,.05)'; ctx.fill();
+      ctx.strokeStyle = 'rgba(240,120,230,1)'; ctx.lineWidth = 1.6 * S; ctx.shadowColor = 'rgba(232,92,220,.95)'; ctx.shadowBlur = 14 * S; setAlpha(.8); ctx.stroke(); ctx.shadowBlur = 0;
+      roundRect(HUB.x + 6, HUB.y + 6, HUB.w - 12, HUB.h - 12, 12); ctx.lineWidth = 1 * S; setAlpha(.25); ctx.stroke();
+
+      // human expertise: people feeding the expert, then the head
+      ctx.lineWidth = .9 * S;
+      PEOPLE.forEach(function (p, i) { ctx.strokeStyle = 'rgba(' + p.rgb + ',1)'; ribbon(p.P, .9, .25, [2, 6], -T * 10 + i * 3); });
+      PEOPLE.forEach(function (p) {
+        if (!reduce) p.u += .32 * dt;
+        if (p.u >= 1) { p.u -= 1; HEAD.e = Math.min(1, HEAD.e + .2); p.e = 1; }
+        var q1 = bez(p.P, p.u), f1 = Math.min(1, p.u * 6, (1 - p.u) * 6); glow(spWhite, q1[0], q1[1], 2.4, f1 * .9);
+      });
+      if (manReady) { glow(spPeach, HEAD.gb[0], HEAD.gb[1], 70 + 8 * HEAD.e, .08 + .2 * HEAD.e); setAlpha(.92 + .08 * HEAD.e); ctx.drawImage(man, HEAD.x * S, HEAD.y * S, HW * S, HH * S); }
+      ctx.globalCompositeOperation = 'source-over';
+      PEOPLE.forEach(person); BOOKS.forEach(book);
+      ctx.globalCompositeOperation = 'lighter';
+
+      // ribbons: knowledge streams, the models' link, general knowledge, the hub's outputs
+      var flow = -T * 22;
+      streams.forEach(function (st, si) {
+        var P = st.path, g = ctx.createLinearGradient(P[0][0] * S, 0, P[3][0] * S, 0); g.addColorStop(0, 'rgba(150,185,255,1)'); g.addColorStop(1, 'rgba(232,120,225,1)');
+        ctx.strokeStyle = g; ribbon(P, 9, .05 + .05 * st.src.e, null, 0); ribbon(P, 1.3, .24, null, 0); ribbon(P, 1.9, .42, [2, 30], flow + si * 11);
+      });
+      ctx.strokeStyle = 'rgba(200,160,255,1)'; ribbon(LINK, 6, .06, null, 0); ribbon(LINK, 1.2, .28, [1.5, 8], -T * 14);
+      // the apps: glass figures, brightening and rippling as knowledge arrives
       if (figReady) FIGS.forEach(function (f) {
-        glow(spSky, f.B[0], f.B[1], 60 + 9 * f.glow, .1 + .22 * f.glow);
+        glow(spSky, f.B[0], f.B[1], 50 + 8 * f.glow, .1 + .22 * f.glow);
         setAlpha(.9 + .1 * f.glow + .04 * Math.sin(T * .8 + f.y)); ctx.drawImage(fig, f.x * S, f.y * S, FW * S, FH * S);
         for (var r = f.rip.length - 1; r >= 0; r--) { f.rip[r] += dt * 260; if (f.rip[r] > 700) f.rip.splice(r, 1); }
-        for (var s = 0; s < sparks.length; s++) {
-          var sp = sparks[s], e = sp['e' + f.y] || 0;
+        for (var s2 = 0; s2 < sparks.length; s2++) {
+          var sp = sparks[s2], e = sp['e' + f.y] || 0;
           for (var r2 = 0; r2 < f.rip.length; r2++) if (Math.abs(f.rip[r2] - sp.d) < 30) e = 1;
           e *= Math.pow(.25, dt); sp['e' + f.y] = e;
           var sq = F(f, sp.x, sp.y), tw3 = Math.max(0, Math.sin(T * 1.7 + sp.ph + f.x));
-          glow(spSky, sq[0], sq[1], 3 + 6 * e, .15 * tw3 + .7 * e); glow(spWhite, sq[0], sq[1], 1.1 + 1.8 * e, .25 * tw3 + .8 * e);
+          glow(spSky, sq[0], sq[1], 2.6 + 5 * e, .15 * tw3 + .7 * e); glow(spWhite, sq[0], sq[1], 1 + 1.6 * e, .25 * tw3 + .8 * e);
         }
       });
-
-      // ---------- human expertise: the heads ----------
-      if (manReady) for (var b2 = 0; b2 < BRAINS.length; b2++) head(BRAINS[b2]);
-
-      // ---------- ribbons ----------
-      var flow = -T * 22;
-      BRAINS.forEach(function (b, bi) {
-        var g = ctx.createLinearGradient(b.P1[0][0] * S, 0, b.P1[3][0] * S, 0); g.addColorStop(0, 'rgba(200,160,255,1)'); g.addColorStop(1, 'rgba(140,170,255,1)');
-        ctx.strokeStyle = g; ribbon(b.P1, 10, .04 + .05 * b.e, null, 0); ribbon(b.P1, 1.4, .22, null, 0); ribbon(b.P1, 2, .42, [2, 30], flow + bi * 11);
-      });
-      FIGS.forEach(function (f, fi) {
-        var g2 = ctx.createLinearGradient(f.P2[0][0] * S, 0, f.P2[3][0] * S, 0); g2.addColorStop(0, 'rgba(140,170,255,1)'); g2.addColorStop(1, 'rgba(110,231,214,1)');
-        ctx.strokeStyle = g2; ribbon(f.P2, 10, .05 + .06 * f.glow, null, 0); ribbon(f.P2, 1.6, .28, null, 0); ribbon(f.P2, 2.2, .48, [2, 26], flow + 9 + fi * 13);
+      OUTS.forEach(function (P, ci) {
+        var g2 = ctx.createLinearGradient(P[0][0] * S, 0, P[3][0] * S, 0); g2.addColorStop(0, 'rgba(240,120,230,1)'); g2.addColorStop(1, 'rgba(255,176,80,1)');
+        ctx.strokeStyle = g2; ribbon(P, 8, .05 + .06 * FIGS[ci].glow, null, 0); ribbon(P, 1.5, .3, null, 0); ribbon(P, 2, .5, [2, 24], flow + ci * 13);
       });
 
-      // documents leaving each brain for the AI model; each one that arrives lights the lattice, and its brain pulses as the next leaves
+      // documents, books, music and conversations streaming into the expert model
       ctx.globalCompositeOperation = 'source-over';
       for (var si = 0; si < streams.length; si++) {
         var st = streams[si], step = 1 / st.docs.length, before = st.u;
         if (!reduce) st.u = (st.u + SPEED * dt / st.len) % step;
-        if (st.u < before) {
-          st.shift++; var tb = BRAINS[st.bi]; tb.e = Math.min(1, tb.e + .3);
-          var tgt = outerN[(Math.random() * outerN.length) | 0]; tgt.e = 1; var inner = nodes[(Math.random() * nodes.length) | 0]; inner.e = Math.max(inner.e, .6);
-        }
+        if (st.u < before) { st.shift++; st.src.e = Math.min(1, st.src.e + .3); HUMAN.light(); }
         var nd2 = st.docs.length; // slot j shows document (j - shift), so each document keeps its look all the way along
         for (var dI = 0; dI < nd2; dI++) { var du2 = st.u + dI * step, pos2 = bez(st.path, du2); paper(st.docs[((dI - st.shift) % nd2 + nd2) % nd2], pos2[0], pos2[1], du2); }
       }
       ctx.globalCompositeOperation = 'lighter';
 
-      // ---------- the app minds talking to each other ----------
-      LINKS.forEach(function (lk, li) {
-        var g3 = ctx.createLinearGradient(lk.P[0][0] * S, lk.P[0][1] * S, lk.P[3][0] * S, lk.P[3][1] * S); g3.addColorStop(0, 'rgba(110,231,214,1)'); g3.addColorStop(.5, 'rgba(190,160,255,1)'); g3.addColorStop(1, 'rgba(110,231,214,1)');
-        ctx.strokeStyle = g3; ribbon(lk.P, 6, .05, null, 0); ribbon(lk.P, 1.1, .2, [1.5, 9], -T * 14 + li * 5);
-      });
-      for (var tk = 0; tk < talk.length; tk++) {
-        var tp = talk[tk], lk2 = LINKS[tp.l]; if (!reduce) tp.u += tp.v * dt;
-        if (tp.u >= 1) { tp.u -= 1; var rf = FIGS[tp.dir ? lk2.a : lk2.b]; rf.glow = Math.min(1, rf.glow + .15); rf.rip.push(0); }
-        var tu = tp.dir ? 1 - tp.u : tp.u, tq = bez(lk2.P, tu), tfade = Math.min(1, tp.u * 6, (1 - tp.u) * 6);
-        glow(tp.dir ? spViolet : spTeal, tq[0], tq[1], 4, tfade * .8); glow(spWhite, tq[0], tq[1], 1.5, tfade * .9);
-      }
+      // pulses: between the two models (both ways), general knowledge into the HUMAN, the hub out to the apps
+      pulses(talk, LINK, function (p) { return p.dir ? spViolet : spTeal; }, function (p) { if (p.dir) GENERAL.light(); else HUMAN.light(); }, 4, dt);
+      pulses(outs, function (p) { return OUTS[p.c]; }, spAmber, function (p) { var f = FIGS[p.c]; f.glow = Math.min(1, f.glow + .3); f.rip.push(0); }, 4.2, dt);
 
-      // ---------- AI models lattice ----------
-      glow(spBlue, LC[0], LC[1], 108 + 18 * energy, .2 + .22 * energy); glow(spTeal, LC[0], LC[1], 63, .1 + .18 * energy);
-      ctx.lineWidth = Math.max(1, S * .9);
-      for (var e = 0; e < edges.length; e++) {
-        var A2 = nodes[edges[e][0]], B2 = nodes[edges[e][1]], en = Math.max(A2.e, B2.e), eh = (A2.h + B2.h) / 2 + (Math.abs(A2.h - B2.h) > 180 ? 180 : 0) + T * 10;
-        setAlpha(.3 + .55 * en); ctx.strokeStyle = 'hsl(' + (eh % 360) + ',95%,' + (62 + 18 * en) + '%)';
-        ctx.beginPath(); ctx.moveTo(A2.x * S, A2.y * S); ctx.lineTo(B2.x * S, B2.y * S); ctx.stroke();
-      }
-      for (var nq = 0; nq < nodes.length; nq++) { var nd = nodes[nq]; glow(hueSpr(nd.h + T * 10), nd.x, nd.y, 4 + 4 * nd.e, .55 + .4 * nd.e); glow(spWhite, nd.x, nd.y, 1.5 + 2.5 * nd.e, .4 + .5 * nd.e); }
-      var sats = [spTeal, spViolet, spBlue];
-      for (var sIdx = 0; sIdx < 3; sIdx++) { var sa = T * .55 + sIdx * 2.094; glow(sats[sIdx], LC[0] + Math.cos(sa) * 77, LC[1] + Math.sin(sa) * 32, 8, .85); glow(spWhite, LC[0] + Math.cos(sa) * 77, LC[1] + Math.sin(sa) * 32, 2.7, .9); }
+      // the two models
+      GENERAL.draw();
+      HUMAN.draw();
 
-      // ---------- particles ----------
-      for (var p = 0; p < parts.length; p++) {
-        var pa = parts[p]; if (!reduce) pa.u += pa.v * dt;
-        if (pa.u >= 1) {
-          { var tf = FIGS[pa.f]; tf.glow = Math.min(1, tf.glow + .3); tf.rip.push(0); }
-          pa.u -= 1;
-        }
-        var path = FIGS[pa.f].P2, u = pa.u, pos = bez(path, u), nx = bez(path, Math.min(1, u + .01));
-        var tx = nx[0] - pos[0], ty = nx[1] - pos[1], tl = Math.hypot(tx, ty) || 1, amp = 4 * Math.sin(u * 3.14159) * pa.off + Math.sin(T * 1.4 + pa.ph) * 1.2;
-        var X = pos[0] - ty / tl * amp, Y = pos[1] + tx / tl * amp, fade = Math.min(1, u * 5, (1 - u) * 5) * pa.a;
-        glow(pa.k === 'a' ? spViolet : spTeal, X, Y, 4.5 * pa.sz, fade * .75); glow(spWhite, X, Y, 1.8 * pa.sz, fade * .9);
-      }
-
-      ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+      setAlpha(1); ctx.globalCompositeOperation = 'source-over';
       if (!reduce && visible) raf = requestAnimationFrame(frame);
     }
 
@@ -318,7 +386,15 @@
     return function stop() { alive = false; if (raf) cancelAnimationFrame(raf); if (ro) ro.disconnect(); if (io) io.disconnect(); };
   }
   global.xformHero = start;
-  // the home page: start the graphic in the hero (the mockup starts it itself, from a template)
-  function boot() { var el = document.querySelector('.xg-c'); if (el && !el.dataset.xc) { el.dataset.xc = '1'; start(el); } }
+  // the home page: start the graphic in the hero (a mockup can start it itself)
+  // touch screens have no hover: a tap on a panel opens its card, a tap elsewhere closes it
+  function taps(el) {
+    var hots = el.querySelectorAll('.xc-hot');
+    document.addEventListener('pointerup', function (e) {
+      if (e.pointerType === 'mouse') return;
+      for (var i = 0; i < hots.length; i++) hots[i].classList.toggle('open', hots[i].contains(e.target) && !hots[i].classList.contains('open'));
+    });
+  }
+  function boot() { var el = document.querySelector('.xg-c'); if (el && !el.dataset.xc) { el.dataset.xc = '1'; start(el); taps(el); } }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 })(window);
