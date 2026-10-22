@@ -14,11 +14,17 @@
   // ------------------------------------------------------------ team & access (admins only)
   function viewTeam() {
     page('team', '<p class="cra-empty">Loading…</p>');
-    Promise.all([sb.from('careers_editors').select('*').order('created_at'), sb.from('audit_log').select('*').order('at', { ascending: false }).limit(50)]).then(function (r) {
-      var people = r[0].data || [], log = r[1].data || [];
+    // admin_team() (docs/admin-team-emails.sql) adds each person's sign-in email, which only the database can read;
+    // if it is not installed yet, the page falls back to the plain table and says so.
+    var team = sb.rpc('admin_team').then(function (x) {
+      return x.error ? sb.from('careers_editors').select('*').order('created_at').then(function (y) { y.noEmail = true; return y; }) : x;
+    });
+    Promise.all([team, sb.from('audit_log').select('*').order('at', { ascending: false }).limit(50)]).then(function (r) {
+      var people = r[0].data || [], log = r[1].data || [], noEmail = !!r[0].noEmail;
       var rows = people.map(function (p) {
         var me = p.user_id === state.user.id;
-        return '<tr><td><b>' + esc(p.display_name || 'Unnamed') + '</b>' + (me ? ' <small>(you)</small>' : '') + '</td><td><span class="st ' + (p.role === 'admin' ? 'pub' : 'new') + '">' + (p.role === 'admin' ? 'Admin' : 'Editor') + '</span></td>' +
+        return '<tr><td><b>' + esc(p.display_name || 'Unnamed') + '</b>' + (me ? ' <small>(you)</small>' : '') + '</td>' +
+          '<td>' + (p.email ? '<a href="mailto:' + esc(p.email) + '">' + esc(p.email) + '</a>' : '<small>—</small>') + '</td><td><span class="st ' + (p.role === 'admin' ? 'pub' : 'new') + '">' + (p.role === 'admin' ? 'Admin' : 'Editor') + '</span></td>' +
           '<td>' + fmt(p.created_at) + '</td><td class="cra-act">' + (me ? '' : '<a href="#" data-role="' + (p.role === 'admin' ? 'editor' : 'admin') + '" data-uid="' + p.user_id + '">Make ' + (p.role === 'admin' ? 'Editor' : 'Admin') + '</a><a href="#" data-remove="' + p.user_id + '" style="color:#b91c1c">Remove</a>') + '</td></tr>';
       }).join('');
       var items = log.map(function (l) {
@@ -27,7 +33,8 @@
           '<small>' + esc(new Date(l.at).toLocaleString()) + '</small></li>';
       }).join('');
       page('team', '<div class="cra-bar"><h1 class="cra-h1">Team &amp; access</h1></div><div class="cra-grid"><div class="cra-card cra-scroll"><h2>People with admin access</h2>' +
-        '<table class="cra-table"><tr><th>Name</th><th>Role</th><th>Added</th><th></th></tr>' + (rows || '<tr><td colspan="4" class="cra-empty">Nobody yet.</td></tr>') + '</table>' +
+        '<table class="cra-table"><tr><th>Name</th><th>Email</th><th>Role</th><th>Added</th><th></th></tr>' + (rows || '<tr><td colspan="5" class="cra-empty">Nobody yet.</td></tr>') + '</table>' +
+        (noEmail ? '<p class="cra-hint" style="margin:10px 12px 0">Emails show here once the database function in docs/admin-team-emails.sql is installed.</p>' : '') +
         '<p class="cra-hint" style="margin:10px 12px 0">To add someone: invite their email in Supabase (Authentication → Users), then ask an admin to give them a role here. Adding people from this page comes later.</p></div>' +
         '<div class="cra-card"><h2>What each role can do</h2><ul class="cra-check"><li><span class="ok">✓</span><span><b>Editor:</b> create, edit, publish and unpublish jobs; review applicants and change their status; add, edit, publish and delete AI news stories</span></li>' +
         '<li><span class="ok">✓</span><span><b>Admin:</b> everything an Editor can, plus delete jobs, applicants and whole AI news weeks, download the full list, and manage who has access</span></li></ul></div></div>' +

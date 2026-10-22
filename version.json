@@ -1,7 +1,17 @@
 {
-  "version": "2.51.0",
+  "version": "2.52.0",
   "date": "2026-10-22",
   "releases": [
+    {
+      "version": "2.52.0",
+      "date": "2026-10-22",
+      "summary": "Admin shows each team member's email",
+      "changes": [
+        "Team & access (/admin/team): new Email column with each person's sign-in email (a mailto link)",
+        "Emails come from a new database function, admin_team() (docs/admin-team-emails.sql), that answers only a two-step-verified admin; if it is not installed the page falls back and says so",
+        "Admin top bar: 'Signed in as <name>, <email>'"
+      ]
+    },
     {
       "version": "2.51.0",
       "date": "2026-10-22",

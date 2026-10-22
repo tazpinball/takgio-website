@@ -139,7 +139,7 @@
       }).join('');
       return '<div class="cra-top"><div class="in"><div class="cra-brand">' + (opts.area ? '<a href="/admin" class="cra-home" title="Back to Admin">&larr; Admin</a>' : '') +
         'Takgio<small>' + esc(opts.area || 'Admin') + '</small></div><nav class="cra-nav">' + tabs + '</nav>' +
-        '<div class="cra-user"><span>Signed in as <b>' + esc(A.state.name) + '</b> &middot; ' + (A.isAdmin() ? 'Admin' : 'Editor') + '</span><a href="#" id="signout">Sign out</a></div></div></div>';
+        '<div class="cra-user"><span>Signed in as <b>' + esc(A.state.name) + '</b>' + (A.state.user.email && A.state.user.email !== A.state.name ? ', ' + esc(A.state.user.email) : '') + ' &middot; ' + (A.isAdmin() ? 'Admin' : 'Editor') + '</span><a href="#" id="signout">Sign out</a></div></div></div>';
     }
     A.page = function (active, html) {
       root.innerHTML = topbar(active) + '<div class="cra-wrap">' + html + '</div>';
