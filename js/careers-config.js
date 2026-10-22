@@ -10,5 +10,7 @@
 window.CAREERS_CONFIG = {
   applyUrl: 'https://pwmrbmjlgweahridxvgk.supabase.co/functions/v1/careers-apply',
   confirmUrl: 'https://pwmrbmjlgweahridxvgk.supabase.co/functions/v1/careers-confirm',
-  turnstileSiteKey: '0x4AAAAAAFRpO6AbCh7x9Hma'
+  turnstileSiteKey: '0x4AAAAAAFRpO6AbCh7x9Hma',
+  // the "ai-news-pull" Edge Function; ai-news-pull.html (the daily AI news email's "Pull this story" link) posts to it
+  newsPullUrl: 'https://pwmrbmjlgweahridxvgk.supabase.co/functions/v1/ai-news-pull'
 };

@@ -448,7 +448,9 @@
       if (r[0].error || !r[0].data) { page('news', '<p class="cra-err">' + esc((r[0].error && r[0].error.message) || 'That week was not found.') + '</p>'); return; }
       var w = r[0].data, items = r[1].data || [], pub = w.status === 'published';
       var cards = items.map(function (i) {
-        return '<div class="cra-card" data-id="' + i.id + '"><div class="cra-r3"><div class="cra-f"><label>Source</label><input type="text" data-k="source" value="' + esc(i.source) + '"></div>' +
+        var flag = (i.origin === 'auto' ? '<span class="st draft" style="margin-right:6px">Added by the daily job</span>' : '') + (i.hidden ? '<span class="st" style="background:#fee2e2;color:#991b1b">Pulled: not on the site</span>' : '');
+        return '<div class="cra-card" data-id="' + i.id + '" data-hidden="' + (i.hidden ? '1' : '') + '">' + (flag ? '<p style="margin:0 0 10px">' + flag + '</p>' : '') +
+          '<div class="cra-r3"><div class="cra-f"><label>Source</label><input type="text" data-k="source" value="' + esc(i.source) + '"></div>' +
           '<div class="cra-f"><label>Date on the source</label><input type="date" data-k="source_date" value="' + esc(i.source_date) + '"></div>' +
           '<div class="cra-f"><label>Topic</label><select data-k="topic">' + TOPICS.map(function (t) { return opt(t, t, i.topic); }).join('') + '</select></div></div>' +
           '<div class="cra-f"><label>Headline (exactly as the source publishes it)</label><input type="text" data-k="headline" value="' + esc(i.headline) + '"></div>' +
@@ -457,7 +459,7 @@
           '<div class="cra-f"><label>Why it matters to us</label><textarea data-k="why" style="min-height:60px">' + esc(i.why) + '</textarea></div>' +
           '<div class="cra-r2"><div class="cra-f"><label>Home-page ticker line (optional)</label><input type="text" data-k="ticker" maxlength="90" value="' + esc(i.ticker || '') + '"></div>' +
           '<div class="cra-f"><label>Short name (used in links)</label><input type="text" data-k="slug" value="' + esc(i.slug) + '"></div></div>' +
-          '<div class="cra-pub"><button class="cra-btn pri" data-save>Save story</button><button class="cra-btn dng" data-del>Delete story</button></div></div>';
+          '<div class="cra-pub"><button class="cra-btn pri" data-save>Save story</button><button class="cra-btn" data-hide>' + (i.hidden ? 'Restore to the site' : 'Pull from the site') + '</button><button class="cra-btn dng" data-del>Delete story</button></div></div>';
       }).join('');
       page('news', '<div class="cra-bar"><div><div style="font-size:.9rem"><a href="#news" style="font-weight:700;text-decoration:none">&larr; AI news</a></div><h1 class="cra-h1">' + esc(weekLabel(ws)) +
         ' <span class="st ' + (pub ? 'pub' : 'draft') + '">' + (pub ? 'Published' : 'Draft') + '</span></h1></div><div class="cra-pub">' +
@@ -496,6 +498,10 @@
           d.ticker = d.ticker || null;
           var p = storyProblem(d); if (p) { toast('Fix this first: ' + p, true); return; }
           sb.from('ai_news_items').update(d).eq('id', id).then(function (x) { if (x.error) toast(x.error.code === '23505' ? 'That short name is used by another story' : x.error.message, true); else toast('Saved'); });
+        });
+        card.querySelector('[data-hide]').addEventListener('click', function () {
+          var hide = !card.getAttribute('data-hidden');
+          sb.from('ai_news_items').update({ hidden: hide }).eq('id', id).then(function (x) { if (x.error) toast(x.error.message, true); else { toast(hide ? 'Pulled from the site' : 'Restored to the site'); viewWeek(ws); } });
         });
         card.querySelector('[data-del]').addEventListener('click', function () {
           if (!confirm('Delete this story?')) return;

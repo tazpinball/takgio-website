@@ -1,7 +1,19 @@
 {
-  "version": "2.49.1",
+  "version": "2.50.0",
   "date": "2026-10-22",
   "releases": [
+    {
+      "version": "2.50.0",
+      "date": "2026-10-22",
+      "summary": "AI news updates itself every day: official sources, stories written from the source and fact-checked, a daily email with a one-click pull",
+      "changes": [
+        "New Supabase function ai-news-daily (runs daily via pg_cron): reads 9 official sources (Anthropic, OpenAI, Google, Google Cloud, Apple Developer, Meta, Meta for Developers, ElevenLabs, Autodesk), picks what matters to Takgio, writes each story only from the article's text, checks every fact against it, and publishes up to 4 a day",
+        "New Supabase function ai-news-pull and page ai-news-pull.html: the daily email's \"Pull this story\" link takes a story off the site with one button; editors can restore it",
+        "Careers admin, AI news: stories show \"Added by the daily job\" and \"Pulled\", with Pull / Restore buttons",
+        "docs/news-daily-schema.sql: story origin and hidden flags, the job's memory and run log, the schedule, and a cron secret kept in Supabase Vault (to be run in the Supabase SQL editor)",
+        "Offline test supabase/functions/_tests/news-harness.ts: 28 checks"
+      ]
+    },
     {
       "version": "2.49.1",
       "date": "2026-10-22",
