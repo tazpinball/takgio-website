@@ -1,7 +1,19 @@
 {
-  "version": "2.50.1",
+  "version": "2.51.0",
   "date": "2026-10-22",
   "releases": [
+    {
+      "version": "2.51.0",
+      "date": "2026-10-22",
+      "summary": "One admin front door: /admin, with Careers, News and Team & access as their own pages",
+      "changes": [
+        "New /admin hub: a card per area (Careers, News, Team & access for admins, Project dashboard) with live counts; new areas are added as cards",
+        "New /admin/news (AI news, including the daily job's stories) and /admin/team (who has access, roles, activity log); /admin/careers is the Careers admin with Jobs and Applications only",
+        "Shared admin core (js/admin-core.js): one sign-in with the two-step code for every admin page, and a '← Admin' link in each page's top bar",
+        "Old links keep working: careers-admin.html#apps (the confirmation email) opens Applications; #news and #team go to their new pages",
+        "Pull page and daily email now point to the News admin"
+      ]
+    },
     {
       "version": "2.50.1",
       "date": "2026-10-22",

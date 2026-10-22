@@ -1,5 +1,5 @@
 
-/* Careers admin (v2.36). Used only by careers-admin.html. */
+/* Takgio admin (v2.36; shared by every admin page since v2.51: admin, careers-admin, news-admin, team-admin). */
 body.cra-body { background: #f4f5f9; margin: 0; }
 .cra-top { background: #11142a; color: #fff; }
 .cra-top .in { max-width: 1240px; margin: 0 auto; padding: 0 22px; display: flex; align-items: center; gap: 22px; min-height: 58px; flex-wrap: wrap; }
@@ -79,3 +79,15 @@ body.cra-body { background: #f4f5f9; margin: 0; }
 .cra-table tr[data-app] { cursor: pointer; }
 .cra-pub select.cra-btn { padding-right: 10px; }
 .cra-hint { font-size: .8rem; color: var(--color-text-secondary); }
+/* v2.51: the hub's cards and the "back to Admin" link in the top bar */
+.cra-brand .cra-home { color: rgba(255,255,255,.72); text-decoration: none; font-weight: 600; font-size: .85rem; margin-right: 14px; padding: 6px 10px; border-radius: 9px; background: rgba(255,255,255,.08); }
+.cra-brand .cra-home:hover { background: rgba(255,255,255,.16); color: #fff; }
+.adm-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+@media (min-width: 760px) { .adm-grid { grid-template-columns: repeat(2, 1fr); } }
+.adm-card { display: flex; flex-direction: column; gap: 6px; background: #fff; border: 1px solid var(--color-border); border-radius: 16px; padding: 22px 24px; text-decoration: none; color: var(--color-text); transition: border-color .15s ease, box-shadow .15s ease; }
+.adm-card:hover { border-color: var(--color-accent); box-shadow: 0 10px 30px rgba(15,23,42,.08); }
+.adm-card b { font-size: 1.2rem; letter-spacing: -0.01em; }
+.adm-card b .pill { font-size: .66rem; background: #f59e0b; color: #422006; border-radius: 999px; padding: 1px 7px; margin-left: 8px; font-weight: 800; vertical-align: middle; }
+.adm-card span { color: var(--color-text-secondary); font-size: .92rem; line-height: 1.45; }
+.adm-card small { color: #11142a; font-weight: 600; font-size: .85rem; }
+.adm-card em { font-style: normal; font-weight: 700; color: var(--color-accent); margin-top: 6px; font-size: .9rem; }

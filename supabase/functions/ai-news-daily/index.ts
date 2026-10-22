@@ -150,8 +150,8 @@ Deno.serve(async (req) => {
   if ((added.length || failed.length || held.length) && to && key && from) {
     const list = added.map((a) => `<li style="margin:0 0 14px"><b>${esc(a.headline)}</b><br><span style="color:#555">${esc(a.source)}</span> &middot; <a href="${esc(a.url)}">source</a> &middot; <a href="${SITE}/ai-news-pull.html#t=${a.token}">Pull this story</a></li>`).join("");
     const html = `<p>${added.length ? `The daily AI news job published ${added.length} ${added.length === 1 ? "story" : "stories"} on <a href="${SITE}/ai-news.html">takgio.com/ai-news</a>. Each was written from the source's own text and checked against it.` : "The daily AI news job added no stories today."}</p>` +
-      (list ? `<ul style="padding-left:18px">${list}</ul><p style="color:#555">&ldquo;Pull this story&rdquo; takes it off the site at once. You can restore it in the careers admin, AI news tab.</p>` : "") +
-      (held.length ? `<p>Not published because the week is an editor&rsquo;s draft: ${held.map(esc).join(", ")}. Open the careers admin to publish it.</p>` : "") +
+      (list ? `<ul style="padding-left:18px">${list}</ul><p style="color:#555">&ldquo;Pull this story&rdquo; takes it off the site at once. You can restore it in the <a href="${SITE}/admin/news">News admin</a>.</p>` : "") +
+      (held.length ? `<p>Not published because the week is an editor&rsquo;s draft: ${held.map(esc).join(", ")}. Open the <a href="${SITE}/admin/news">News admin</a> to publish it.</p>` : "") +
       (failed.length ? `<p>These sources could not be read today: ${failed.map(([n, v]) => `${esc(n)} (${esc(v)})`).join("; ")}.</p>` : "");
     try {
       const m = await fetch("https://api.resend.com/emails", { method: "POST", headers: { Authorization: `Bearer ${key}`, "content-type": "application/json" },

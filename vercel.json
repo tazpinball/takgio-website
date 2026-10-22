@@ -39,6 +39,22 @@
     {
       "source": "/news/true-record-launch",
       "destination": "/news-true-record-launch.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
+    },
+    {
+      "source": "/admin/careers",
+      "destination": "/careers-admin.html"
+    },
+    {
+      "source": "/admin/news",
+      "destination": "/news-admin.html"
+    },
+    {
+      "source": "/admin/team",
+      "destination": "/team-admin.html"
     }
   ]
 }

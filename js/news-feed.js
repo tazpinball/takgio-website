@@ -1,5 +1,5 @@
 /* AI news feed (v2.43). Reads the published weekly recap from Supabase's public view ai_news_public
-   (tables in docs/news-schema.sql; editors manage weeks in /careers-admin.html, "AI news" tab) and fills:
+   (tables in docs/news-schema.sql; editors manage weeks in the News admin, /admin/news) and fills:
      - #ai-news-root   on ai-news.html: week chips, the selected week's stories, past weeks, topics
      - #ai-week-card   on news.html: the latest week's headlines
      - .h-ticker       on index.html: adds the newest stories that have a ticker line, linked to their story

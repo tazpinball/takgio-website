@@ -1,7 +1,7 @@
 // ai-news-pull: takes one automatic AI news story off the site, from the "Pull this story" link in the daily email.
 // Supabase rewrites any HTML a function returns to plain text, so this function never serves a page. The page Ted sees is
 // ai-news-pull.html on the site; it posts here. Deploy with --no-verify-jwt (the page cannot send a login).
-// The story is hidden, not deleted: an editor can restore it in the careers admin, AI news tab.
+// The story is hidden, not deleted: an editor can restore it in the News admin (/admin/news).
 import { createClient } from "jsr:@supabase/supabase-js@2";
 
 const SITE = Deno.env.get("SITE_URL") ?? "https://www.takgio.com";

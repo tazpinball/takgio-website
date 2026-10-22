@@ -1,161 +1,22 @@
 // ============================================================
-// Careers admin: sign-in with a two-step code, manage jobs, post/edit a job, review applications, team & access,
-// and the weekly AI news recap (v2.43; tables in docs/news-schema.sql).
-// Depends on: Supabase JS (CDN), supabase-config.js.
-// Who may do what is enforced by the DATABASE (see docs/careers-schema.sql), not by this page: every table needs a
-// two-step-verified session and a row in careers_editors. This page only shows or hides buttons to match.
+// Takgio admin: Careers (/admin/careers: jobs, posting and editing a job, applications).
+// Runs on the shared admin core (js/admin-core.js): sign-in, two-step code, access check and the page frame live there.
+// Who may do what is enforced by the DATABASE (docs/careers-schema.sql), not by this page.
+// Depends on: Supabase JS (CDN), supabase-config.js, admin-core.js.
 // ============================================================
 (function () {
   'use strict';
 
-  var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  var root = document.getElementById('cra-root');
-  var state = { user: null, role: null, name: '', jobs: [], apps: [], selApp: null };
+  // bound to the shared core when it first routes (js/admin-core.js)
+  var A, sb, state, esc = TakgioAdmin.esc, fmt = TakgioAdmin.fmt, MONTHS = TakgioAdmin.MONTHS, toast, isAdmin, page, route;
+  function bind(a) { A = a; sb = a.sb; state = a.state; toast = a.toast; isAdmin = a.isAdmin; page = a.page; route = a.route; }
 
   var TYPE = { internship: 'Internship', full_time: 'Full time', part_time: 'Part time', contract: 'Contract' };
   var STATUS = { new: 'New', reviewing: 'Reviewing', interview: 'Interview', not_a_fit: 'Not a fit', hired: 'Hired' };
   var STATUS_CLASS = { new: 'new', reviewing: 'rev', interview: 'rev', not_a_fit: 'draft', hired: 'ok' };
-  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-  function esc(s) {
-    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-    });
-  }
-  function fmt(d) {
-    if (!d) return '—';
-    var s = String(d), p = s.slice(0, 10).split('-');
-    return MONTHS[+p[1] - 1] + ' ' + (+p[2]) + ', ' + p[0];
-  }
-  function toast(msg, isErr) {
-    var t = document.createElement('div'); t.className = 'cra-toast' + (isErr ? ' err' : ''); t.textContent = msg;
-    document.body.appendChild(t); setTimeout(function () { t.remove(); }, isErr ? 6000 : 2800);
-  }
   function slugify(s) {
     return String(s || '').toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 70);
   }
-  var isAdmin = function () { return state.role === 'admin'; };
-
-  // ------------------------------------------------------------ sign-in screens
-  function shell(inner) {
-    root.innerHTML = '<div class="cra-login"><div style="width:100%;display:grid;gap:22px;justify-items:center">' +
-      '<div style="text-align:center"><div class="cra-brand" style="color:#11142a;font-size:1.6rem">Takgio</div><div style="color:var(--color-text-secondary);font-weight:600">Careers admin</div></div>' +
-      '<div class="cra-lcard" style="max-width:420px;width:100%">' + inner + '</div></div></div>';
-  }
-  function showLogin(msg) {
-    shell('<div class="tag">Step 1 of 2</div><h2>Sign in</h2><p style="margin:0 0 14px;font-size:.9rem">Access is by invitation only.</p>' +
-      '<form id="f-login"><div class="cra-f"><label for="e">Email</label><input type="email" id="e" autocomplete="email" required placeholder="you@takgio.com"></div>' +
-      '<div class="cra-f"><label for="p">Password</label><input type="password" id="p" autocomplete="current-password" required></div>' +
-      '<button class="cra-btn pri" style="width:100%" type="submit">Continue</button><p class="cra-err" id="err">' + esc(msg || '') + '</p></form>' +
-      '<p class="cra-hint" style="margin-top:10px"><a href="#" id="forgot">Forgot your password?</a></p>');
-    document.getElementById('f-login').addEventListener('submit', function (e) {
-      e.preventDefault();
-      var err = document.getElementById('err'); err.textContent = '';
-      sb.auth.signInWithPassword({ email: document.getElementById('e').value.trim(), password: document.getElementById('p').value }).then(function (r) {
-        if (r.error) { err.textContent = r.error.message; return; }
-        afterAuth();
-      });
-    });
-    document.getElementById('forgot').addEventListener('click', function (ev) {
-      ev.preventDefault();
-      var email = document.getElementById('e').value.trim(), err = document.getElementById('err');
-      if (!email) { err.textContent = 'Type your email above first.'; return; }
-      // No redirectTo: the project's Site URL is /login.html, the only allowed redirect, and that page already handles reset links
-      sb.auth.resetPasswordForEmail(email).then(function (r) {
-        err.textContent = r.error ? r.error.message : 'If that address has access, a reset link is on its way.';
-      });
-    });
-  }
-  function showCode(factorId) {
-    shell('<div class="tag">Step 2 of 2</div><h2>Enter your code</h2><p style="margin:0 0 10px;font-size:.9rem">Open your authenticator app and enter the 6-digit code for Takgio.</p>' +
-      '<form id="f-code"><div class="cra-f"><input class="cra-code-in" id="c" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000" required></div>' +
-      '<button class="cra-btn pri" style="width:100%" type="submit">Verify and sign in</button><p class="cra-err" id="err"></p></form>' +
-      '<p class="cra-hint"><a href="#" id="out">Use a different account</a></p>');
-    document.getElementById('f-code').addEventListener('submit', function (e) {
-      e.preventDefault();
-      sb.auth.mfa.challengeAndVerify({ factorId: factorId, code: document.getElementById('c').value.trim() }).then(function (r) {
-        if (r.error) { document.getElementById('err').textContent = r.error.message; return; }
-        afterAuth();
-      });
-    });
-    document.getElementById('out').addEventListener('click', function (ev) { ev.preventDefault(); signOut(); });
-  }
-  function showEnroll() {
-    shell('<div class="tag">First sign-in</div><h2>Link your authenticator app</h2><p style="margin:0 0 6px;font-size:.9rem">Scan this code with an authenticator app (Google Authenticator, 1Password, Authy), then enter the 6-digit code it shows.</p><div id="enroll">Preparing…</div>');
-    sb.auth.mfa.listFactors().then(function (lf) {
-      var stale = ((lf.data && lf.data.all) || []).filter(function (f) { return f.factor_type === 'totp' && f.status === 'unverified'; });
-      return Promise.all(stale.map(function (f) { return sb.auth.mfa.unenroll({ factorId: f.id }); }));
-    }).then(function () {
-      return sb.auth.mfa.enroll({ factorType: 'totp', friendlyName: 'Takgio careers ' + new Date().toISOString().slice(0, 10) });
-    }).then(function (r) {
-      if (r.error) { document.getElementById('enroll').innerHTML = '<p class="cra-err">' + esc(r.error.message) + '</p>'; return; }
-      var d = r.data;
-      document.getElementById('enroll').innerHTML = '<img class="cra-qr" alt="QR code for your authenticator app" src="' + esc(d.totp.qr_code) + '">' +
-        '<p class="cra-hint">Can’t scan? Enter this key instead:</p><div class="cra-secret">' + esc(d.totp.secret) + '</div>' +
-        '<form id="f-enroll" style="margin-top:14px"><div class="cra-f"><input class="cra-code-in" id="c" inputmode="numeric" maxlength="6" placeholder="000000" required></div>' +
-        '<button class="cra-btn pri" style="width:100%" type="submit">Link app and sign in</button><p class="cra-err" id="err"></p></form>';
-      document.getElementById('f-enroll').addEventListener('submit', function (e) {
-        e.preventDefault();
-        sb.auth.mfa.challengeAndVerify({ factorId: d.id, code: document.getElementById('c').value.trim() }).then(function (v) {
-          if (v.error) { document.getElementById('err').textContent = v.error.message; return; }
-          afterAuth();
-        });
-      });
-    });
-  }
-  // `who` is the signed-in email, `problem` an error from the lookup (a failed lookup must not read as "no access")
-  function showNoAccess(who, problem) {
-    shell(problem
-      ? '<h2>Couldn’t check your access</h2><p style="margin:0 0 10px">' + (who ? 'Signed in as <b>' + esc(who) + '</b>. ' : '') + 'The access check failed, so nothing is shown.</p><p class="cra-err">' + esc(problem) + '</p><button class="cra-btn" id="out">Sign out</button>'
-      : '<h2>No careers access yet</h2><p style="margin:0 0 10px">' + (who ? 'You’re signed in as <b>' + esc(who) + '</b>, but that' : 'You’re signed in, but this') + ' account hasn’t been given access to careers. If you have another account, sign out and use that one; otherwise ask an admin to add you.</p><button class="cra-btn" id="out">Sign out</button>');
-    document.getElementById('out').addEventListener('click', signOut);
-  }
-  function signOut() { sb.auth.signOut().then(function () { state = { user: null, role: null, name: '', jobs: [], apps: [], selApp: null }; showLogin(); }); }
-
-  function afterAuth() {
-    sb.auth.mfa.getAuthenticatorAssuranceLevel().then(function (a) {
-      if (a.error) return showLogin(a.error.message);
-      if (a.data.currentLevel !== 'aal2') {
-        return sb.auth.mfa.listFactors().then(function (f) {
-          var ok = ((f.data && f.data.totp) || []).filter(function (x) { return x.status === 'verified'; });
-          if (ok.length) showCode(ok[0].id); else showEnroll();
-        });
-      }
-      return sb.auth.getUser().then(function (u) {
-        state.user = u.data.user;
-        return sb.from('careers_editors').select('role,display_name').eq('user_id', state.user.id).maybeSingle();
-      }).then(function (r) {
-        if (r.error) return showNoAccess(state.user && state.user.email, r.error.message);
-        if (!r.data) return showNoAccess(state.user && state.user.email);
-        state.role = r.data.role; state.name = r.data.display_name || state.user.email;
-        route();
-      });
-    });
-  }
-
-  // ------------------------------------------------------------ app shell + routing
-  function topbar(active) {
-    var a = function (k, label, extra) { return '<a href="#' + k + '" class="' + (k === active ? 'on' : '') + '">' + label + (extra || '') + '</a>'; };
-    return '<div class="cra-top"><div class="in"><div class="cra-brand">Takgio<small>Careers admin</small></div><nav class="cra-nav">' +
-      a('jobs', 'Jobs') + a('apps', 'Applications') + a('news', 'AI news') + (isAdmin() ? a('team', 'Team &amp; access', '<span class="pill">Admin</span>') : '') + '</nav>' +
-      '<div class="cra-user"><span>Signed in as <b>' + esc(state.name) + '</b> &middot; ' + (isAdmin() ? 'Admin' : 'Editor') + '</span><a href="#" id="signout">Sign out</a></div></div></div>';
-  }
-  function page(active, html) {
-    root.innerHTML = topbar(active) + '<div class="cra-wrap">' + html + '</div>';
-    document.getElementById('signout').addEventListener('click', function (e) { e.preventDefault(); signOut(); });
-  }
-  function route() {
-    if (!state.role) return;
-    var h = (location.hash || '#jobs').slice(1).split('/');
-    var view = h[0] || 'jobs';
-    if (view === 'edit') return viewEdit(h[1] || null);
-    if (view === 'apps') return viewApps(h[1] || null);
-    if (view === 'news') return viewNews();
-    if (view === 'week' && h[1]) return viewWeek(h[1]);
-    if (view === 'team' && isAdmin()) return viewTeam();
-    return viewJobs();
-  }
-  window.addEventListener('hashchange', route);
 
   // ------------------------------------------------------------ jobs list
   function viewJobs() {
@@ -374,176 +235,17 @@
     });
   }
 
-
-  // ------------------------------------------------------------ AI news (weekly recap; docs/news-schema.sql)
-  var TOPICS = ['Claude', 'Smart glasses', 'Models', 'Voice', 'App stores', 'Industry'];
-  function monday(d) { var x = new Date(d + 'T12:00:00Z'); return x.getUTCDay() === 1; }
-  function weekLabel(ws) {
-    var a = new Date(ws + 'T12:00:00Z'), b = new Date(a.getTime() + 6 * 864e5);
-    return MONTHS[a.getUTCMonth()] + ' ' + a.getUTCDate() + ' – ' + (a.getUTCMonth() === b.getUTCMonth() ? '' : MONTHS[b.getUTCMonth()] + ' ') + b.getUTCDate() + ', ' + b.getUTCFullYear();
-  }
-  function thisMonday() { var d = new Date(); d.setUTCDate(d.getUTCDate() + ((8 - d.getUTCDay()) % 7 || 7) - 7); return d.toISOString().slice(0, 10); }
-
-  function viewNews() {
-    page('news', '<p class="cra-empty">Loading…</p>');
-    Promise.all([sb.from('ai_news_weeks').select('*').order('week_start', { ascending: false }), sb.from('ai_news_items').select('week_start')]).then(function (r) {
-      if (r[0].error) { page('news', '<p class="cra-err">' + esc(r[0].error.message) + '</p>'); return; }
-      var weeks = r[0].data || [], n = {};
-      (r[1].data || []).forEach(function (i) { n[i.week_start] = (n[i.week_start] || 0) + 1; });
-      var rows = weeks.map(function (w) {
-        var pub = w.status === 'published';
-        return '<tr><td><b>' + esc(weekLabel(w.week_start)) + '</b><br><small style="color:var(--color-text-secondary)">' + esc(w.brief) + '</small></td>' +
-          '<td><span class="st ' + (pub ? 'pub' : 'draft') + '">' + (pub ? 'Published' : 'Draft') + '</span></td><td>' + (n[w.week_start] || 0) + '</td><td>' + fmt(w.published_at) + '</td>' +
-          '<td class="cra-act"><a href="#week/' + w.week_start + '">Edit</a>' + (pub ? '<a href="/ai-news.html#w-' + w.week_start + '" target="_blank" rel="noopener">View live</a>' : '') + '</td></tr>';
-      }).join('');
-      page('news', '<div class="cra-bar"><h1 class="cra-h1">AI news</h1><div class="cra-pub"><button class="cra-btn" id="n-import">Import a week</button><button class="cra-btn pri" id="n-new">+ New week</button></div></div>' +
-        '<div class="cra-card cra-scroll">' + (weeks.length ? '<table class="cra-table"><tr><th>Week</th><th>Status</th><th>Stories</th><th>Published</th><th>Actions</th></tr>' + rows + '</table>'
-          : '<p class="cra-empty">No weeks yet.</p>') + '</div>' +
-        '<div class="cra-card"><h2>How a week goes live</h2><p style="margin:0;font-size:.9rem">Each week starts as a <b>draft</b>: nothing shows on the site. Check every story (open its source link), then press <b>Publish week</b>. The newest stories marked for the ticker appear on the home page by themselves.</p></div>' +
-        '<div class="cra-card" id="n-imp" hidden><h2>Import a week</h2><p class="cra-hint" style="margin:0 0 8px">Paste the week file you were sent (it starts with <code>{"week_start"</code>). It is added as a draft for you to check.</p>' +
-        '<div class="cra-f"><textarea id="n-json" style="min-height:220px;font-family:ui-monospace,Consolas,monospace;font-size:.82rem"></textarea></div><button class="cra-btn pri" id="n-go">Add as a draft</button><p class="cra-err" id="n-err"></p></div>');
-      document.getElementById('n-new').addEventListener('click', function () {
-        var ws = prompt('Week starting (a Monday, YYYY-MM-DD):', thisMonday()); if (!ws) return;
-        if (!/^\d{4}-\d{2}-\d{2}$/.test(ws) || !monday(ws)) { toast('That date is not a Monday', true); return; }
-        sb.from('ai_news_weeks').insert({ week_start: ws, brief: 'One sentence that sums up the week.' }).then(function (x) {
-          if (x.error) toast(x.error.code === '23505' ? 'That week already exists' : x.error.message, true); else location.hash = '#week/' + ws;
-        });
-      });
-      document.getElementById('n-import').addEventListener('click', function () { document.getElementById('n-imp').hidden = false; document.getElementById('n-json').focus(); });
-      document.getElementById('n-go').addEventListener('click', function () {
-        var err = document.getElementById('n-err'); err.textContent = '';
-        var d; try { d = JSON.parse(document.getElementById('n-json').value); } catch (e) { err.textContent = 'That is not a valid week file: ' + e.message; return; }
-        var problem = validateWeek(d); if (problem) { err.textContent = problem; return; }
-        sb.from('ai_news_weeks').insert({ week_start: d.week_start, brief: d.brief }).then(function (x) {
-          if (x.error) { err.textContent = x.error.code === '23505' ? 'That week already exists. Open it and edit it instead.' : x.error.message; return; }
-          var items = d.items.map(function (i) { return { slug: i.slug, week_start: d.week_start, topic: i.topic, source: i.source, source_url: i.source_url, source_date: i.source_date, headline: i.headline, summary: i.summary, why: i.why, ticker: i.ticker || null }; });
-          sb.from('ai_news_items').insert(items).then(function (y) {
-            if (y.error) { err.textContent = 'The week was added, but its stories were not: ' + y.error.message; return; }
-            toast('Added as a draft'); location.hash = '#week/' + d.week_start;
-          });
-        });
-      });
-    });
-  }
-  function validateWeek(d) {
-    if (!d || !/^\d{4}-\d{2}-\d{2}$/.test(d.week_start || '') || !monday(d.week_start)) return 'week_start must be a Monday (YYYY-MM-DD).';
-    if (!d.brief) return 'The week needs its one-sentence summary (brief).';
-    if (!Array.isArray(d.items) || !d.items.length) return 'The week has no stories.';
-    for (var k = 0; k < d.items.length; k++) { var p = storyProblem(d.items[k]); if (p) return 'Story ' + (k + 1) + ': ' + p; }
-    return '';
-  }
-  function storyProblem(i) {
-    if (!/^[a-z0-9-]+$/.test(i.slug || '')) return 'the short name may only use a–z, 0–9 and dashes';
-    if (TOPICS.indexOf(i.topic) < 0) return 'the topic must be one of: ' + TOPICS.join(', ');
-    if (!i.source) return 'the source is missing';
-    if (!/^https:\/\//.test(i.source_url || '')) return 'the source link must start with https://';
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(i.source_date || '')) return 'the date must be YYYY-MM-DD';
-    if (!i.headline || !i.summary || !i.why) return 'the headline, summary and “why it matters” are all needed';
-    return '';
-  }
-
-  function viewWeek(ws) {
-    page('news', '<p class="cra-empty">Loading…</p>');
-    Promise.all([sb.from('ai_news_weeks').select('*').eq('week_start', ws).maybeSingle(), sb.from('ai_news_items').select('*').eq('week_start', ws).order('source_date', { ascending: false })]).then(function (r) {
-      if (r[0].error || !r[0].data) { page('news', '<p class="cra-err">' + esc((r[0].error && r[0].error.message) || 'That week was not found.') + '</p>'); return; }
-      var w = r[0].data, items = r[1].data || [], pub = w.status === 'published';
-      var cards = items.map(function (i) {
-        var flag = (i.origin === 'auto' ? '<span class="st draft" style="margin-right:6px">Added by the daily job</span>' : '') + (i.hidden ? '<span class="st" style="background:#fee2e2;color:#991b1b">Pulled: not on the site</span>' : '');
-        return '<div class="cra-card" data-id="' + i.id + '" data-hidden="' + (i.hidden ? '1' : '') + '">' + (flag ? '<p style="margin:0 0 10px">' + flag + '</p>' : '') +
-          '<div class="cra-r3"><div class="cra-f"><label>Source</label><input type="text" data-k="source" value="' + esc(i.source) + '"></div>' +
-          '<div class="cra-f"><label>Date on the source</label><input type="date" data-k="source_date" value="' + esc(i.source_date) + '"></div>' +
-          '<div class="cra-f"><label>Topic</label><select data-k="topic">' + TOPICS.map(function (t) { return opt(t, t, i.topic); }).join('') + '</select></div></div>' +
-          '<div class="cra-f"><label>Headline (exactly as the source publishes it)</label><input type="text" data-k="headline" value="' + esc(i.headline) + '"></div>' +
-          '<div class="cra-f"><label>Source link</label><input type="text" data-k="source_url" value="' + esc(i.source_url) + '"><p class="hint"><a href="' + esc(i.source_url) + '" target="_blank" rel="noopener noreferrer">Open the source</a> and check the date and every fact before publishing.</p></div>' +
-          '<div class="cra-f"><label>Summary (our words)</label><textarea data-k="summary" style="min-height:70px">' + esc(i.summary) + '</textarea></div>' +
-          '<div class="cra-f"><label>Why it matters to us</label><textarea data-k="why" style="min-height:60px">' + esc(i.why) + '</textarea></div>' +
-          '<div class="cra-r2"><div class="cra-f"><label>Home-page ticker line (optional)</label><input type="text" data-k="ticker" maxlength="90" value="' + esc(i.ticker || '') + '"></div>' +
-          '<div class="cra-f"><label>Short name (used in links)</label><input type="text" data-k="slug" value="' + esc(i.slug) + '"></div></div>' +
-          '<div class="cra-pub"><button class="cra-btn pri" data-save>Save story</button><button class="cra-btn" data-hide>' + (i.hidden ? 'Restore to the site' : 'Pull from the site') + '</button><button class="cra-btn dng" data-del>Delete story</button></div></div>';
-      }).join('');
-      page('news', '<div class="cra-bar"><div><div style="font-size:.9rem"><a href="#news" style="font-weight:700;text-decoration:none">&larr; AI news</a></div><h1 class="cra-h1">' + esc(weekLabel(ws)) +
-        ' <span class="st ' + (pub ? 'pub' : 'draft') + '">' + (pub ? 'Published' : 'Draft') + '</span></h1></div><div class="cra-pub">' +
-        (pub ? '<a class="cra-btn" href="/ai-news.html#w-' + ws + '" target="_blank" rel="noopener">View live</a><button class="cra-btn" id="w-unpub">Unpublish</button>' : '<button class="cra-btn pri" id="w-pub">Publish week</button>') +
-        (isAdmin() ? '<button class="cra-btn dng" id="w-del">Delete week</button>' : '') + '</div></div>' +
-        '<div class="cra-card"><h2>The week in one sentence</h2><div class="cra-f"><textarea id="w-brief" style="min-height:70px">' + esc(w.brief) + '</textarea></div><button class="cra-btn" id="w-save">Save</button></div>' +
-        '<h2 style="font-size:1.1rem;margin:22px 0 12px">Stories (' + items.length + ')</h2>' + (cards || '<div class="cra-card"><p class="cra-empty">No stories yet.</p></div>') +
-        '<button class="cra-btn" id="w-add">+ Add a story</button>');
-      var setWeek = function (patch, msg) { sb.from('ai_news_weeks').update(patch).eq('week_start', ws).then(function (x) { if (x.error) toast(x.error.message, true); else { toast(msg); viewWeek(ws); } }); };
-      document.getElementById('w-save').addEventListener('click', function () { setWeek({ brief: document.getElementById('w-brief').value.trim() }, 'Saved'); });
-      var bp = document.getElementById('w-pub');
-      if (bp) bp.addEventListener('click', function () {
-        var bad = items.map(storyProblem).filter(Boolean);
-        if (!items.length) { toast('Add at least one story first', true); return; }
-        if (bad.length) { toast('Fix this first: ' + bad[0], true); return; }
-        if (confirm('Publish this week? Its ' + items.length + ' stories appear on takgio.com right away.')) setWeek({ status: 'published', published_at: w.published_at || new Date().toISOString() }, 'Published');
-      });
-      var bu = document.getElementById('w-unpub');
-      if (bu) bu.addEventListener('click', function () { if (confirm('Take this week off the site?')) setWeek({ status: 'draft' }, 'Unpublished'); });
-      var bd = document.getElementById('w-del');
-      if (bd) bd.addEventListener('click', function () {
-        if (!confirm('Delete this week and all its stories for good?')) return;
-        sb.from('ai_news_weeks').delete().eq('week_start', ws).select().then(function (x) {
-          if (x.error) toast(x.error.message, true); else if (!x.data || !x.data.length) toast('Not deleted (only admins can delete a week)', true); else { toast('Deleted'); location.hash = '#news'; }
-        });
-      });
-      document.getElementById('w-add').addEventListener('click', function () {
-        var slug = 'story-' + Date.now().toString(36);
-        sb.from('ai_news_items').insert({ slug: slug, week_start: ws, topic: 'Claude', source: 'Source name', source_url: 'https://', source_date: ws, headline: 'Headline', summary: 'Summary', why: 'Why it matters to us' })
-          .then(function (x) { if (x.error) toast(x.error.message, true); else viewWeek(ws); });
-      });
-      document.querySelectorAll('[data-id]').forEach(function (card) {
-        var id = card.getAttribute('data-id');
-        card.querySelector('[data-save]').addEventListener('click', function () {
-          var d = {}; card.querySelectorAll('[data-k]').forEach(function (f) { d[f.getAttribute('data-k')] = f.value.trim(); });
-          d.ticker = d.ticker || null;
-          var p = storyProblem(d); if (p) { toast('Fix this first: ' + p, true); return; }
-          sb.from('ai_news_items').update(d).eq('id', id).then(function (x) { if (x.error) toast(x.error.code === '23505' ? 'That short name is used by another story' : x.error.message, true); else toast('Saved'); });
-        });
-        card.querySelector('[data-hide]').addEventListener('click', function () {
-          var hide = !card.getAttribute('data-hidden');
-          sb.from('ai_news_items').update({ hidden: hide }).eq('id', id).then(function (x) { if (x.error) toast(x.error.message, true); else { toast(hide ? 'Pulled from the site' : 'Restored to the site'); viewWeek(ws); } });
-        });
-        card.querySelector('[data-del]').addEventListener('click', function () {
-          if (!confirm('Delete this story?')) return;
-          sb.from('ai_news_items').delete().eq('id', id).then(function (x) { if (x.error) toast(x.error.message, true); else viewWeek(ws); });
-        });
-      });
-    });
-  }
-
-  // ------------------------------------------------------------ team & access (admins only)
-  function viewTeam() {
-    page('team', '<p class="cra-empty">Loading…</p>');
-    Promise.all([sb.from('careers_editors').select('*').order('created_at'), sb.from('audit_log').select('*').order('at', { ascending: false }).limit(50)]).then(function (r) {
-      var people = r[0].data || [], log = r[1].data || [];
-      var rows = people.map(function (p) {
-        var me = p.user_id === state.user.id;
-        return '<tr><td><b>' + esc(p.display_name || 'Unnamed') + '</b>' + (me ? ' <small>(you)</small>' : '') + '</td><td><span class="st ' + (p.role === 'admin' ? 'pub' : 'new') + '">' + (p.role === 'admin' ? 'Admin' : 'Editor') + '</span></td>' +
-          '<td>' + fmt(p.created_at) + '</td><td class="cra-act">' + (me ? '' : '<a href="#" data-role="' + (p.role === 'admin' ? 'editor' : 'admin') + '" data-uid="' + p.user_id + '">Make ' + (p.role === 'admin' ? 'Editor' : 'Admin') + '</a><a href="#" data-remove="' + p.user_id + '" style="color:#b91c1c">Remove</a>') + '</td></tr>';
-      }).join('');
-      var items = log.map(function (l) {
-        var verb = { insert: 'created', update: 'changed', delete: 'deleted' }[l.action] || l.action;
-        return '<li>' + esc((l.actor_email || 'Someone') + ' ' + verb + ' ' + (l.entity === 'jobs' ? 'a job' : l.entity === 'job_applications' ? 'an application' : l.entity === 'ai_news_weeks' ? 'an AI news week' : l.entity === 'ai_news_items' ? 'an AI news story' : l.entity) + (l.detail && l.detail.title ? ' “' + l.detail.title + '”' : '') + (l.detail && l.detail.status ? ' (' + l.detail.status + ')' : '')) +
-          '<small>' + esc(new Date(l.at).toLocaleString()) + '</small></li>';
-      }).join('');
-      page('team', '<div class="cra-bar"><h1 class="cra-h1">Team &amp; access</h1></div><div class="cra-grid"><div class="cra-card cra-scroll"><h2>People with careers access</h2>' +
-        '<table class="cra-table"><tr><th>Name</th><th>Role</th><th>Added</th><th></th></tr>' + (rows || '<tr><td colspan="4" class="cra-empty">Nobody yet.</td></tr>') + '</table>' +
-        '<p class="cra-hint" style="margin:10px 12px 0">To add someone: invite their email in Supabase (Authentication → Users), then ask an admin to give them a role here. Adding people from this page comes later.</p></div>' +
-        '<div class="cra-card"><h2>What each role can do</h2><ul class="cra-check"><li><span class="ok">✓</span><span><b>Editor:</b> create, edit, publish and unpublish jobs; review applicants and change their status; add, edit, publish and delete AI news stories</span></li>' +
-        '<li><span class="ok">✓</span><span><b>Admin:</b> everything an Editor can, plus delete jobs, applicants and whole AI news weeks, download the full list, and manage who has access</span></li></ul></div></div>' +
-        '<div class="cra-card"><h2>Activity</h2><ul class="cra-log">' + (items || '<li>Nothing recorded yet.</li>') + '</ul><p class="cra-hint" style="margin:10px 0 0">Every publish, edit and delete is recorded with who and when. Nobody can erase an entry.</p></div>');
-      document.querySelector('.cra-wrap').addEventListener('click', function (e) {
-        var a = e.target.closest('[data-role],[data-remove]'); if (!a) return; e.preventDefault();
-        var req = a.hasAttribute('data-remove') ? (confirm('Remove this person’s careers access?') ? sb.from('careers_editors').delete().eq('user_id', a.getAttribute('data-remove')) : null)
-          : sb.from('careers_editors').update({ role: a.getAttribute('data-role') }).eq('user_id', a.getAttribute('data-uid'));
-        if (req) req.then(function (x) { if (x.error) toast(x.error.message, true); else { toast('Done'); viewTeam(); } });
-      });
-    });
-  }
-
-  // ------------------------------------------------------------ start
-  sb.auth.onAuthStateChange(function (event) { if (event === 'PASSWORD_RECOVERY') { shell('<h2>Set a new password</h2><form id="f-new"><div class="cra-f"><input type="password" id="np" minlength="8" required placeholder="New password (8+ characters)"></div><button class="cra-btn pri" style="width:100%" type="submit">Update password</button><p class="cra-err" id="err"></p></form>'); document.getElementById('f-new').addEventListener('submit', function (e) { e.preventDefault(); sb.auth.updateUser({ password: document.getElementById('np').value }).then(function (r) { if (r.error) document.getElementById('err').textContent = r.error.message; else afterAuth(); }); }); } });
-  sb.auth.getSession().then(function (s) { if (!s.data.session) showLogin(); else afterAuth(); });
-
-  window.__adminTest = { slugify: slugify, esc: esc, fmt: fmt, weekLabel: weekLabel, validateWeek: validateWeek, monday: monday };
+  // older links (#news, #week/..., #team) now live on their own pages
+  TakgioAdmin.start({
+    area: 'Careers',
+    tabs: [['jobs', 'Jobs'], ['apps', 'Applications']],
+    route: function (a, view, parts) {
+      bind(a); state.apps = state.apps || []; state.selApp = state.selApp || null;
+      if (view === 'news' || view === 'week') return location.replace('/admin/news' + location.hash);
+      if (view === 'team') return location.replace('/admin/team');
+      if (view === 'edit') return viewEdit(parts[1] || null);
+      if (view === 'apps') return viewApps(parts[1] || null);
+      return viewJobs();
+    }
+  });
 })();

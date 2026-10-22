@@ -22,7 +22,7 @@
     return;
   }
 
-  say('Pull this story?', 'Press the button to take this story off takgio.com right away. You can restore it later in the careers admin, AI news tab.');
+  say('Pull this story?', 'Press the button to take this story off takgio.com right away. You can restore it later in the News admin (takgio.com/admin/news).');
   btn.hidden = false;
 
   btn.addEventListener('click', function () {
