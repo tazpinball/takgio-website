@@ -1,7 +1,15 @@
 {
-  "version": "2.53.0",
+  "version": "2.53.1",
   "date": "2026-10-23",
   "releases": [
+    {
+      "version": "2.53.1",
+      "date": "2026-10-23",
+      "summary": "Customer story: bid amounts removed",
+      "changes": [
+        "ConcreteIQ customer story: the $1,669,900 submitted total and the $1,834,900 reissued total are replaced with 'the total bid price' and 'the corrected price (+$165,000 for panel reinforcing)'"
+      ]
+    },
     {
       "version": "2.53.0",
       "date": "2026-10-23",
