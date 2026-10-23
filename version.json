@@ -1,7 +1,17 @@
 {
-  "version": "2.52.0",
-  "date": "2026-10-22",
+  "version": "2.53.0",
+  "date": "2026-10-23",
   "releases": [
+    {
+      "version": "2.53.0",
+      "date": "2026-10-23",
+      "summary": "ConcreteIQ customer story added to the case studies",
+      "changes": [
+        "New page /case-study-construction-concreteiq-customer-story.html: the ConcreteIQ customer story (from ConcreteIQ-Customer-Story-1.docx), with its own URL so it can be cited",
+        "Listed on Case Studies (Construction) and linked from the ConcreteIQ case study; added to sitemap.xml",
+        "New .cs-quote style for customer quotes"
+      ]
+    },
     {
       "version": "2.52.0",
       "date": "2026-10-22",
