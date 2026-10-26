@@ -5,18 +5,20 @@
 > (`releases`, newest first) and in `git log`.
 
 *Started 2026-10-26 (it did not exist before this date). Built from `version.json`, `git log` and the repo itself.
-Supabase was not looked at from here, so nothing in this file says what is installed or running there.*
+The Supabase side was checked by Ted in the dashboard on 26 Oct (below). A cloud session cannot reach Supabase or
+takgio.com (the network policy refuses both hosts); Ted runs the checks in the dashboard.*
 
 ## Where the next session starts
 
 ```
-LIVE     v2.53.2 (26 Oct): the internal files blocked from the site, this file committed. Ted confirmed
-         takgio.com/CLAUDE.md now lands on the home page. v2.53.3 (CLAUDE.md and README.md brought up to date) goes
-         through a PR. Vercel deploys master on push.
+LIVE     v2.53.3 (26 Oct). v2.53.2 blocked the internal files from the site (Ted confirmed takgio.com/CLAUDE.md
+         lands on the home page); v2.53.3 brought CLAUDE.md and README.md up to date. Vercel deploys master on push.
+         PR tazpinball/takgio-website#3 carries v2.53.4 (this file: Supabase checked) and v2.54.0 (the ticker).
 GIT      master = the deployed site. Cloud sessions work on a claude/* branch and open a draft PR into master;
          merging the PR is what deploys.
 DEMOS    The Demos link check passes: 32 pages / 33 links / 0 wrong href (26 Oct).
-NEXT     Nothing in progress after v2.53.3. Ted chooses the next piece of work.
+NEXT     Ted reviews the new hero graphic (v2.55.0) on its PR's Vercel preview, desktop and phone, then merges.
+SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked 26 Oct, see Open / verified).
 ```
 
 ## What the site is
@@ -28,7 +30,21 @@ NEXT     Nothing in progress after v2.53.3. Ted chooses the next piece of work.
   is "We turn human expertise into AI products." (v2.46.0), and the line under it is "We pair human experts with AI"
   (v2.48.1). There are six products: ConcreteIQ, Brickture, Hoof Harted, True Record, Ann Elise and Pinball-QR, with
   Meta Ray-Ban Display shown as "Coming soon".
-- **Home hero (v2.49.0):** a three-panel graphic (`js/hero-xform.js`) and four differentiator tiles: *A real expert
+- **Home hero graphic (v2.55.0):** "how a Takgio product is made" in three numbered steps, plain HTML and CSS (`.hx`
+  in `index.html` and `css/styles.css`; `js/hero-models.js` draws only the two model pictures): 01 Human expertise (practising experts and what they know from:
+  interviews, job records, drawings and specs, field know-how; "Decades of know-how", Ted) -> 02 Dual-model AI (the general-purpose LLM and the
+  Takgio expert model, "work as a pair"; the expert model is the one highlighted card) -> 03 Takgio apps (ConcreteIQ,
+  Brickture, myBuyersGuide; it is "myBuyersGuide", Ted 26 Oct). A 6 s CSS loop plays the story: interview waveform and
+  one source lit -> pulse into the expert model (ripple, meter) -> pulses to the apps, which show what they do; every
+  line also carries a steady stream of moving dots and has a port at each end (v2.55.1, Ted: show the data flowing). The
+  pictures are turning lattices in the v2.48 graphic's style (`js/hero-models.js`; Ted: the icons looked generic), told
+  apart by SHAPE (v2.55.4, Ted: the combined model must look like neither, yet clearly both): the LLM a round cool
+  lattice; the Takgio expert model a gold four-pointed star (the Takgio spark), lit as the pulse arrives; each app card
+  shows the COMBINED model instead of its app icon (v2.55.3): ~70% cool LLM lattice with a small gold star at its heart
+  (v2.55.5, Ted's proportions; the expert star alone was also made 25% smaller). Ted
+  asked for it to feel active and not like stock art. Phones stack the steps. It replaced the v2.48 canvas graphic
+  (`js/hero-xform.js`, deleted; its two licensed pictures stay in `images/hero/`, unused).
+- **Home hero copy (v2.49.0):** four differentiator tiles: *A real expert
   first*, *In their own words* (1,400+ statements for ConcreteIQ), *Tested on real work*, and *$144,219*. The old
   stats are gone everywhere (products shipped, commits, ratings); About and Contact use the same four tiles
   (v2.49.1).
@@ -45,6 +61,11 @@ NEXT     Nothing in progress after v2.53.3. Ted chooses the next piece of work.
   - OpenAI is not read directly (v2.50.1).
 - **Internal project dashboard:** `login.html`, `dashboard.html`, `tasks.html`, `project.html` and `ideas.html`, plus
   the `generate-project-update` function.
+- **Home ticker (v2.54.0):** every line is a link. 8 Takgio lines in `index.html` (each goes to the page that backs it:
+  the announcement, `#how-it-works`, the ConcreteIQ customer story and product page, the Hoof Harted and True Record
+  case studies, the Meta page, `#market`), plus the 5 newest AI news stories added by `js/news-feed.js`, labelled
+  AI NEWS and linked to `/ai-news.html#<slug>`. A story's ticker line is used if it has one, else its headline cut at
+  90 characters. The two "first commit" lines were reworded to "... days after work began" (Ted, 26 Oct).
 - **Routing:** `vercel.json` holds the rewrites for the clean URLs above, plus `/hoof` and `/marketing/hoof-harted`.
   `/services` permanently redirects to `/industries.html`.
 
@@ -71,10 +92,18 @@ Full notes for each release are in `version.json`.
   code). HANDOFF.md had been kept out of git for this reason (`.gitignore`, 28 Sep); it is committed from v2.53.2.
   🔴 **Any new internal file or folder goes into BOTH `.vercelignore` and the redirects in `vercel.json`.**
 
-- **The Supabase side of v2.50–2.52 has not been checked from this repo.** `docs/news-daily-schema.sql` (the schedule,
-  the job's tables and a Vault secret) and `docs/admin-team-emails.sql` have to be run in the Supabase SQL editor, and
-  the functions have to be deployed to Supabase. Pushing to git deploys neither. Whether either has happened is not
-  recorded. Ask Ted, or check in the Supabase dashboard.
+- **The Supabase side is installed and running** (Ted, in the dashboard, 26 Oct). Pushing to git deploys none of it;
+  SQL is run in the SQL editor and functions are deployed with the Supabase CLI.
+  - SQL: the news and careers tables, the daily-news columns, run log and Vault secret, pg_cron, and `admin_team()`
+    are all present.
+  - Functions: all five are deployed. `ai-news-daily` and `ai-news-pull` were last updated 22 Oct; the careers pair
+    on 8 Oct.
+  - Daily job: `ai-news-daily` runs at `0 11 * * *` (11:00 UTC), active. Runs: 23 Oct checked 19 and added 4;
+    24 Oct checked 2 and added 0; 25 and 26 Oct checked 0. All 8 sources were read on 26 Oct with no errors, so a
+    "checked 0" day means nothing new was published, not a failure. A source that fails shows "could not be read"
+    in the run's `report->'sources'`.
+  - Dashboard: https://supabase.com/dashboard/project/pwmrbmjlgweahridxvgk (SQL editor: `/sql/new`, functions:
+    `/functions`).
 
 ## Rules that bind every change (from CLAUDE.md)
 

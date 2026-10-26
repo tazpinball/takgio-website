@@ -1,7 +1,88 @@
 {
-  "version": "2.53.3",
+  "version": "2.55.5",
   "date": "2026-10-26",
   "releases": [
+    {
+      "version": "2.55.5",
+      "date": "2026-10-26",
+      "summary": "Hero graphic: smaller expert-model star; the combined model is about 70% LLM, 30% expert model",
+      "changes": [
+        "The Takgio expert model's gold star is 25% smaller",
+        "Each app's combined model is now mostly the blue-purple LLM lattice (about 70%) with a small gold star at its heart (about 30%), joined at the star's points"
+      ]
+    },
+    {
+      "version": "2.55.4",
+      "date": "2026-10-26",
+      "summary": "Hero graphic: each model has its own shape; the combined model is visibly both",
+      "changes": [
+        "The Takgio expert model is now a gold four-pointed star lattice (the Takgio spark), so it no longer looks like a smaller LLM",
+        "The general-purpose LLM stays the round blue, cyan and purple lattice",
+        "Each app's combined model is the gold star set inside a ring of the blue-purple lattice, its points reaching the ring and the joining lines blending the two colours: unlike either model, plainly made of both. It turns as one piece",
+        "The star and the combined model turn rigidly, so no connecting line stretches as they spin; the pictures sit centred in narrow cards"
+      ]
+    },
+    {
+      "version": "2.55.3",
+      "date": "2026-10-26",
+      "summary": "Hero graphic: each app shows the combined model; 'Decades of know-how'",
+      "changes": [
+        "Each Takgio app card (ConcreteIQ, Brickture, myBuyersGuide) now shows one combined-model picture in place of its app icon: the gold Takgio expert model lattice at the heart of the blue-purple LLM lattice, turning, and lighting up as the data pulse reaches that app",
+        "The experts card now says 'Decades of know-how from real work' (was 'Years')"
+      ]
+    },
+    {
+      "version": "2.55.2",
+      "date": "2026-10-26",
+      "summary": "Hero graphic: the two models keep the site's turning lattice pictures",
+      "changes": [
+        "The general-purpose LLM card shows the big blue, cyan and purple turning lattice, and the Takgio expert model card the smaller gold one, as on the site before; the generic node ring and star icon are gone",
+        "The expert model's lattice lights up when the data pulse reaches it, in step with the rest of the loop; the LLM's lights up on its own",
+        "New js/hero-models.js draws just the two lattices (ported from the v2.48 graphic); paused when scrolled off screen, a still frame for reduced motion"
+      ]
+    },
+    {
+      "version": "2.55.1",
+      "date": "2026-10-26",
+      "summary": "Hero graphic: the lines between the steps show data flowing",
+      "changes": [
+        "Each line now carries a steady stream of small moving dots, so data is always visibly flowing, on top of the bright pulse that runs once per cycle",
+        "A port at each end of every line, which lights up when the pulse arrives",
+        "Slightly wider gaps between the columns so the curves read clearly; on phones the short links between the steps carry moving dots too"
+      ]
+    },
+    {
+      "version": "2.55.0",
+      "date": "2026-10-26",
+      "summary": "Home hero graphic redrawn and animated: how a Takgio product is made, in three steps",
+      "changes": [
+        "The canvas graphic (glowing heads, flying document icons, three coloured panels) is replaced by a plain HTML and CSS diagram in three numbered steps: 01 Human expertise (practising experts, and what they know from: interviews, job records, drawings and specs, field know-how), 02 Dual-model AI (the general-purpose LLM and the Takgio expert model working as a pair, the expert model highlighted), 03 Takgio apps (ConcreteIQ and Brickture with their real icons, and myBuyersGuide)",
+        "It plays the story on a 6-second loop: a live interview waveform and one knowledge source lighting up, a pulse running into the Takgio expert model (which ripples and fills its meter), then pulses fanning out to the three apps, which light up with what they do ($144,219 of missing steel caught; step-by-step build instructions; advice from a real expert). The LLM's ring of nodes turns and signals pass both ways between the two models",
+        "Custom animated pieces in place of stock-style icons; everything stops for visitors who ask for reduced motion",
+        "Phones show the three steps stacked, the two models side by side and the apps one per row; in the two-column hero at 1024-1200px the app names sit under their icons",
+        "js/hero-xform.js is deleted (no script is needed now)"
+      ]
+    },
+    {
+      "version": "2.54.0",
+      "date": "2026-10-26",
+      "summary": "Home ticker: every line is a link, and the 5 newest AI news headlines run in it",
+      "changes": [
+        "Every Takgio line in the home-page ticker now goes to the page that backs it up: the How it works section, the ConcreteIQ customer story and product page, the Hoof Harted and True Record case studies, the Meta Ray-Ban Display page, and the market numbers on the home page (new anchor #market)",
+        "The 5 newest stories from AI news we're watching are mixed into the ticker, labelled AI NEWS, each opening its story on /ai-news; a story's short ticker line is used if it has one, otherwise its headline (cut at 90 characters). Before, only stories with a ticker line appeared, at most 3",
+        "Reworded: 'Hoof Harted: on the App Store 20 days after work began' and 'True Record: submitted to the App Store 16 days after work began' (they said 'first commit')",
+        "The NEWS and AI NEWS badges no longer show a stray diamond inside them"
+      ]
+    },
+    {
+      "version": "2.53.4",
+      "date": "2026-10-26",
+      "summary": "HANDOFF.md: the Supabase side recorded as installed and running",
+      "changes": [
+        "HANDOFF.md: the SQL files, the five functions and the daily AI news job were checked in the Supabase dashboard (26 Oct) and are installed and running; the open question is closed",
+        "No page changes"
+      ]
+    },
     {
       "version": "2.53.3",
       "date": "2026-10-26",

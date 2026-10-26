@@ -3475,6 +3475,7 @@ section[id], article[id] { scroll-margin-top: 72px; }
 .h-ticker a:hover{text-decoration:underline}
 .h-ticker .tk{display:inline-block;font-size:.62rem;font-weight:800;letter-spacing:.1em;padding:3px 7px;border-radius:5px;margin-right:9px;vertical-align:2px;background:rgba(255,255,255,.22)}
 .h-ticker .tk-ai{background:rgba(11,13,28,.35)}
+.h-ticker .tk::before{content:none}
 @media (prefers-reduced-motion:reduce){.h-ticker a[aria-hidden="true"]{display:none}}
 /* ===== News v3: compact, Google-style (prefix g-) ===== */
 .g-page{background:#fff;color:#1f1f1f;padding:36px 0 88px}
@@ -3608,7 +3609,7 @@ section[id], article[id] { scroll-margin-top: 72px; }
 @media (max-width: 900px) { .xm-flow { grid-template-columns: 1fr 1fr; } .xm-step:not(:last-child)::after { display: none; } }
 @media (max-width: 560px) { .xm-flow { grid-template-columns: 1fr; gap: 14px; } .xm-band { padding: 34px 0 30px; } }
 
-/* ===== v2.48.0 home: hero graphic "human expertise into AI products" (canvas, js/hero-xform.js) and the reel as a portfolio tile ===== */
+/* ===== v2.48.0 home: the reel as a portfolio tile (the hero graphic that started here is now .hx, v2.55.0, below) ===== */
 .t-reel{padding:0;min-height:460px;background:radial-gradient(120% 90% at 85% 0,#1d2b72 0,#0b0d1c 58%);border-color:rgba(122,162,255,.35);display:block}
 .t-reel::before{display:none}
 .t-reel .h-reel{position:absolute!important;inset:0;margin:0!important;height:auto!important;min-height:0!important;align-self:auto;--m:1;
@@ -3624,37 +3625,127 @@ section[id], article[id] { scroll-margin-top: 72px; }
   .t-hoof{grid-column:span 5}
   .t-meta{grid-column:span 12}
 }
-.xg{position:relative;width:100%;aspect-ratio:66/56;max-width:660px;margin-left:auto;color:#fff;font-family:inherit}
-.xg-cap{position:absolute;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#8fa2e6;white-space:nowrap}
-.xg-c{overflow:visible;container-type:inline-size}
-.xg-c canvas{position:absolute;inset:0;width:100%;height:100%}
-.xg-c .xc-man,.xg-c .xc-fig{display:none!important}
-/* v2.49: panel titles, model labels, app cards and captions sit over the canvas, positioned in the 660 x 560 design space */
-.xc-ph{position:absolute;top:2.6%;width:31%;transform:translateX(-50%);text-align:center;line-height:1.15}
-.xc-ph b{display:block;font-size:max(10px,2.55cqw);font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#fff;text-shadow:0 0 1.2cqw rgba(140,170,255,.55)}
-.xc-ph span{display:block;margin-top:.3cqw;font-size:max(7px,1.5cqw);color:#9fb0e8}
-.xc-lb{position:absolute;left:50%;transform:translateX(-50%);text-align:center;white-space:nowrap;font-size:max(9px,2.2cqw);font-weight:700;color:#fff;line-height:1.2;text-shadow:0 0 1cqw rgba(232,120,225,.6)}
-.xc-lb small{display:block;font-size:max(7px,1.35cqw);font-weight:500;color:#b9a6dd}
-/* the app name pills under the figures scale with the graphic (8px floor for phones) */
-.xc-at{position:absolute;transform:translateX(-50%);z-index:2}
-.xc-tag{position:relative;display:flex;align-items:center;gap:.8cqw;padding:.75cqw 1.3cqw;border-radius:99px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.26);
-  font-weight:700;font-size:max(8px,1.75cqw);line-height:1;white-space:nowrap;backdrop-filter:blur(5px);animation:xc-bob 5s ease-in-out infinite}
-.xc-tag i{width:1.1cqw;height:1.1cqw;border-radius:50%;box-shadow:0 0 10px currentColor}
-@keyframes xc-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-@media (prefers-reduced-motion:reduce){.xc-tag{animation:none}}
-/* each panel: a short label at the bottom; hovering the panel (or tapping it on a touch screen) shows the full sentence */
-.xc-hot{position:absolute;top:.7%;height:98.6%;z-index:3;border-radius:2cqw;cursor:default}
-.xc-pc{position:absolute;left:0;right:0;bottom:4.2%;margin:0;text-align:center;font-size:max(9px,2.3cqw);font-weight:700;line-height:1.2;color:#e3e9ff}
-.xc-pc i{display:inline-grid;place-items:center;width:max(11px,2.3cqw);height:max(11px,2.3cqw);margin-left:.7cqw;border-radius:50%;vertical-align:.1em;
-  font:italic 700 max(8px,1.55cqw)/1 Georgia,serif;color:rgb(var(--pc));border:1px solid rgba(var(--pc),.8)}
-.xc-tip{position:absolute;left:5%;right:5%;bottom:3%;padding:1.6cqw 1.8cqw;border-radius:1.6cqw;background:rgba(10,12,30,.94);border:1px solid rgba(var(--pc),.9);
-  box-shadow:0 0 2.4cqw rgba(var(--pc),.35);font-size:max(10px,2cqw);font-weight:500;line-height:1.35;color:#eef2ff;text-align:center;
-  opacity:0;transform:translateY(6px);transition:opacity .2s ease,transform .2s ease;pointer-events:none}
-.xc-hot.open .xc-tip{opacity:1;transform:none}
-@media (hover:hover){.xc-hot:hover .xc-tip{opacity:1;transform:none}} /* touch screens: taps only, no sticky hover */
-@media (prefers-reduced-motion:reduce){.xc-tip{transition:none}}
-@media (max-width:1023px){.xg{max-width:520px;margin:12px auto 0}}
-@media (max-width:560px){.xg-cap{font-size:9px}}
+/* Home hero graphic (v2.55): how a Takgio product is made, in three steps. Practising experts -> the Takgio expert
+   model, paired with a general-purpose LLM -> Takgio's apps. HTML cards, thin wires between the columns, and one 6 s
+   cycle that plays the story: a source lights up while the expert talks (live waveform) -> a pulse runs to the expert
+   model, which ripples and fills its meter -> pulses fan out to the apps, which light up with what they do.
+   Everything is CSS; reduced motion shows the still diagram. Phones stack the steps. Prefix hx-. */
+.hx{--T:6s;position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) 40px minmax(0,1.06fr) 40px minmax(0,1fr);
+  grid-template-rows:auto 1fr;column-gap:0;row-gap:14px;width:100%;max-width:640px;margin-left:auto;color:#fff;font-size:14px;container-type:inline-size}
+.hx-step{margin:0;display:flex;align-items:center;gap:7px;white-space:nowrap;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9aa6cf}
+.hx-step span{display:inline-grid;place-items:center;min-width:24px;height:20px;padding:0 6px;border-radius:6px;font-size:10px;letter-spacing:.04em;
+  color:#dfe6ff;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12)}
+.hx-s1{grid-area:1/1}.hx-s2{grid-area:1/3}.hx-s3{grid-area:1/5}
+.hx-c1{grid-area:2/1}.hx-w1{grid-area:2/2}.hx-c2{grid-area:2/3}.hx-w2{grid-area:2/4}.hx-c3{grid-area:2/5}
+.hx-col{display:flex;flex-direction:column;gap:12px;min-width:0}
+.hx-card{position:relative;border-radius:16px;padding:15px 14px;background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.025));
+  border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 10px 30px -12px rgba(0,0,0,.6);backdrop-filter:blur(8px)}
+.hx-t{display:block;font-size:14px;font-weight:700;line-height:1.25;letter-spacing:-.005em;color:#fff}
+.hx-d{display:block;margin-top:3px;font-size:12px;line-height:1.4;color:#9aa6cf}
+.hx svg{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* 01: the experts. A live interview (a moving voice waveform), and the four sources taking turns, one per cycle */
+.hx-experts{flex:1;display:flex;flex-direction:column;justify-content:center}
+.hx-live{display:flex;align-items:center;gap:6px;white-space:nowrap;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#ffb4c0}
+.hx-rec{width:7px;height:7px;border-radius:50%;background:#ff5a78;box-shadow:0 0 0 0 rgba(255,90,120,.6);animation:hx-rec 1.6s ease-out infinite}
+@keyframes hx-rec{70%{box-shadow:0 0 0 7px rgba(255,90,120,0)}100%{box-shadow:0 0 0 0 rgba(255,90,120,0)}}
+.hx-wave{display:flex;align-items:center;gap:3px;height:34px;margin:8px 0 12px}
+.hx-wave i{flex:1;max-width:5px;height:100%;border-radius:3px;background:linear-gradient(#7aa2ff,#2dd4bf);transform-origin:50% 50%;
+  transform:scaleY(.25);animation:hx-talk 1.1s ease-in-out infinite alternate}
+.hx-wave i:nth-child(3n){animation-duration:.8s}.hx-wave i:nth-child(3n+1){animation-duration:1.35s}.hx-wave i:nth-child(4n){animation-duration:.95s}
+.hx-wave i:nth-child(2n){animation-delay:-.5s}.hx-wave i:nth-child(5n){animation-delay:-.9s}.hx-wave i:nth-child(7n){animation-delay:-.25s}
+@keyframes hx-talk{0%{transform:scaleY(.18)}45%{transform:scaleY(.95)}70%{transform:scaleY(.45)}100%{transform:scaleY(.7)}}
+.hx-src{list-style:none;margin:14px 0 0;padding:12px 0 0;border-top:1px solid rgba(255,255,255,.08);display:grid;gap:5px}
+.hx-src li{display:flex;align-items:center;gap:9px;margin:0 -8px;padding:3px 8px;border-radius:8px;font-size:12.5px;color:#cfd6f2;
+  animation:hx-src calc(var(--T)*4) linear infinite both}
+.hx-src li:nth-child(2){animation-delay:var(--T)}.hx-src li:nth-child(3){animation-delay:calc(var(--T)*2)}.hx-src li:nth-child(4){animation-delay:calc(var(--T)*3)}
+.hx-src svg{flex:none;width:16px;height:16px;color:#7aa2ff}
+@keyframes hx-src{0%,1%{background:rgba(122,162,255,0);color:#cfd6f2}3%,7%{background:rgba(122,162,255,.16);color:#fff}10%,100%{background:rgba(122,162,255,0);color:#cfd6f2}}
+
+/* 02: the two models */
+.hx-c2{gap:0}
+.hx-c2 .hx-card{flex:1;display:flex;flex-direction:column;justify-content:center}
+/* the two models' pictures: the turning lattices kept from the v2.48 graphic (js/hero-models.js draws them); a blinking
+   cursor after the LLM's line */
+.hx-lat{display:block;width:100%;height:92px;margin:-6px 0 6px}
+.hx-caret{display:inline-block;width:6px;height:11px;margin-left:3px;vertical-align:-1px;background:#c4b5fd;animation:hx-blink 1s steps(1) infinite}
+@keyframes hx-blink{50%{opacity:0}}
+/* the pair: two signals passing each other, both ways, all the time */
+.hx-pairing{display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 0;font-size:11px;font-weight:600;letter-spacing:.02em;color:#8f9bc6}
+.hx-pt{position:relative;width:12px;height:22px}
+.hx-pt::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1.5px;margin-left:-.75px;background:rgba(140,170,240,.35)}
+.hx-pt i{position:absolute;left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#a78bfa;box-shadow:0 0 8px #a78bfa;animation:hx-up 1.6s ease-in-out infinite}
+.hx-pt i+i{background:#2dd4bf;box-shadow:0 0 8px #2dd4bf;animation-name:hx-down}
+@keyframes hx-up{0%{top:16px;opacity:0}20%,80%{opacity:1}100%{top:0;opacity:0}}
+@keyframes hx-down{0%{top:0;opacity:0}20%,80%{opacity:1}100%{top:16px;opacity:0}}
+/* the Takgio expert model: the one highlighted card. It glows when knowledge arrives (its lattice lights up) and its meter fills */
+.hx-core{border-color:transparent;background:linear-gradient(180deg,rgba(32,40,92,.92),rgba(18,26,58,.92)) padding-box,
+  linear-gradient(135deg,#7aa2ff,#2dd4bf 55%,#a78bfa) border-box;border:1px solid transparent;
+  box-shadow:0 0 0 1px rgba(45,212,191,.06),0 0 40px -12px rgba(45,212,191,.5),0 14px 34px -14px rgba(0,0,0,.7);animation:hx-core var(--T) ease-out infinite}
+@keyframes hx-core{0%,30%{box-shadow:0 0 0 1px rgba(45,212,191,.06),0 0 40px -12px rgba(45,212,191,.5),0 14px 34px -14px rgba(0,0,0,.7)}
+  38%{box-shadow:0 0 0 1px rgba(45,212,191,.25),0 0 64px -6px rgba(45,212,191,.85),0 14px 34px -14px rgba(0,0,0,.7)}
+  60%,100%{box-shadow:0 0 0 1px rgba(45,212,191,.06),0 0 40px -12px rgba(45,212,191,.5),0 14px 34px -14px rgba(0,0,0,.7)}}
+.hx-core .hx-d{color:#b9c7ee}
+.hx-meter{display:block;height:4px;margin-top:12px;border-radius:4px;background:rgba(255,255,255,.08);overflow:hidden}
+.hx-meter i{display:block;height:100%;width:100%;border-radius:4px;background:linear-gradient(90deg,#7aa2ff,#2dd4bf);transform-origin:0 50%;animation:hx-fill var(--T) ease-out infinite}
+@keyframes hx-fill{0%,33%{transform:scaleX(.35)}52%,92%{transform:scaleX(1)}100%{transform:scaleX(.35)}}
+
+/* 03: the apps light up as the pulse reaches them, and show what they do */
+.hx-app{flex:1;display:flex;align-items:center;gap:11px;padding:12px;animation:hx-app var(--T) ease-out infinite}
+.hx-o2.hx-app{animation-delay:.15s}.hx-o3.hx-app{animation-delay:.3s}
+@keyframes hx-app{0%,70%{border-color:rgba(255,255,255,.1);background-color:rgba(255,255,255,0)}
+  74%,90%{border-color:rgba(94,234,212,.55);background-color:rgba(45,212,191,.08)}100%{border-color:rgba(255,255,255,.1);background-color:rgba(255,255,255,0)}}
+/* each app's picture is the combined model (both lattices in one, js/hero-models.js) */
+.hx-app .hx-lat-app{flex:none;width:72px;height:64px;margin:-10px -8px -10px -10px}
+.hx-app > span{min-width:0}
+.hx-sw{display:grid}
+.hx-sw > span{grid-area:1/1}
+.hx-sw .hx-d{animation:hx-say-d var(--T) ease-out infinite}
+.hx-out{margin-top:3px;font-size:12px;line-height:1.4;font-weight:600;color:#5eead4;opacity:0;animation:hx-say var(--T) ease-out infinite}
+.hx-o2 .hx-sw > span{animation-delay:.15s}.hx-o3 .hx-sw > span{animation-delay:.3s}
+@keyframes hx-say{0%,72%{opacity:0;transform:translateY(4px)}76%,92%{opacity:1;transform:none}97%,100%{opacity:0}}
+@keyframes hx-say-d{0%,70%{opacity:1}73%,93%{opacity:0}98%,100%{opacity:1}}
+
+/* the wires: a quiet track with a steady stream of data running along it (small dots, always moving), a bright
+   pulse once per cycle carrying the story, and a port at each end that flashes when the pulse arrives */
+.hx-wire{width:100%;height:100%;overflow:visible}
+.hx-wire path{stroke-width:1.6;fill:none}
+.hx-base{stroke:rgba(140,170,240,.3)}
+.hx-stream{stroke:#a5c4ff;stroke-width:3.2;stroke-linecap:round;stroke-dasharray:.01 5;opacity:.95;filter:drop-shadow(0 0 2px rgba(122,162,255,.9));animation:hx-stream 1.1s linear infinite}
+@keyframes hx-stream{to{stroke-dashoffset:-5}}
+.hx-port{fill:#0e1330;stroke:#7aa2ff;stroke-width:1.4}
+.hx-in1{animation:hx-in1 var(--T) ease-out infinite}.hx-in2{animation:hx-in2 var(--T) ease-out infinite}
+.hx-o2.hx-in2{animation-delay:.15s}.hx-o3.hx-in2{animation-delay:.3s}
+@keyframes hx-in1{0%,30%{fill:#0e1330;stroke:#7aa2ff}33%,40%{fill:#5eead4;stroke:#5eead4}55%,100%{fill:#0e1330;stroke:#7aa2ff}}
+@keyframes hx-in2{0%,70%{fill:#0e1330;stroke:#7aa2ff}73%,80%{fill:#5eead4;stroke:#5eead4}95%,100%{fill:#0e1330;stroke:#7aa2ff}}
+.hx-flow{stroke:#5eead4;stroke-width:3;stroke-linecap:round;stroke-dasharray:26 200;stroke-dashoffset:26;filter:drop-shadow(0 0 5px rgba(94,234,212,1));animation:hx-p1 var(--T) linear infinite}
+.hx-f2{animation-name:hx-p2}.hx-o2.hx-flow{animation-delay:.15s}.hx-o3.hx-flow{animation-delay:.3s}
+@keyframes hx-p1{0%,8%{stroke-dashoffset:26;opacity:1}32%{stroke-dashoffset:-100;opacity:1}33%,100%{stroke-dashoffset:-100;opacity:0}}
+@keyframes hx-p2{0%,50%{stroke-dashoffset:26;opacity:1}72%{stroke-dashoffset:-100;opacity:1}73%,100%{stroke-dashoffset:-100;opacity:0}}
+@keyframes hx-down-dots{to{background-position:center 7px}}
+
+/* reduced motion: the still diagram, nothing moves */
+@media (prefers-reduced-motion:reduce){
+  .hx *,.hx *::before{animation:none!important}
+  .hx-flow,.hx-out,.hx-stream{display:none}.hx-wave i{transform:scaleY(.55)}.hx-meter i{transform:none}
+}
+@media (max-width:1023px){.hx{max-width:560px;margin:12px auto 0}}
+/* a narrow graphic (the two-column hero at 1024-1200px): app names under their icons */
+@container (max-width:580px){.hx-app{flex-direction:column;align-items:flex-start;gap:4px}.hx-app .hx-lat-app{width:96px;height:70px;margin:-8px 0 0 -14px}}
+@container (max-width:500px){.hx-step{white-space:normal;align-items:flex-start;font-size:10px}}
+/* phones and narrow tablets: the three steps stacked with short wires between them; the two models side by side */
+@media (max-width:640px){
+  .hx{grid-template-columns:1fr;grid-template-rows:none;row-gap:10px}
+  .hx-s1{grid-area:1/1}.hx-c1{grid-area:2/1}.hx-w1{grid-area:3/1}.hx-s2{grid-area:4/1}.hx-c2{grid-area:5/1}.hx-w2{grid-area:6/1}.hx-s3{grid-area:7/1}.hx-c3{grid-area:8/1}
+  .hx-wire{height:30px;background:radial-gradient(circle,#8fb4ff 1.3px,transparent 1.8px) center top/8px 7px repeat-y;animation:hx-down-dots 1.1s linear infinite}
+  .hx-wire path,.hx-wire ellipse{display:none}
+  .hx-src{grid-template-columns:1fr 1fr}
+  .hx-c2{flex-direction:row;align-items:stretch}
+  .hx-c2 .hx-card{flex:1}
+  .hx-pairing{flex-direction:column;padding:0 6px;font-size:10px;text-align:center;max-width:62px}
+  .hx-pt{transform:rotate(90deg)}
+  .hx-app{flex-direction:row;align-items:center;gap:12px;padding:12px}
+}
 
 /* Customer story pull quotes (case-study-construction-concreteiq-customer-story.html) */
 .cs-quote { margin: 20px 0; padding: 16px 20px; border-left: 4px solid #0d9488; background: rgba(45,212,191,.08); border-radius: 0 12px 12px 0; }
