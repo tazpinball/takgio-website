@@ -15,8 +15,8 @@ LIVE     v2.53.1 (23 Oct). v2.53.2 (this file + the internal files blocked from 
 GIT      master = the deployed site. Cloud sessions work on a claude/* branch and open a draft PR into master;
          merging the PR is what deploys.
 DEMOS    The Demos link check passes: 32 pages / 33 links / 0 wrong href (26 Oct).
-NEXT     Before merging v2.53.2: open the PR's Vercel preview and check /CLAUDE.md, /HANDOFF.md, /README.md and
-         /docs/supabase-schema.sql no longer show their text. After merging: the same on takgio.com.
+NEXT     v2.53.2's preview checked by Ted (26 Oct): /CLAUDE.md, /HANDOFF.md and /docs/supabase-schema.sql land on
+         the home page; /careers and /hoof work. After merging: the same check on takgio.com.
 ```
 
 ## What the site is
