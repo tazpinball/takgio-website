@@ -1,7 +1,16 @@
 {
-  "version": "2.55.2",
+  "version": "2.55.3",
   "date": "2026-10-26",
   "releases": [
+    {
+      "version": "2.55.3",
+      "date": "2026-10-26",
+      "summary": "Hero graphic: each app shows the combined model; 'Decades of know-how'",
+      "changes": [
+        "Each Takgio app card (ConcreteIQ, Brickture, myBuyersGuide) now shows one combined-model picture in place of its app icon: the gold Takgio expert model lattice at the heart of the blue-purple LLM lattice, turning, and lighting up as the data pulse reaches that app",
+        "The experts card now says 'Decades of know-how from real work' (was 'Years')"
+      ]
+    },
     {
       "version": "2.55.2",
       "date": "2026-10-26",

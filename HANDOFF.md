@@ -32,13 +32,14 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   Meta Ray-Ban Display shown as "Coming soon".
 - **Home hero graphic (v2.55.0):** "how a Takgio product is made" in three numbered steps, plain HTML and CSS (`.hx`
   in `index.html` and `css/styles.css`; `js/hero-models.js` draws only the two model pictures): 01 Human expertise (practising experts and what they know from:
-  interviews, job records, drawings and specs, field know-how) -> 02 Dual-model AI (the general-purpose LLM and the
+  interviews, job records, drawings and specs, field know-how; "Decades of know-how", Ted) -> 02 Dual-model AI (the general-purpose LLM and the
   Takgio expert model, "work as a pair"; the expert model is the one highlighted card) -> 03 Takgio apps (ConcreteIQ,
   Brickture, myBuyersGuide; it is "myBuyersGuide", Ted 26 Oct). A 6 s CSS loop plays the story: interview waveform and
   one source lit -> pulse into the expert model (ripple, meter) -> pulses to the apps, which show what they do; every
   line also carries a steady stream of moving dots and has a port at each end (v2.55.1, Ted: show the data flowing). The
   two models keep the site's turning lattices from the v2.48 graphic (v2.55.2, Ted: the new icons looked generic): a big
-  cool one for the LLM, a smaller gold one for the expert model, which lights up as the pulse arrives. Ted
+  cool one for the LLM, a smaller gold one for the expert model, which lights up as the pulse arrives. Each app card
+  shows the COMBINED model instead of its app icon: the gold lattice at the heart of the cool one (v2.55.3, Ted's idea). Ted
   asked for it to feel active and not like stock art. Phones stack the steps. It replaced the v2.48 canvas graphic
   (`js/hero-xform.js`, deleted; its two licensed pictures stay in `images/hero/`, unused).
 - **Home hero copy (v2.49.0):** four differentiator tiles: *A real expert

@@ -3695,9 +3695,8 @@ section[id], article[id] { scroll-margin-top: 72px; }
 .hx-o2.hx-app{animation-delay:.15s}.hx-o3.hx-app{animation-delay:.3s}
 @keyframes hx-app{0%,70%{border-color:rgba(255,255,255,.1);background-color:rgba(255,255,255,0)}
   74%,90%{border-color:rgba(94,234,212,.55);background-color:rgba(45,212,191,.08)}100%{border-color:rgba(255,255,255,.1);background-color:rgba(255,255,255,0)}}
-.hx-app img,.hx-mono{flex:none;width:34px;height:34px;border-radius:9px;box-shadow:0 4px 12px -4px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.12)}
-.hx-mono{display:grid;place-items:center;align-content:center;font-style:normal;font-size:12px;font-weight:800;line-height:.95;letter-spacing:.02em;color:#fff;background:linear-gradient(135deg,#0f766e,#14b8a6)}
-.hx-mono small{font-size:8px;font-weight:700;letter-spacing:.04em;opacity:.85}
+/* each app's picture is the combined model (both lattices in one, js/hero-models.js) */
+.hx-app .hx-lat-app{flex:none;width:72px;height:64px;margin:-10px -8px -10px -10px}
 .hx-app > span{min-width:0}
 .hx-sw{display:grid}
 .hx-sw > span{grid-area:1/1}
@@ -3732,7 +3731,7 @@ section[id], article[id] { scroll-margin-top: 72px; }
 }
 @media (max-width:1023px){.hx{max-width:560px;margin:12px auto 0}}
 /* a narrow graphic (the two-column hero at 1024-1200px): app names under their icons */
-@container (max-width:580px){.hx-app{flex-direction:column;align-items:flex-start;gap:8px}}
+@container (max-width:580px){.hx-app{flex-direction:column;align-items:flex-start;gap:4px}.hx-app .hx-lat-app{width:96px;height:70px;margin:-8px 0 0 -14px}}
 @container (max-width:500px){.hx-step{white-space:normal;align-items:flex-start;font-size:10px}}
 /* phones and narrow tablets: the three steps stacked with short wires between them; the two models side by side */
 @media (max-width:640px){
