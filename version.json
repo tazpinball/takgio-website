@@ -1,7 +1,15 @@
 {
-  "version": "2.55.7",
+  "version": "2.55.8",
   "date": "2026-10-26",
   "releases": [
+    {
+      "version": "2.55.8",
+      "date": "2026-10-26",
+      "summary": "HANDOFF.md: the investor-deck template recorded",
+      "changes": [
+        "Records where the investor-deck template lives (Ted's laptop, never in git), its 16 slides, the rules it follows and what is still blank"
+      ]
+    },
     {
       "version": "2.55.7",
       "date": "2026-10-26",

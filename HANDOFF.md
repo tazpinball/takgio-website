@@ -18,7 +18,7 @@ LIVE     v2.55.6 (26 Oct; PR tazpinball/takgio-website#4 merged at 11e122f): the
 GIT      master = the deployed site. Cloud sessions work on a claude/* branch and open a draft PR into master;
          merging the PR is what deploys.
 DEMOS    The Demos link check passes: 32 pages / 33 links / 0 wrong href (26 Oct).
-NEXT     Nothing open on the site. Wait for Ted's next request.
+NEXT     Nothing open on the site. The investor-deck template is recorded below (Investor deck).
 SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked 26 Oct, see Open / verified).
 ```
 
@@ -88,6 +88,24 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
 | 2.44.0–2.48.1 | Product-company repositioning and the new headline and brand line |
 
 Full notes for each release are in `version.json`.
+
+## Investor deck (the template for every future investor deck)
+
+- **The template is `C:\Users\Ted\OneDrive\TAKGIO\Presentations\Takgio-Investor-Deck-DRAFT-v4.pptx`** (Ted, 26 Oct:
+  "use this as a template for future decks for investors"). It lives on Ted's laptop only and is **never committed**
+  (this repo is served as a website). A cloud session cannot read it: ask Ted to attach it in the chat, edit the copy
+  with the pptx skill (unzip, edit `ppt/slides/slideN.xml`, re-zip; duplicate slides with `add_slide.py`), render and
+  look at every changed slide, and hand it back as a file card. Name new versions `Takgio-Investor-Deck-DRAFT-vN.pptx`.
+- **Its 16 slides:** 1 title, 2 how a Takgio product works, 3 problem, 4 ConcreteIQ proof, 5 the method in new markets,
+  6 six products / four industries, 7 speed, 8 traction, 9 business model, 10 why now, 11 market, 12 competition
+  (vs. off-the-shelf AI, plus named competitors per product), 13 team, 14 the ask, 15 vision, 16 appendix (sources).
+- **Its rules:** the wording follows this site (headline "We turn human expertise into AI products.", 1,400+ statements,
+  "six products, four industries", the bios on `leadership.html`); every number carries its source and date, and is
+  re-checked at the source on the day a deck is sent; market figures are the source's own, never a Takgio forecast;
+  no investor or expert is named; a rating is never shown without its count.
+- **Still blank in v4 (Ted's):** the amount and instrument and the milestones (14), downloads, installs and revenue
+  (8), Richard's background and who is full-time (13), the 24-month and 5-year vision (15), and the expert's OK on
+  "30+ years" (4). The site's Hoof Harted page says 2 ratings where Apple showed 3 on 20 Oct.
 
 ## Open / not verified
 
