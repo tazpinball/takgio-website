@@ -3670,14 +3670,27 @@ section[id], article[id] { scroll-margin-top: 72px; }
 .hx-lat{display:block;width:100%;height:92px;margin:-6px 0 6px}
 .hx-caret{display:inline-block;width:6px;height:11px;margin-left:3px;vertical-align:-1px;background:#c4b5fd;animation:hx-blink 1s steps(1) infinite}
 @keyframes hx-blink{50%{opacity:0}}
-/* the pair: two signals passing each other, both ways, all the time */
-.hx-pairing{display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 0;font-size:11px;font-weight:600;letter-spacing:.02em;color:#8f9bc6}
-.hx-pt{position:relative;width:12px;height:22px}
-.hx-pt::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1.5px;margin-left:-.75px;background:rgba(140,170,240,.35)}
+/* the pair: a link joining the two model cards, two signals passing each other on it, both ways, all the time. At its
+   centre sits the hub where the pair's combined output starts: a short line carries it right to the fan-out to the
+   apps (v2.55.6, Ted: the apps' lines start at the centre, from the pair's link) */
+.hx-pairing{position:relative;height:46px;font-size:11px;font-weight:600;letter-spacing:.02em;color:#8f9bc6}
+.hx-plabel{position:absolute;right:calc(50% + 14px);top:50%;transform:translateY(-50%);white-space:nowrap}
+.hx-pt{position:absolute;left:50%;top:0;bottom:0;width:12px;margin-left:-6px}
+.hx-pt::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1.5px;margin-left:-.75px;background:rgba(140,170,240,.45)}
 .hx-pt i{position:absolute;left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#a78bfa;box-shadow:0 0 8px #a78bfa;animation:hx-up 1.6s ease-in-out infinite}
 .hx-pt i+i{background:#2dd4bf;box-shadow:0 0 8px #2dd4bf;animation-name:hx-down}
-@keyframes hx-up{0%{top:16px;opacity:0}20%,80%{opacity:1}100%{top:0;opacity:0}}
-@keyframes hx-down{0%{top:0;opacity:0}20%,80%{opacity:1}100%{top:16px;opacity:0}}
+@keyframes hx-up{0%{top:calc(100% - 6px);opacity:0}20%,80%{opacity:1}100%{top:0;opacity:0}}
+@keyframes hx-down{0%{top:0;opacity:0}20%,80%{opacity:1}100%{top:calc(100% - 6px);opacity:0}}
+.hx-tap{position:absolute;left:50%;right:-1px;top:50%;height:4px;margin-top:-2px;
+  background:linear-gradient(rgba(140,170,240,.3),rgba(140,170,240,.3)) 0 50%/100% 1.6px no-repeat,
+  radial-gradient(circle,#a5c4ff 1.5px,transparent 2px) 0 50%/7px 4px repeat-x;animation:hx-tap 1.1s linear infinite}
+@keyframes hx-tap{to{background-position:0 50%,7px 50%}}
+.hx-tap::after{content:"";position:absolute;top:50%;left:0;width:22px;height:3px;margin-top:-1.5px;border-radius:3px;background:#5eead4;
+  box-shadow:0 0 8px #5eead4;opacity:0;animation:hx-tap-pulse var(--T) linear infinite}
+@keyframes hx-tap-pulse{0%,43%{left:0;opacity:0}44%{left:0;opacity:1}50%{left:calc(100% - 22px);opacity:1}51%,100%{left:calc(100% - 22px);opacity:0}}
+.hx-hub{position:absolute;left:50%;top:50%;width:11px;height:11px;margin:-5.5px;border-radius:50%;background:#0e1330;border:1.6px solid #7aa2ff;
+  box-shadow:0 0 0 3px rgba(122,162,255,.12);animation:hx-hub var(--T) ease-out infinite}
+@keyframes hx-hub{0%,40%{background:#0e1330;border-color:#7aa2ff}44%,48%{background:#5eead4;border-color:#5eead4;box-shadow:0 0 0 5px rgba(94,234,212,.2),0 0 12px #5eead4}60%,100%{background:#0e1330;border-color:#7aa2ff}}
 /* the Takgio expert model: the one highlighted card. It glows when knowledge arrives (its lattice lights up) and its meter fills */
 .hx-core{border-color:transparent;background:linear-gradient(180deg,rgba(32,40,92,.92),rgba(18,26,58,.92)) padding-box,
   linear-gradient(135deg,#7aa2ff,#2dd4bf 55%,#a78bfa) border-box;border:1px solid transparent;
@@ -3727,7 +3740,7 @@ section[id], article[id] { scroll-margin-top: 72px; }
 /* reduced motion: the still diagram, nothing moves */
 @media (prefers-reduced-motion:reduce){
   .hx *,.hx *::before{animation:none!important}
-  .hx-flow,.hx-out,.hx-stream{display:none}.hx-wave i{transform:scaleY(.55)}.hx-meter i{transform:none}
+  .hx-flow,.hx-out,.hx-stream,.hx-tap::after{display:none}.hx-wave i{transform:scaleY(.55)}.hx-meter i{transform:none}
 }
 @media (max-width:1023px){.hx{max-width:560px;margin:12px auto 0}}
 /* a narrow graphic (the two-column hero at 1024-1200px): app names under their icons */
@@ -3742,8 +3755,10 @@ section[id], article[id] { scroll-margin-top: 72px; }
   .hx-src{grid-template-columns:1fr 1fr}
   .hx-c2{flex-direction:row;align-items:stretch}
   .hx-c2 .hx-card{flex:1}
-  .hx-pairing{flex-direction:column;padding:0 6px;font-size:10px;text-align:center;max-width:62px}
-  .hx-pt{transform:rotate(90deg)}
+  .hx-pairing{height:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 6px;font-size:10px;text-align:center;width:62px}
+  .hx-plabel{position:static;transform:none;white-space:normal;order:2}
+  .hx-pt{position:relative;left:auto;top:auto;bottom:auto;margin:0 0 6px;height:22px;transform:rotate(90deg)}
+  .hx-tap,.hx-hub{display:none}
   .hx-app{flex-direction:row;align-items:center;gap:12px;padding:12px}
 }
 

@@ -124,7 +124,21 @@
     var every = [LLM, CORE].concat(APPS), cvs = [llmCv, coreCv].concat(appCvs);
     var raf = 0, last = 0, T = 0, visible = true, lastCycle = -1, nextLLM = 0, appCycle = APPS.map(function () { return -1; });
     function draw(t, dt) { every.forEach(function (l) { l.frame(t, dt); }); }
-    function resize() { every.forEach(function (l) { l.resize(); }); if (reduce) draw(5, 0); }
+    // the fan-out to the apps starts level with the hub in the middle of the pair link (v2.55.6): the two model cards
+    // are not the same height, so the hub's height is measured and the fan-out's paths start there
+    var hub = document.querySelector('.hx-hub'), w2 = document.querySelector('.hx-w2');
+    function alignFan() {
+      if (!hub || !w2 || !hub.offsetParent) return;
+      var hb = hub.getBoundingClientRect(), wb = w2.getBoundingClientRect();
+      if (!wb.height) return;
+      var y = Math.round(((hb.top + hb.height / 2 - wb.top) / wb.height) * 360 * 10) / 10;
+      [].forEach.call(w2.querySelectorAll('path'), function (p) {
+        var to = p.getAttribute('data-to') || p.getAttribute('d').match(/([0-9.]+)\s*$/)[1];   // where this branch ends (its app)
+        p.setAttribute('data-to', to);
+        p.setAttribute('d', 'M0 ' + y + ' C 24 ' + y + ', 24 ' + to + ', 48 ' + to);
+      });
+    }
+    function resize() { every.forEach(function (l) { l.resize(); }); alignFan(); if (reduce) draw(5, 0); }
     // the CSS loop and this one share the document clock, so the lattices light as the pulses arrive
     function clock() { return (document.timeline && document.timeline.currentTime != null) ? document.timeline.currentTime : performance.now(); }
     function frame(now) {
