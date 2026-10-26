@@ -3609,7 +3609,7 @@ section[id], article[id] { scroll-margin-top: 72px; }
 @media (max-width: 900px) { .xm-flow { grid-template-columns: 1fr 1fr; } .xm-step:not(:last-child)::after { display: none; } }
 @media (max-width: 560px) { .xm-flow { grid-template-columns: 1fr; gap: 14px; } .xm-band { padding: 34px 0 30px; } }
 
-/* ===== v2.48.0 home: hero graphic "human expertise into AI products" (canvas, js/hero-xform.js) and the reel as a portfolio tile ===== */
+/* ===== v2.48.0 home: the reel as a portfolio tile (the hero graphic that started here is now .hx, v2.55.0, below) ===== */
 .t-reel{padding:0;min-height:460px;background:radial-gradient(120% 90% at 85% 0,#1d2b72 0,#0b0d1c 58%);border-color:rgba(122,162,255,.35);display:block}
 .t-reel::before{display:none}
 .t-reel .h-reel{position:absolute!important;inset:0;margin:0!important;height:auto!important;min-height:0!important;align-self:auto;--m:1;
@@ -3625,37 +3625,77 @@ section[id], article[id] { scroll-margin-top: 72px; }
   .t-hoof{grid-column:span 5}
   .t-meta{grid-column:span 12}
 }
-.xg{position:relative;width:100%;aspect-ratio:66/56;max-width:660px;margin-left:auto;color:#fff;font-family:inherit}
-.xg-cap{position:absolute;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#8fa2e6;white-space:nowrap}
-.xg-c{overflow:visible;container-type:inline-size}
-.xg-c canvas{position:absolute;inset:0;width:100%;height:100%}
-.xg-c .xc-man,.xg-c .xc-fig{display:none!important}
-/* v2.49: panel titles, model labels, app cards and captions sit over the canvas, positioned in the 660 x 560 design space */
-.xc-ph{position:absolute;top:2.6%;width:31%;transform:translateX(-50%);text-align:center;line-height:1.15}
-.xc-ph b{display:block;font-size:max(10px,2.55cqw);font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#fff;text-shadow:0 0 1.2cqw rgba(140,170,255,.55)}
-.xc-ph span{display:block;margin-top:.3cqw;font-size:max(7px,1.5cqw);color:#9fb0e8}
-.xc-lb{position:absolute;left:50%;transform:translateX(-50%);text-align:center;white-space:nowrap;font-size:max(9px,2.2cqw);font-weight:700;color:#fff;line-height:1.2;text-shadow:0 0 1cqw rgba(232,120,225,.6)}
-.xc-lb small{display:block;font-size:max(7px,1.35cqw);font-weight:500;color:#b9a6dd}
-/* the app name pills under the figures scale with the graphic (8px floor for phones) */
-.xc-at{position:absolute;transform:translateX(-50%);z-index:2}
-.xc-tag{position:relative;display:flex;align-items:center;gap:.8cqw;padding:.75cqw 1.3cqw;border-radius:99px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.26);
-  font-weight:700;font-size:max(8px,1.75cqw);line-height:1;white-space:nowrap;backdrop-filter:blur(5px);animation:xc-bob 5s ease-in-out infinite}
-.xc-tag i{width:1.1cqw;height:1.1cqw;border-radius:50%;box-shadow:0 0 10px currentColor}
-@keyframes xc-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-@media (prefers-reduced-motion:reduce){.xc-tag{animation:none}}
-/* each panel: a short label at the bottom; hovering the panel (or tapping it on a touch screen) shows the full sentence */
-.xc-hot{position:absolute;top:.7%;height:98.6%;z-index:3;border-radius:2cqw;cursor:default}
-.xc-pc{position:absolute;left:0;right:0;bottom:4.2%;margin:0;text-align:center;font-size:max(9px,2.3cqw);font-weight:700;line-height:1.2;color:#e3e9ff}
-.xc-pc i{display:inline-grid;place-items:center;width:max(11px,2.3cqw);height:max(11px,2.3cqw);margin-left:.7cqw;border-radius:50%;vertical-align:.1em;
-  font:italic 700 max(8px,1.55cqw)/1 Georgia,serif;color:rgb(var(--pc));border:1px solid rgba(var(--pc),.8)}
-.xc-tip{position:absolute;left:5%;right:5%;bottom:3%;padding:1.6cqw 1.8cqw;border-radius:1.6cqw;background:rgba(10,12,30,.94);border:1px solid rgba(var(--pc),.9);
-  box-shadow:0 0 2.4cqw rgba(var(--pc),.35);font-size:max(10px,2cqw);font-weight:500;line-height:1.35;color:#eef2ff;text-align:center;
-  opacity:0;transform:translateY(6px);transition:opacity .2s ease,transform .2s ease;pointer-events:none}
-.xc-hot.open .xc-tip{opacity:1;transform:none}
-@media (hover:hover){.xc-hot:hover .xc-tip{opacity:1;transform:none}} /* touch screens: taps only, no sticky hover */
-@media (prefers-reduced-motion:reduce){.xc-tip{transition:none}}
-@media (max-width:1023px){.xg{max-width:520px;margin:12px auto 0}}
-@media (max-width:560px){.xg-cap{font-size:9px}}
+/* Home hero graphic (v2.55): how a Takgio product is made, in three steps. Practising experts -> the Takgio expert
+   model, paired with a general-purpose LLM -> specialized apps. HTML cards with thin animated wires between the
+   columns; one line-icon style; the expert model is the only highlighted piece. Phones stack the steps. Prefix hx-. */
+.hx{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) 32px minmax(0,1.06fr) 32px minmax(0,1fr);grid-template-rows:auto 1fr;column-gap:0;row-gap:14px;
+  width:100%;max-width:640px;margin-left:auto;color:#fff;font-size:14px;container-type:inline-size}
+.hx-step{margin:0;display:flex;align-items:center;gap:7px;white-space:nowrap;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9aa6cf}
+.hx-step span{display:inline-grid;place-items:center;min-width:24px;height:20px;padding:0 6px;border-radius:6px;font-size:10px;letter-spacing:.04em;
+  color:#dfe6ff;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12)}
+.hx-s1{grid-area:1/1}.hx-s2{grid-area:1/3}.hx-s3{grid-area:1/5}
+.hx-c1{grid-area:2/1}.hx-w1{grid-area:2/2}.hx-c2{grid-area:2/3}.hx-w2{grid-area:2/4}.hx-c3{grid-area:2/5}
+.hx-col{display:flex;flex-direction:column;gap:12px;min-width:0}
+.hx-card{position:relative;border-radius:16px;padding:15px 14px;background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.025));
+  border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 10px 30px -12px rgba(0,0,0,.6);backdrop-filter:blur(8px)}
+.hx-t{display:block;font-size:14px;font-weight:700;line-height:1.25;letter-spacing:-.005em;color:#fff}
+.hx-d{display:block;margin-top:3px;font-size:12px;line-height:1.4;color:#9aa6cf}
+.hx svg{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+/* 01: the experts */
+.hx-experts{flex:1;display:flex;flex-direction:column;justify-content:center}
+.hx-people{display:flex;margin-bottom:12px}
+.hx-people i{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;margin-right:-8px;color:#fff;
+  background:linear-gradient(135deg,var(--a),var(--b));border:2px solid #121530;box-shadow:0 4px 12px -4px var(--a)}
+.hx-people svg{width:18px;height:18px}
+.hx-src{list-style:none;margin:14px 0 0;padding:12px 0 0;border-top:1px solid rgba(255,255,255,.08);display:grid;gap:9px}
+.hx-src li{display:flex;align-items:center;gap:9px;font-size:12.5px;color:#cfd6f2}
+.hx-src svg{flex:none;width:16px;height:16px;color:#7aa2ff}
+/* 02: the two models */
+.hx-c2{gap:0}
+.hx-c2 .hx-card{flex:1;display:flex;flex-direction:column;justify-content:center}
+.hx-ic{display:grid;place-items:center;width:36px;height:36px;margin-bottom:10px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#c4cbe6}
+.hx-ic svg{width:20px;height:20px}
+.hx-core{border-color:transparent;background:linear-gradient(180deg,rgba(32,40,92,.92),rgba(18,26,58,.92)) padding-box,
+  linear-gradient(135deg,#7aa2ff,#2dd4bf 55%,#a78bfa) border-box;border:1px solid transparent;
+  box-shadow:0 0 0 1px rgba(45,212,191,.06),0 0 42px -10px rgba(45,212,191,.55),0 14px 34px -14px rgba(0,0,0,.7);animation:hx-glow 4.5s ease-in-out infinite}
+.hx-core .hx-ic{background:rgba(45,212,191,.1);border-color:rgba(45,212,191,.35)}
+.hx-core .hx-ic svg{width:22px;height:22px}
+.hx-core .hx-d{color:#b9c7ee}
+@keyframes hx-glow{50%{box-shadow:0 0 0 1px rgba(45,212,191,.1),0 0 56px -8px rgba(45,212,191,.75),0 14px 34px -14px rgba(0,0,0,.7)}}
+.hx-pairing{display:flex;align-items:center;justify-content:center;gap:7px;padding:9px 0;font-size:11px;font-weight:600;letter-spacing:.02em;color:#8f9bc6}
+.hx-pairing svg{width:18px;height:18px;color:#7aa2ff}
+/* 03: the apps */
+.hx-app{flex:1;display:flex;align-items:center;gap:11px;padding:12px}
+.hx-app img,.hx-mono{flex:none;width:34px;height:34px;border-radius:9px;box-shadow:0 4px 12px -4px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.12)}
+.hx-mono{display:grid;place-items:center;font-style:normal;font-size:13px;font-weight:800;letter-spacing:.02em;color:#fff;background:linear-gradient(135deg,#0f766e,#14b8a6)}
+.hx-app > span{min-width:0}
+/* the wires: a faint track and a travelling light */
+.hx-wire{width:100%;height:100%;overflow:visible}
+.hx-wire path{stroke-width:1.6;fill:none}
+.hx-base{stroke:rgba(140,170,240,.42)}
+.hx-flow{stroke:#5eead4;stroke-dasharray:18 82;stroke-dashoffset:100;filter:drop-shadow(0 0 3px rgba(94,234,212,.9));animation:hx-run 2.6s linear infinite}
+.hx-d2{animation-delay:-.85s}.hx-d3{animation-delay:-1.7s}
+@keyframes hx-run{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.hx-flow{display:none}.hx-core{animation:none}}
+@media (max-width:1023px){.hx{max-width:560px;margin:12px auto 0}}
+/* a narrow graphic (the two-column hero at 1024-1200px): app names under their icons */
+@container (max-width:580px){.hx-app{flex-direction:column;align-items:flex-start;gap:8px}}
+@container (max-width:500px){.hx-step{white-space:normal;align-items:flex-start;font-size:10px}}
+/* phones and narrow tablets: the three steps stacked, short straight wires between them, the apps side by side */
+@media (max-width:640px){
+  .hx{grid-template-columns:1fr;grid-template-rows:none;row-gap:10px}
+  .hx-s1{grid-area:1/1}.hx-c1{grid-area:2/1}.hx-w1{grid-area:3/1}.hx-s2{grid-area:4/1}.hx-c2{grid-area:5/1}.hx-w2{grid-area:6/1}.hx-s3{grid-area:7/1}.hx-c3{grid-area:8/1}
+  .hx-wire{height:26px}
+  .hx-wire path{display:none}
+  .hx-wire{background:linear-gradient(#5eead4,rgba(94,234,212,.15)) center/1.6px 100% no-repeat}
+  .hx-src{grid-template-columns:1fr 1fr}
+  .hx-c2{flex-direction:row;align-items:stretch}
+  .hx-c2 .hx-card{flex:1}
+  .hx-pairing{flex-direction:column;padding:0 6px;font-size:10px;text-align:center;max-width:62px}
+  .hx-pairing svg{transform:rotate(90deg)}
+  .hx-c3{flex-direction:row}
+  .hx-app{flex-direction:column;align-items:flex-start;padding:12px}
+}
 
 /* Customer story pull quotes (case-study-construction-concreteiq-customer-story.html) */
 .cs-quote { margin: 20px 0; padding: 16px 20px; border-left: 4px solid #0d9488; background: rgba(45,212,191,.08); border-radius: 0 12px 12px 0; }

@@ -17,7 +17,7 @@ LIVE     v2.53.3 (26 Oct). v2.53.2 blocked the internal files from the site (Ted
 GIT      master = the deployed site. Cloud sessions work on a claude/* branch and open a draft PR into master;
          merging the PR is what deploys.
 DEMOS    The Demos link check passes: 32 pages / 33 links / 0 wrong href (26 Oct).
-NEXT     Ted merges PR #3, then checks the home ticker on takgio.com: every line clickable, 5 AI NEWS items.
+NEXT     Ted reviews the new hero graphic (v2.55.0) on its PR's Vercel preview, desktop and phone, then merges.
 SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked 26 Oct, see Open / verified).
 ```
 
@@ -30,7 +30,13 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   is "We turn human expertise into AI products." (v2.46.0), and the line under it is "We pair human experts with AI"
   (v2.48.1). There are six products: ConcreteIQ, Brickture, Hoof Harted, True Record, Ann Elise and Pinball-QR, with
   Meta Ray-Ban Display shown as "Coming soon".
-- **Home hero (v2.49.0):** a three-panel graphic (`js/hero-xform.js`) and four differentiator tiles: *A real expert
+- **Home hero graphic (v2.55.0):** "how a Takgio product is made" in three numbered steps, plain HTML and CSS (`.hx`
+  in `index.html` and `css/styles.css`, no script): 01 Human expertise (practising experts and what they know from:
+  interviews, job records, drawings and specs, field know-how) -> 02 Dual-model AI (the general-purpose LLM and the
+  Takgio expert model, "work as a pair"; the expert model is the one highlighted card) -> 03 Takgio apps (ConcreteIQ,
+  Brickture, BuyersGuide). Thin animated wires between the columns; phones stack the steps. It replaced the v2.48
+  canvas graphic (`js/hero-xform.js`, deleted; its two licensed pictures stay in `images/hero/`, unused).
+- **Home hero copy (v2.49.0):** four differentiator tiles: *A real expert
   first*, *In their own words* (1,400+ statements for ConcreteIQ), *Tested on real work*, and *$144,219*. The old
   stats are gone everywhere (products shipped, commits, ratings); About and Contact use the same four tiles
   (v2.49.1).
