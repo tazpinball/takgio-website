@@ -3630,7 +3630,7 @@ section[id], article[id] { scroll-margin-top: 72px; }
    cycle that plays the story: a source lights up while the expert talks (live waveform) -> a pulse runs to the expert
    model, which ripples and fills its meter -> pulses fan out to the apps, which light up with what they do.
    Everything is CSS; reduced motion shows the still diagram. Phones stack the steps. Prefix hx-. */
-.hx{--T:6s;position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) 32px minmax(0,1.06fr) 32px minmax(0,1fr);
+.hx{--T:6s;position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) 40px minmax(0,1.06fr) 40px minmax(0,1fr);
   grid-template-rows:auto 1fr;column-gap:0;row-gap:14px;width:100%;max-width:640px;margin-left:auto;color:#fff;font-size:14px;container-type:inline-size}
 .hx-step{margin:0;display:flex;align-items:center;gap:7px;white-space:nowrap;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9aa6cf}
 .hx-step span{display:inline-grid;place-items:center;min-width:24px;height:20px;padding:0 6px;border-radius:6px;font-size:10px;letter-spacing:.04em;
@@ -3646,7 +3646,7 @@ section[id], article[id] { scroll-margin-top: 72px; }
 
 /* 01: the experts. A live interview (a moving voice waveform), and the four sources taking turns, one per cycle */
 .hx-experts{flex:1;display:flex;flex-direction:column;justify-content:center}
-.hx-live{display:flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#ffb4c0}
+.hx-live{display:flex;align-items:center;gap:6px;white-space:nowrap;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#ffb4c0}
 .hx-rec{width:7px;height:7px;border-radius:50%;background:#ff5a78;box-shadow:0 0 0 0 rgba(255,90,120,.6);animation:hx-rec 1.6s ease-out infinite}
 @keyframes hx-rec{70%{box-shadow:0 0 0 7px rgba(255,90,120,0)}100%{box-shadow:0 0 0 0 rgba(255,90,120,0)}}
 .hx-wave{display:flex;align-items:center;gap:3px;height:34px;margin:8px 0 12px}
@@ -3718,19 +3718,28 @@ section[id], article[id] { scroll-margin-top: 72px; }
 @keyframes hx-say{0%,72%{opacity:0;transform:translateY(4px)}76%,92%{opacity:1;transform:none}97%,100%{opacity:0}}
 @keyframes hx-say-d{0%,70%{opacity:1}73%,93%{opacity:0}98%,100%{opacity:1}}
 
-/* the wires: a faint track, and a pulse that runs once per cycle */
+/* the wires: a quiet track with a steady stream of data running along it (small dots, always moving), a bright
+   pulse once per cycle carrying the story, and a port at each end that flashes when the pulse arrives */
 .hx-wire{width:100%;height:100%;overflow:visible}
 .hx-wire path{stroke-width:1.6;fill:none}
-.hx-base{stroke:rgba(140,170,240,.42)}
-.hx-flow{stroke:#5eead4;stroke-width:2.2;stroke-dasharray:22 200;stroke-dashoffset:22;filter:drop-shadow(0 0 4px rgba(94,234,212,.95));animation:hx-p1 var(--T) linear infinite}
+.hx-base{stroke:rgba(140,170,240,.3)}
+.hx-stream{stroke:#a5c4ff;stroke-width:3.2;stroke-linecap:round;stroke-dasharray:.01 5;opacity:.95;filter:drop-shadow(0 0 2px rgba(122,162,255,.9));animation:hx-stream 1.1s linear infinite}
+@keyframes hx-stream{to{stroke-dashoffset:-5}}
+.hx-port{fill:#0e1330;stroke:#7aa2ff;stroke-width:1.4}
+.hx-in1{animation:hx-in1 var(--T) ease-out infinite}.hx-in2{animation:hx-in2 var(--T) ease-out infinite}
+.hx-o2.hx-in2{animation-delay:.15s}.hx-o3.hx-in2{animation-delay:.3s}
+@keyframes hx-in1{0%,30%{fill:#0e1330;stroke:#7aa2ff}33%,40%{fill:#5eead4;stroke:#5eead4}55%,100%{fill:#0e1330;stroke:#7aa2ff}}
+@keyframes hx-in2{0%,70%{fill:#0e1330;stroke:#7aa2ff}73%,80%{fill:#5eead4;stroke:#5eead4}95%,100%{fill:#0e1330;stroke:#7aa2ff}}
+.hx-flow{stroke:#5eead4;stroke-width:3;stroke-linecap:round;stroke-dasharray:26 200;stroke-dashoffset:26;filter:drop-shadow(0 0 5px rgba(94,234,212,1));animation:hx-p1 var(--T) linear infinite}
 .hx-f2{animation-name:hx-p2}.hx-o2.hx-flow{animation-delay:.15s}.hx-o3.hx-flow{animation-delay:.3s}
-@keyframes hx-p1{0%,8%{stroke-dashoffset:22;opacity:1}32%{stroke-dashoffset:-100;opacity:1}33%,100%{stroke-dashoffset:-100;opacity:0}}
-@keyframes hx-p2{0%,50%{stroke-dashoffset:22;opacity:1}72%{stroke-dashoffset:-100;opacity:1}73%,100%{stroke-dashoffset:-100;opacity:0}}
+@keyframes hx-p1{0%,8%{stroke-dashoffset:26;opacity:1}32%{stroke-dashoffset:-100;opacity:1}33%,100%{stroke-dashoffset:-100;opacity:0}}
+@keyframes hx-p2{0%,50%{stroke-dashoffset:26;opacity:1}72%{stroke-dashoffset:-100;opacity:1}73%,100%{stroke-dashoffset:-100;opacity:0}}
+@keyframes hx-down-dots{to{background-position:center 7px}}
 
 /* reduced motion: the still diagram, nothing moves */
 @media (prefers-reduced-motion:reduce){
   .hx *,.hx *::before{animation:none!important}
-  .hx-flow,.hx-out{display:none}.hx-wave i{transform:scaleY(.55)}.hx-meter i{transform:none}
+  .hx-flow,.hx-out,.hx-stream{display:none}.hx-wave i{transform:scaleY(.55)}.hx-meter i{transform:none}
 }
 @media (max-width:1023px){.hx{max-width:560px;margin:12px auto 0}}
 /* a narrow graphic (the two-column hero at 1024-1200px): app names under their icons */
@@ -3740,8 +3749,8 @@ section[id], article[id] { scroll-margin-top: 72px; }
 @media (max-width:640px){
   .hx{grid-template-columns:1fr;grid-template-rows:none;row-gap:10px}
   .hx-s1{grid-area:1/1}.hx-c1{grid-area:2/1}.hx-w1{grid-area:3/1}.hx-s2{grid-area:4/1}.hx-c2{grid-area:5/1}.hx-w2{grid-area:6/1}.hx-s3{grid-area:7/1}.hx-c3{grid-area:8/1}
-  .hx-wire{height:26px;background:linear-gradient(rgba(140,170,240,.42),rgba(140,170,240,.42)) center/1.6px 100% no-repeat}
-  .hx-wire path{display:none}
+  .hx-wire{height:30px;background:radial-gradient(circle,#8fb4ff 1.3px,transparent 1.8px) center top/8px 7px repeat-y;animation:hx-down-dots 1.1s linear infinite}
+  .hx-wire path,.hx-wire ellipse{display:none}
   .hx-src{grid-template-columns:1fr 1fr}
   .hx-c2{flex-direction:row;align-items:stretch}
   .hx-c2 .hx-card{flex:1}

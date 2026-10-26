@@ -1,7 +1,17 @@
 {
-  "version": "2.55.0",
+  "version": "2.55.1",
   "date": "2026-10-26",
   "releases": [
+    {
+      "version": "2.55.1",
+      "date": "2026-10-26",
+      "summary": "Hero graphic: the lines between the steps show data flowing",
+      "changes": [
+        "Each line now carries a steady stream of small moving dots, so data is always visibly flowing, on top of the bright pulse that runs once per cycle",
+        "A port at each end of every line, which lights up when the pulse arrives",
+        "Slightly wider gaps between the columns so the curves read clearly; on phones the short links between the steps carry moving dots too"
+      ]
+    },
     {
       "version": "2.55.0",
       "date": "2026-10-26",

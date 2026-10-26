@@ -35,7 +35,8 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   interviews, job records, drawings and specs, field know-how) -> 02 Dual-model AI (the general-purpose LLM and the
   Takgio expert model, "work as a pair"; the expert model is the one highlighted card) -> 03 Takgio apps (ConcreteIQ,
   Brickture, myBuyersGuide; it is "myBuyersGuide", Ted 26 Oct). A 6 s CSS loop plays the story: interview waveform and
-  one source lit -> pulse into the expert model (ripple, meter) -> pulses to the apps, which show what they do. Ted
+  one source lit -> pulse into the expert model (ripple, meter) -> pulses to the apps, which show what they do; every
+  line also carries a steady stream of moving dots and has a port at each end (v2.55.1, Ted: show the data flowing). Ted
   asked for it to feel active and not like stock art. Phones stack the steps. It replaced the v2.48 canvas graphic
   (`js/hero-xform.js`, deleted; its two licensed pictures stay in `images/hero/`, unused).
 - **Home hero copy (v2.49.0):** four differentiator tiles: *A real expert
