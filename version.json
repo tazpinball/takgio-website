@@ -1,7 +1,16 @@
 {
-  "version": "2.55.4",
+  "version": "2.55.5",
   "date": "2026-10-26",
   "releases": [
+    {
+      "version": "2.55.5",
+      "date": "2026-10-26",
+      "summary": "Hero graphic: smaller expert-model star; the combined model is about 70% LLM, 30% expert model",
+      "changes": [
+        "The Takgio expert model's gold star is 25% smaller",
+        "Each app's combined model is now mostly the blue-purple LLM lattice (about 70%) with a small gold star at its heart (about 30%), joined at the star's points"
+      ]
+    },
     {
       "version": "2.55.4",
       "date": "2026-10-26",

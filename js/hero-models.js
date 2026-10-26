@@ -3,7 +3,8 @@
    model must look like neither model, yet clearly both):
      - the general-purpose LLM: a round lattice, cool colours (blue, cyan, purple, silver);
      - the Takgio expert model: a four-pointed STAR lattice (the Takgio spark), warm colours (gold, amber, green);
-     - each Takgio app: the COMBINED model, the gold star set inside a ring of the cool lattice, joined at its points.
+     - each Takgio app: the COMBINED model, ~70% LLM / 30% expert: a small gold star at the heart of a broad band of the
+       cool lattice, joined at its points.
    All turn slowly (the star and the combined model as one rigid piece); nodes light up and pass the light along their edges; satellites orbit. The expert model lights up
    when the CSS loop's pulse reaches it (1/3 of the 6 s cycle, .hx's --T) and each app as its pulse arrives (~3/4);
    the LLM lights up on its own. One canvas per card (canvas.hx-lat[data-lat="llm"|"core"|"app"]), each drawn in a
@@ -113,11 +114,12 @@
     }
     // the general-purpose LLM: a round cool lattice
     var LLM = Lattice(llmCv, rings([5, 10, 15, 20, 26, 32, 38, 44], 130, COOL, false), .85, [COOL]);
-    // the Takgio expert model: a gold four-pointed star
-    var CORE = Lattice(coreCv, rings([12, 24, 36, 48], 120, WARM, true), .7, [WARM]);
-    // each app: the combined model, the gold star inside a ring of the cool lattice, joined at its points
+    // the Takgio expert model: a gold four-pointed star (25% smaller than at first, Ted)
+    var CORE = Lattice(coreCv, rings([9, 18, 27, 36], 92, WARM, true), .7, [WARM]);
+    // each app: the combined model, about 70% LLM and 30% expert model (Ted, 26 Oct): a small gold star at the heart of
+    // a broad band of the cool lattice, joined at its points
     var APPS = appCvs.map(function (cv) {
-      return Lattice(cv, rings([10, 20, 30, 41], 96, WARM, true).concat(rings([43, 48], 100, COOL, false)), .78, [COOL, WARM], true);
+      return Lattice(cv, rings([5, 10, 15, 21], 50, WARM, true).concat(rings([26, 31, 36, 41, 46], 150, COOL, false)), .78, [COOL, WARM], true);
     });
     var every = [LLM, CORE].concat(APPS), cvs = [llmCv, coreCv].concat(appCvs);
     var raf = 0, last = 0, T = 0, visible = true, lastCycle = -1, nextLLM = 0, appCycle = APPS.map(function () { return -1; });

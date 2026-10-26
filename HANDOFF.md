@@ -40,7 +40,8 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   pictures are turning lattices in the v2.48 graphic's style (`js/hero-models.js`; Ted: the icons looked generic), told
   apart by SHAPE (v2.55.4, Ted: the combined model must look like neither, yet clearly both): the LLM a round cool
   lattice; the Takgio expert model a gold four-pointed star (the Takgio spark), lit as the pulse arrives; each app card
-  shows the COMBINED model instead of its app icon (v2.55.3): the gold star inside a ring of the cool lattice. Ted
+  shows the COMBINED model instead of its app icon (v2.55.3): ~70% cool LLM lattice with a small gold star at its heart
+  (v2.55.5, Ted's proportions; the expert star alone was also made 25% smaller). Ted
   asked for it to feel active and not like stock art. Phones stack the steps. It replaced the v2.48 canvas graphic
   (`js/hero-xform.js`, deleted; its two licensed pictures stay in `images/hero/`, unused).
 - **Home hero copy (v2.49.0):** four differentiator tiles: *A real expert
