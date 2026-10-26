@@ -5,12 +5,13 @@
     {
       "version": "2.55.0",
       "date": "2026-10-26",
-      "summary": "Home hero graphic redrawn: a clean three-step diagram of how a Takgio product is made",
+      "summary": "Home hero graphic redrawn and animated: how a Takgio product is made, in three steps",
       "changes": [
-        "The canvas graphic (glowing heads, flying document icons, three coloured panels) is replaced by a plain HTML and CSS diagram in three numbered steps: 01 Human expertise (practising experts, and what they know from: interviews, job records, drawings and specs, field know-how), 02 Dual-model AI (the general-purpose LLM and the Takgio expert model working as a pair, the expert model highlighted), 03 Takgio apps (ConcreteIQ and Brickture with their real icons, and BuyersGuide)",
-        "One line-icon style throughout, glass cards in the site's palette, and thin animated lines carrying the flow from step to step; the motion stops for visitors who ask for reduced motion",
-        "Phones show the three steps stacked, with the apps side by side; in the two-column hero at 1024-1200px the app names sit under their icons",
-        "js/hero-xform.js is deleted (no script is needed now); the graphic is also lighter to load"
+        "The canvas graphic (glowing heads, flying document icons, three coloured panels) is replaced by a plain HTML and CSS diagram in three numbered steps: 01 Human expertise (practising experts, and what they know from: interviews, job records, drawings and specs, field know-how), 02 Dual-model AI (the general-purpose LLM and the Takgio expert model working as a pair, the expert model highlighted), 03 Takgio apps (ConcreteIQ and Brickture with their real icons, and myBuyersGuide)",
+        "It plays the story on a 6-second loop: a live interview waveform and one knowledge source lighting up, a pulse running into the Takgio expert model (which ripples and fills its meter), then pulses fanning out to the three apps, which light up with what they do ($144,219 of missing steel caught; step-by-step build instructions; advice from a real expert). The LLM's ring of nodes turns and signals pass both ways between the two models",
+        "Custom animated pieces in place of stock-style icons; everything stops for visitors who ask for reduced motion",
+        "Phones show the three steps stacked, the two models side by side and the apps one per row; in the two-column hero at 1024-1200px the app names sit under their icons",
+        "js/hero-xform.js is deleted (no script is needed now)"
       ]
     },
     {

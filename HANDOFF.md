@@ -34,8 +34,10 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   in `index.html` and `css/styles.css`, no script): 01 Human expertise (practising experts and what they know from:
   interviews, job records, drawings and specs, field know-how) -> 02 Dual-model AI (the general-purpose LLM and the
   Takgio expert model, "work as a pair"; the expert model is the one highlighted card) -> 03 Takgio apps (ConcreteIQ,
-  Brickture, BuyersGuide). Thin animated wires between the columns; phones stack the steps. It replaced the v2.48
-  canvas graphic (`js/hero-xform.js`, deleted; its two licensed pictures stay in `images/hero/`, unused).
+  Brickture, myBuyersGuide; it is "myBuyersGuide", Ted 26 Oct). A 6 s CSS loop plays the story: interview waveform and
+  one source lit -> pulse into the expert model (ripple, meter) -> pulses to the apps, which show what they do. Ted
+  asked for it to feel active and not like stock art. Phones stack the steps. It replaced the v2.48 canvas graphic
+  (`js/hero-xform.js`, deleted; its two licensed pictures stay in `images/hero/`, unused).
 - **Home hero copy (v2.49.0):** four differentiator tiles: *A real expert
   first*, *In their own words* (1,400+ statements for ConcreteIQ), *Tested on real work*, and *$144,219*. The old
   stats are gone everywhere (products shipped, commits, ratings); About and Contact use the same four tiles
