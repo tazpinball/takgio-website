@@ -1,7 +1,17 @@
 {
-  "version": "2.53.1",
-  "date": "2026-10-23",
+  "version": "2.53.2",
+  "date": "2026-10-26",
   "releases": [
+    {
+      "version": "2.53.2",
+      "date": "2026-10-26",
+      "summary": "Internal files kept off takgio.com; HANDOFF.md started",
+      "changes": [
+        "CLAUDE.md, README.md, docs/ (the database scripts), supabase/ (the function source) and .claude/ were readable on the live site, because Vercel serves the repo as static files. New .vercelignore leaves them out of the deployment, and vercel.json redirects their paths to the home page",
+        "New HANDOFF.md (CLAUDE.md already imports it): the live state of the site for each new session. It was kept out of git so it would not be published; with the block above it is committed, and .gitignore no longer lists it",
+        "No page changes"
+      ]
+    },
     {
       "version": "2.53.1",
       "date": "2026-10-23",

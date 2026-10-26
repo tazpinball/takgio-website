@@ -1,0 +1,9 @@
+# Files in this repo that are for the team, not for takgio.com. Vercel serves the
+# repo as static files, so anything not listed here is public at its own URL.
+# vercel.json also redirects these paths, in case a file slips through.
+CLAUDE.md
+HANDOFF.md
+README.md
+docs/
+supabase/
+.claude/
