@@ -56,24 +56,26 @@ If you forget this, Ted will be upset. Do not skip it. Do not defer it. Do it ev
 
 ## Project Structure
 
-Two surfaces live in one repo:
+Everything sits in the project root as plain `.html` files; `vercel.json` gives some of them clean URLs.
 
-**Public marketing site** (indexed, linked from `sitemap.xml`):
-- `index.html`, `about.html`, `services.html`, `products.html`, `contact.html`
-- `case-studies.html` + `case-study-*.html` (5 case studies)
-- `insights.html` + `insight-*.html`
+**Public marketing site** (indexed; all in `sitemap.xml` except the per-job pages):
+- `index.html`, `about.html`, `leadership.html`, `industries.html` (`/services` redirects here), `products.html`, `contact.html`
+- Product pages: `concreteiq.html`, `brickture.html`, `hoof-harted.html`, `true-record.html`, `ann-elise.html`, `pinball-qr.html`, `meta-ray-ban-display.html`
+- `case-studies.html` + `case-study-*.html` (9), `insights.html` + `insight-*.html` (2)
+- Careers: `careers.html` (`/careers`), `job.html` (`/careers/:slug`). News: `news.html`, `ai-news.html`, `news-true-record-launch.html`
 
-**Internal project dashboard** (Supabase-auth-gated, `noindex,nofollow`):
-- `login.html`, `dashboard.html`, `tasks.html`, `project.html`, `ideas.html`
+**Unlisted / internal** (`noindex`):
+- Admin: `admin.html` (`/admin`), `careers-admin.html` (`/admin/careers`), `news-admin.html` (`/admin/news`), `team-admin.html` (`/admin/team`); shared sign-in in `js/admin-core.js`
+- Project dashboard (Supabase-auth-gated): `login.html`, `dashboard.html`, `tasks.html`, `project.html`, `ideas.html`
+- `ai-news-pull.html`, `application-confirm.html`, `hoof-harted-download.html` (`/hoof`), `hoof-harted-marketing.html` (`/marketing/hoof-harted`)
 
 **Shared assets & code:**
-- `css/` — `styles.css` (site-wide), `dashboard.css` (dashboard only)
-- `js/` — `supabase-config.js` (SUPABASE_URL / SUPABASE_ANON_KEY, load first), `auth.js` (login + session gating), `dashboard.js`, `my-tasks.js`, `project-detail.js`, `nav.js`, `hero.js`, `showcase.js`, `analytics.js`
-- `images/` — graphics; `og-image.html` generates `og-image.png`
-- `marketing/social/` — social assets
-- `supabase/` — `config.toml` + `functions/generate-project-update/index.ts` (Deno/TS edge function that reads repo files from the GitHub API)
-- `docs/` — `supabase-schema.sql`, `migrate-ideas.sql`, `strategy-project-dashboard.md`
-- `version.json`, `robots.txt`, `sitemap.xml`
+- `css/` — `styles.css` (site-wide), `dashboard.css` (dashboard), `careers-admin.css` (admin pages)
+- `js/` — `supabase-config.js` (SUPABASE_URL / SUPABASE_ANON_KEY, load first), `auth.js` (dashboard login), `admin-core.js` + the `*-admin.js` / `admin-hub.js` pages, `careers.js`, `news-feed.js`, `nav.js`, `motion.js`, `hero-xform.js`, `hero-reel.js`, `showcase.js`, `analytics.js`, and the dashboard's `dashboard.js`, `my-tasks.js`, `project-detail.js`
+- `images/` — graphics (`brand/`, `hero/`, `marketing/`, `news/`, `products/`, `reel/`, `team/`); `og-image.html` generates `og-image.png`
+- `supabase/functions/` — Deno/TS edge functions: `careers-apply`, `careers-confirm`, `ai-news-daily`, `ai-news-pull`, `generate-project-update`; offline tests in `_tests/`. Deployed with the Supabase CLI, not by git.
+- `docs/` — SQL to run in the Supabase SQL editor (`supabase-schema.sql`, `careers-schema.sql`, `news-schema.sql`, `news-daily-schema.sql`, `admin-team-emails.sql`, `migrate-ideas.sql`) and `strategy-project-dashboard.md`
+- `version.json`, `robots.txt`, `sitemap.xml`, `vercel.json`, `.vercelignore`
 
 ## Local Development
 
@@ -83,12 +85,13 @@ No build. Serve the static files from the project root, e.g.:
 npx http-server . -p 8080 -c-1
 ```
 
-`.claude/launch.json` defines two preview servers: `takgio-site` (port 8080) and `takgio-marketing` (port 8099).
+`.claude/launch.json` defines one preview server, `takgio-site` (port 8080). The local server ignores `vercel.json`, so clean URLs like `/careers` only work on Vercel; open the `.html` file locally.
 
 ## Deployment
 
-- Push to `master` → Vercel auto-deploys within seconds. There is no `vercel.json`; Vercel serves the repo as static files.
-- NOTE: `README.md` says push to `main`, but the actual deploy branch is `master`. Use `master`.
+- Push to `master` → Vercel auto-deploys within seconds. Vercel serves the repo as static files; `vercel.json` holds the clean-URL rewrites and redirects.
+- 🔴 **Anything committed is public at its own URL unless it is blocked.** `CLAUDE.md`, `HANDOFF.md`, `README.md`, `docs/`, `supabase/` and `.claude/` are kept off the site twice: `.vercelignore` leaves them out of the deployment, and `vercel.json` redirects their paths to the home page (v2.53.2). **A new internal file or folder goes into both.**
+- Cloud sessions push a `claude/*` branch and open a PR into `master`; Vercel builds a preview for each PR, and merging deploys.
 
 ## Gotchas
 
