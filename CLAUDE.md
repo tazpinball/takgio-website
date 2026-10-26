@@ -10,6 +10,14 @@ session. Read it before proposing work, and rewrite it at the end of every sessi
 
 @HANDOFF.md
 
+## 🔴 Always give Ted the full URL or full path
+
+Ted, 26 Oct: "you can state a name of the company all you want, but if you don't include where I should go, it's
+totally meaningless." Every company, program, tool, page or file you name in a reply comes with where to go: a full
+`https://` URL for anything on the web, and a full absolute path for a file. Say when a URL could not be confirmed.
+A path inside the cloud session (`/tmp/...`, `/home/user/...`) is not on Ted's laptop: give him the file as a
+download card instead.
+
 ## 🔒 FIXED LINK: the Demos link is `https://demos.takgio.com`
 
 Ted's demo site for client and investor meetings. **The link target is fixed: `href="https://demos.takgio.com"`,

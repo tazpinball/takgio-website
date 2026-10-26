@@ -1,7 +1,15 @@
 {
-  "version": "2.55.8",
+  "version": "2.55.9",
   "date": "2026-10-26",
   "releases": [
+    {
+      "version": "2.55.9",
+      "date": "2026-10-26",
+      "summary": "CLAUDE.md: always give Ted the full URL or full path",
+      "changes": [
+        "New rule (Ted, 26 Oct): every company, program, tool, page or file named in a reply comes with its full URL or full path"
+      ]
+    },
     {
       "version": "2.55.8",
       "date": "2026-10-26",
