@@ -3475,6 +3475,7 @@ section[id], article[id] { scroll-margin-top: 72px; }
 .h-ticker a:hover{text-decoration:underline}
 .h-ticker .tk{display:inline-block;font-size:.62rem;font-weight:800;letter-spacing:.1em;padding:3px 7px;border-radius:5px;margin-right:9px;vertical-align:2px;background:rgba(255,255,255,.22)}
 .h-ticker .tk-ai{background:rgba(11,13,28,.35)}
+.h-ticker .tk::before{content:none}
 @media (prefers-reduced-motion:reduce){.h-ticker a[aria-hidden="true"]{display:none}}
 /* ===== News v3: compact, Google-style (prefix g-) ===== */
 .g-page{background:#fff;color:#1f1f1f;padding:36px 0 88px}

@@ -1,7 +1,18 @@
 {
-  "version": "2.53.4",
+  "version": "2.54.0",
   "date": "2026-10-26",
   "releases": [
+    {
+      "version": "2.54.0",
+      "date": "2026-10-26",
+      "summary": "Home ticker: every line is a link, and the 5 newest AI news headlines run in it",
+      "changes": [
+        "Every Takgio line in the home-page ticker now goes to the page that backs it up: the How it works section, the ConcreteIQ customer story and product page, the Hoof Harted and True Record case studies, the Meta Ray-Ban Display page, and the market numbers on the home page (new anchor #market)",
+        "The 5 newest stories from AI news we're watching are mixed into the ticker, labelled AI NEWS, each opening its story on /ai-news; a story's short ticker line is used if it has one, otherwise its headline (cut at 90 characters). Before, only stories with a ticker line appeared, at most 3",
+        "Reworded: 'Hoof Harted: on the App Store 20 days after work began' and 'True Record: submitted to the App Store 16 days after work began' (they said 'first commit')",
+        "The NEWS and AI NEWS badges no longer show a stray diamond inside them"
+      ]
+    },
     {
       "version": "2.53.4",
       "date": "2026-10-26",

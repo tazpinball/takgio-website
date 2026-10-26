@@ -13,10 +13,11 @@ takgio.com (the network policy refuses both hosts); Ted runs the checks in the d
 ```
 LIVE     v2.53.3 (26 Oct). v2.53.2 blocked the internal files from the site (Ted confirmed takgio.com/CLAUDE.md
          lands on the home page); v2.53.3 brought CLAUDE.md and README.md up to date. Vercel deploys master on push.
+         PR tazpinball/takgio-website#3 carries v2.53.4 (this file: Supabase checked) and v2.54.0 (the ticker).
 GIT      master = the deployed site. Cloud sessions work on a claude/* branch and open a draft PR into master;
          merging the PR is what deploys.
 DEMOS    The Demos link check passes: 32 pages / 33 links / 0 wrong href (26 Oct).
-NEXT     Nothing in progress. Ted chooses the next piece of work.
+NEXT     Ted merges PR #3, then checks the home ticker on takgio.com: every line clickable, 5 AI NEWS items.
 SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked 26 Oct, see Open / verified).
 ```
 
@@ -46,6 +47,11 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   - OpenAI is not read directly (v2.50.1).
 - **Internal project dashboard:** `login.html`, `dashboard.html`, `tasks.html`, `project.html` and `ideas.html`, plus
   the `generate-project-update` function.
+- **Home ticker (v2.54.0):** every line is a link. 8 Takgio lines in `index.html` (each goes to the page that backs it:
+  the announcement, `#how-it-works`, the ConcreteIQ customer story and product page, the Hoof Harted and True Record
+  case studies, the Meta page, `#market`), plus the 5 newest AI news stories added by `js/news-feed.js`, labelled
+  AI NEWS and linked to `/ai-news.html#<slug>`. A story's ticker line is used if it has one, else its headline cut at
+  90 characters. The two "first commit" lines were reworded to "... days after work began" (Ted, 26 Oct).
 - **Routing:** `vercel.json` holds the rewrites for the clean URLs above, plus `/hoof` and `/marketing/hoof-harted`.
   `/services` permanently redirects to `/industries.html`.
 

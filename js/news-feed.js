@@ -2,7 +2,7 @@
    (tables in docs/news-schema.sql; editors manage weeks in the News admin, /admin/news) and fills:
      - #ai-news-root   on ai-news.html: week chips, the selected week's stories, past weeks, topics
      - #ai-week-card   on news.html: the latest week's headlines
-     - .h-ticker       on index.html: adds the newest stories that have a ticker line, linked to their story
+     - .h-ticker       on index.html: adds the 5 newest stories (their ticker line, else their headline), linked to their story
    Needs js/supabase-config.js first (SUPABASE_URL, SUPABASE_ANON_KEY: the public key, read-only by design).
    If the request fails, the AI news page says so and the other two places simply stay as they are. */
 (function () {
@@ -24,6 +24,8 @@
     var a = d(ws), b = new Date(a.getTime() + 6 * 864e5), M = long ? LONG : MONTHS, same = a.getUTCMonth() === b.getUTCMonth();
     return M[a.getUTCMonth()] + ' ' + a.getUTCDate() + '–' + (same ? '' : M[b.getUTCMonth()] + ' ') + b.getUTCDate() + (long ? ', ' + b.getUTCFullYear() : '');
   }
+  var TICKER_STORIES = 5, TICKER_MAX = 90;
+  function clip(t) { t = String(t || ''); if (t.length <= TICKER_MAX) return t; var c = t.slice(0, TICKER_MAX - 1); return c.slice(0, c.lastIndexOf(' ') > 40 ? c.lastIndexOf(' ') : c.length) + '\u2026'; }
   function safeUrl(u) { return /^https:\/\//.test(u || '') ? u : '#'; }
 
   fetch(SUPABASE_URL + '/rest/v1/ai_news_public?select=*&order=source_date.desc', { headers: { apikey: SUPABASE_ANON_KEY } })
@@ -85,12 +87,13 @@
 
   // ---------------------------------------------------------------- index.html ticker
   function addToTicker(rows) {
-    var news = rows.filter(function (s) { return s.ticker; }).slice(0, 3);
+    // rows arrive newest first; a story's short ticker line wins, its headline otherwise (cut to fit at a word)
+    var news = rows.slice(0, TICKER_STORIES);
     if (!news.length) return;
     var first = [].slice.call(ticker.children).filter(function (e) { return e.getAttribute('aria-hidden') !== 'true'; });
     var made = news.map(function (s) {
       var a = document.createElement('a'); a.href = '/ai-news.html#' + s.slug;
-      a.innerHTML = '<span class="tk tk-ai">AI NEWS</span>' + esc(s.ticker); return a;
+      a.innerHTML = '<span class="tk tk-ai">AI NEWS</span>' + esc(s.ticker || clip(s.headline)); return a;
     });
     // after the company NEWS item, interleave: one AI story, then one of the existing lines
     var seq = [], k = 0;
