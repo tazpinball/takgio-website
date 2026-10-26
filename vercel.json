@@ -1,6 +1,36 @@
 {
   "redirects": [
     {
+      "source": "/CLAUDE.md",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/HANDOFF.md",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/README.md",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/docs/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/supabase/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/.claude/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
       "source": "/services.html",
       "destination": "/industries.html",
       "permanent": true
