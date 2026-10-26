@@ -10,13 +10,13 @@ Supabase was not looked at from here, so nothing in this file says what is insta
 ## Where the next session starts
 
 ```
-LIVE     v2.53.1 (23 Oct). v2.53.2 (this file + the internal files blocked from the site) is a draft PR into
-         master; it deploys when Ted merges it. Vercel deploys master on push.
+LIVE     v2.53.2 (26 Oct): the internal files blocked from the site, this file committed. Ted confirmed
+         takgio.com/CLAUDE.md now lands on the home page. v2.53.3 (CLAUDE.md and README.md brought up to date) goes
+         through a PR. Vercel deploys master on push.
 GIT      master = the deployed site. Cloud sessions work on a claude/* branch and open a draft PR into master;
          merging the PR is what deploys.
 DEMOS    The Demos link check passes: 32 pages / 33 links / 0 wrong href (26 Oct).
-NEXT     v2.53.2's preview checked by Ted (26 Oct): /CLAUDE.md, /HANDOFF.md and /docs/supabase-schema.sql land on
-         the home page; /careers and /hoof work. After merging: the same check on takgio.com.
+NEXT     Nothing in progress after v2.53.3. Ted chooses the next piece of work.
 ```
 
 ## What the site is
@@ -64,7 +64,7 @@ Full notes for each release are in `version.json`.
 
 ## Open / not verified
 
-- **Internal files were public on takgio.com until v2.53.2.** Vercel serves the repo as static files, so `CLAUDE.md`
+- **Internal files were public on takgio.com until v2.53.2** (fixed and checked live, 26 Oct). Vercel serves the repo as static files, so `CLAUDE.md`
   (Ted confirmed it loads, 26 Oct), `README.md`, `docs/*.sql` and the Supabase function source were readable at their
   own URLs. v2.53.2 keeps them off the site two ways: `.vercelignore` leaves them out of the deployment, and
   `vercel.json` redirects their paths to the home page. Nothing secret is in them (only the public anon key is in
@@ -75,12 +75,6 @@ Full notes for each release are in `version.json`.
   the job's tables and a Vault secret) and `docs/admin-team-emails.sql` have to be run in the Supabase SQL editor, and
   the functions have to be deployed to Supabase. Pushing to git deploys neither. Whether either has happened is not
   recorded. Ask Ted, or check in the Supabase dashboard.
-- **Stale docs, not fixed:**
-  - `README.md` says to push to `main`; the deploy branch is `master`.
-  - CLAUDE.md lists `supabase/config.toml`, but no such file exists.
-  - CLAUDE.md's page list still names `services.html`, which now redirects to `/industries.html`.
-  - CLAUDE.md says "There is no `vercel.json`" and names two preview servers; there is a `vercel.json` and
-    `.claude/launch.json` has one (`takgio-site`).
 
 ## Rules that bind every change (from CLAUDE.md)
 

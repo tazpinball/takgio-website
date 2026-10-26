@@ -1,7 +1,18 @@
 {
-  "version": "2.53.2",
+  "version": "2.53.3",
   "date": "2026-10-26",
   "releases": [
+    {
+      "version": "2.53.3",
+      "date": "2026-10-26",
+      "summary": "CLAUDE.md and README.md brought up to date",
+      "changes": [
+        "CLAUDE.md: the page list, the js/css/images folders, the Supabase functions and SQL files, one preview server (not two), vercel.json and .vercelignore, and the rule that a new internal file goes into both; the non-existent supabase/config.toml and the redirected services.html are gone",
+        "README.md: push to master (it said main), bump version.json, and pointers to CLAUDE.md and HANDOFF.md in place of an out-of-date folder tree",
+        "HANDOFF.md: the stale-docs list is cleared; v2.53.2 recorded as live and checked",
+        "No page changes"
+      ]
+    },
     {
       "version": "2.53.2",
       "date": "2026-10-26",
