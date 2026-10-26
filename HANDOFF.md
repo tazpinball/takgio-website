@@ -4,20 +4,21 @@
 > place at the end of each session; do not append a per-session log. The release history lives in `version.json`
 > (`releases`, newest first) and in `git log`.
 
-*Started 2026-10-26 (it did not exist before this date). Built from `version.json`, `git log` and the repo itself.
+*Started 2026-10-26 (it did not exist before this date); last updated 2026-10-26, after v2.55.6 went live. Built from
+`version.json`, `git log` and the repo itself.
 The Supabase side was checked by Ted in the dashboard on 26 Oct (below). A cloud session cannot reach Supabase or
 takgio.com (the network policy refuses both hosts); Ted runs the checks in the dashboard.*
 
 ## Where the next session starts
 
 ```
-LIVE     v2.55.5 (26 Oct; PR tazpinball/takgio-website#3 merged at c129b81): the ticker and the new hero graphic.
+LIVE     v2.55.6 (26 Oct; PR tazpinball/takgio-website#4 merged at 11e122f): the hero graphic as Ted approved it,
+         the apps' lines starting at the centre, from the pair link. v2.55.7 changes only this file.
          Vercel deploys master on push.
 GIT      master = the deployed site. Cloud sessions work on a claude/* branch and open a draft PR into master;
          merging the PR is what deploys.
 DEMOS    The Demos link check passes: 32 pages / 33 links / 0 wrong href (26 Oct).
-NEXT     Ted reviews v2.55.6 (the apps' lines start at the centre, from the pair link) on its PR's Vercel preview,
-         then the PR is merged.
+NEXT     Nothing open on the site. Wait for Ted's next request.
 SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked 26 Oct, see Open / verified).
 ```
 
@@ -71,10 +72,13 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
 - **Routing:** `vercel.json` holds the rewrites for the clean URLs above, plus `/hoof` and `/marketing/hoof-harted`.
   `/services` permanently redirects to `/industries.html`.
 
-## Recent work (Oct 21–23)
+## Recent work (Oct 21–26)
 
 | Version | What |
 |---|---|
+| 2.55.0–2.55.6 | Home hero graphic redrawn and animated in three steps (26 Oct; Ted approved each round on a Vercel preview) |
+| 2.54.0 | Home ticker: every line a link, plus the 5 newest AI news headlines |
+| 2.53.2–2.53.4 | Internal files kept off the site; HANDOFF.md started; CLAUDE.md and README.md updated; Supabase checked |
 | 2.53.1 | ConcreteIQ customer story: the bid dollar totals removed |
 | 2.53.0 | ConcreteIQ customer story page, linked from Case Studies and in the sitemap |
 | 2.52.0 | Team & access shows each member's email; the top bar shows the signed-in email |

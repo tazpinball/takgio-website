@@ -1,7 +1,16 @@
 {
-  "version": "2.55.6",
+  "version": "2.55.7",
   "date": "2026-10-26",
   "releases": [
+    {
+      "version": "2.55.7",
+      "date": "2026-10-26",
+      "summary": "HANDOFF.md brought up to date after v2.55.6 went live",
+      "changes": [
+        "LIVE is v2.55.6's hero graphic (PR #4 merged); nothing is waiting on review",
+        "Recent work lists the 26 Oct releases (2.53.2 to 2.55.6)"
+      ]
+    },
     {
       "version": "2.55.6",
       "date": "2026-10-26",
