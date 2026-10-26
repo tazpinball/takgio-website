@@ -1,7 +1,17 @@
 {
-  "version": "2.55.1",
+  "version": "2.55.2",
   "date": "2026-10-26",
   "releases": [
+    {
+      "version": "2.55.2",
+      "date": "2026-10-26",
+      "summary": "Hero graphic: the two models keep the site's turning lattice pictures",
+      "changes": [
+        "The general-purpose LLM card shows the big blue, cyan and purple turning lattice, and the Takgio expert model card the smaller gold one, as on the site before; the generic node ring and star icon are gone",
+        "The expert model's lattice lights up when the data pulse reaches it, in step with the rest of the loop; the LLM's lights up on its own",
+        "New js/hero-models.js draws just the two lattices (ported from the v2.48 graphic); paused when scrolled off screen, a still frame for reduced motion"
+      ]
+    },
     {
       "version": "2.55.1",
       "date": "2026-10-26",

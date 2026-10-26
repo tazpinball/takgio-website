@@ -3665,14 +3665,9 @@ section[id], article[id] { scroll-margin-top: 72px; }
 /* 02: the two models */
 .hx-c2{gap:0}
 .hx-c2 .hx-card{flex:1;display:flex;flex-direction:column;justify-content:center}
-/* the general-purpose LLM: a ring of nodes that never stops turning, and a blinking cursor */
-.hx-orb{position:relative;width:36px;height:36px;margin-bottom:10px;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,.25),transparent 70%);animation:hx-spin 9s linear infinite}
-.hx-orb i{position:absolute;left:50%;top:50%;width:5px;height:5px;margin:-2.5px;border-radius:50%;background:#c4b5fd;box-shadow:0 0 6px #a78bfa}
-.hx-orb i:nth-child(1){transform:rotate(0deg) translateY(-15px)}.hx-orb i:nth-child(2){transform:rotate(45deg) translateY(-15px);opacity:.45}
-.hx-orb i:nth-child(3){transform:rotate(90deg) translateY(-15px);opacity:.8}.hx-orb i:nth-child(4){transform:rotate(135deg) translateY(-15px);opacity:.35}
-.hx-orb i:nth-child(5){transform:rotate(180deg) translateY(-15px);opacity:.9}.hx-orb i:nth-child(6){transform:rotate(225deg) translateY(-15px);opacity:.5}
-.hx-orb i:nth-child(7){transform:rotate(270deg) translateY(-15px);opacity:.7}.hx-orb i:nth-child(8){transform:rotate(315deg) translateY(-15px);opacity:.3}
-@keyframes hx-spin{to{transform:rotate(360deg)}}
+/* the two models' pictures: the turning lattices kept from the v2.48 graphic (js/hero-models.js draws them); a blinking
+   cursor after the LLM's line */
+.hx-lat{display:block;width:100%;height:92px;margin:-6px 0 6px}
 .hx-caret{display:inline-block;width:6px;height:11px;margin-left:3px;vertical-align:-1px;background:#c4b5fd;animation:hx-blink 1s steps(1) infinite}
 @keyframes hx-blink{50%{opacity:0}}
 /* the pair: two signals passing each other, both ways, all the time */
@@ -3683,19 +3678,13 @@ section[id], article[id] { scroll-margin-top: 72px; }
 .hx-pt i+i{background:#2dd4bf;box-shadow:0 0 8px #2dd4bf;animation-name:hx-down}
 @keyframes hx-up{0%{top:16px;opacity:0}20%,80%{opacity:1}100%{top:0;opacity:0}}
 @keyframes hx-down{0%{top:0;opacity:0}20%,80%{opacity:1}100%{top:16px;opacity:0}}
-/* the Takgio expert model: the one highlighted card. It ripples when knowledge arrives and its meter fills */
+/* the Takgio expert model: the one highlighted card. It glows when knowledge arrives (its lattice lights up) and its meter fills */
 .hx-core{border-color:transparent;background:linear-gradient(180deg,rgba(32,40,92,.92),rgba(18,26,58,.92)) padding-box,
   linear-gradient(135deg,#7aa2ff,#2dd4bf 55%,#a78bfa) border-box;border:1px solid transparent;
   box-shadow:0 0 0 1px rgba(45,212,191,.06),0 0 40px -12px rgba(45,212,191,.5),0 14px 34px -14px rgba(0,0,0,.7);animation:hx-core var(--T) ease-out infinite}
 @keyframes hx-core{0%,30%{box-shadow:0 0 0 1px rgba(45,212,191,.06),0 0 40px -12px rgba(45,212,191,.5),0 14px 34px -14px rgba(0,0,0,.7)}
   38%{box-shadow:0 0 0 1px rgba(45,212,191,.25),0 0 64px -6px rgba(45,212,191,.85),0 14px 34px -14px rgba(0,0,0,.7)}
   60%,100%{box-shadow:0 0 0 1px rgba(45,212,191,.06),0 0 40px -12px rgba(45,212,191,.5),0 14px 34px -14px rgba(0,0,0,.7)}}
-.hx-core-ic{position:relative;display:grid;place-items:center;width:36px;height:36px;margin-bottom:10px;border-radius:10px;background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.35)}
-.hx-core-ic svg{position:relative;width:22px;height:22px;animation:hx-star var(--T) ease-out infinite}
-@keyframes hx-star{0%,32%{transform:scale(1) rotate(0)}40%{transform:scale(1.25) rotate(45deg)}55%,100%{transform:scale(1) rotate(90deg)}}
-.hx-core-ic i{position:absolute;inset:-1px;border-radius:10px;border:1.5px solid #2dd4bf;opacity:0;animation:hx-rip var(--T) ease-out infinite}
-.hx-core-ic i+i{animation-delay:.25s;border-color:#7aa2ff}
-@keyframes hx-rip{0%,32%{transform:scale(1);opacity:0}34%{transform:scale(1);opacity:.9}58%,100%{transform:scale(2.3);opacity:0}}
 .hx-core .hx-d{color:#b9c7ee}
 .hx-meter{display:block;height:4px;margin-top:12px;border-radius:4px;background:rgba(255,255,255,.08);overflow:hidden}
 .hx-meter i{display:block;height:100%;width:100%;border-radius:4px;background:linear-gradient(90deg,#7aa2ff,#2dd4bf);transform-origin:0 50%;animation:hx-fill var(--T) ease-out infinite}

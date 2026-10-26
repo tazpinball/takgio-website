@@ -71,7 +71,7 @@ Everything sits in the project root as plain `.html` files; `vercel.json` gives 
 
 **Shared assets & code:**
 - `css/` — `styles.css` (site-wide), `dashboard.css` (dashboard), `careers-admin.css` (admin pages)
-- `js/` — `supabase-config.js` (SUPABASE_URL / SUPABASE_ANON_KEY, load first), `auth.js` (dashboard login), `admin-core.js` + the `*-admin.js` / `admin-hub.js` pages, `careers.js`, `news-feed.js`, `nav.js`, `motion.js`, `hero-reel.js`, `showcase.js`, `analytics.js`, and the dashboard's `dashboard.js`, `my-tasks.js`, `project-detail.js`
+- `js/` — `supabase-config.js` (SUPABASE_URL / SUPABASE_ANON_KEY, load first), `auth.js` (dashboard login), `admin-core.js` + the `*-admin.js` / `admin-hub.js` pages, `careers.js`, `news-feed.js`, `nav.js`, `motion.js`, `hero-reel.js`, `hero-models.js` (the two model lattices in the hero graphic), `showcase.js`, `analytics.js`, and the dashboard's `dashboard.js`, `my-tasks.js`, `project-detail.js`
 - `images/` — graphics (`brand/`, `hero/`, `marketing/`, `news/`, `products/`, `reel/`, `team/`); `og-image.html` generates `og-image.png`
 - `supabase/functions/` — Deno/TS edge functions: `careers-apply`, `careers-confirm`, `ai-news-daily`, `ai-news-pull`, `generate-project-update`; offline tests in `_tests/`. Deployed with the Supabase CLI, not by git.
 - `docs/` — SQL to run in the Supabase SQL editor (`supabase-schema.sql`, `careers-schema.sql`, `news-schema.sql`, `news-daily-schema.sql`, `admin-team-emails.sql`, `migrate-ideas.sql`) and `strategy-project-dashboard.md`
