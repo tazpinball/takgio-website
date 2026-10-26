@@ -11,13 +11,13 @@ takgio.com (the network policy refuses both hosts); Ted runs the checks in the d
 ## Where the next session starts
 
 ```
-LIVE     v2.53.3 (26 Oct). v2.53.2 blocked the internal files from the site (Ted confirmed takgio.com/CLAUDE.md
-         lands on the home page); v2.53.3 brought CLAUDE.md and README.md up to date. Vercel deploys master on push.
-         PR tazpinball/takgio-website#3 carries v2.53.4 (this file: Supabase checked) and v2.54.0 (the ticker).
+LIVE     v2.55.5 (26 Oct; PR tazpinball/takgio-website#3 merged at c129b81): the ticker and the new hero graphic.
+         Vercel deploys master on push.
 GIT      master = the deployed site. Cloud sessions work on a claude/* branch and open a draft PR into master;
          merging the PR is what deploys.
 DEMOS    The Demos link check passes: 32 pages / 33 links / 0 wrong href (26 Oct).
-NEXT     Ted reviews the new hero graphic (v2.55.0) on its PR's Vercel preview, desktop and phone, then merges.
+NEXT     Ted reviews v2.55.6 (the apps' lines start at the centre, from the pair link) on its PR's Vercel preview,
+         then the PR is merged.
 SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked 26 Oct, see Open / verified).
 ```
 
@@ -41,7 +41,9 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   apart by SHAPE (v2.55.4, Ted: the combined model must look like neither, yet clearly both): the LLM a round cool
   lattice; the Takgio expert model a gold four-pointed star (the Takgio spark), lit as the pulse arrives; each app card
   shows the COMBINED model instead of its app icon (v2.55.3): ~70% cool LLM lattice with a small gold star at its heart
-  (v2.55.5, Ted's proportions; the expert star alone was also made 25% smaller). Ted
+  (v2.55.5, Ted's proportions; the expert star alone was also made 25% smaller). The "work as a pair" link has a hub
+  at its centre; one short line runs from it to where the three app lines fan out (v2.55.6, Ted: start them centred,
+  from the pair link; `alignFan()` in `js/hero-models.js` sets the fan's start to the hub's height). Ted
   asked for it to feel active and not like stock art. Phones stack the steps. It replaced the v2.48 canvas graphic
   (`js/hero-xform.js`, deleted; its two licensed pictures stay in `images/hero/`, unused).
 - **Home hero copy (v2.49.0):** four differentiator tiles: *A real expert
