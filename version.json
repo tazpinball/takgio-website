@@ -1,7 +1,18 @@
 {
-  "version": "2.55.3",
+  "version": "2.55.4",
   "date": "2026-10-26",
   "releases": [
+    {
+      "version": "2.55.4",
+      "date": "2026-10-26",
+      "summary": "Hero graphic: each model has its own shape; the combined model is visibly both",
+      "changes": [
+        "The Takgio expert model is now a gold four-pointed star lattice (the Takgio spark), so it no longer looks like a smaller LLM",
+        "The general-purpose LLM stays the round blue, cyan and purple lattice",
+        "Each app's combined model is the gold star set inside a ring of the blue-purple lattice, its points reaching the ring and the joining lines blending the two colours: unlike either model, plainly made of both. It turns as one piece",
+        "The star and the combined model turn rigidly, so no connecting line stretches as they spin; the pictures sit centred in narrow cards"
+      ]
+    },
     {
       "version": "2.55.3",
       "date": "2026-10-26",

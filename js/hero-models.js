@@ -1,12 +1,13 @@
-/* Home hero graphic (v2.55.2): the two model pictures inside the .hx cards, kept from the v2.48 canvas graphic at Ted's
-   request (Oct 26: "I prefer the graphic we have on the site now"). The general-purpose LLM is the big cool lattice
-   (blue, cyan, purple, silver); the Takgio expert model is the smaller warm one (gold, amber, green). Both turn slowly,
-   nodes light up and pass the light along their edges, and three satellites orbit each. The expert model lights up
-   when the CSS cycle's pulse reaches it (1/3 of the way through the 6 s loop, .hx's --T); the LLM lights up on its own.
-   Each Takgio app shows the COMBINED model (v2.55.3): the gold expert lattice at the heart of the cool LLM lattice,
-   lighting up as the pulse reaches that app.
-   One canvas per card (canvas.hx-lat[data-lat="llm"|"core"]); each draws in a 150 x 110 design box. Paused off screen;
-   reduced motion draws one still frame. */
+/* Home hero graphic (v2.55): the model pictures inside the .hx cards, drawn as turning lattices (the style of the v2.48
+   canvas graphic, which Ted preferred to icons). Each picture says what it is by its SHAPE (v2.55.4, Ted: the combined
+   model must look like neither model, yet clearly both):
+     - the general-purpose LLM: a round lattice, cool colours (blue, cyan, purple, silver);
+     - the Takgio expert model: a four-pointed STAR lattice (the Takgio spark), warm colours (gold, amber, green);
+     - each Takgio app: the COMBINED model, the gold star set inside a ring of the cool lattice, joined at its points.
+   All turn slowly (the star and the combined model as one rigid piece); nodes light up and pass the light along their edges; satellites orbit. The expert model lights up
+   when the CSS loop's pulse reaches it (1/3 of the 6 s cycle, .hx's --T) and each app as its pulse arrives (~3/4);
+   the LLM lights up on its own. One canvas per card (canvas.hx-lat[data-lat="llm"|"core"|"app"]), each drawn in a
+   150 x 110 design box. Paused off screen; reduced motion draws one still frame. */
 (function (global) {
   var DW = 150, DH = 110, CYCLE = 6000, ARRIVE = .33, APP_ARRIVE = .72;
   var reduce = global.matchMedia && global.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -22,15 +23,22 @@
   var COOL = palette([[35, 110, 255], [30, 225, 255], [185, 75, 255], [205, 214, 230]]);                 // electric blue, cyan, neon purple, silver
   var WHITE = sprite('255,255,255', 32);
 
-  // pal is one palette, or { inner, outer, split }: rings below `split` take the inner palette (the combined model:
-  // the warm expert model at the heart of the cool LLM)
-  function Lattice(cv, radii, total, sz, pal) {
-    var mix = pal.inner ? pal : null, base = mix ? mix.outer : pal;
+  // the star's outline: a superellipse with an exponent under 1 (points on the axes, waist at 45 degrees ~ 18% out)
+  var STAR_Q = .4;
+  function starK(a) { var c = Math.abs(Math.cos(a)), s = Math.abs(Math.sin(a)); return 1 / Math.pow(Math.pow(c, STAR_Q) + Math.pow(s, STAR_Q), 1 / STAR_Q); }
+
+  // rings: [{ r, n, pal, star }]; the centre node takes the first ring's look; sats: the satellites' palettes; rigid: the
+  // whole lattice turns as one piece (the combined model), else round rings counter-rotate and only stars turn rigidly
+  function Lattice(cv, rings, sz, sats, rigid) {
     var ctx = cv.getContext('2d'), cx = DW / 2, cy = DH / 2, S = 1, T = 0;
-    var L = { R: radii[radii.length - 1], nodes: [], edges: [], energy: 0 }, rings = [[0, 1]], sum = 0, left = total;
-    radii.forEach(function (r) { sum += r; });
-    radii.forEach(function (r, i) { var n = i === radii.length - 1 ? left : Math.round(total * r / sum); rings.push([r, n]); left -= n; });
-    rings.forEach(function (r, ri) { for (var i = 0; i < r[1]; i++) L.nodes.push({ r: r[0], a0: (i / r[1]) * 6.283 + ri * .35, e: 0, ri: ri, x: 0, y: 0, h: ((i / r[1]) * 360 + ri * 28) % 360, p: mix && ri < mix.split ? mix.inner : base }); });
+    var L = { R: rings[rings.length - 1].r, nodes: [], edges: [], energy: 0 };
+    var all = [{ r: 0, n: 1, pal: rings[0].pal, star: rings[0].star }].concat(rings);
+    all.forEach(function (rg, ri) { for (var i = 0; i < rg.n; i++) L.nodes.push({ r: rg.r, a0: (i / rg.n) * 6.283 + ri * .35, e: 0, ri: ri, x: 0, y: 0, h: ((i / rg.n) * 360 + ri * 28) % 360, p: rg.pal, star: rg.star }); });
+    // a star's four points are thin, so evenly spaced ring nodes leave them almost empty: a ray of nodes runs out along
+    // each point to the star's tip, which is what makes the star read as a star (and reach the ring in the combined model)
+    var starR = 0, starPal = null; rings.forEach(function (rg) { if (rg.star && rg.r > starR) { starR = rg.r; starPal = rg.pal; } });
+    for (var ax = 0; starR && ax < 4; ax++) for (var d = 6; d <= starR + .1; d += 4.5) L.nodes.push({ r: d, a0: ax * 1.5708, e: 0, ri: 1, x: 0, y: 0, h: (ax * 90 + d * 4) % 360, p: starPal, star: true });
+    var glowIn = rings[0].pal, glowOut = rings[rings.length - 1].pal;
     function palPos(p, h) { var n = p.cols.length; return (((h / 360) * n + T * .06) % n + n) % n; }
     function palRgb(p, h, white) {
       var f = palPos(p, h), i = Math.floor(f), t = f - i, a = p.cols[i], b = p.cols[(i + 1) % p.cols.length], w = white || 0, o = [];
@@ -41,10 +49,14 @@
     // a canvas silently IGNORES an opacity outside 0..1 and keeps the previous one, so every opacity goes through here
     function setAlpha(a) { ctx.globalAlpha = a < 0 ? 0 : a > 1 ? 1 : a; }
     function glow(spr, x, y, r, a) { setAlpha(a); ctx.drawImage(spr, (x - r) * S, (y - r) * S, 2 * r * S, 2 * r * S); }
+    // a star (and a rigid lattice) turns as one piece, so its edges never stretch; round rings slide, alternate rings
+    // turning opposite ways, as in the v2.48 graphic
     function place() {
+      var spin = T * .05;
       for (var i = 0; i < L.nodes.length; i++) {
-        var n = L.nodes[i], dir = n.ri % 2 ? 1 : -1, a = n.a0 + T * .04 * dir;
-        n.x = cx + Math.cos(a) * n.r * (1 + .02 * Math.sin(T * .6 + i)); n.y = cy + Math.sin(a) * n.r * (1 + .02 * Math.cos(T * .5 + i));
+        var n = L.nodes[i], still = rigid || n.star, a = still ? n.a0 + spin : n.a0 + T * .04 * (n.ri % 2 ? 1 : -1);
+        var rr = n.r * (1 + .02 * Math.sin(T * .6 + i)) * (n.star ? starK(n.a0) : 1);
+        n.x = cx + Math.cos(a) * rr; n.y = cy + Math.sin(a) * rr * (still ? 1 : 1 + .02 * Math.cos(T * .5 + i));
       }
     }
     place();
@@ -54,14 +66,14 @@
       ds.sort(function (a, b) { return a[0] - b[0]; });
       for (var k = 0; k < 3; k++) if (i < ds[k][1]) L.edges.push([i, ds[k][1]]);
     }
-    var outer = L.nodes.filter(function (n) { return n.ri >= rings.length - 4; });
+    var outer = L.nodes.filter(function (n) { return n.ri >= all.length - 3; });
     L.light = function (m) {
       for (var q = 0; q < (m || 1); q++) { outer[(Math.random() * outer.length) | 0].e = 1; var inner = L.nodes[(Math.random() * L.nodes.length) | 0]; inner.e = Math.max(inner.e, .6); }
     };
     L.resize = function () {
       var r = cv.getBoundingClientRect(), dpr = Math.min(2, global.devicePixelRatio || 1);
       cv.width = Math.max(1, r.width * dpr); cv.height = Math.max(1, r.height * dpr);
-      S = Math.min(r.width / DW, r.height / DH); cx = (r.width / S) / 2; cy = DH / 2;
+      S = Math.min(r.width / DW, r.height / DH); cx = (r.width / S) / 2; cy = (r.height / S) / 2;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     L.frame = function (t, dt) {
@@ -72,16 +84,20 @@
       ctx.clearRect(0, 0, cv.width, cv.height);
       ctx.lineCap = 'round'; ctx.globalCompositeOperation = 'lighter';
       var k = L.R / 61, enr = L.energy;
-      glow(base.spr[0], cx, cy, (108 + 18 * enr) * k, .18 + .2 * enr); glow((mix ? mix.inner : base).spr[mix ? 0 : 1], cx, cy, 63 * k, .1 + .16 * enr);
+      glow(glowOut.spr[0], cx, cy, (108 + 18 * enr) * k, .18 + .2 * enr); glow(glowIn.spr[glowIn === glowOut ? 1 : 0], cx, cy, 63 * k, .1 + .16 * enr);
       ctx.lineWidth = Math.max(.8, S * .9 * sz);
       for (var e = 0; e < L.edges.length; e++) {
         var A2 = L.nodes[L.edges[e][0]], B2 = L.nodes[L.edges[e][1]], ee = Math.max(A2.e, B2.e), eh = (A2.h + B2.h) / 2 + (Math.abs(A2.h - B2.h) > 180 ? 180 : 0) + T * 10;
-        setAlpha(.3 + .55 * ee); ctx.strokeStyle = palRgb(A2.p, eh - T * 10, .1 + .35 * ee);
+        setAlpha(.3 + .55 * ee);
+        if (A2.p !== B2.p) {          // where the two models meet: the edge runs from one model's colour into the other's
+          var g = ctx.createLinearGradient(A2.x * S, A2.y * S, B2.x * S, B2.y * S);
+          g.addColorStop(0, palRgb(A2.p, A2.h, .2 + .35 * ee)); g.addColorStop(1, palRgb(B2.p, B2.h, .2 + .35 * ee)); ctx.strokeStyle = g;
+        } else ctx.strokeStyle = palRgb(A2.p, eh - T * 10, .1 + .35 * ee);
         ctx.beginPath(); ctx.moveTo(A2.x * S, A2.y * S); ctx.lineTo(B2.x * S, B2.y * S); ctx.stroke();
       }
       for (var nq = 0; nq < L.nodes.length; nq++) { var nd = L.nodes[nq]; glow(palSpr(nd.p, nd.h), nd.x, nd.y, (4 + 4 * nd.e) * sz, .55 + .4 * nd.e); glow(WHITE, nd.x, nd.y, (1.5 + 2.5 * nd.e) * sz, .4 + .5 * nd.e); }
-      var ox = L.R + 16, oy = ox * .42;
-      for (var s = 0; s < 3; s++) { var sa = T * .55 + s * 2.094; glow((mix && s === 1 ? mix.inner : base).spr[s], cx + Math.cos(sa) * ox, cy + Math.sin(sa) * oy, 7, .85); glow(WHITE, cx + Math.cos(sa) * ox, cy + Math.sin(sa) * oy, 2.4, .9); }
+      var ox = L.R + 14, oy = ox * .42;
+      for (var s = 0; s < 3; s++) { var sp = sats[s % sats.length], sa = T * .55 + s * 2.094; glow(sp.spr[s], cx + Math.cos(sa) * ox, cy + Math.sin(sa) * oy, 7, .85); glow(WHITE, cx + Math.cos(sa) * ox, cy + Math.sin(sa) * oy, 2.4, .9); }
       setAlpha(1); ctx.globalCompositeOperation = 'source-over';
     };
     return L;
@@ -90,16 +106,24 @@
   function boot() {
     var llmCv = document.querySelector('canvas.hx-lat[data-lat="llm"]'), coreCv = document.querySelector('canvas.hx-lat[data-lat="core"]');
     if (!llmCv || !coreCv || !llmCv.getContext) return;
-    var LLM = Lattice(llmCv, [5, 10, 15, 20, 26, 32, 38, 44], 130, .85, COOL);   // the general-purpose LLM: the big lattice
-    var CORE = Lattice(coreCv, [6.7, 13.3, 20, 26.7], 80, .7, WARM);             // the Takgio expert model: the smaller one
-    // each app: the COMBINED model, the gold expert lattice at the heart of the cool LLM lattice (v2.55.3, Ted's idea)
-    var APPS = [].slice.call(document.querySelectorAll('canvas.hx-lat[data-lat="app"]')).map(function (cv) {
-      return Lattice(cv, [5, 10, 15, 21, 28, 35, 42], 110, .8, { inner: WARM, outer: COOL, split: 5 });
+    var appCvs = [].slice.call(document.querySelectorAll('canvas.hx-lat[data-lat="app"]'));
+    function rings(radii, total, pal, star) {
+      var sum = 0, left = total; radii.forEach(function (r) { sum += r; });
+      return radii.map(function (r, i) { var n = i === radii.length - 1 ? left : Math.round(total * r / sum); left -= n; return { r: r, n: n, pal: pal, star: star }; });
+    }
+    // the general-purpose LLM: a round cool lattice
+    var LLM = Lattice(llmCv, rings([5, 10, 15, 20, 26, 32, 38, 44], 130, COOL, false), .85, [COOL]);
+    // the Takgio expert model: a gold four-pointed star
+    var CORE = Lattice(coreCv, rings([12, 24, 36, 48], 120, WARM, true), .7, [WARM]);
+    // each app: the combined model, the gold star inside a ring of the cool lattice, joined at its points
+    var APPS = appCvs.map(function (cv) {
+      return Lattice(cv, rings([10, 20, 30, 41], 96, WARM, true).concat(rings([43, 48], 100, COOL, false)), .78, [COOL, WARM], true);
     });
-    var both = [LLM, CORE].concat(APPS), raf = 0, last = 0, T = 0, visible = true, lastCycle = -1, nextLLM = 0, appCycle = [-1, -1, -1];
-    function resize() { both.forEach(function (l) { l.resize(); }); if (reduce) draw(5, 0); }
-    function draw(t, dt) { both.forEach(function (l) { l.frame(t, dt); }); }
-    // the CSS loop and this one share the document clock, so the warm lattice lights as the pulse arrives
+    var every = [LLM, CORE].concat(APPS), cvs = [llmCv, coreCv].concat(appCvs);
+    var raf = 0, last = 0, T = 0, visible = true, lastCycle = -1, nextLLM = 0, appCycle = APPS.map(function () { return -1; });
+    function draw(t, dt) { every.forEach(function (l) { l.frame(t, dt); }); }
+    function resize() { every.forEach(function (l) { l.resize(); }); if (reduce) draw(5, 0); }
+    // the CSS loop and this one share the document clock, so the lattices light as the pulses arrive
     function clock() { return (document.timeline && document.timeline.currentTime != null) ? document.timeline.currentTime : performance.now(); }
     function frame(now) {
       raf = 0;
@@ -112,7 +136,7 @@
       if (visible) raf = requestAnimationFrame(frame);
     }
     var ro = global.ResizeObserver ? new ResizeObserver(resize) : null;
-    if (ro) { ro.observe(llmCv); ro.observe(coreCv); } else global.addEventListener('resize', resize);
+    if (ro) cvs.forEach(function (cv) { ro.observe(cv); }); else global.addEventListener('resize', resize);
     resize();
     if (reduce) return;
     var io = global.IntersectionObserver ? new IntersectionObserver(function (es) {
