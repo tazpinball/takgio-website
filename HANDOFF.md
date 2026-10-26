@@ -5,18 +5,19 @@
 > (`releases`, newest first) and in `git log`.
 
 *Started 2026-10-26 (it did not exist before this date). Built from `version.json`, `git log` and the repo itself.
-Supabase was not looked at from here, so nothing in this file says what is installed or running there.*
+The Supabase side was checked by Ted in the dashboard on 26 Oct (below). A cloud session cannot reach Supabase or
+takgio.com (the network policy refuses both hosts); Ted runs the checks in the dashboard.*
 
 ## Where the next session starts
 
 ```
-LIVE     v2.53.2 (26 Oct): the internal files blocked from the site, this file committed. Ted confirmed
-         takgio.com/CLAUDE.md now lands on the home page. v2.53.3 (CLAUDE.md and README.md brought up to date) goes
-         through a PR. Vercel deploys master on push.
+LIVE     v2.53.3 (26 Oct). v2.53.2 blocked the internal files from the site (Ted confirmed takgio.com/CLAUDE.md
+         lands on the home page); v2.53.3 brought CLAUDE.md and README.md up to date. Vercel deploys master on push.
 GIT      master = the deployed site. Cloud sessions work on a claude/* branch and open a draft PR into master;
          merging the PR is what deploys.
 DEMOS    The Demos link check passes: 32 pages / 33 links / 0 wrong href (26 Oct).
-NEXT     Nothing in progress after v2.53.3. Ted chooses the next piece of work.
+NEXT     Nothing in progress. Ted chooses the next piece of work.
+SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked 26 Oct, see Open / verified).
 ```
 
 ## What the site is
@@ -71,10 +72,18 @@ Full notes for each release are in `version.json`.
   code). HANDOFF.md had been kept out of git for this reason (`.gitignore`, 28 Sep); it is committed from v2.53.2.
   🔴 **Any new internal file or folder goes into BOTH `.vercelignore` and the redirects in `vercel.json`.**
 
-- **The Supabase side of v2.50–2.52 has not been checked from this repo.** `docs/news-daily-schema.sql` (the schedule,
-  the job's tables and a Vault secret) and `docs/admin-team-emails.sql` have to be run in the Supabase SQL editor, and
-  the functions have to be deployed to Supabase. Pushing to git deploys neither. Whether either has happened is not
-  recorded. Ask Ted, or check in the Supabase dashboard.
+- **The Supabase side is installed and running** (Ted, in the dashboard, 26 Oct). Pushing to git deploys none of it;
+  SQL is run in the SQL editor and functions are deployed with the Supabase CLI.
+  - SQL: the news and careers tables, the daily-news columns, run log and Vault secret, pg_cron, and `admin_team()`
+    are all present.
+  - Functions: all five are deployed. `ai-news-daily` and `ai-news-pull` were last updated 22 Oct; the careers pair
+    on 8 Oct.
+  - Daily job: `ai-news-daily` runs at `0 11 * * *` (11:00 UTC), active. Runs: 23 Oct checked 19 and added 4;
+    24 Oct checked 2 and added 0; 25 and 26 Oct checked 0. All 8 sources were read on 26 Oct with no errors, so a
+    "checked 0" day means nothing new was published, not a failure. A source that fails shows "could not be read"
+    in the run's `report->'sources'`.
+  - Dashboard: https://supabase.com/dashboard/project/pwmrbmjlgweahridxvgk (SQL editor: `/sql/new`, functions:
+    `/functions`).
 
 ## Rules that bind every change (from CLAUDE.md)
 

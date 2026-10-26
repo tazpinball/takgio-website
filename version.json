@@ -1,7 +1,16 @@
 {
-  "version": "2.53.3",
+  "version": "2.53.4",
   "date": "2026-10-26",
   "releases": [
+    {
+      "version": "2.53.4",
+      "date": "2026-10-26",
+      "summary": "HANDOFF.md: the Supabase side recorded as installed and running",
+      "changes": [
+        "HANDOFF.md: the SQL files, the five functions and the daily AI news job were checked in the Supabase dashboard (26 Oct) and are installed and running; the open question is closed",
+        "No page changes"
+      ]
+    },
     {
       "version": "2.53.3",
       "date": "2026-10-26",
