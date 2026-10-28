@@ -54,17 +54,10 @@
 .pp-vid video { width: 100%; display: block; aspect-ratio: 16 / 9; border-radius: 18px; background: #000;
   box-shadow: 0 24px 60px rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.14); }
 .pp-ctrls { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
-.pp-vid video { cursor: pointer; }
-.pp-sound, .pp-ctl { display: inline-flex; align-items: center; gap: 8px;
+.pp-sound { display: inline-flex; align-items: center; gap: 8px;
   font: 700 .85rem/1 inherit; font-family: inherit; color: #0b0d1c; background: var(--pp-a, #ffd23f);
   border: 0; border-radius: 999px; padding: 10px 14px; cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,.35); }
-.pp-sound svg, .pp-ctl svg { width: 18px; height: 18px; }
-.pp-ctl { background: rgba(255,255,255,.08); color: #fff; box-shadow: none; border: 1px solid rgba(255,255,255,.22); }
-.pp-ctl:hover { background: rgba(255,255,255,.16); }
-.pp-ctl .i-play { display: none; }
-.pp-ctl[data-paused="true"] .i-play { display: block; }
-.pp-ctl[data-paused="true"] .i-pause { display: none; }
-@media (max-width: 420px) { .pp-ctl span { display: none; } .pp-ctl { padding: 10px 12px; } }
+.pp-sound svg { width: 18px; height: 18px; }
 .pp-sound[aria-pressed="true"] { background: rgba(11,13,28,.75); color: #fff; }
 .pp-watch { display: grid; gap: 32px; align-items: center; grid-template-columns: 1fr; }
 @media (min-width: 900px) { .pp-watch { grid-template-columns: auto 1fr; gap: 56px; } }
@@ -184,20 +177,13 @@
           <p class="pp-note">In beta on TestFlight and Google Play testing.</p>
         </div>
         <div class="pp-visual"><div class="pp-vid">
-          <video id="pp-hero-video" autoplay muted loop playsinline preload="auto" poster="/images/products/brickture-promo-16x9-poster.jpg"
+          <video id="pp-hero-video" controls autoplay muted loop playsinline preload="auto" poster="/images/products/brickture-promo-16x9-poster.jpg"
             aria-label="Brickture promo video: a photo becomes a brick-built model, step-by-step instructions and a kit">
             <source src="/videos/brickture-promo-16x9.mp4" type="video/mp4"></video>
           <div class="pp-ctrls">
           <button class="pp-sound" type="button" aria-pressed="false" data-video="pp-hero-video">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg>
             <span>Watch with sound</span></button>
-          <button class="pp-ctl pp-pause" type="button" data-video="pp-hero-video" data-paused="false" aria-label="Pause the video">
-            <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
-            <svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5v14l12-7z"/></svg>
-            <span>Pause</span></button>
-          <button class="pp-ctl pp-replay" type="button" data-video="pp-hero-video" aria-label="Replay the video from the start">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
-            <span>Replay</span></button>
           </div>
         </div></div>
       </div>
@@ -401,26 +387,15 @@ if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)
   const h = document.getElementById('pp-hero-video');
   if (h) { h.removeAttribute('autoplay'); h.pause(); h.controls = true; }
 }
-document.querySelectorAll('.pp-sound').forEach(b => b.addEventListener('click', () => {
-  const v = document.getElementById(b.dataset.video), on = v.muted;
-  v.muted = !on; if (on) { v.currentTime = 0; v.play(); }
-  b.setAttribute('aria-pressed', String(on));
-  b.querySelector('span').textContent = on ? 'Sound on' : 'Watch with sound';
-}));
-// pause / play and replay for the hero video; tapping the video toggles too
-document.querySelectorAll('.pp-pause').forEach(b => {
+document.querySelectorAll('.pp-sound').forEach(b => {
   const v = document.getElementById(b.dataset.video);
-  const sync = () => { b.dataset.paused = String(v.paused);
-    b.querySelector('span').textContent = v.paused ? 'Play' : 'Pause';
-    b.setAttribute('aria-label', v.paused ? 'Play the video' : 'Pause the video'); };
-  b.addEventListener('click', () => { v.paused ? v.play() : v.pause(); });
-  v.addEventListener('play', sync); v.addEventListener('pause', sync);
-  if (!v.controls) v.addEventListener('click', () => { v.paused ? v.play() : v.pause(); });
-  sync();
+  const sync = () => { const on = !v.muted;
+    b.setAttribute('aria-pressed', String(on));
+    b.querySelector('span').textContent = on ? 'Sound on' : 'Watch with sound'; };
+  b.addEventListener('click', () => { const on = v.muted;
+    v.muted = !on; if (on) { v.currentTime = 0; v.play(); } });
+  v.addEventListener('volumechange', sync);
 });
-document.querySelectorAll('.pp-replay').forEach(b => b.addEventListener('click', () => {
-  const v = document.getElementById(b.dataset.video); v.currentTime = 0; v.play();
-}));
 document.querySelectorAll('[data-dl]').forEach(a => {
   const v = document.getElementById(a.dataset.dl);
   a.href = v.querySelector('source').src;
