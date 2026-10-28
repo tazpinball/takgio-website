@@ -1,7 +1,15 @@
 {
-  "version": "2.55.12",
+  "version": "2.55.13",
   "date": "2026-10-28",
   "releases": [
+    {
+      "version": "2.55.13",
+      "date": "2026-10-28",
+      "summary": "CLAUDE.md: merge without asking",
+      "changes": [
+        "New rule (Ted, 28 Oct): cloud sessions merge their own PRs once the change is done and checked, and send the preview or live link for anything visible"
+      ]
+    },
     {
       "version": "2.55.12",
       "date": "2026-10-28",

@@ -12,10 +12,10 @@ takgio.com (the network policy refuses both hosts); Ted runs the checks in the d
 ## Where the next session starts
 
 ```
-LIVE     v2.55.11 (28 Oct): Ted's title on the ConcreteIQ customer story is "President & CEO, Takgio" (PR
-         tazpinball/takgio-website#10). Vercel deploys master on push.
-GIT      master = the deployed site. Cloud sessions work on a claude/* branch and open a draft PR into master;
-         merging the PR is what deploys.
+LIVE     v2.55.13 (28 Oct): v2.55.11 corrected Ted's title on the ConcreteIQ customer story; 2.55.12-2.55.13 changed
+         only HANDOFF.md and CLAUDE.md. Vercel deploys master on push.
+GIT      master = the deployed site. Cloud sessions work on a claude/* branch and open a PR into master;
+         merging the PR is what deploys. Ted (28 Oct): merge without asking (CLAUDE.md, "Merge without asking").
 DEMOS    The Demos link check passes: 32 pages / 33 links / 0 wrong href (26 Oct).
 NEXT     Nothing open on the site. ConcreteIQ stays BETA until Ted says it is live; then the CPN story is redone
          (Open / not verified, "CPN customer story"). Investor work (deck template, fundraising targets) is below.

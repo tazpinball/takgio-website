@@ -18,6 +18,14 @@ totally meaningless." Every company, program, tool, page or file you name in a r
 A path inside the cloud session (`/tmp/...`, `/home/user/...`) is not on Ted's laptop: give him the file as a
 download card instead.
 
+## 🔴 Merge without asking
+
+Ted, 28 Oct: "Merge without asking for everything." A cloud session still works on its `claude/*` branch and opens a
+PR (merging the PR is what deploys, like a push to `master` from the laptop), but merges it itself once the change is
+done and checked: the Demos check, `version.json` bumped, and anything visible rendered and looked at. For a change
+Ted will see on the site, give him the PR's Vercel preview link (or the live URL) with the report. Never merge a PR
+whose checks are red or that has a merge conflict.
+
 ## 🔒 FIXED LINK: the Demos link is `https://demos.takgio.com`
 
 Ted's demo site for client and investor meetings. **The link target is fixed: `href="https://demos.takgio.com"`,
