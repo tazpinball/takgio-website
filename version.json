@@ -1,7 +1,15 @@
 {
-  "version": "2.56.0",
+  "version": "2.56.1",
   "date": "2026-10-28",
   "releases": [
+    {
+      "version": "2.56.1",
+      "date": "2026-10-28",
+      "summary": "Brickture page: the Watch with sound button moved below the hero video",
+      "changes": [
+        "The button sat over the video's own captions (they move around the frame); it now sits just under the video"
+      ]
+    },
     {
       "version": "2.56.0",
       "date": "2026-10-28",
