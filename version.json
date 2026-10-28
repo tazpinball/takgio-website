@@ -1,7 +1,16 @@
 {
-  "version": "2.55.11",
+  "version": "2.55.12",
   "date": "2026-10-28",
   "releases": [
+    {
+      "version": "2.55.12",
+      "date": "2026-10-28",
+      "summary": "HANDOFF.md brought up to date (28 Oct)",
+      "changes": [
+        "LIVE is v2.55.11; Recent work lists 2.55.7 to 2.55.11",
+        "New Fundraising section: the raise, the tracking sheet (on Ted's laptop, never committed), the A targets with URLs, the NJ programs"
+      ]
+    },
     {
       "version": "2.55.11",
       "date": "2026-10-28",

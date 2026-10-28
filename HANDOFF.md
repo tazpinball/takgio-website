@@ -4,7 +4,7 @@
 > place at the end of each session; do not append a per-session log. The release history lives in `version.json`
 > (`releases`, newest first) and in `git log`.
 
-*Started 2026-10-26 (it did not exist before this date); last updated 2026-10-26, after v2.55.6 went live. Built from
+*Started 2026-10-26 (it did not exist before this date); last updated 2026-10-28, after v2.55.11 went live. Built from
 `version.json`, `git log` and the repo itself.
 The Supabase side was checked by Ted in the dashboard on 26 Oct (below). A cloud session cannot reach Supabase or
 takgio.com (the network policy refuses both hosts); Ted runs the checks in the dashboard.*
@@ -12,13 +12,13 @@ takgio.com (the network policy refuses both hosts); Ted runs the checks in the d
 ## Where the next session starts
 
 ```
-LIVE     v2.55.9 (27 Oct): the hero graphic as Ted approved it (v2.55.6); v2.55.7-2.55.10 changed only HANDOFF.md
-         and CLAUDE.md. Vercel deploys master on push.
+LIVE     v2.55.11 (28 Oct): Ted's title on the ConcreteIQ customer story is "President & CEO, Takgio" (PR
+         tazpinball/takgio-website#10). Vercel deploys master on push.
 GIT      master = the deployed site. Cloud sessions work on a claude/* branch and open a draft PR into master;
          merging the PR is what deploys.
 DEMOS    The Demos link check passes: 32 pages / 33 links / 0 wrong href (26 Oct).
 NEXT     Nothing open on the site. ConcreteIQ stays BETA until Ted says it is live; then the CPN story is redone
-         (Open / not verified, "CPN customer story"). The investor-deck template is recorded below (Investor deck).
+         (Open / not verified, "CPN customer story"). Investor work (deck template, fundraising targets) is below.
 SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked 26 Oct, see Open / verified).
 ```
 
@@ -72,10 +72,12 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
 - **Routing:** `vercel.json` holds the rewrites for the clean URLs above, plus `/hoof` and `/marketing/hoof-harted`.
   `/services` permanently redirects to `/industries.html`.
 
-## Recent work (Oct 21–26)
+## Recent work (Oct 21–28)
 
 | Version | What |
 |---|---|
+| 2.55.11 | ConcreteIQ customer story: Ted's title corrected to President & CEO, Takgio (28 Oct) |
+| 2.55.7–2.55.10 | HANDOFF.md and CLAUDE.md only: the investor-deck template, the full-URL rule, the declined CPN story |
 | 2.55.0–2.55.6 | Home hero graphic redrawn and animated in three steps (26 Oct; Ted approved each round on a Vercel preview) |
 | 2.54.0 | Home ticker: every line a link, plus the 5 newest AI news headlines |
 | 2.53.2–2.53.4 | Internal files kept off the site; HANDOFF.md started; CLAUDE.md and README.md updated; Supabase checked |
@@ -106,6 +108,25 @@ Full notes for each release are in `version.json`.
 - **Still blank in v4 (Ted's):** the amount and instrument and the milestones (14), downloads, installs and revenue
   (8), Richard's background and who is full-time (13), the 24-month and 5-year vision (15), and the expert's OK on
   "30+ years" (4). The site's Hoof Harted page says 2 ratings where Apple showed 3 on 20 Oct.
+
+## Fundraising (started 26 Oct)
+
+- **The raise:** Ted wants $100K to $500K (more if an investor wants), at pre-seed. Friends-and-family angels have put
+  in the first checks; the amounts are in Ted's tracking sheet, not here (this file is in git).
+- **The tracking sheet:** `Takgio-Investor-Targets.xlsx`, built 26 Oct and downloaded by Ted (suggested home:
+  `C:\Users\Ted\OneDrive\TAKGIO\Investors\`; never committed). Tabs: Targets (13 investors, priority A/B/C, each
+  with its URL, check size, stage, best-fit product, contact route, status drop-down), Programs & tools, Raised so far
+  (totals by formula). Ask Ted to attach it to update it.
+- **A targets (contact now):** Menlo Anthology Fund https://menlovc.com/menlo-anthology-fund/ ; Brick & Mortar
+  Ventures https://brickmortar.vc ; MetaProp https://www.metaprop.com/partner-with-us ; JumpStart NJ Angel Network
+  https://www.jumpstartnj.com ; Nine Four Ventures https://ninefour.vc ; Newark Venture Partners
+  https://newarkventurepartners.com ; Suffolk Technologies BOOST https://suffolktech.com/boost . Several URLs came from
+  directories, not the firms' own sites (the sheet's "URL confirmed?" column says which).
+- **NJ programs:** Angel Investor Tax Credit https://www.njeda.gov/angeltaxcredit (up to 35% refundable to NJ
+  investors; investor applies within 6 months of investing; Richard to confirm Takgio qualifies). Angel Match
+  https://www.njeda.gov/angelmatch is PAUSED (Innovation@njeda.gov).
+- **Advice given:** lead with ConcreteIQ (the only product with hard proof); rounds this size are usually a SAFE, terms
+  are Richard's; slide 8 (revenue, downloads) is still blank and investors will ask.
 
 ## Open / not verified
 
