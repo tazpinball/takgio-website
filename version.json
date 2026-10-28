@@ -1,7 +1,15 @@
 {
-  "version": "2.55.10",
+  "version": "2.55.11",
   "date": "2026-10-28",
   "releases": [
+    {
+      "version": "2.55.11",
+      "date": "2026-10-28",
+      "summary": "ConcreteIQ customer story: Ted's title corrected",
+      "changes": [
+        "Under Ted's quote: 'President & CEO, Takgio' instead of 'Founder & CTO, ConcreteIQ' (Ted, 28 Oct), matching leadership.html"
+      ]
+    },
     {
       "version": "2.55.10",
       "date": "2026-10-28",
