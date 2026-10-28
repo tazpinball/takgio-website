@@ -1,7 +1,18 @@
 {
-  "version": "2.56.1",
+  "version": "2.57.0",
   "date": "2026-10-28",
   "releases": [
+    {
+      "version": "2.57.0",
+      "date": "2026-10-28",
+      "summary": "Brickture: the cruise ship and the octopus replace the elephant and the lion; Campaign kit updated",
+      "changes": [
+        "Brickture page: the gallery's elephant is now the brick-built cruise ship with the couple in front of it; the assets add the cruise ship and the octopus",
+        "Home page: in the Brickture tile and the product reel, the lion is now the octopus and the elephant the cruise ship",
+        "Campaign kit: new 50-word description and claims table (the octopus build, Foundation and Ultimate, the brick base, kit ordering in beta, Coming Thanksgiving 2026); the old sizes, timing, cost estimate and dated test results are gone",
+        "Campaign kit: positioning statement, key messages and Do / Don't brought in line (no cost estimate; the 'no people or pets' rule dropped, since the video shows both)"
+      ]
+    },
     {
       "version": "2.56.1",
       "date": "2026-10-28",
