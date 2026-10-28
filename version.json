@@ -1,18 +1,7 @@
 {
-  "version": "2.55.10",
-  "date": "2026-10-28",
+  "version": "2.55.9",
+  "date": "2026-10-26",
   "releases": [
-    {
-      "version": "2.55.10",
-      "date": "2026-10-28",
-      "summary": "ConcreteIQ is live, not beta: the site and the SCO customer story say so",
-      "changes": [
-        "ConcreteIQ went live on October 5, 2026 (soft release) and is in full release (Ted, 28 Oct); every 'Live beta' label for it now reads 'Live', on all 32 pages' product menu, the home page and the products page",
-        "Customer story: 'In production since October 5, 2026'; a plain statement that SCO uses ConcreteIQ to price its live bids; the testing-sounding wording reworded; Ted's title corrected to President & CEO, Takgio",
-        "ConcreteIQ page and case study: 'Request access' instead of 'Request beta access'; 'Invite-based early access' removed; beta wording removed from descriptions",
-        "Why: Anthropic's Claude Partner Network declined the SCO customer story on 27 Oct as 'not in production (\u00a72.3)' because the page said beta"
-      ]
-    },
     {
       "version": "2.55.9",
       "date": "2026-10-26",
