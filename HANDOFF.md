@@ -12,13 +12,13 @@ takgio.com (the network policy refuses both hosts); Ted runs the checks in the d
 ## Where the next session starts
 
 ```
-LIVE     v2.55.6 (26 Oct; PR tazpinball/takgio-website#4 merged at 11e122f): the hero graphic as Ted approved it,
-         the apps' lines starting at the centre, from the pair link. v2.55.7 changes only this file.
-         Vercel deploys master on push.
+LIVE     v2.55.9 (27 Oct): the hero graphic as Ted approved it (v2.55.6); v2.55.7-2.55.10 changed only HANDOFF.md
+         and CLAUDE.md. Vercel deploys master on push.
 GIT      master = the deployed site. Cloud sessions work on a claude/* branch and open a draft PR into master;
          merging the PR is what deploys.
 DEMOS    The Demos link check passes: 32 pages / 33 links / 0 wrong href (26 Oct).
-NEXT     Nothing open on the site. The investor-deck template is recorded below (Investor deck).
+NEXT     Nothing open on the site. ConcreteIQ stays BETA until Ted says it is live; then the CPN story is redone
+         (Open / not verified, "CPN customer story"). The investor-deck template is recorded below (Investor deck).
 SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked 26 Oct, see Open / verified).
 ```
 
@@ -108,6 +108,17 @@ Full notes for each release are in `version.json`.
   "30+ years" (4). The site's Hoof Harted page says 2 ratings where Apple showed 3 on 20 Oct.
 
 ## Open / not verified
+
+- **CPN customer story: declined, waiting on ConcreteIQ going live.** Anthropic's Claude Partner Network declined the
+  Structural Construction of Orlando story (`case-study-construction-concreteiq-customer-story.html`) on 27 Oct 2026
+  for tier credit, for one reason: "not in production (§2.3)". It met the other criteria (public, names the customer,
+  names Claude, a measurable result). The email: subject "CPN customer story update: Structural Construction of
+  Orlando", from partner-support@anthropic.com. **ConcreteIQ is still beta (Ted, 28 Oct); never label it live until
+  Ted says so.** When he does: change every ConcreteIQ "Live beta" label site-wide, state the production use in the
+  story, then Ted re-submits it in Claude Partner Hub. The wording is ready in closed PR tazpinball/takgio-website#8
+  (https://github.com/tazpinball/takgio-website/pull/8; its dates assumed a 5 Oct go-live, which was wrong: use the
+  real date). The §2.3 definition of "production" is in the CPN Program Guide (Claude Partner Hub > Content > Partner
+  Program), which a cloud session cannot open: ask Ted for it.
 
 - **Internal files were public on takgio.com until v2.53.2** (fixed and checked live, 26 Oct). Vercel serves the repo as static files, so `CLAUDE.md`
   (Ted confirmed it loads, 26 Oct), `README.md`, `docs/*.sql` and the Supabase function source were readable at their
