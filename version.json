@@ -1,7 +1,15 @@
 {
-  "version": "2.55.9",
-  "date": "2026-10-26",
+  "version": "2.55.10",
+  "date": "2026-10-28",
   "releases": [
+    {
+      "version": "2.55.10",
+      "date": "2026-10-28",
+      "summary": "HANDOFF.md: the declined CPN customer story recorded; ConcreteIQ stays beta",
+      "changes": [
+        "Records Anthropic's 27 Oct decline of the SCO customer story (not in production), Ted's decision to keep ConcreteIQ in beta, and what to do when it goes live"
+      ]
+    },
     {
       "version": "2.55.9",
       "date": "2026-10-26",
