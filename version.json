@@ -1,7 +1,15 @@
 {
-  "version": "2.57.1",
+  "version": "2.58.0",
   "date": "2026-10-28",
   "releases": [
+    {
+      "version": "2.58.0",
+      "date": "2026-10-28",
+      "summary": "Brickture page: pause and replay for the hero video",
+      "changes": [
+        "Beside Watch with sound, a Pause / Play button and a Replay button (from the start); tapping the video also pauses or plays it"
+      ]
+    },
     {
       "version": "2.57.1",
       "date": "2026-10-28",
