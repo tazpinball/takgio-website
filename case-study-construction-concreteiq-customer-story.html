@@ -70,7 +70,7 @@
               <div>
                 <p class="sh-label">Our products</p>
                 <div class="sh-products-grid">
-                  <a class="sh-prod" href="/concreteiq.html"><img src="/images/products/concreteiq-icon.png" alt="" width="44" height="44" loading="lazy"><span><b>ConcreteIQ <span class="sh-st live">Live beta</span></b><small>AI takeoff and bidding for commercial concrete</small></span></a>
+                  <a class="sh-prod" href="/concreteiq.html"><img src="/images/products/concreteiq-icon.png" alt="" width="44" height="44" loading="lazy"><span><b>ConcreteIQ <span class="sh-st live">Live</span></b><small>AI takeoff and bidding for commercial concrete</small></span></a>
                   <a class="sh-prod" href="/brickture.html"><img src="/images/products/brickture-icon.png" alt="" width="44" height="44" loading="lazy"><span><b>Brickture <span class="sh-st beta">Beta</span></b><small>Snap a photo, get the brick model, the steps and the kit</small></span></a>
                   <a class="sh-prod" href="/hoof-harted.html"><img src="/images/products/hoof-harted-icon.png" alt="" width="44" height="44" loading="lazy"><span><b>Hoof Harted <span class="sh-st live">Live</span></b><small>The party scan game that detects nothing</small></span></a>
                   <a class="sh-prod" href="/true-record.html"><img src="/images/products/true-record-icon.png" alt="" width="44" height="44" loading="lazy"><span><b>True Record <span class="sh-st live">Live</span></b><small>Government documents, narrated in their own words</small></span></a>
@@ -147,11 +147,13 @@
         <div class="case-study-detail">
           <span class="tag tag-construction">Construction &middot; Customer story</span>
           <h3>ConcreteIQ uses Claude to read commercial concrete plan sets and surface what a bid is missing</h3>
-          <p class="case-study-meta">ConcreteIQ &middot; Built with Claude &middot; Live Beta</p>
+          <p class="case-study-meta">ConcreteIQ &middot; Built with Claude &middot; In production since October 5, 2026</p>
           <div class="case-study-section">
           <p>ConcreteIQ builds AI takeoff and bidding software for commercial concrete contractors who bid schools, warehouses, public buildings, and tilt-up and CMU projects. Its goal is that every scope in a bid is accounted for, so contractors stop losing money on the numbers nobody caught. Claude reads each plan set directly from the PDF, measures the scopes that drive the bid, and ConcreteIQ puts anything it can't measure, or that the drawings contradict, in front of the estimator before the number goes out.</p>
+          <p><strong>In production.</strong> ConcreteIQ went live on October 5, 2026, and is in full release. Structural Construction of Orlando (SCO) uses it to price its live bids.</p>
           <p><strong>With Claude, ConcreteIQ:</strong></p><ul>
-          <li>Has read the drawing sets of eight real Structural Construction of Orlando (SCO) jobs, from a 48-page tilt-up warehouse to a 185-page elementary school</li>
+          <li>Is in production at SCO, which uses it to price its live bids</li>
+          <li>Has read the drawing sets of eight real SCO jobs, from a 48-page tilt-up warehouse to a 185-page elementary school</li>
           <li>Reads and analyzes a 60-page structural and architectural set in about 40 minutes, with no OCR step</li>
           <li>Surfaced scope missing from SCO's own delivered takeoffs, including 685 LF of slab turndown edge, a dumpster footing, planter walls and an elevator pit carried at half height, each confirmed by SCO's estimator</li>
           <li>Keeps the estimator in control: every open review item must be resolved before a bid moves to pricing</li>
@@ -164,7 +166,7 @@
           <div class="case-study-section"><h4>Why Claude</h4>
           <p>ConcreteIQ needed a model that could read construction drawings the way an estimator does: dimensioned plans, dense schedules and fine-print general notes, all inside one PDF set. ConcreteIQ sends the drawings to Claude as PDF documents, with no OCR or separate extraction step, and Claude reads plans, sections and schedules together. On SCO's Vero Classical School set, Claude transcribed 87 tilt-panel rows and the footing schedules across seven structural sheets, and correctly left out the column and caged-panel schedules that only looked like beam schedules. ConcreteIQ applies each schedule on the sheet where it is printed, because the same mark can mean different things on different sheets.</p>
           <p>ConcreteIQ also keeps Claude grounded in the drawings. Claude is instructed to flag only what the drawings themselves contradict, such as an area larger than its building or a count higher than the marks drawn, and never to adjust a number because it seems high or low for the type of building. The experience-based checks, such as a minimum rebar density for tilt panels, are an estimator's rules applied by ConcreteIQ's own code. Main sheet reading moved to Claude Opus 5.5 after it was the only configuration to beat the previous model in a head-to-head test on a real job's key sheets.</p>
-          <blockquote class="cs-quote"><p>"Concrete takeoff lives in the schedules and the notes, not just the plan view. Claude reads those sheets the way an estimator does, straight from the PDF, so we could spend our effort on what a contractor actually needs: making sure nothing leaves the takeoff without either a real quantity or a flag."</p><cite><strong>Ted Takvorian</strong>, Founder &amp; CTO, ConcreteIQ</cite></blockquote>
+          <blockquote class="cs-quote"><p>"Concrete takeoff lives in the schedules and the notes, not just the plan view. Claude reads those sheets the way an estimator does, straight from the PDF, so we could spend our effort on what a contractor actually needs: making sure nothing leaves the takeoff without either a real quantity or a flag."</p><cite><strong>Ted Takvorian</strong>, President &amp; CEO, Takgio</cite></blockquote>
           </div>
           <div class="case-study-section"><h4>The solution: every scope accounted for, not just extracted</h4>
           <p>ConcreteIQ was built with Jim Courtney, VP and estimator at Structural Construction of Orlando, so it follows the way estimators actually build a bid. Its rule is simple: every scope is either measured or flagged for review. Nothing is silently left out.</p><p>The workflow takes three steps:</p><ul>
@@ -173,7 +175,7 @@
           <li><strong>Review and send.</strong> The estimator accepts, dismisses or corrects each item. The bid can't move to pricing while any item is open. The estimator then prices it from the rate library and exports a proposal as a PDF or Excel workbook.</li>
           </ul><p>On the Vero Classical School bid, a tilt-up school in Vero Beach, Florida, ConcreteIQ's total came in about 8% above the total bid price SCO had submitted on July 13, 2026, and its panel rebar lines sat open and unpriced. Rather than tune the result down to match the estimator's number, the team held it. When the reinforcing detailer and the steel supplier's quote arrived, they agreed within a tenth of a percent: 209,781 lb of tilt-panel steel, or 4.25 lb/SF across 49,363 SF of panel face. SCO's worksheet had carried zero pounds on that line, $144,219 of steel with tax. SCO withdrew the bid and reissued it on July 16 at the corrected price (+$165,000 for panel reinforcing) before award.</p></div>
           <div class="case-study-section"><h4>The outcome: a bid corrected before award, and a new rule for grading</h4>
-          <p>SCO has now used ConcreteIQ to price several live bids. Every run is still graded against SCO's real, delivered jobs, and the Vero bid changed how. Jim's verdict:</p>
+          <p>SCO now uses ConcreteIQ to price its live bids. ConcreteIQ's work is also checked against SCO's real, delivered jobs, and the Vero bid changed how that check works. Jim's verdict:</p>
           <blockquote class="cs-quote"><p>"My number is not the answer key. The drawings are. When the app disagrees with me, that's not a bug report, that's the product working. Benchmark against the set and print where I diverge. An app that reproduces my bid is worth nothing. An app that tells me my bid is missing $144K of steel is worth everything …"</p><cite><strong>Jim Courtney</strong>, VP, Structural Construction of Orlando</cite></blockquote>
           <p>ConcreteIQ now benchmarks every run against the drawings and prints where the estimator's number diverges. The panel steel SCO found by hand on Vero is now a standing check: when a set has no panel reinforcing schedule, ConcreteIQ carries SCO's 4.75 lb/SF default and holds the line open until the cage schedule or a fabricator quote replaces it, and it flags any panel rebar under 3.5 lb/SF.</p><p>Jim says the difference already shows in SCO's quotes:</p>
           <blockquote class="cs-quote"><p>"The benefits that we've experienced from using ConcreteIQ for our project quotes are astounding! We've been able to submit quotes faster, with greater accuracy, both of which help my company better calculate profit margin."</p><cite><strong>Jim Courtney</strong>, VP, Structural Construction of Orlando</cite></blockquote>
@@ -197,7 +199,7 @@
     <section class="section-alt">
       <div class="container" style="text-align: center;">
         <h2>Estimating concrete? Try ConcreteIQ.</h2>
-        <p style="max-width: 500px; margin: 0 auto var(--space-lg);">ConcreteIQ is in beta with concrete contractors now. Tell us about your next bid.</p>
+        <p style="max-width: 500px; margin: 0 auto var(--space-lg);">ConcreteIQ is live with concrete contractors now. Tell us about your next bid.</p>
         <a href="/contact.html" class="btn btn-primary btn-lg">Start a Conversation</a>
       </div>
     </section>

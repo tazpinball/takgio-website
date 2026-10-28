@@ -12,13 +12,13 @@ takgio.com (the network policy refuses both hosts); Ted runs the checks in the d
 ## Where the next session starts
 
 ```
-LIVE     v2.55.6 (26 Oct; PR tazpinball/takgio-website#4 merged at 11e122f): the hero graphic as Ted approved it,
-         the apps' lines starting at the centre, from the pair link. v2.55.7 changes only this file.
-         Vercel deploys master on push.
+LIVE     v2.55.9 (27 Oct): the hero graphic as Ted approved it (v2.55.6); v2.55.7-2.55.9 changed only HANDOFF.md
+         and CLAUDE.md. Vercel deploys master on push.
 GIT      master = the deployed site. Cloud sessions work on a claude/* branch and open a draft PR into master;
          merging the PR is what deploys.
 DEMOS    The Demos link check passes: 32 pages / 33 links / 0 wrong href (26 Oct).
-NEXT     Nothing open on the site. The investor-deck template is recorded below (Investor deck).
+NEXT     v2.55.10 (ConcreteIQ live, not beta) on its PR; once merged, Ted re-submits the SCO customer story in
+         Claude Partner Hub (CPN declined it 27 Oct: "not in production (§2.3)", because the page said beta).
 SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked 26 Oct, see Open / verified).
 ```
 
@@ -27,6 +27,8 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
 - **Public marketing site**: 44 HTML pages in the project root. 13 of them are `noindex`: the admin and dashboard
   pages, `ai-news-pull`, `application-confirm`, and the unlisted Hoof Harted download and marketing pages. 30 URLs
   are in `sitemap.xml`.
+- **ConcreteIQ is LIVE, not beta** (Ted, 28 Oct): soft release on October 5, 2026, now in full release; SCO uses it to
+  price its live bids. Never label it beta again. (Brickture is still beta.)
 - **Positioning (Oct 21–22):** Takgio is a **product company**, not a project-for-hire shop (v2.44.0). The headline
   is "We turn human expertise into AI products." (v2.46.0), and the line under it is "We pair human experts with AI"
   (v2.48.1). There are six products: ConcreteIQ, Brickture, Hoof Harted, True Record, Ann Elise and Pinball-QR, with
@@ -105,7 +107,8 @@ Full notes for each release are in `version.json`.
   no investor or expert is named; a rating is never shown without its count.
 - **Still blank in v4 (Ted's):** the amount and instrument and the milestones (14), downloads, installs and revenue
   (8), Richard's background and who is full-time (13), the 24-month and 5-year vision (15), and the expert's OK on
-  "30+ years" (4). The site's Hoof Harted page says 2 ratings where Apple showed 3 on 20 Oct.
+  "30+ years" (4). The site's Hoof Harted page says 2 ratings where Apple showed 3 on 20 Oct. v4 still calls ConcreteIQ
+  "Live beta | web, invite-only" (slides 6, 8): it is live since 5 Oct, fix that in the next version.
 
 ## Open / not verified
 
