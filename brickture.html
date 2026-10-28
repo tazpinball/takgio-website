@@ -47,6 +47,26 @@
   }
 }
   </script>
+<style>
+/* Brickture promo video */
+@media (min-width: 1024px) { .pp-hero-grid { grid-template-columns: 1fr 1.25fr; } }
+.pp-vid { position: relative; width: 100%; max-width: 760px; }
+.pp-vid video { width: 100%; display: block; aspect-ratio: 16 / 9; border-radius: 18px; background: #000;
+  box-shadow: 0 24px 60px rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.14); }
+.pp-sound { margin-top: 14px; display: inline-flex; align-items: center; gap: 8px;
+  font: 700 .85rem/1 inherit; font-family: inherit; color: #0b0d1c; background: var(--pp-a, #ffd23f);
+  border: 0; border-radius: 999px; padding: 10px 14px; cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+.pp-sound svg { width: 18px; height: 18px; }
+.pp-sound[aria-pressed="true"] { background: rgba(11,13,28,.75); color: #fff; }
+.pp-watch { display: grid; gap: 32px; align-items: center; grid-template-columns: 1fr; }
+@media (min-width: 900px) { .pp-watch { grid-template-columns: auto 1fr; gap: 56px; } }
+.pp-phone-frame { width: 300px; max-width: 78vw; margin: 0 auto; padding: 10px; border-radius: 44px; background: #0b0d1c;
+  box-shadow: 0 0 0 2px #2a2d3d, 0 30px 70px rgba(11,13,28,.35); }
+.pp-phone-frame video { width: 100%; display: block; aspect-ratio: 9 / 16; border-radius: 34px; background: #000; }
+.pp-watch h2 { margin-top: 4px; }
+.pp-watch .btn-group { margin-top: 18px; gap: 10px; }
+.pp-watch .pp-meta { margin-top: 14px; font-size: .85rem; color: var(--color-text-secondary); }
+</style>
 </head>
 <body class="pp pp-brick">
 
@@ -139,7 +159,7 @@
           <button class="pp-sw-btn" type="button" aria-expanded="false" aria-controls="pp-sw-menu" aria-label="Switch product (current: Brickture)"><img src="/images/products/brickture-icon.png" alt="" width="28" height="28"><span>Brickture</span><svg class="pp-sw-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg></button>
           <div class="pp-sw-menu" id="pp-sw-menu"><a href="/concreteiq.html"><img src="/images/products/concreteiq-icon.png" alt="" width="28" height="28"><span>ConcreteIQ</span><span class="sh-st live">Live beta</span></a><a href="/brickture.html" aria-current="page"><img src="/images/products/brickture-icon.png" alt="" width="28" height="28"><span>Brickture</span><span class="sh-st beta">Beta</span></a><a href="/hoof-harted.html"><img src="/images/products/hoof-harted-icon.png" alt="" width="28" height="28"><span>Hoof Harted</span><span class="sh-st live">Live</span></a><a href="/true-record.html"><img src="/images/products/true-record-icon.png" alt="" width="28" height="28"><span>True Record</span><span class="sh-st live">Live</span></a><a href="/ann-elise.html"><img src="/images/products/ann-elise-icon.png" alt="" width="28" height="28"><span>Ann Elise</span><span class="sh-st live">Live</span></a><a href="/pinball-qr.html"><img src="/images/products/pinball-qr-icon.svg" alt="" width="28" height="28"><span>Pinball-QR</span><span class="sh-st live">Live</span></a><a href="/meta-ray-ban-display.html"><span class="pp-sw-glyph" aria-hidden="true"><svg viewBox="0 0 220 90" fill="none" stroke="#e2e8f0" stroke-width="12"><rect x="20" y="24" width="76" height="52" rx="18"/><rect x="124" y="24" width="76" height="52" rx="18"/></svg></span><span>Meta Ray-Ban Display</span><span class="sh-st next">Upcoming</span></a><a class="pp-sw-all" href="/products.html">All products &rarr;</a></div>
         </div>
-        <div class="pp-subnav-links"><a href="#overview">Overview</a><a href="#audience">Who it&rsquo;s for</a><a href="#how">How it works</a><a href="#proof">Proof</a><a href="#market">Market</a><a href="#campaign-kit" class="kit">Campaign kit</a></div>
+        <div class="pp-subnav-links"><a href="#overview">Overview</a><a href="#watch">Watch</a><a href="#audience">Who it&rsquo;s for</a><a href="#how">How it works</a><a href="#proof">Proof</a><a href="#market">Market</a><a href="#campaign-kit" class="kit">Campaign kit</a></div>
         <a class="pp-subnav-cta" href="#overview">Get launch news</a>
       </div>
     </nav>
@@ -155,11 +175,38 @@
           <form class="waitlist-form" action="https://formspree.io/f/mreokggq" method="POST"><input type="hidden" name="_subject" value="Brickture waitlist signup"><input type="hidden" name="source" value="brickture-waitlist"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true"><input type="email" name="email" required placeholder="you@email.com" aria-label="Email address"><button type="submit" class="btn btn-primary">Get launch news</button></form>
           <p class="pp-note">In beta on TestFlight and Google Play testing.</p>
         </div>
-        <div class="pp-visual"><img class="pp-wide" src="/images/products/brickture-lion.webp" alt="A Brickture brick-built lion" width="800" height="447"></div>
+        <div class="pp-visual"><div class="pp-vid">
+          <video id="pp-hero-video" autoplay muted loop playsinline preload="auto" poster="/images/products/brickture-promo-16x9-poster.jpg"
+            aria-label="Brickture promo video: a photo becomes a brick-built model, step-by-step instructions and a kit">
+            <source src="/videos/brickture-promo-16x9.mp4" type="video/mp4"></video>
+          <button class="pp-sound" type="button" aria-pressed="false" data-video="pp-hero-video">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg>
+            <span>Watch with sound</span></button>
+        </div></div>
       </div>
     </section>
 
-    <div class="container"><div class="pp-stats reveal"><div><b>~2 min</b><span>From photo to a finished, rotatable 3D brick model</span></div><div><b>100&ndash;600</b><span>Bricks per build across four sizes, XS to L</span></div><div><b>100+</b><span>Steps in a Large build&rsquo;s interactive instructions</span></div><div><b>15 of 16</b><span>Builds the same or more stable after the stability fix</span></div></div></div>
+    <div class="container"><div class="pp-stats reveal"><div><b>4,224</b><span>Pieces in the octopus from the video, one Ultimate build</span></div><div><b>758</b><span>Steps in its step-by-step instructions</span></div><div><b>33</b><span>Layers, from the base to the top</span></div><div><b>2</b><span>Kinds of build: Foundation and Ultimate</span></div></div></div>
+
+    <section class="pp-sec" id="watch">
+      <div class="container pp-watch">
+        <div class="pp-phone-frame"><video id="pp-tall-video" controls playsinline preload="metadata" poster="/images/products/brickture-promo-9x16-poster.jpg"
+          aria-label="Brickture promo video, vertical"><source src="/videos/brickture-promo-9x16.mp4" type="video/mp4"></video></div>
+        <div>
+          <span class="pp-kicker">Watch</span>
+          <h2>Anything you love, brick-built.</h2>
+          <p class="pp-sub">Fifty seconds, start to finish: a photo becomes a brick-built design you can spin in 3D,
+          step-by-step instructions, and every piece in one box. Real photos from our beta testers &mdash; a pumpkin,
+          a cruise, a favorite mug, a hero, a best friend, a team mascot.</p>
+          <p class="pp-sub">The vertical cut is made for Reels, TikTok and Shorts; the wide cut for the web and YouTube.</p>
+          <div class="btn-group">
+            <a class="btn btn-primary" data-dl="pp-tall-video" download="brickture-promo-vertical.mp4" href="/videos/brickture-promo-9x16.mp4">Download vertical (9:16)</a>
+            <a class="btn btn-ghost" data-dl="pp-hero-video" download="brickture-promo-wide.mp4" href="/videos/brickture-promo-16x9.mp4">Download wide (16:9)</a>
+          </div>
+          <p class="pp-meta">0:50 &middot; with voice-over and music &middot; 720&times;1280 and 1920&times;1080</p>
+        </div>
+      </div>
+    </section>
 
     <section class="pp-sec" id="audience">
       <div class="container">
@@ -184,7 +231,7 @@
         <span class="pp-kicker">How it works</span>
         <h2>From a photo to a buildable model in about two minutes</h2>
         <ol class="pp-steps s5 reveal"><li><b>Snap or describe</b>Take a photo, pick one from your library, or type a description.</li><li><b>Crop and pick a size</b>XS (100 bricks) up to L (600) &mdash; bigger means more detail.</li><li><b>Watch it build</b>In about two minutes, the model assembles itself on screen, brick by brick.</li><li><b>Follow the steps</b>Interactive 3D guide or printable booklet, with a parts list.</li><li><b>Request the kit</b>Order the exact parts as a kit (in beta).</li></ol>
-        <div class="pp-gallery wide"><figure class="reveal"><img src="/images/products/brickture-lion.webp" alt="A Brickture brick-built lion" width="800" height="447" loading="lazy"><figcaption>Lion</figcaption></figure><figure class="reveal"><img src="/images/products/brickture-panda.webp" alt="A Brickture brick-built panda" width="900" height="502" loading="lazy"><figcaption>Panda</figcaption></figure><figure class="reveal"><img src="/images/products/brickture-elephant.webp" alt="A Brickture brick-built elephant" width="700" height="700" loading="lazy"><figcaption>Elephant</figcaption></figure></div>
+        <div class="pp-gallery wide"><figure class="reveal"><img src="/images/products/brickture-lion.webp" alt="A Brickture brick-built lion" width="800" height="447" loading="lazy"><figcaption>Lion</figcaption></figure><figure class="reveal"><img src="/images/products/brickture-panda.webp" alt="A Brickture brick-built panda" width="900" height="502" loading="lazy"><figcaption>Panda</figcaption></figure><figure class="reveal"><img src="/images/products/brickture-cruise.webp" alt="A Brickture brick-built cruise ship with a couple standing in front of it" width="800" height="440" loading="lazy"><figcaption>Cruise</figcaption></figure></div>
       </div>
     </section>
 
@@ -213,21 +260,21 @@
         <h2>Everything you need to advertise Brickture</h2>
         <p class="pp-sub">Positioning, approved copy, targeting, keywords, claims with their sources, and downloadable assets. Every claim here is verified &mdash; please use them as written.</p>
         <div class="pp-kit-grid">
-          <div class="pp-kblock"><h3>Positioning statement <button class="pp-copybtn" data-copy="#brickture-pos">Copy</button></h3><p class="pp-copy" id="brickture-pos">For adults who love building things and see brick-worthy objects everywhere, Brickture is the app that turns one photo of a real-world object into a buildable brick model &mdash; with step-by-step 3D instructions, a parts list with a cost estimate, and kit ordering in beta. Great at chunky, characterful objects.</p></div>
+          <div class="pp-kblock"><h3>Positioning statement <button class="pp-copybtn" data-copy="#brickture-pos">Copy</button></h3><p class="pp-copy" id="brickture-pos">For adults who love building things and see brick-worthy objects everywhere, Brickture is the app that turns one photo of a real-world object into a buildable brick model &mdash; with step-by-step instructions, a full parts list, and kit ordering in beta. Great at chunky, characterful objects.</p></div>
           <div class="pp-kblock"><h3>Approved headlines &amp; taglines <button class="pp-copybtn" data-copy="#brickture-heads">Copy</button></h3><ul id="brickture-heads"><li>Point. Snap. Build it brick by brick.</li><li>Reverse instructions for the real world.</li><li>The world is your brick set.</li><li>See it. Snap it. Build it.</li><li>Turn photos into brick builds.</li></ul></div>
           <div class="pp-kblock"><h3>25-word description <button class="pp-copybtn" data-copy="#brickture-d25">Copy</button></h3><p class="pp-copy" id="brickture-d25">Photograph a real object and Brickture designs a brick model that stands up &mdash; with 3D step-by-step instructions, a parts list, and kit ordering in beta.</p></div>
-          <div class="pp-kblock"><h3>50-word description <button class="pp-copybtn" data-copy="#brickture-d50">Copy</button></h3><p class="pp-copy" id="brickture-d50">Brick sets ship instructions for someone else&rsquo;s model. Brickture writes them for yours. Photograph a real object &mdash; a car, a mug, a hydrant &mdash; and in about two minutes you get a buildable brick model, an interactive 3D build guide, a printable booklet, and a parts list with a cost estimate. Kit ordering in beta.</p></div>
-          <div class="pp-kblock"><h3>Key messages</h3><ul><li><b>Lead with the instructions and the kit,</b> not the photo trick.</li><li><b>Your object, not a set.</b> The world supplies the model.</li><li><b>Built to stand up</b> &mdash; stability repair is automatic.</li><li><b>Numbers over adjectives:</b> four sizes, 100&ndash;600 bricks, 100+ steps at Large.</li><li><b>Honest about fit:</b> great at chunky, characterful objects.</li></ul></div>
+          <div class="pp-kblock"><h3>50-word description <button class="pp-copybtn" data-copy="#brickture-d50">Copy</button></h3><p class="pp-copy" id="brickture-d50">Brick sets come with instructions for someone else&rsquo;s model. Brickture writes them for yours. Photograph something you love &mdash; a mug, a pumpkin, a team mascot &mdash; and you get a brick-built design you can spin in 3D, step-by-step instructions, and a full parts list. Kit ordering in beta. Coming Thanksgiving 2026.</p></div>
+          <div class="pp-kblock"><h3>Key messages</h3><ul><li><b>Lead with the instructions and the kit,</b> not the photo trick.</li><li><b>Your object, not a set.</b> The world supplies the model.</li><li><b>Built to stand up</b> &mdash; every model stands on its own brick base.</li><li><b>Numbers over adjectives:</b> the octopus in the video is 4,224 pieces in 758 steps.</li><li><b>Honest about fit:</b> great at chunky, characterful objects.</li></ul></div>
           <div class="pp-kblock"><h3>Audience &amp; targeting</h3><ul><li><b>Age:</b> adults 21+ (marketing positioning; content is all-ages safe).</li><li><b>Interests:</b> adult brick building, model building, DIY and maker hobbies, desk toys, personalized gifts.</li><li><b>Moments:</b> Father&rsquo;s Day, birthdays and holiday gifting.</li><li><b>Platforms:</b> iPhone and Android.</li></ul></div>
           <div class="pp-kblock"><h3>Search keywords <button class="pp-copybtn" data-copy="#brickture-kw">Copy</button></h3><div class="pp-tags" id="brickture-kw"><span>bricks</span><span>builder</span><span>instructions</span><span>3d</span><span>model</span><span>voxel</span><span>toy</span><span>blocks</span><span>diy</span><span>maker</span><span>kit</span><span>craft</span><span>gift</span><span>steps</span><span>hobby</span></div><p style="margin-top:8px;font-size:.78rem;color:rgba(255,255,255,.55)">From the app&rsquo;s store keyword set.</p></div>
           <div class="pp-kblock"><h3>Channels</h3><ul><li><b>Adult builder communities</b> &mdash; brick-building forums and fan sites, with value-first posts showing real builds.</li><li><b>YouTube builders</b> who review custom-build tools.</li><li><b>Short-form video</b> &mdash; TikTok, Reels and Shorts: photo &rarr; model assembling &rarr; finished build.</li><li><b>App Store and Google Play</b> search.</li></ul></div>
           <div class="pp-kblock"><h3>Calls to action &amp; links</h3><ul><li><b>Get launch news</b> &rarr; <a href="https://www.takgio.com/brickture.html" style="color:var(--pp-a)">https://www.takgio.com/brickture.html</a></li><li><b>Read the case study</b> &rarr; <a href="https://www.takgio.com/case-study-entertainment-brickture.html" style="color:var(--pp-a)">https://www.takgio.com/case-study-entertainment-brickture.html</a></li></ul></div>
-          <div class="pp-kblock"><h3>Approved claims &amp; sources</h3><table class="pp-claims"><tr><td>About two minutes from photo to finished model</td><td>Takgio build timing, 2026</td></tr><tr><td>Four sizes: XS 100, S 200, M 350, L 600 bricks</td><td>App size budgets</td></tr><tr><td>A Large lion build: 593 bricks, 104 steps</td><td>Takgio build record, 2026</td></tr><tr><td>20 of 20 photos processed without a pipeline failure</td><td>Takgio stress test, July 2026</td></tr><tr><td>15 of 16 builds the same or more stable after the stability fix</td><td>Takgio 16-build comparison</td></tr><tr><td>Kit ordering in beta</td><td>Current app</td></tr></table></div>
-          <div class="pp-kblock"><h3>Do</h3><ul class="pp-do"><li>Say &ldquo;brick&rdquo; or &ldquo;brick-built&rdquo;. If compatibility must be mentioned, say &ldquo;compatible with leading brick brands&rdquo;.</li><li>Use Brickture&rsquo;s own build pictures (lion, panda, elephant) from the assets below.</li><li>Say &ldquo;in beta&rdquo; for kit ordering.</li><li>Use American spelling (color, gray).</li></ul></div>
-          <div class="pp-kblock"><h3>Don&rsquo;t</h3><ul class="pp-dont"><li>Use any brick-brand name in ad copy, or name competitors.</li><li>Claim it works on anything &mdash; no people or pets, no &ldquo;photorealistic&rdquo;, no kids imagery.</li><li>Claim anyone has hand-built a model from the instructions.</li><li>Quote prices, credit packs or tiers &mdash; none are final.</li><li>Say &ldquo;no account&rdquo; &mdash; sign-in is required.</li><li>Name the technology vendors behind the pipeline.</li></ul></div>
+          <div class="pp-kblock"><h3>Approved claims &amp; sources</h3><table class="pp-claims"><tr><td>An Ultimate octopus build: 4,224 pieces, 758 steps, 33 layers</td><td>Takgio build record, 2026 (the build in the video)</td></tr><tr><td>Two kinds of build: Foundation and Ultimate</td><td>Current app</td></tr><tr><td>Every model stands on its own brick base</td><td>Current app</td></tr><tr><td>Kit ordering in beta</td><td>Current app</td></tr><tr><td>Coming Thanksgiving 2026</td><td>Takgio launch plan</td></tr></table></div>
+          <div class="pp-kblock"><h3>Do</h3><ul class="pp-do"><li>Say &ldquo;brick&rdquo; or &ldquo;brick-built&rdquo;. If compatibility must be mentioned, say &ldquo;compatible with leading brick brands&rdquo;.</li><li>Use Brickture&rsquo;s own build pictures and videos from the assets below.</li><li>Say &ldquo;in beta&rdquo; for kit ordering.</li><li>Use American spelling (color, gray).</li></ul></div>
+          <div class="pp-kblock"><h3>Don&rsquo;t</h3><ul class="pp-dont"><li>Use any brick-brand name in ad copy, or name competitors.</li><li>Claim it works on anything &mdash; no &ldquo;photorealistic&rdquo;, no kids imagery.</li><li>Claim anyone has hand-built a model from the instructions.</li><li>Quote prices, credit packs or tiers &mdash; none are final.</li><li>Say &ldquo;no account&rdquo; &mdash; sign-in is required.</li><li>Name the technology vendors behind the pipeline.</li></ul></div>
         </div>
         <div class="pp-kblock pp-links-block"><h3>Official links &amp; policies <button class="pp-copybtn" data-copy="#brickture-links">Copy</button></h3><p>Ad platforms and app stores ask for these. Use them exactly as written.</p><table class="pp-links" id="brickture-links"><tr><th scope="row">Website</th><td><a href="https://www.takgio.com/brickture.html">https://www.takgio.com/brickture.html</a></td></tr><tr><th scope="row">Privacy Policy</th><td><a href="https://bricksnap-takgio.fly.dev/privacy" target="_blank" rel="noopener">https://bricksnap-takgio.fly.dev/privacy</a></td></tr><tr><th scope="row">Terms of Service</th><td><a href="https://bricksnap-takgio.fly.dev/terms" target="_blank" rel="noopener">https://bricksnap-takgio.fly.dev/terms</a></td></tr><tr><th scope="row">Support</th><td><a href="https://bricksnap-takgio.fly.dev/support" target="_blank" rel="noopener">https://bricksnap-takgio.fly.dev/support</a></td></tr><tr><th scope="row">Support email</th><td><a href="mailto:support@takgio.com">support@takgio.com</a></td></tr></table><p class="pp-links-note">Privacy Policy and Terms of Service effective September 17, 2026. Links checked September 28, 2026.</p></div>
-        <div class="pp-kblock" style="margin-top:12px"><h3>Downloadable assets</h3><div class="pp-assets"><a href="/images/products/brickture-icon.png" download target="_blank" rel="noopener"><img src="/images/products/brickture-icon.png" alt="" loading="lazy">App icon (256&times;256)</a><a href="/images/products/brickture-lion.webp" download target="_blank" rel="noopener"><img src="/images/products/brickture-lion.webp" alt="" loading="lazy">Lion</a><a href="/images/products/brickture-panda.webp" download target="_blank" rel="noopener"><img src="/images/products/brickture-panda.webp" alt="" loading="lazy">Panda</a><a href="/images/products/brickture-elephant.webp" download target="_blank" rel="noopener"><img src="/images/products/brickture-elephant.webp" alt="" loading="lazy">Elephant</a></div><p style="margin-top:8px;font-size:.78rem;color:rgba(255,255,255,.55)">Pictures generated by Brickture. Use them unmodified.</p></div>
+        <div class="pp-kblock" style="margin-top:12px"><h3>Downloadable assets</h3><div class="pp-assets"><a href="/images/products/brickture-icon.png" download target="_blank" rel="noopener"><img src="/images/products/brickture-icon.png" alt="" loading="lazy">App icon (256&times;256)</a><a href="/images/products/brickture-lion.webp" download target="_blank" rel="noopener"><img src="/images/products/brickture-lion.webp" alt="" loading="lazy">Lion</a><a href="/images/products/brickture-panda.webp" download target="_blank" rel="noopener"><img src="/images/products/brickture-panda.webp" alt="" loading="lazy">Panda</a><a href="/images/products/brickture-cruise.webp" download target="_blank" rel="noopener"><img src="/images/products/brickture-cruise.webp" alt="" loading="lazy">Cruise</a><a href="/images/products/brickture-octopus.webp" download target="_blank" rel="noopener"><img src="/images/products/brickture-octopus.webp" alt="" loading="lazy">Octopus</a><a data-dl="pp-hero-video" download="brickture-promo-wide.mp4" href="/videos/brickture-promo-16x9.mp4"><img src="/images/products/brickture-promo-16x9-poster.jpg" alt="" loading="lazy">Promo video, wide (16:9)</a><a data-dl="pp-tall-video" download="brickture-promo-vertical.mp4" href="/videos/brickture-promo-9x16.mp4"><img src="/images/products/brickture-promo-9x16-poster.jpg" alt="" loading="lazy">Promo video, vertical (9:16)</a></div><p style="margin-top:8px;font-size:.78rem;color:rgba(255,255,255,.55)">Pictures and videos from Brickture. Use them unmodified.</p></div>
         <p class="pp-fine">In beta. For LEGO&reg; bricks or any compatible system. LEGO&reg; is a trademark of the LEGO Group, which does not sponsor, authorize, or endorse Brickture.</p>
       </div>
     </section>
@@ -330,5 +377,23 @@
 
   <script src="js/nav.js"></script>
   <script src="js/motion.js"></script>
+<script>
+// Brickture promo video: sound on/off for the hero; download links take each video's own file;
+// a visitor who asked for reduced motion gets the hero still, with controls, instead of autoplay
+if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const h = document.getElementById('pp-hero-video');
+  if (h) { h.removeAttribute('autoplay'); h.pause(); h.controls = true; }
+}
+document.querySelectorAll('.pp-sound').forEach(b => b.addEventListener('click', () => {
+  const v = document.getElementById(b.dataset.video), on = v.muted;
+  v.muted = !on; if (on) { v.currentTime = 0; v.play(); }
+  b.setAttribute('aria-pressed', String(on));
+  b.querySelector('span').textContent = on ? 'Sound on' : 'Watch with sound';
+}));
+document.querySelectorAll('[data-dl]').forEach(a => {
+  const v = document.getElementById(a.dataset.dl);
+  a.href = v.querySelector('source').src;
+});
+</script>
 </body>
 </html>

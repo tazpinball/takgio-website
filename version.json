@@ -1,7 +1,39 @@
 {
-  "version": "2.55.13",
+  "version": "2.57.0",
   "date": "2026-10-28",
   "releases": [
+    {
+      "version": "2.57.0",
+      "date": "2026-10-28",
+      "summary": "Brickture: the cruise ship and the octopus replace the elephant and the lion; Campaign kit updated",
+      "changes": [
+        "Brickture page: the gallery's elephant is now the brick-built cruise ship with the couple in front of it; the assets add the cruise ship and the octopus",
+        "Home page: in the Brickture tile and the product reel, the lion is now the octopus and the elephant the cruise ship",
+        "Campaign kit: new 50-word description and claims table (the octopus build, Foundation and Ultimate, the brick base, kit ordering in beta, Coming Thanksgiving 2026); the old sizes, timing, cost estimate and dated test results are gone",
+        "Campaign kit: positioning statement, key messages and Do / Don't brought in line (no cost estimate; the 'no people or pets' rule dropped, since the video shows both)"
+      ]
+    },
+    {
+      "version": "2.56.1",
+      "date": "2026-10-28",
+      "summary": "Brickture page: the Watch with sound button moved below the hero video",
+      "changes": [
+        "The button sat over the video's own captions (they move around the frame); it now sits just under the video"
+      ]
+    },
+    {
+      "version": "2.56.0",
+      "date": "2026-10-28",
+      "summary": "Brickture page: the two promo videos (the wide one is the hero)",
+      "changes": [
+        "Hero: the lion picture is replaced by the 16:9 promo, muted on a loop, with a Watch with sound button; visitors who ask for reduced motion get the still with controls",
+        "New Watch section (and section-bar link) between the numbers band and Who it's for: the 9:16 promo in a phone frame, with download buttons for both cuts",
+        "Numbers band: 4,224 pieces / 758 steps / 33 layers / 2 kinds of build (the octopus Ultimate build from the video)",
+        "Campaign kit: both videos added to the downloadable assets; note reads 'Pictures and videos from Brickture'",
+        "New folder videos/ (brickture-promo-16x9.mp4, brickture-promo-9x16.mp4); posters in images/products/",
+        "From the Brickture project's handoff (8 changes); the Watch caption's vertical size corrected to 720x1280, the file's real size"
+      ]
+    },
     {
       "version": "2.55.13",
       "date": "2026-10-28",
