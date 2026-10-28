@@ -1,7 +1,16 @@
 {
-  "version": "2.58.0",
+  "version": "2.58.1",
   "date": "2026-10-28",
   "releases": [
+    {
+      "version": "2.58.1",
+      "date": "2026-10-28",
+      "summary": "Brickture page: the hero video uses the same built-in controls as the vertical video",
+      "changes": [
+        "The wide hero video now shows the browser's own controls (play / pause, timeline, volume, full screen), like the vertical video; the custom Pause and Replay buttons are gone",
+        "Watch with sound stays, and keeps in step when the sound is turned on from the video's own controls"
+      ]
+    },
     {
       "version": "2.58.0",
       "date": "2026-10-28",
