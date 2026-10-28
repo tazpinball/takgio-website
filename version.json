@@ -1,7 +1,18 @@
 {
-  "version": "2.57.0",
+  "version": "2.57.1",
   "date": "2026-10-28",
   "releases": [
+    {
+      "version": "2.57.1",
+      "date": "2026-10-28",
+      "summary": "Brickture: the home tile, How it works and Proof match the new Campaign kit",
+      "changes": [
+        "Home page Brickture tile: no cost and no two-minute claim; the third point is the brick base",
+        "Brickture How it works: no two-minute claim and no XS-L sizes; the steps are snap, see it in bricks, pick Foundation or Ultimate, follow the steps, request the kit",
+        "Brickture Proof: the old lion card is now the octopus (4,224 pieces, 758 steps, 33 layers)",
+        "Brickture: the parts-list card and the search and share descriptions no longer promise a cost estimate"
+      ]
+    },
     {
       "version": "2.57.0",
       "date": "2026-10-28",
