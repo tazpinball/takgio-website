@@ -18,12 +18,14 @@ ElevenLabs; mixed with ffmpeg.
   `cgSgspJ2msm6clMCkdW9`, eleven_multilingual_v2; the text is in `lines.json`), the music bed and four snaps
   (whoosh, pop, tick, chime) from ElevenLabs; the clips are kept in `audio/` so a re-render keeps the same voice.
   The scenes were re-timed to the measured voice lines (`timeline.json`: scene times, where each voice line and snap
-  lands); the video is 54 s. `build.py` mixes it (music ducked under the voice, -14 LUFS) and puts it under the
+  lands); the video is 56 s (54 s before v2.62.3). `build.py` mixes it (music ducked under the voice, -14 LUFS) and puts it under the
   picture. Both cuts went to Ted as files: `takgio-promo-16x9.mp4` (1920x1080) and `takgio-promo-9x16.mp4`
   (1080x1920).
 - **Not checked by machine:** how the voice says the names. The API key has no speech-to-text permission, so listen
   for Takgio ("tack-jee-oh"), Brickture (written "Brick-chure"), Ann Elise (written "Ann Eleese") and ConcreteIQ
-  (written "Concrete I.Q."). To redo a line: change its text in `lines.json`, delete its clip in `audio/`, run
+  (written "Concrete I.Q."). Ted, 29 Oct: Hoof Harted is said "Hoof-Hearted" (written "Hoof Hearted") and
+  Pinball-QR "Pinball-QR" (written "Pinball Q.R."); the Hoof Harted and Pinball-QR beat is voiced since v2.62.3 (Ted: both
+  are on the Apple App Store now). To redo a line: change its text in `lines.json`, delete its clip in `audio/`, run
   `audio.py` again, re-check its length (the scene times assume the lengths below) and rebuild.
 - 🔴 TAKGIO is said "tak-geo": write it "tack-jee-oh" in the voice text.
 - **Next (Ted's call):** where the video goes on the site, if anywhere. It is not on the site yet.
@@ -38,12 +40,12 @@ ElevenLabs; mixed with ffmpeg.
 | 0:15.4 | Then we pair our own expert model with a general-purpose AI. | step 02 |
 | 0:19.8 | The result: AI products that work like a seasoned pro. | the whole graphic |
 | 0:24.1 | On one live school bid, ConcreteIQ caught $144,219 of missing steel. | ConcreteIQ screen + $144,219 |
-| 0:31.6 | Brickture turns a photo into a brick model you can build. True Record reads government documents aloud. Ann Elise teaches organic chemistry. | Brickture, True Record, Ann Elise, Hoof Harted + Pinball-QR |
-| 0:42.7 | Six products. Four industries. And more on the way. | six icons; Meta Ray-Ban Display and myBuyersCoach "Upcoming" |
-| 0:47.2 | Takgio. We turn human expertise into AI products. | lockup, takgio.com (to 0:54) |
+| 0:31.6 | Brickture turns a photo into a brick model you can build. True Record reads government documents aloud. Ann Elise teaches organic chemistry. Hoof Harted and Pinball-QR are both on the App Store now. | Brickture, True Record, Ann Elise, Hoof Harted + Pinball-QR ("Now on the App Store") |
+| 0:44.7 | Six products. Four industries. And more on the way. | six icons; Meta Ray-Ban Display and myBuyersCoach "Upcoming" |
+| 0:49.2 | Takgio. We turn human expertise into AI products. | lockup, takgio.com (to 0:56) |
 
 Voice clip lengths (speech only, s): v1 3.1, v2 2.3, v3 6.6, v4 3.7, v5 3.5, v6 6.4, v7a 3.0, v7b 2.3, v7c 2.1,
-v8 3.7, v9 4.3.
+v7d 3.1, v8 3.7, v9 4.3.
 
 ## How to make it (S = a scratch folder outside the repo)
 
