@@ -4,21 +4,24 @@
 > place at the end of each session; do not append a per-session log. The release history lives in `version.json`
 > (`releases`, newest first) and in `git log`.
 
-*Started 2026-10-26 (it did not exist before this date); last updated 2026-10-28, after v2.55.11 went live. Built from
+*Started 2026-10-26 (it did not exist before this date); last updated 2026-10-29, after v2.59.0 went live. Built from
 `version.json`, `git log` and the repo itself.
-The Supabase side was checked by Ted in the dashboard on 26 Oct (below). A cloud session cannot reach Supabase or
-takgio.com (the network policy refuses both hosts); Ted runs the checks in the dashboard.*
+The Supabase side was checked by Ted in the dashboard on 26 Oct (below). Since 28 Oct a cloud session CAN reach
+takgio.com (Ted added it to the environment), so check the live site yourself with curl after a merge. It still
+cannot reach Supabase or Vercel preview links (`*.vercel.app` answers 403 from the proxy): Ted looks at previews.*
 
 ## Where the next session starts
 
 ```
-LIVE     v2.55.13 (28 Oct): v2.55.11 corrected Ted's title on the ConcreteIQ customer story; 2.55.12-2.55.13 changed
-         only HANDOFF.md and CLAUDE.md. Vercel deploys master on push.
+LIVE     v2.59.0 (29 Oct): the Brickture promo videos, version 3 (the giraffe at 0:34). Checked live by curl:
+         version.json, both video files byte-for-byte, the Watch line. Vercel deploys master on push.
 GIT      master = the deployed site. Cloud sessions work on a claude/* branch and open a PR into master;
          merging the PR is what deploys. Ted (28 Oct): merge without asking (CLAUDE.md, "Merge without asking").
 DEMOS    The Demos link check passes: 32 pages / 33 links / 0 wrong href (26 Oct).
-NEXT     Nothing open on the site. ConcreteIQ stays BETA until Ted says it is live; then the CPN story is redone
-         (Open / not verified, "CPN customer story"). Investor work (deck template, fundraising targets) is below.
+NEXT     Nothing open on the site. Offered, not asked for: the Brickture case study still says "about two minutes",
+         and the Brickture Proof section keeps the July 20/20 test and the 16-build stability card (both dated).
+         ConcreteIQ stays BETA until Ted says it is live; then the CPN story is redone (Open / not verified).
+         Investor work (deck template, fundraising targets) is below.
 SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked 26 Oct, see Open / verified).
 ```
 
@@ -69,13 +72,34 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   case studies, the Meta page, `#market`), plus the 5 newest AI news stories added by `js/news-feed.js`, labelled
   AI NEWS and linked to `/ai-news.html#<slug>`. A story's ticker line is used if it has one, else its headline cut at
   90 characters. The two "first commit" lines were reworded to "... days after work began" (Ted, 26 Oct).
+- **Brickture page (`brickture.html`, v2.56.0-v2.59.0, 28-29 Oct):** the Brickture project sends updates as a
+  handoff in a claude.ai artifact (https://claude.ai/artifact/A9DJ4o7yaMe26vxeVYSLh9: `handoff.md`, the finished
+  `brickture.html`, the videos under `media/`). Read it with the Artifact tool; Ted wants the changed page shown before
+  it goes live ("Do not publish it live until I say so").
+  - Hero: the wide promo `videos/brickture-promo-16x9.mp4` (1920x1080, 50 s), muted, looping, with the browser's own
+    controls (Ted, 28 Oct: like the vertical video) and a "Watch with sound" button under it (not over it: the
+    video's burned-in captions move around the frame). Visitors with Reduce motion get the still with controls.
+  - Watch section (`#watch`): the vertical promo `videos/brickture-promo-9x16.mp4` (720x1280, not 1080x1920 as the
+    first handoff said) in a phone frame, with download buttons for both cuts. The video links carry `?v=3` (bump it
+    when the files change; the names stay) so browsers that cached an old cut fetch the new one.
+  - Version 3 (29 Oct): the giraffe ("Your favorite animal.", Ted's own photo) replaced Betsy at 0:34.
+  - Pictures: the brick octopus and the brick cruise ship with the couple are stills cut from the video
+    (`images/products/brickture-{octopus,cruise}.webp`, 800 wide; `images/reel/...` 480x640 for the home reel). The
+    home Brickture tile and reel show them in place of the lion and the elephant; the Brickture gallery's elephant is
+    the cruise ship.
+  - Campaign kit (Ted approved all recommendations, 28 Oct): the 50-word description ends "Kit ordering in beta.
+    Coming Thanksgiving 2026."; claims are the octopus build (4,224 pieces, 758 steps, 33 layers), Foundation and
+    Ultimate, every model on its own brick base, kit ordering in beta, Coming Thanksgiving 2026. No prices, no cost
+    estimate, no "about two minutes", no XS-L sizes anywhere on the page or the home tile (all retired with the old
+    app). The "no people or pets" rule is gone from the Don't list (the video shows both).
 - **Routing:** `vercel.json` holds the rewrites for the clean URLs above, plus `/hoof` and `/marketing/hoof-harted`.
   `/services` permanently redirects to `/industries.html`.
 
-## Recent work (Oct 21–28)
+## Recent work (Oct 21–29)
 
 | Version | What |
 |---|---|
+| 2.56.0–2.59.0 | Brickture promo videos (hero + Watch section), octopus and cruise pictures, Campaign kit rewritten, built-in video controls, then version 3 of the videos (28–29 Oct) |
 | 2.55.11 | ConcreteIQ customer story: Ted's title corrected to President & CEO, Takgio (28 Oct) |
 | 2.55.7–2.55.10 | HANDOFF.md and CLAUDE.md only: the investor-deck template, the full-URL rule, the declined CPN story |
 | 2.55.0–2.55.6 | Home hero graphic redrawn and animated in three steps (26 Oct; Ted approved each round on a Vercel preview) |
@@ -172,7 +196,12 @@ Full notes for each release are in `version.json`.
 
 ## Commands
 
-- Serve locally: `npx http-server . -p 8080 -c-1` (launch config `takgio-site`).
+- Serve locally: `npx http-server . -p 8080 -c-1` (launch config `takgio-site`). Plain `http-server` answers video
+  range requests, so the videos seek locally.
+- After a merge, wait for the deploy: `until curl -s "https://www.takgio.com/version.json?x=$RANDOM" | head -3 | grep -q <version>; do sleep 5; done`.
+  Right after a deploy Vercel's edge can serve the old copy of a replaced file once: fetch it again before
+  calling it wrong (seen 29 Oct with the wide video).
+- Cut a still from a video: `ffmpeg -ss <seconds> -i <video> -frames:v 1 <out.png>`, then crop and save as webp.
 - News function test: `deno run -A supabase/functions/_tests/news-harness.ts "<absolute project root>"`.
 - Careers function test: `deno run -A supabase/functions/_tests/careers-harness.ts "<absolute project root>"`.
   Both tests run the real function code offline and should report 0 failed.

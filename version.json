@@ -1,7 +1,16 @@
 {
-  "version": "2.59.0",
+  "version": "2.59.1",
   "date": "2026-10-29",
   "releases": [
+    {
+      "version": "2.59.1",
+      "date": "2026-10-29",
+      "summary": "HANDOFF.md and CLAUDE.md: the Brickture page work of 28-29 Oct",
+      "changes": [
+        "HANDOFF.md: live state v2.59.0, the Brickture page (videos, pictures, Campaign kit, how updates arrive), that a cloud session can now reach takgio.com but not Vercel previews, and the commands used",
+        "CLAUDE.md: the new videos/ folder in the project structure"
+      ]
+    },
     {
       "version": "2.59.0",
       "date": "2026-10-29",
