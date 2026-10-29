@@ -1,7 +1,15 @@
 {
-  "version": "2.62.1",
+  "version": "2.62.2",
   "date": "2026-10-29",
   "releases": [
+    {
+      "version": "2.62.2",
+      "date": "2026-10-29",
+      "summary": "HANDOFF.md: the Takgio client promo video is finished",
+      "changes": [
+        "HANDOFF.md: the promo video's state (16:9 and 9:16 cuts sent to Ted, not on the site), what Ted should listen for, and the next item (his verdict and where it goes)"
+      ]
+    },
     {
       "version": "2.62.1",
       "date": "2026-10-29",
