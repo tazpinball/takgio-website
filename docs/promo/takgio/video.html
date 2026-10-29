@@ -39,7 +39,8 @@ html, body { margin: 0; background: #000; }
 .browser img { display: block; width: 100%; }
 .pill { display: inline-block; padding: 10px 22px; border-radius: 40px; font: 700 30px Inter; }
 .up { background: rgba(167,139,250,.22); color: #ddd6fe; }
-.store { background: rgba(52,211,153,.2); color: #a7f3d0; margin-top: 34px; }
+.store { background: rgba(52,211,153,.2); color: #a7f3d0; margin-top: 34px; display: table; }
+.web { background: rgba(96,165,250,.2); color: #bfdbfe; margin-top: 18px; display: table; }
 .grid6 { position: absolute; display: grid; grid-template-columns: repeat(6, 200px); gap: 40px; left: 270px; top: 260px; }
 .grid6 div { text-align: center; font: 700 30px Inter; }
 .grid6 img { width: 170px; height: 170px; border-radius: 40px; display: block; margin: 0 auto 18px; box-shadow: 0 18px 44px rgba(0,0,0,.45); background: #fff; object-fit: cover; }
@@ -137,7 +138,8 @@ const P = {
   ae: { g: product('Ann Elise', 'img/ann-elise-app-icon.webp', 'An AI tutor that teaches<br>organic chemistry.') },
   hp: { g: product('Hoof Harted<br>&amp; Pinball-QR', 'img/hoof-harted-icon.png', 'A party game, and QR problem<br>reporting for arcades.') },
 };
-const store = el('div', 'pill store', P.hp.g, 'Now on the App Store');
+const trStore = el('div', 'pill store', P.tr.g, 'On the App Store');
+const store = el('div', 'pill store', P.hp.g, 'Hoof Harted &middot; App Store &amp; Google Play'), web2 = el('div', 'pill web', P.hp.g, 'Pinball-QR &middot; Web, no app');
 const oct = el('div', 'abs shadow', s7); css(oct, { left: '1020px', top: '170px', width: '760px', height: '418px', borderRadius: '26px', overflow: 'hidden' });
 img('img/brickture-octopus.webp', oct).style.width = '100%';
 function phone(src, x, y, w, h) { const p = el('div', 'phone', s7); css(p, { left: x + 'px', top: y + 'px', width: w + 'px', height: h + 'px' }); img(src, p); return p; }
@@ -238,7 +240,7 @@ window.render = async t => {
     const st = B[cur], x = eOut(p01(t, st, .45));
     P[cur].g.style.opacity = x; P[cur].g.style.transform = `translateX(${(1 - x) * -70}px)`;
     ext[cur].forEach((e, i) => { const y = eOut(p01(t, st + .1 + i * .15, .5)); e.style.opacity = y; e.style.transform = `translateY(${(1 - y) * 80}px) scale(${lerp(.94, 1, y)})`; });
-    pop(store, t, B.hp + .9); c7.style.opacity = 0; }
+    pop(trStore, t, B.tr + 2.7); pop(store, t, B.hp + .9); pop(web2, t, B.hp + 3.3); c7.style.opacity = 0; }
   // s8
   { const [a, b] = S.s8; tiles.forEach((d, i) => pop(d, t, a + .1 + i * .18)); pop(up1, t, a + 3); pop(up2, t, a + 3.3);
     up1.style.display = up2.style.display = 'inline-block'; capAt(c8a, t, a + .1, a + 2.9); capAt(c8b, t, a + 2.9, b); }
