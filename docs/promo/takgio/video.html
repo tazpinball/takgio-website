@@ -1,0 +1,210 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Takgio Promo</title>
+<!-- The Takgio client promo's frames (docs/promo/takgio/README.md). render.js serves the
+     stage folder (stage.py), calls window.render(t) for every frame and screenshots it.
+     1920x1080 for the website. Scenes follow the script Ted approved on 29 Oct 2026. -->
+<style>
+html, body { margin: 0; background: #000; }
+#stage { position: relative; width: 1920px; height: 1080px; overflow: hidden;
+         background: radial-gradient(ellipse at 30% 20%, #1d2547 0%, #11152a 45%, #0a0c18 100%);
+         font-family: Inter, sans-serif; color: #fff; }
+.layer { position: absolute; inset: 0; display: none; }
+.cap { position: absolute; left: 0; width: 1920px; text-align: center; top: 905px;
+       font: 800 74px/1.08 'Inter Display', Inter, sans-serif; letter-spacing: -1.5px; opacity: 0;
+       text-shadow: 0 8px 34px rgba(0,0,0,.65); white-space: nowrap; }
+.cap b { color: #ffc93c; font-weight: 800; }
+.abs { position: absolute; }
+.shadow { box-shadow: 0 30px 90px rgba(0,0,0,.55); }
+.glow { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .55; }
+/* industry chips */
+.chip { position: absolute; padding: 18px 30px; border-radius: 60px; font: 700 38px Inter; white-space: nowrap;
+        background: rgba(255,255,255,.08); border: 2px solid rgba(255,255,255,.18); display: flex; gap: 16px; align-items: center; }
+.chip i { width: 18px; height: 18px; border-radius: 50%; display: inline-block; }
+/* hero crops */
+.view { position: absolute; overflow: hidden; border-radius: 26px; }
+.view img { position: absolute; transform-origin: 0 0; }
+/* counters */
+.big { font: 900 230px/1 'Inter Display', Inter; letter-spacing: -6px; }
+.lbl { font: 600 44px/1.25 Inter; color: rgba(255,255,255,.82); }
+/* product cards */
+.pname { font: 800 92px/1 'Inter Display', Inter; letter-spacing: -2px; }
+.pline { font: 600 44px/1.25 Inter; color: rgba(255,255,255,.85); margin-top: 22px; }
+.picon { width: 120px; height: 120px; border-radius: 28px; box-shadow: 0 16px 40px rgba(0,0,0,.4); }
+.phone { position: absolute; border-radius: 54px; background: #050506; box-shadow: 0 0 0 4px #2b2d33, 0 40px 100px rgba(0,0,0,.6); overflow: hidden; }
+.phone img { position: absolute; left: 14px; top: 14px; right: 14px; border-radius: 42px; width: calc(100% - 28px); }
+.browser { position: absolute; border-radius: 18px; background: #f3f4f6; overflow: hidden; box-shadow: 0 40px 110px rgba(0,0,0,.6); }
+.browser .bar { height: 44px; background: #e5e7eb; display: flex; align-items: center; gap: 10px; padding-left: 20px; }
+.browser .bar i { width: 14px; height: 14px; border-radius: 50%; background: #cbd5e1; display: inline-block; }
+.browser img { display: block; width: 100%; }
+.pill { display: inline-block; padding: 10px 22px; border-radius: 40px; font: 700 30px Inter; }
+.up { background: rgba(167,139,250,.22); color: #ddd6fe; }
+.grid6 { position: absolute; display: grid; grid-template-columns: repeat(6, 200px); gap: 40px; left: 270px; top: 260px; }
+.grid6 div { text-align: center; font: 700 30px Inter; }
+.grid6 img { width: 170px; height: 170px; border-radius: 40px; display: block; margin: 0 auto 18px; box-shadow: 0 18px 44px rgba(0,0,0,.45); background: #fff; object-fit: cover; }
+</style>
+</head><body><div id="stage"></div>
+<script>
+(async () => {
+const TL = await (await fetch('timeline.json')).json();
+const S = TL.scenes;            // name -> [start, end] in seconds
+const stage = document.getElementById('stage');
+const el = (tag, cls, parent = stage, html = '') => { const e = document.createElement(tag); if (cls) e.className = cls; e.innerHTML = html; parent.appendChild(e); return e; };
+const img = (src, parent, cls = '') => { const i = el('img', cls, parent); i.src = src; return i; };
+const css = (e, o) => Object.assign(e.style, o);
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const p01 = (t, a, d) => clamp((t - a) / d);
+const eOut = x => 1 - Math.pow(1 - x, 3);
+const eBack = x => { const c1 = 1.7, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+const lerp = (a, b, x) => a + (b - a) * x;
+const FADE = 0.35;
+// a caption that slams in and fades out with its scene
+function cap(parent, html, top) { const c = el('div', 'cap', parent, html); if (top) c.style.top = top + 'px'; return c; }
+function capAt(c, t, a, b) { const i = eOut(p01(t, a, .35)), o = 1 - p01(t, b - .3, .3);
+  c.style.opacity = Math.min(i, o); c.style.transform = `translateY(${(1 - i) * 40}px) scale(${lerp(1.08, 1, i)})`; }
+function pop(e, t, a, d = .45) { const x = p01(t, a, d); e.style.opacity = clamp(x * 2); e.style.transform = `scale(${lerp(.6, 1, eBack(x))})`; }
+const layers = {};
+function layer(name) { const l = el('div', 'layer', stage); layers[name] = l; return l; }
+
+// ---- the captured home-page graphic: one continuous timeline from scene s2 on ----
+const HX = TL.hx;                       // {dir, n, fps, w, h, scale}
+const hxImgs = [];
+function hxView(parent, x, y, w, h) { const v = el('div', 'view shadow', parent); css(v, { left: x + 'px', top: y + 'px', width: w + 'px', height: h + 'px' });
+  const i = img(HX.dir + '/f0000.png', v); hxImgs.push(i); return { v, i }; }
+// show the region r=[x,y,w,h] (CSS px of .hx) filling the view
+function hxFrame(view, r, w, h) { const k = Math.min(w / r[2], h / r[3]) / HX.scale;
+  css(view.i, { width: HX.w * k + 'px', height: HX.h * k + 'px', left: (-(r[0] * HX.scale) * k + (w - r[2] * HX.scale * k) / 2) + 'px', top: (-(r[1] * HX.scale) * k + (h - r[3] * HX.scale * k) / 2) + 'px' }); }
+// a step with its numbered label above it; views are sized to the step's own shape, so no neighbor shows
+const C1 = [-6, 0, 170, 506], C2 = [191.5, 0, 179, 506], ALL = [0, 0, 562, 504];
+const VW = r => Math.round(860 * r[2] / r[3]);
+
+// ---- s1: every industry has experts ----
+const s1 = layer('s1');
+el('div', 'glow', s1).setAttribute('style', 'left:520px;top:120px;width:880px;height:700px;background:#4a6cf7');
+const head = img('img/expert-head.webp', s1, 'abs'); css(head, { left: '760px', top: '110px', width: '400px', borderRadius: '30px' });
+const INDS = [['Construction', '#f59e0b', 210, 180], ['Entertainment', '#ec4899', 1330, 150], ['Legal & civic', '#8b5cf6', 160, 470],
+              ['Education', '#0d9488', 1380, 450], ['Real estate', '#34d399', 790, 690]];
+const chips = INDS.map(([n, c, x, y]) => { const ch = el('div', 'chip', s1, `<i style="background:${c}"></i>${n}`); css(ch, { left: x + 'px', top: y + 'px', opacity: 0 }); return ch; });
+const c1a = cap(s1, 'Every industry has <b>experts</b>');
+const c1b = cap(s1, 'who know things no software does.');
+
+// ---- s2: we start with them ----
+const s2 = layer('s2');
+const logo = img('img/takgio-wordmark-white.svg', s2, 'abs'); css(logo, { left: '330px', top: '330px', width: '620px' });
+const s2v = hxView(s2, 1200, 30, VW(C1), 860);
+const c2 = cap(s2, 'At Takgio, we start with <b>them</b>.');
+
+// ---- s3: in their own words, 1,400+ ----
+const s3 = layer('s3');
+const s3v = hxView(s3, 330, 30, VW(C1), 860);
+const n3 = el('div', 'abs big', s3); css(n3, { left: '820px', top: '240px' });
+const l3 = el('div', 'abs lbl', s3, 'statements from practising experts,<br>in their own words, for ConcreteIQ alone'); css(l3, { left: '830px', top: '500px' });
+const c3 = cap(s3, 'We capture what they know, <b>in their own words</b>.');
+
+// ---- s4: the pair ----
+const s4 = layer('s4');
+const s4v = hxView(s4, 960 - VW(C2) / 2, 30, VW(C2), 860);
+const c4 = cap(s4, 'Our own <b>expert model</b> + a general-purpose AI');
+
+// ---- s5: the whole graphic ----
+const s5 = layer('s5');
+const s5v = hxView(s5, 488, 40, 944, 846);
+const c5 = cap(s5, 'AI products that work like a <b>seasoned pro</b>.');
+
+// ---- s6: ConcreteIQ ----
+const s6 = layer('s6');
+const br = el('div', 'browser', s6, '<div class="bar"><i></i><i></i><i></i></div>'); css(br, { left: '120px', top: '150px', width: '980px' });
+img('img/concreteiq-results.webp', br);
+const ciqLogo = img('img/concreteiq-logo-dark.png', s6, 'abs'); css(ciqLogo, { left: '1220px', top: '180px', width: '470px' });
+const n6 = el('div', 'abs big', s6); css(n6, { left: '1190px', top: '330px', fontSize: '170px', color: '#ffc93c' });
+const l6 = el('div', 'abs lbl', s6, 'of missing steel caught<br>on one live school bid'); css(l6, { left: '1200px', top: '540px' });
+const c6 = cap(s6, 'ConcreteIQ caught <b>$144,219</b> of missing steel.');
+
+// ---- s7: the product montage ----
+const s7 = layer('s7');
+function product(name, icon, line) {
+  const g = el('div', 'abs', s7); css(g, { left: '170px', top: '300px', width: '820px' });
+  const ic = img(icon, g, 'picon'); const n = el('div', 'pname', g, name); n.style.marginTop = '34px'; el('div', 'pline', g, line);
+  return g; }
+const P = {
+  bt: { g: product('Brickture', 'img/brickture-icon.png', 'A photo becomes a brick model<br>you can build.') },
+  tr: { g: product('True Record', 'img/true-record-icon.png', 'Government documents,<br>read aloud.') },
+  ae: { g: product('Ann Elise', 'img/ann-elise-app-icon.webp', 'An AI tutor that teaches<br>organic chemistry.') },
+  hp: { g: product('Hoof Harted<br>&amp; Pinball-QR', 'img/hoof-harted-icon.png', 'A party game, and QR problem<br>reporting for arcades.') },
+};
+const oct = el('div', 'abs shadow', s7); css(oct, { left: '1020px', top: '170px', width: '760px', height: '418px', borderRadius: '26px', overflow: 'hidden' });
+img('img/brickture-octopus.webp', oct).style.width = '100%';
+function phone(src, x, y, w, h) { const p = el('div', 'phone', s7); css(p, { left: x + 'px', top: y + 'px', width: w + 'px', height: h + 'px' }); img(src, p); return p; }
+const trP = phone('img/true-record-opinions.webp', 1180, 60, 400, 800);
+const aeT = img('img/ann-elise-app-icon.webp', s7, 'abs shadow'); css(aeT, { left: '1150px', top: '170px', width: '480px', height: '480px', borderRadius: '110px' });
+const hhP = phone('img/hoof-harted-home.webp', 1030, 70, 360, 760), pqP = phone('img/pinball-qr-ticket.webp', 1430, 70, 360, 760);
+const c7 = cap(s7, '');
+
+// ---- s8: six products, four industries, more on the way ----
+const s8 = layer('s8');
+const grid = el('div', 'grid6', s8);
+const SIX = [['ConcreteIQ', 'img/concreteiq-icon.png'], ['Brickture', 'img/brickture-icon.png'], ['Hoof Harted', 'img/hoof-harted-icon.png'],
+             ['True Record', 'img/true-record-icon.png'], ['Ann Elise', 'img/ann-elise-app-icon.webp'], ['Pinball-QR', 'img/pinball-qr-icon.svg']];
+const tiles = SIX.map(([n, i]) => { const d = el('div', '', grid); img(i, d); el('span', '', d, n); return d; });
+const ups = el('div', 'abs', s8); css(ups, { left: '0', width: '1920px', top: '640px', textAlign: 'center', font: '700 40px Inter' });
+const up1 = el('span', 'pill up', ups, 'Upcoming &middot; Meta Ray-Ban Display'), up2 = el('span', 'pill up', ups, 'Upcoming &middot; myBuyersCoach');
+up2.style.marginLeft = '28px';
+const c8a = cap(s8, '<b>Six</b> products. <b>Four</b> industries.'), c8b = cap(s8, 'And more on the way.');
+
+// ---- s9: end card ----
+const s9 = layer('s9');
+el('div', 'glow', s9).setAttribute('style', 'left:560px;top:180px;width:800px;height:520px;background:#ffc93c;opacity:.22');
+const lock = img('img/takgio-lockup-white.svg', s9, 'abs'); css(lock, { left: '660px', top: '260px', width: '600px' });
+const tag = el('div', 'abs', s9, 'We turn human expertise into AI products.'); css(tag, { left: 0, width: '1920px', textAlign: 'center', top: '560px', font: "800 64px/1.1 'Inter Display', Inter", letterSpacing: '-1px' });
+const web = el('div', 'abs', s9, 'takgio.com'); css(web, { left: 0, width: '1920px', textAlign: 'center', top: '700px', font: '600 48px Inter', color: '#ffc93c' });
+
+// wait for every image, then say ready
+await Promise.all([...document.images].map(i => i.decode().catch(() => {})));
+
+async function setHx(t) {        // the hero graphic's own time = seconds since s2 began
+  const f = clamp(Math.round((t - S.s2[0]) * HX.fps), 0, HX.n - 1);
+  const src = HX.dir + '/f' + String(f).padStart(4, '0') + '.png';
+  const vis = hxImgs.filter(i => i.parentElement.parentElement.style.display === 'block');
+  await Promise.all(vis.map(i => { if (i.getAttribute('src') === src) return null; i.src = src; return i.decode().catch(() => {}); }));
+}
+
+window.render = async t => {
+  for (const [n, [a, b]] of Object.entries(S)) { const L = layers[n]; const on = t >= a - FADE && t < b + FADE;
+    L.style.display = on ? 'block' : 'none'; if (on) L.style.opacity = Math.min(p01(t, a - FADE, FADE * 2), 1 - p01(t, b - FADE, FADE * 2)); }
+  // s1
+  { const [a, b] = S.s1, m = (a + b) / 2; head.style.transform = `scale(${lerp(1, 1.08, p01(t, a, b - a))})`;
+    chips.forEach((c, i) => pop(c, t, a + .6 + i * .45)); capAt(c1a, t, a + .1, m + .2); capAt(c1b, t, m + .2, b); }
+  // s2
+  { const [a, b] = S.s2; hxFrame(s2v, C1, VW(C1), 860); const x = eOut(p01(t, a, .7));
+    logo.style.opacity = x; logo.style.transform = `translateX(${(1 - x) * -60}px)`; s2v.v.style.transform = `translateX(${(1 - x) * 80}px)`; capAt(c2, t, a + .2, b); }
+  // s3
+  { const [a, b] = S.s3; hxFrame(s3v, C1, VW(C1), 860); const k = eOut(p01(t, a + 2.6, 2.2));
+    n3.textContent = Math.round(1400 * k).toLocaleString('en-US') + (k >= 1 ? '+' : ''); n3.style.opacity = clamp(p01(t, a + 2.4, .3));
+    l3.style.opacity = clamp(p01(t, a + 3.2, .4)); capAt(c3, t, a + .1, b); }
+  // s4
+  { const [a, b] = S.s4; const z = lerp(1, 1.04, p01(t, a, b - a)); hxFrame(s4v, C2, VW(C2), 860); s4v.v.style.transform = `scale(${z})`; capAt(c4, t, a + .1, b); }
+  // s5
+  { const [a, b] = S.s5; hxFrame(s5v, ALL, 944, 846); s5v.v.style.transform = `scale(${lerp(.96, 1, eOut(p01(t, a, 1)))})`; capAt(c5, t, a + .1, b); }
+  // s6
+  { const [a, b] = S.s6; const x = eOut(p01(t, a, .7)); br.style.transform = `translateY(${(1 - x) * 60}px)`;
+    const k = eOut(p01(t, a + 1.2, 1.8)); n6.textContent = '$' + Math.round(144219 * k).toLocaleString('en-US');
+    n6.style.opacity = clamp(p01(t, a + 1, .3)); l6.style.opacity = clamp(p01(t, a + 2.4, .4)); ciqLogo.style.opacity = clamp(p01(t, a + .4, .4)); capAt(c6, t, a + .2, b); }
+  // s7: four beats inside one layer
+  { const B = TL.montage; const order = ['bt', 'tr', 'ae', 'hp'];
+    const ext = { bt: [oct], tr: [trP], ae: [aeT], hp: [hhP, pqP] };
+    let cur = order[0]; for (const k of order) if (t >= B[k]) cur = k;
+    for (const k of order) { const on = k === cur; P[k].g.style.display = on ? 'block' : 'none'; ext[k].forEach(e => e.style.display = on ? 'block' : 'none'); }
+    const st = B[cur], x = eOut(p01(t, st, .45));
+    P[cur].g.style.opacity = x; P[cur].g.style.transform = `translateX(${(1 - x) * -70}px)`;
+    ext[cur].forEach((e, i) => { const y = eOut(p01(t, st + .1 + i * .15, .5)); e.style.opacity = y; e.style.transform = `translateY(${(1 - y) * 80}px) scale(${lerp(.94, 1, y)})`; });
+    c7.style.opacity = 0; }
+  // s8
+  { const [a, b] = S.s8; tiles.forEach((d, i) => pop(d, t, a + .1 + i * .18)); pop(up1, t, a + 2.2); pop(up2, t, a + 2.5);
+    up1.style.display = up2.style.display = 'inline-block'; capAt(c8a, t, a + .1, a + 2.2); capAt(c8b, t, a + 2.2, b); }
+  // s9
+  { const [a] = S.s9; pop(lock, t, a + .2, .6); tag.style.opacity = clamp(p01(t, a + .9, .5)); web.style.opacity = clamp(p01(t, a + 1.6, .5)); }
+  await setHx(t);
+};
+window.ready = true;
+})();
+</script></body></html>
