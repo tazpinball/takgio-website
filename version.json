@@ -1,7 +1,16 @@
 {
-  "version": "2.62.0",
+  "version": "2.62.1",
   "date": "2026-10-29",
   "releases": [
+    {
+      "version": "2.62.1",
+      "date": "2026-10-29",
+      "summary": "Takgio client promo: the 9:16 end card's tagline breaks after 'expertise' (docs only)",
+      "changes": [
+        "docs/promo/takgio/video.html: in the 9:16 cut the tagline reads 'We turn human expertise / into AI products.' (it left 'products.' alone on the second line)",
+        "docs/promo/takgio/timeline.json: the home graphic is captured for 20 s (600 frames), all the scenes use"
+      ]
+    },
     {
       "version": "2.62.0",
       "date": "2026-10-29",
