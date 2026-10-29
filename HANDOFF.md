@@ -36,6 +36,9 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   is "We turn human expertise into AI products." (v2.46.0), and the line under it is "We pair human experts with AI"
   (v2.48.1). There are six products: ConcreteIQ, Brickture, Hoof Harted, True Record, Ann Elise and Pinball-QR, with
   two marked "Upcoming": Meta Ray-Ban Display and myBuyersCoach.
+- **Ann Elise's picture is the AnnElise portrait** (v2.61.0, Ted 29 Oct: "use the AnnElise portrait everywhere"):
+  `images/products/ann-elise-portrait.webp` everywhere the product is shown (header menu, switchers, tiles, its page,
+  the promo video). The blue "AE" icon (`images/products/ann-elise-icon.png`) is no longer used.
 - **myBuyersCoach (v2.60.0, Ted 29 Oct):** the home-buyer product (property due diligence; Orange County, Florida first;
   built with a licensed Florida Realtor; in early development). It is the Products page card `#mybuyerscoach` (was
   the unnamed "Property due diligence" card) and an "Upcoming" entry in the header Products menu on all 32 pages
