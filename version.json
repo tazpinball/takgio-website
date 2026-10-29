@@ -1,7 +1,15 @@
 {
-  "version": "2.60.1",
+  "version": "2.60.2",
   "date": "2026-10-29",
   "releases": [
+    {
+      "version": "2.60.2",
+      "date": "2026-10-29",
+      "summary": "Takgio client promo video: scene page and tools (in docs/, not on the site)",
+      "changes": [
+        "docs/promo/takgio/: the promo's scene page (nine scenes, 1920x1080), timing, frame renderer, the capture of the home-page graphic, and a README with the approved script and next steps"
+      ]
+    },
     {
       "version": "2.60.1",
       "date": "2026-10-29",
