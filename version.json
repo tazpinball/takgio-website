@@ -1,7 +1,17 @@
 {
-  "version": "2.58.1",
-  "date": "2026-10-28",
+  "version": "2.59.0",
+  "date": "2026-10-29",
   "releases": [
+    {
+      "version": "2.59.0",
+      "date": "2026-10-29",
+      "summary": "Brickture page: promo videos version 3 (the giraffe replaces Betsy)",
+      "changes": [
+        "Both promo videos replaced with version 3: at 0:34 the giraffe ('Your favorite animal.') instead of Betsy ('Your hero.')",
+        "Watch section: 'Real photos from our beta - a pumpkin, a cruise, a favorite mug, a giraffe, a best friend, a team mascot.'",
+        "The video links carry ?v=3 so browsers that cached the old videos fetch the new ones"
+      ]
+    },
     {
       "version": "2.58.1",
       "date": "2026-10-28",
