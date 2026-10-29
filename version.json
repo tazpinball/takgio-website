@@ -1,7 +1,18 @@
 {
-  "version": "2.62.3",
+  "version": "2.62.4",
   "date": "2026-10-29",
   "releases": [
+    {
+      "version": "2.62.4",
+      "date": "2026-10-29",
+      "summary": "Takgio client promo: says where each app is (docs only)",
+      "changes": [
+        "docs/promo/takgio: Pinball-QR is web only, not on the App Store (Ted); True Record's line adds 'and it is on the App Store'; the Hoof Harted line says App Store and Google Play; 'Pinball-QR runs right in the browser'",
+        "On screen: 'On the App Store' under True Record; 'Hoof Harted · App Store & Google Play' and 'Pinball-QR · Web, no app' under Hoof Harted & Pinball-QR",
+        "The video is 58 s; build.py slows the same music bed to 0.955 (same pitch) to cover it",
+        "README and HANDOFF.md updated (HANDOFF records where each app is)"
+      ]
+    },
     {
       "version": "2.62.3",
       "date": "2026-10-29",
