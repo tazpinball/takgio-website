@@ -1,7 +1,17 @@
 {
-  "version": "2.59.2",
+  "version": "2.60.0",
   "date": "2026-10-29",
   "releases": [
+    {
+      "version": "2.60.0",
+      "date": "2026-10-29",
+      "summary": "myBuyersCoach: the home-buyer product gets its name",
+      "changes": [
+        "Products page: the upcoming 'Property due diligence' card is now myBuyersCoach (same description and status; anchor #mybuyerscoach)",
+        "Header Products menu on every page: myBuyersCoach, Upcoming, linking to its card on the Products page",
+        "Home hero graphic: the third app is myBuyersCoach (was myBuyersGuide)"
+      ]
+    },
     {
       "version": "2.59.2",
       "date": "2026-10-29",
