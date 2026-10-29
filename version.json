@@ -1,7 +1,34 @@
 {
-  "version": "2.61.1",
+  "version": "2.62.2",
   "date": "2026-10-29",
   "releases": [
+    {
+      "version": "2.62.2",
+      "date": "2026-10-29",
+      "summary": "HANDOFF.md: the Takgio client promo video is finished",
+      "changes": [
+        "HANDOFF.md: the promo video's state (16:9 and 9:16 cuts sent to Ted, not on the site), what Ted should listen for, and the next item (his verdict and where it goes)"
+      ]
+    },
+    {
+      "version": "2.62.1",
+      "date": "2026-10-29",
+      "summary": "Takgio client promo: the 9:16 end card's tagline breaks after 'expertise' (docs only)",
+      "changes": [
+        "docs/promo/takgio/video.html: in the 9:16 cut the tagline reads 'We turn human expertise / into AI products.' (it left 'products.' alone on the second line)",
+        "docs/promo/takgio/timeline.json: the home graphic is captured for 20 s (600 frames), all the scenes use"
+      ]
+    },
+    {
+      "version": "2.62.0",
+      "date": "2026-10-29",
+      "summary": "Takgio client promo: voice, music and the finished cuts (docs only, not on the site)",
+      "changes": [
+        "docs/promo/takgio: audio.py makes the voice lines (lines.json), music bed and snaps from ElevenLabs; the clips are kept in docs/promo/takgio/audio/",
+        "Scenes re-timed to the measured voice lines (timeline.json, 54 s); build.py mixes the sound (music ducked under the voice, -14 LUFS) under the rendered picture",
+        "README: the new timing, how to redo a voice line, and the names to listen for"
+      ]
+    },
     {
       "version": "2.61.1",
       "date": "2026-10-29",

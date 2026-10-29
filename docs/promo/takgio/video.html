@@ -193,6 +193,7 @@ function tallLayout() {
   // s9
   at(lock, { left: 240, top: 640, width: 600 }); s9.querySelector('.glow').setAttribute('style', 'left:140px;top:520px;width:800px;height:560px;background:#ffc93c;opacity:.22');
   center(tag, 900, { padding: '0 70px', boxSizing: 'border-box', fontSize: 64 }); center(web, 1120);
+  tag.innerHTML = 'We turn human expertise<br>into AI products.';
 }
 if (TALL) tallLayout();
 
@@ -210,23 +211,23 @@ window.render = async t => {
   for (const [n, [a, b]] of Object.entries(S)) { const L = layers[n]; const on = t >= a - FADE && t < b + FADE;
     L.style.display = on ? 'block' : 'none'; if (on) L.style.opacity = Math.min(p01(t, a - FADE, FADE * 2), 1 - p01(t, b - FADE, FADE * 2)); }
   // s1
-  { const [a, b] = S.s1, m = (a + b) / 2; head.style.transform = `scale(${lerp(1, 1.08, p01(t, a, b - a))})`;
-    chips.forEach((c, i) => pop(c, t, a + .6 + i * .45)); capAt(c1a, t, a + .1, m + .2); capAt(c1b, t, m + .2, b); }
+  { const [a, b] = S.s1; head.style.transform = `scale(${lerp(1, 1.08, p01(t, a, b - a))})`;
+    chips.forEach((c, i) => pop(c, t, a + .6 + i * .45)); capAt(c1a, t, a + .1, a + 2.3); capAt(c1b, t, a + 2.3, b); }
   // s2
   { const [a, b] = S.s2; hxFrame(s2v, C1); const x = eOut(p01(t, a, .7));
     logo.style.opacity = x; logo.style.transform = `translateX(${(1 - x) * -60}px)`; s2v.v.style.transform = `translateX(${(1 - x) * 80}px)`; capAt(c2, t, a + .2, b); }
   // s3
-  { const [a, b] = S.s3; hxFrame(s3v, C1); const k = eOut(p01(t, a + 2.6, 2.2));
-    n3.textContent = Math.round(1400 * k).toLocaleString('en-US') + (k >= 1 ? '+' : ''); n3.style.opacity = clamp(p01(t, a + 2.4, .3));
-    l3.style.opacity = clamp(p01(t, a + 3.2, .4)); capAt(c3, t, a + .1, b); }
+  { const [a, b] = S.s3; hxFrame(s3v, C1); const k = eOut(p01(t, a + 3.1, 2.2));
+    n3.textContent = Math.round(1400 * k).toLocaleString('en-US') + (k >= 1 ? '+' : ''); n3.style.opacity = clamp(p01(t, a + 2.9, .3));
+    l3.style.opacity = clamp(p01(t, a + 3.7, .4)); capAt(c3, t, a + .1, b); }
   // s4
   { const [a, b] = S.s4; const z = lerp(1, 1.04, p01(t, a, b - a)); hxFrame(s4v, C2); s4v.v.style.transform = `scale(${z})`; capAt(c4, t, a + .1, b); }
   // s5
   { const [a, b] = S.s5; hxFrame(s5v, ALL); s5v.v.style.transform = `scale(${lerp(.96, 1, eOut(p01(t, a, 1)))})`; capAt(c5, t, a + .1, b); }
   // s6
   { const [a, b] = S.s6; const x = eOut(p01(t, a, .7)); br.style.transform = `translateY(${(1 - x) * 60}px)`;
-    const k = eOut(p01(t, a + 1.2, 1.8)); n6.textContent = '$' + Math.round(144219 * k).toLocaleString('en-US');
-    n6.style.opacity = clamp(p01(t, a + 1, .3)); l6.style.opacity = clamp(p01(t, a + 2.4, .4)); ciqLogo.style.opacity = clamp(p01(t, a + .4, .4)); capAt(c6, t, a + .2, b); }
+    const k = eOut(p01(t, a + 1.6, 2.2)); n6.textContent = '$' + Math.round(144219 * k).toLocaleString('en-US');
+    n6.style.opacity = clamp(p01(t, a + 1.4, .3)); l6.style.opacity = clamp(p01(t, a + 3.4, .4)); ciqLogo.style.opacity = clamp(p01(t, a + .4, .4)); capAt(c6, t, a + .2, b); }
   // s7: four beats inside one layer
   { const B = TL.montage; const order = ['bt', 'tr', 'ae', 'hp'];
     const ext = { bt: [oct], tr: [trP], ae: [aeT], hp: [hhP, pqP] };
@@ -237,10 +238,10 @@ window.render = async t => {
     ext[cur].forEach((e, i) => { const y = eOut(p01(t, st + .1 + i * .15, .5)); e.style.opacity = y; e.style.transform = `translateY(${(1 - y) * 80}px) scale(${lerp(.94, 1, y)})`; });
     c7.style.opacity = 0; }
   // s8
-  { const [a, b] = S.s8; tiles.forEach((d, i) => pop(d, t, a + .1 + i * .18)); pop(up1, t, a + 2.2); pop(up2, t, a + 2.5);
-    up1.style.display = up2.style.display = 'inline-block'; capAt(c8a, t, a + .1, a + 2.2); capAt(c8b, t, a + 2.2, b); }
+  { const [a, b] = S.s8; tiles.forEach((d, i) => pop(d, t, a + .1 + i * .18)); pop(up1, t, a + 3); pop(up2, t, a + 3.3);
+    up1.style.display = up2.style.display = 'inline-block'; capAt(c8a, t, a + .1, a + 2.9); capAt(c8b, t, a + 2.9, b); }
   // s9
-  { const [a] = S.s9; pop(lock, t, a + .2, .6); tag.style.opacity = clamp(p01(t, a + .9, .5)); web.style.opacity = clamp(p01(t, a + 1.6, .5)); }
+  { const [a] = S.s9; pop(lock, t, a + .2, .6); tag.style.opacity = clamp(p01(t, a + 1.9, .5)); web.style.opacity = clamp(p01(t, a + 2.7, .5)); }
   await setHx(t);
 };
 window.ready = true;

@@ -1,0 +1,25 @@
+{
+  "voice": "cgSgspJ2msm6clMCkdW9",
+  "model": "eleven_multilingual_v2",
+  "settings": { "stability": 0.5, "similarity_boost": 0.75, "style": 0.25, "use_speaker_boost": true },
+  "lines": [
+    ["v1", "s1", "Every industry has experts who know things no software does."],
+    ["v2", "s2", "At tack-jee-oh, we start with them."],
+    ["v3", "s3", "We capture what they know, in their own words. More than fourteen hundred statements for Concrete I.Q. alone."],
+    ["v4", "s4", "Then we pair our own expert model with a general-purpose AI."],
+    ["v5", "s5", "The result: AI products that work like a seasoned pro."],
+    ["v6", "s6", "On one live school bid, Concrete I.Q. caught one hundred forty-four thousand, two hundred nineteen dollars of missing steel."],
+    ["v7a", "bt", "Brick-chure turns a photo into a brick model you can build."],
+    ["v7b", "tr", "True Record reads government documents aloud."],
+    ["v7c", "ae", "Ann Eleese teaches organic chemistry."],
+    ["v8", "s8", "Six products. Four industries. And more on the way."],
+    ["v9", "s9", "tack-jee-oh. We turn human expertise into AI products."]
+  ],
+  "music": "Modern, confident corporate technology underscore for a 50 second product video. Warm synth pads, soft pulsing plucks, light electronic percussion, gentle build, optimistic and premium, no vocals, clean ending.",
+  "sfx": {
+    "whoosh": "short soft cinematic whoosh transition, clean, airy",
+    "pop": "soft modern UI pop, short, subtle",
+    "tick": "fast soft digital counter ticking, short",
+    "chime": "bright warm logo reveal chime, short shimmer"
+  }
+}
