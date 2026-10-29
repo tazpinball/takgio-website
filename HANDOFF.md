@@ -4,7 +4,7 @@
 > place at the end of each session; do not append a per-session log. The release history lives in `version.json`
 > (`releases`, newest first) and in `git log`.
 
-*Started 2026-10-26 (it did not exist before this date); last updated 2026-10-29, after v2.59.0 went live. Built from
+*Started 2026-10-26 (it did not exist before this date); last updated 2026-10-29, after v2.60.0 went live. Built from
 `version.json`, `git log` and the repo itself.
 The Supabase side was checked by Ted in the dashboard on 26 Oct (below). Since 28 Oct a cloud session CAN reach
 takgio.com (Ted added it to the environment), so check the live site yourself with curl after a merge. It still
@@ -13,13 +13,15 @@ cannot reach Supabase or Vercel preview links (`*.vercel.app` answers 403 from t
 ## Where the next session starts
 
 ```
-LIVE     v2.59.0 (29 Oct): the Brickture promo videos, version 3 (the giraffe at 0:34). Checked live by curl:
-         version.json, both video files byte-for-byte, the Watch line. Vercel deploys master on push.
+LIVE     v2.60.0 (29 Oct): myBuyersCoach named (Products card, header Products menu, home hero). Before it, v2.59.2
+         brought the Brickture case study, Case Studies, Industries and Products in line with the Brickture page.
+         Checked live by curl. Vercel deploys master on push.
 GIT      master = the deployed site. Cloud sessions work on a claude/* branch and open a PR into master;
          merging the PR is what deploys. Ted (28 Oct): merge without asking (CLAUDE.md, "Merge without asking").
 DEMOS    The Demos link check passes: 32 pages / 33 links / 0 wrong href (26 Oct).
-NEXT     Nothing open on the site. Offered, not asked for: the Brickture case study still says "about two minutes",
-         and the Brickture Proof section keeps the July 20/20 test and the 16-build stability card (both dated).
+NEXT     A Takgio promo video, like Brickture's (Ted, 29 Oct): script and storyboard first, for Ted's approval.
+         Offered, not asked for: the July 20/20 test and the 16-build stability card (Brickture page and case study,
+         both dated), and the lion still in the Brickture gallery and the News page thumbnail.
          ConcreteIQ stays BETA until Ted says it is live; then the CPN story is redone (Open / not verified).
          Investor work (deck template, fundraising targets) is below.
 SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked 26 Oct, see Open / verified).
@@ -33,7 +35,12 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
 - **Positioning (Oct 21–22):** Takgio is a **product company**, not a project-for-hire shop (v2.44.0). The headline
   is "We turn human expertise into AI products." (v2.46.0), and the line under it is "We pair human experts with AI"
   (v2.48.1). There are six products: ConcreteIQ, Brickture, Hoof Harted, True Record, Ann Elise and Pinball-QR, with
-  Meta Ray-Ban Display shown as "Coming soon".
+  two marked "Upcoming": Meta Ray-Ban Display and myBuyersCoach.
+- **myBuyersCoach (v2.60.0, Ted 29 Oct):** the home-buyer product (property due diligence; Orange County, Florida first;
+  built with a licensed Florida Realtor; in early development). It is the Products page card `#mybuyerscoach` (was
+  the unnamed "Property due diligence" card) and an "Upcoming" entry in the header Products menu on all 32 pages
+  linking to that card. No page of its own yet (Ted's choice). The hero graphic's third app was myBuyersGuide; it is
+  myBuyersCoach now. The "Six products" counts are unchanged (upcoming products are not counted, like Meta).
 - **Home hero graphic (v2.55.0):** "how a Takgio product is made" in three numbered steps, plain HTML and CSS (`.hx`
   in `index.html` and `css/styles.css`; `js/hero-models.js` draws only the two model pictures): 01 Human expertise (practising experts and what they know from:
   interviews, job records, drawings and specs, field know-how; "Decades of know-how", Ted) -> 02 Dual-model AI (the general-purpose LLM and the
@@ -72,7 +79,7 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   case studies, the Meta page, `#market`), plus the 5 newest AI news stories added by `js/news-feed.js`, labelled
   AI NEWS and linked to `/ai-news.html#<slug>`. A story's ticker line is used if it has one, else its headline cut at
   90 characters. The two "first commit" lines were reworded to "... days after work began" (Ted, 26 Oct).
-- **Brickture page (`brickture.html`, v2.56.0-v2.59.0, 28-29 Oct):** the Brickture project sends updates as a
+- **Brickture page (`brickture.html`, v2.56.0-v2.59.2, 28-29 Oct):** the Brickture project sends updates as a
   handoff in a claude.ai artifact (https://claude.ai/artifact/A9DJ4o7yaMe26vxeVYSLh9: `handoff.md`, the finished
   `brickture.html`, the videos under `media/`). Read it with the Artifact tool; Ted wants the changed page shown before
   it goes live ("Do not publish it live until I say so").
@@ -90,8 +97,8 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   - Campaign kit (Ted approved all recommendations, 28 Oct): the 50-word description ends "Kit ordering in beta.
     Coming Thanksgiving 2026."; claims are the octopus build (4,224 pieces, 758 steps, 33 layers), Foundation and
     Ultimate, every model on its own brick base, kit ordering in beta, Coming Thanksgiving 2026. No prices, no cost
-    estimate, no "about two minutes", no XS-L sizes anywhere on the page or the home tile (all retired with the old
-    app). The "no people or pets" rule is gone from the Don't list (the video shows both).
+    estimate, no "about two minutes" or "~2 min", no XS-L sizes anywhere on the site (all retired with the old app;
+    v2.59.2 cleared them from the case study, Case Studies, Industries and Products too, which now quote 4,224). The "no people or pets" rule is gone from the Don't list (the video shows both).
 - **Routing:** `vercel.json` holds the rewrites for the clean URLs above, plus `/hoof` and `/marketing/hoof-harted`.
   `/services` permanently redirects to `/industries.html`.
 
@@ -99,6 +106,8 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
 
 | Version | What |
 |---|---|
+| 2.60.0 | myBuyersCoach: the home-buyer product named (Products card, header menu on every page, home hero) |
+| 2.59.1–2.59.2 | Handoff for the Brickture work; Brickture case study and the Case Studies, Industries and Products cards in line with the Brickture page |
 | 2.56.0–2.59.0 | Brickture promo videos (hero + Watch section), octopus and cruise pictures, Campaign kit rewritten, built-in video controls, then version 3 of the videos (28–29 Oct) |
 | 2.55.11 | ConcreteIQ customer story: Ted's title corrected to President & CEO, Takgio (28 Oct) |
 | 2.55.7–2.55.10 | HANDOFF.md and CLAUDE.md only: the investor-deck template, the full-URL rule, the declined CPN story |
