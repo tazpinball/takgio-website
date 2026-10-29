@@ -69,14 +69,18 @@ function layer(name) { const l = el('div', 'layer', stage); layers[name] = l; re
 // ---- the captured home-page graphic: one continuous timeline from scene s2 on ----
 const HX = TL.hx;                       // {dir, n, fps, w, h, scale}
 const hxImgs = [];
-function hxView(parent, x, y, w, h) { const v = el('div', 'view shadow', parent); css(v, { left: x + 'px', top: y + 'px', width: w + 'px', height: h + 'px' });
-  const i = img(HX.dir + '/f0000.png', v); hxImgs.push(i); return { v, i }; }
+function hxView(parent, x, y, w, h) { const v = el('div', 'view shadow', parent); const o = { v, w, h };
+  o.place = (x, y, w, h) => { o.w = w; o.h = h; css(v, { left: x + 'px', top: y + 'px', width: w + 'px', height: h + 'px' }); };
+  o.place(x, y, w, h); o.i = img(HX.dir + '/f0000.png', v); hxImgs.push(o.i); return o; }
 // show the region r=[x,y,w,h] (CSS px of .hx) filling the view
-function hxFrame(view, r, w, h) { const k = Math.min(w / r[2], h / r[3]) / HX.scale;
+function hxFrame(view, r) { const w = view.w, h = view.h; const k = Math.min(w / r[2], h / r[3]) / HX.scale;
   css(view.i, { width: HX.w * k + 'px', height: HX.h * k + 'px', left: (-(r[0] * HX.scale) * k + (w - r[2] * HX.scale * k) / 2) + 'px', top: (-(r[1] * HX.scale) * k + (h - r[3] * HX.scale * k) / 2) + 'px' }); }
 // a step with its numbered label above it; views are sized to the step's own shape, so no neighbor shows
 const C1 = [-6, 0, 170, 506], C2 = [191.5, 0, 179, 506], ALL = [0, 0, 562, 504];
-const VW = r => Math.round(860 * r[2] / r[3]);
+const VW = (r, h = 860) => Math.round(h * r[2] / r[3]);
+// 9:16 for social (?tall): the same scenes, laid out tall (tallLayout below)
+const TALL = location.search.includes('tall');
+if (TALL) css(stage, { width: '1080px', height: '1920px' });
 
 // ---- s1: every industry has experts ----
 const s1 = layer('s1');
@@ -158,6 +162,40 @@ const lock = img('img/takgio-lockup-white.svg', s9, 'abs'); css(lock, { left: '6
 const tag = el('div', 'abs', s9, 'We turn human expertise into AI products.'); css(tag, { left: 0, width: '1920px', textAlign: 'center', top: '560px', font: "800 64px/1.1 'Inter Display', Inter", letterSpacing: '-1px' });
 const web = el('div', 'abs', s9, 'takgio.com'); css(web, { left: 0, width: '1920px', textAlign: 'center', top: '700px', font: '600 48px Inter', color: '#ffc93c' });
 
+function tallLayout() {
+  const at = (e, o) => css(e, Object.fromEntries(Object.entries(o).map(([k, v]) => [k, typeof v === 'number' ? v + 'px' : v])));
+  const center = (e, top, extra = {}) => at(e, { left: 0, width: 1080, textAlign: 'center', top, ...extra });
+  document.querySelectorAll('.cap').forEach(c => at(c, { top: 1560, left: 50, width: 980, whiteSpace: 'normal', fontSize: 72 }));
+  // s1
+  at(head, { left: 300, top: 360, width: 480 });
+  s1.querySelector('.glow').setAttribute('style', 'left:90px;top:300px;width:900px;height:760px;background:#4a6cf7');
+  [[90, 200], [560, 160], [70, 1060], [600, 1100], [330, 1280]].forEach(([x, y], i) => at(chips[i], { left: x, top: y }));
+  // s2: the logo over step 01
+  at(logo, { left: 250, top: 150, width: 580 }); s2v.place(540 - VW(C1, 1060) / 2, 400, VW(C1, 1060), 1060);
+  // s3: step 01, then the counter under it
+  s3v.place(540 - VW(C1, 820) / 2, 110, VW(C1, 820), 820);
+  center(n3, 980, { fontSize: 190 }); center(l3, 1210, { fontSize: 40 });
+  // s4, s5
+  s4v.place(540 - VW(C2, 1300) / 2, 150, VW(C2, 1300), 1300);
+  s5v.place(30, 380, 1020, 916);
+  // s6: the screen, then the number
+  at(br, { left: 50, top: 170, width: 980 }); center(ciqLogo, 820, { width: 420, left: 330 });
+  center(n6, 950, { fontSize: 170 }); center(l6, 1170, { fontSize: 42 });
+  // s7: the picture on top, the name under it
+  Object.values(P).forEach(p => at(p.g, { left: 90, top: 1060, width: 900 }));
+  at(oct, { left: 60, top: 230, width: 960, height: 528 });
+  at(trP, { left: 330, top: 110, width: 420, height: 880 }); at(aeT, { left: 240, top: 220, width: 600, height: 600, borderRadius: 130 });
+  at(hhP, { left: 120, top: 130, width: 400, height: 845 }); at(pqP, { left: 560, top: 130, width: 400, height: 845 });
+  // s8: the six in a 3 x 2 grid, the upcoming two stacked
+  at(grid, { left: 120, top: 260, gridTemplateColumns: 'repeat(3, 220px)', rowGap: '70px', columnGap: '60px' });
+  at(ups, { top: 960, left: 0, width: 1080 }); at(up2, { marginLeft: 0, marginTop: 26 }); up1.style.display = up2.style.display = 'inline-block';
+  ups.insertBefore(document.createElement('br'), up2);
+  // s9
+  at(lock, { left: 240, top: 640, width: 600 }); s9.querySelector('.glow').setAttribute('style', 'left:140px;top:520px;width:800px;height:560px;background:#ffc93c;opacity:.22');
+  center(tag, 900, { padding: '0 70px', boxSizing: 'border-box', fontSize: 64 }); center(web, 1120);
+}
+if (TALL) tallLayout();
+
 // wait for every image, then say ready
 await Promise.all([...document.images].map(i => i.decode().catch(() => {})));
 
@@ -175,16 +213,16 @@ window.render = async t => {
   { const [a, b] = S.s1, m = (a + b) / 2; head.style.transform = `scale(${lerp(1, 1.08, p01(t, a, b - a))})`;
     chips.forEach((c, i) => pop(c, t, a + .6 + i * .45)); capAt(c1a, t, a + .1, m + .2); capAt(c1b, t, m + .2, b); }
   // s2
-  { const [a, b] = S.s2; hxFrame(s2v, C1, VW(C1), 860); const x = eOut(p01(t, a, .7));
+  { const [a, b] = S.s2; hxFrame(s2v, C1); const x = eOut(p01(t, a, .7));
     logo.style.opacity = x; logo.style.transform = `translateX(${(1 - x) * -60}px)`; s2v.v.style.transform = `translateX(${(1 - x) * 80}px)`; capAt(c2, t, a + .2, b); }
   // s3
-  { const [a, b] = S.s3; hxFrame(s3v, C1, VW(C1), 860); const k = eOut(p01(t, a + 2.6, 2.2));
+  { const [a, b] = S.s3; hxFrame(s3v, C1); const k = eOut(p01(t, a + 2.6, 2.2));
     n3.textContent = Math.round(1400 * k).toLocaleString('en-US') + (k >= 1 ? '+' : ''); n3.style.opacity = clamp(p01(t, a + 2.4, .3));
     l3.style.opacity = clamp(p01(t, a + 3.2, .4)); capAt(c3, t, a + .1, b); }
   // s4
-  { const [a, b] = S.s4; const z = lerp(1, 1.04, p01(t, a, b - a)); hxFrame(s4v, C2, VW(C2), 860); s4v.v.style.transform = `scale(${z})`; capAt(c4, t, a + .1, b); }
+  { const [a, b] = S.s4; const z = lerp(1, 1.04, p01(t, a, b - a)); hxFrame(s4v, C2); s4v.v.style.transform = `scale(${z})`; capAt(c4, t, a + .1, b); }
   // s5
-  { const [a, b] = S.s5; hxFrame(s5v, ALL, 944, 846); s5v.v.style.transform = `scale(${lerp(.96, 1, eOut(p01(t, a, 1)))})`; capAt(c5, t, a + .1, b); }
+  { const [a, b] = S.s5; hxFrame(s5v, ALL); s5v.v.style.transform = `scale(${lerp(.96, 1, eOut(p01(t, a, 1)))})`; capAt(c5, t, a + .1, b); }
   // s6
   { const [a, b] = S.s6; const x = eOut(p01(t, a, .7)); br.style.transform = `translateY(${(1 - x) * 60}px)`;
     const k = eOut(p01(t, a + 1.2, 1.8)); n6.textContent = '$' + Math.round(144219 * k).toLocaleString('en-US');

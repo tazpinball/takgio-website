@@ -1,7 +1,15 @@
 {
-  "version": "2.61.0",
+  "version": "2.61.1",
   "date": "2026-10-29",
   "releases": [
+    {
+      "version": "2.61.1",
+      "date": "2026-10-29",
+      "summary": "Takgio client promo: the 9:16 layout (docs only)",
+      "changes": [
+        "docs/promo/takgio: the vertical 1080x1920 layout of the nine scenes (video.html ?tall, render.js PROMO_TALL=1); README records Ted's approval of the scenes"
+      ]
+    },
     {
       "version": "2.61.0",
       "date": "2026-10-29",
