@@ -1,7 +1,19 @@
 {
-  "version": "2.59.1",
+  "version": "2.59.2",
   "date": "2026-10-29",
   "releases": [
+    {
+      "version": "2.59.2",
+      "date": "2026-10-29",
+      "summary": "Brickture case study brought in line with the Brickture page",
+      "changes": [
+        "Case study: no 'about two minutes' and no estimated cost; How It Works now matches the Brickture page (snap, see it in bricks, pick Foundation or Ultimate, follow the steps, request the kit)",
+        "Case study Results: the two-minute bullet is now the octopus build (4,224 pieces in 758 steps, on its own brick base)",
+        "Case Studies index: the Brickture card drops 'in about two minutes' and shows the octopus instead of the lion",
+        "The '~2 min' Brickture stat is gone everywhere: the case study and its index card now show 4,224 pieces (the octopus), the Industries results row likewise",
+        "Products page Brickture card: 4,224 pieces / 758 steps / 2 kinds of build, in place of ~2 min / 100-600 bricks / 100+ steps at Large, and the octopus picture in place of the lion"
+      ]
+    },
     {
       "version": "2.59.1",
       "date": "2026-10-29",
