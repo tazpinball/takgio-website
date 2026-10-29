@@ -1,7 +1,17 @@
 {
-  "version": "2.62.2",
+  "version": "2.62.3",
   "date": "2026-10-29",
   "releases": [
+    {
+      "version": "2.62.3",
+      "date": "2026-10-29",
+      "summary": "Takgio client promo: Hoof Harted and Pinball-QR are announced (docs only)",
+      "changes": [
+        "docs/promo/takgio: a voice line for the Hoof Harted and Pinball-QR beat, 'Hoof Harted and Pinball-QR are both on the App Store now.' (Ted: say 'Hoof-Hearted'), and a 'Now on the App Store' pill on screen",
+        "The scenes after it move 2 s later; the video is 56 s",
+        "README and HANDOFF.md updated"
+      ]
+    },
     {
       "version": "2.62.2",
       "date": "2026-10-29",

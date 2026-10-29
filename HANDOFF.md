@@ -4,7 +4,7 @@
 > place at the end of each session; do not append a per-session log. The release history lives in `version.json`
 > (`releases`, newest first) and in `git log`.
 
-*Started 2026-10-26 (it did not exist before this date); last updated 2026-10-29, after v2.62.2 (the Takgio promo video). Built from
+*Started 2026-10-26 (it did not exist before this date); last updated 2026-10-29, after v2.62.3 (the Takgio promo video). Built from
 `version.json`, `git log` and the repo itself.
 The Supabase side was checked by Ted in the dashboard on 26 Oct (below). Since 28 Oct a cloud session CAN reach
 takgio.com (Ted added it to the environment), so check the live site yourself with curl after a merge. It still
@@ -19,9 +19,9 @@ LIVE     v2.60.0 (29 Oct): myBuyersCoach named (Products card, header Products m
 GIT      master = the deployed site. Cloud sessions work on a claude/* branch and open a PR into master;
          merging the PR is what deploys. Ted (28 Oct): merge without asking (CLAUDE.md, "Merge without asking").
 DEMOS    The Demos link check passes: 32 pages / 33 links / 0 wrong href (26 Oct).
-PROMO    The Takgio client promo video is finished (29 Oct, v2.62.0-v2.62.2): 54 s, a 16:9 and a 9:16 cut, sent to
+PROMO    The Takgio client promo video is finished (29 Oct, v2.62.0-v2.62.3): 56 s, a 16:9 and a 9:16 cut, sent to
          Ted as files. Not on the site: where it goes is Ted's call. Tools, voice clips and how to redo a line:
-         docs/promo/takgio/README.md. Ted to listen for how the voice says Takgio, Brickture, Ann Elise, ConcreteIQ.
+         docs/promo/takgio/README.md. Ted to listen for how the voice says Takgio, Brickture, Ann Elise, ConcreteIQ, Hoof Harted ("Hoof-Hearted"), Pinball-QR.
 NEXT     Ted's verdict on the promo video (and where it goes). Offered, not asked for: the July 20/20 test and the 16-build stability card (Brickture page and case study,
          both dated), and the lion still in the Brickture gallery and the News page thumbnail.
          ConcreteIQ stays BETA until Ted says it is live; then the CPN story is redone (Open / not verified).
@@ -111,7 +111,7 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
 
 | Version | What |
 |---|---|
-| 2.62.0–2.62.2 | Takgio client promo video finished: voice, music and snaps from ElevenLabs, scenes re-timed (54 s), 16:9 and 9:16 cuts (docs only) |
+| 2.62.0–2.62.3 | Takgio client promo video finished: voice, music and snaps from ElevenLabs, scenes re-timed, 16:9 and 9:16 cuts (docs only); v2.62.3 voices Hoof Harted and Pinball-QR ("both on the App Store now"), 56 s |
 | 2.60.2–2.61.1 | Takgio promo scene page and tools; Ann Elise portrait everywhere; 9:16 layout |
 | 2.60.0 | myBuyersCoach: the home-buyer product named (Products card, header menu on every page, home hero) |
 | 2.59.1–2.59.2 | Handoff for the Brickture work; Brickture case study and the Case Studies, Industries and Products cards in line with the Brickture page |
