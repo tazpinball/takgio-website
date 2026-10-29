@@ -1,7 +1,17 @@
 {
-  "version": "2.61.1",
+  "version": "2.62.0",
   "date": "2026-10-29",
   "releases": [
+    {
+      "version": "2.62.0",
+      "date": "2026-10-29",
+      "summary": "Takgio client promo: voice, music and the finished cuts (docs only, not on the site)",
+      "changes": [
+        "docs/promo/takgio: audio.py makes the voice lines (lines.json), music bed and snaps from ElevenLabs; the clips are kept in docs/promo/takgio/audio/",
+        "Scenes re-timed to the measured voice lines (timeline.json, 54 s); build.py mixes the sound (music ducked under the voice, -14 LUFS) under the rendered picture",
+        "README: the new timing, how to redo a voice line, and the names to listen for"
+      ]
+    },
     {
       "version": "2.61.1",
       "date": "2026-10-29",
