@@ -1,7 +1,17 @@
 {
-  "version": "2.63.0",
+  "version": "2.63.1",
   "date": "2026-10-29",
   "releases": [
+    {
+      "version": "2.63.1",
+      "date": "2026-10-29",
+      "summary": "Home page: clearer wording for the promo video",
+      "changes": [
+        "Hero link: 'Watch our 1-minute video' (was 'Watch Takgio in under a minute', which read like a live stream; Ted)",
+        "Video band: kicker 'Video', heading 'Takgio, explained in one minute.'",
+        "HANDOFF.md updated"
+      ]
+    },
     {
       "version": "2.63.0",
       "date": "2026-10-29",

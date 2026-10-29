@@ -4,7 +4,7 @@
 > place at the end of each session; do not append a per-session log. The release history lives in `version.json`
 > (`releases`, newest first) and in `git log`.
 
-*Started 2026-10-26 (it did not exist before this date); last updated 2026-10-29, after v2.63.0 (the Takgio promo video on the home page). Built from
+*Started 2026-10-26 (it did not exist before this date); last updated 2026-10-29, after v2.63.1 (the Takgio promo video on the home page). Built from
 `version.json`, `git log` and the repo itself.
 The Supabase side was checked by Ted in the dashboard on 26 Oct (below). Since 28 Oct a cloud session CAN reach
 takgio.com (Ted added it to the environment), so check the live site yourself with curl after a merge. It still
@@ -21,7 +21,8 @@ GIT      master = the deployed site. Cloud sessions work on a claude/* branch an
 DEMOS    The Demos link check passes: 32 pages / 33 links / 0 wrong href (26 Oct).
 PROMO    The Takgio client promo video is finished (29 Oct, v2.62.0-v2.62.4): 58 s, a 16:9 and a 9:16 cut, sent to
          Ted as files. On the home page since v2.63.0 (Ted asked; placement was my recommendation): a Watch band
-         right under the ticker, plus a "Watch Takgio in under a minute" link in the hero. Tools, voice clips and how to redo a line:
+         right under the ticker, plus a "Watch our 1-minute video" link in the hero (v2.63.1 wording, Ted:
+         "Watch Takgio in under a minute" read like a live stream). Tools, voice clips and how to redo a line:
          docs/promo/takgio/README.md. Ted to listen for how the voice says Takgio, Brickture, Ann Elise, ConcreteIQ, Hoof Harted ("Hoof-Hearted"), Pinball-QR.
 NEXT     Ted's verdict on the promo video and its home-page placement; the 9:16 cut is not on the site (social). Offered, not asked for: the July 20/20 test and the 16-build stability card (Brickture page and case study,
          both dated), and the lion still in the Brickture gallery and the News page thumbnail.
@@ -85,7 +86,7 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   `videos/takgio-promo-16x9.mp4` (7.8 MB, re-encoded for the web from the docs/promo build; link carries `?v=1`, bump it
   when the file changes), poster `images/marketing/takgio-promo-16x9-poster.jpg` (the opening scene, no caption),
   `preload="none"`, never autoplays (the hero graphic already moves); a big play button starts it with sound. The hero
-  has a "Watch Takgio in under a minute" link to it. CSS prefix `h-watch` in `css/styles.css`.
+  has a "Watch our 1-minute video" link to it; the band is headed "Video" / "Takgio, explained in one minute." (v2.63.1). CSS prefix `h-watch` in `css/styles.css`.
 - **Home ticker (v2.54.0):** every line is a link. 8 Takgio lines in `index.html` (each goes to the page that backs it:
   the announcement, `#how-it-works`, the ConcreteIQ customer story and product page, the Hoof Harted and True Record
   case studies, the Meta page, `#market`), plus the 5 newest AI news stories added by `js/news-feed.js`, labelled
