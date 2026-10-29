@@ -28,7 +28,9 @@ ElevenLabs; mixed with ffmpeg.
   Store and Google Play, True Record on the App Store, Pinball-QR is web only (no app). To redo a line: change its text in `lines.json`, delete its clip in `audio/`, run
   `audio.py` again, re-check its length (the scene times assume the lengths below) and rebuild.
 - 🔴 TAKGIO is said "tak-geo": write it "tack-jee-oh" in the voice text.
-- **Next (Ted's call):** where the video goes on the site, if anywhere. It is not on the site yet.
+- **On the home page (v2.63.0):** the 16:9 cut, re-encoded for the web (crf 21, 7.8 MB) as `videos/takgio-promo-16x9.mp4`,
+  in the `#watch` band under the ticker. After a re-render: re-encode it the same way and bump the `?v=` on its link in
+  `index.html`.
 
 ## The script (approved)
 

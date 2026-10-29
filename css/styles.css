@@ -3609,6 +3609,21 @@ section[id], article[id] { scroll-margin-top: 72px; }
 @media (max-width: 900px) { .xm-flow { grid-template-columns: 1fr 1fr; } .xm-step:not(:last-child)::after { display: none; } }
 @media (max-width: 560px) { .xm-flow { grid-template-columns: 1fr; gap: 14px; } .xm-band { padding: 34px 0 30px; } }
 
+/* v2.63.0: the Takgio promo video on the home page (Watch band under the ticker, and the hero's link to it). Prefix h-watch */
+.h-watch { padding: 44px 0 44px; background: #fff; border-bottom: 1px solid var(--color-border); }
+.h-watch-vid { position: relative; max-width: 960px; margin: 0 auto; }
+.h-watch-vid video { width: 100%; height: auto; display: block; aspect-ratio: 16 / 9; border-radius: 18px; background: #0b0d1c; box-shadow: 0 24px 60px rgba(11,13,28,.22); }
+.h-watch-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 12px; padding: 12px 22px 12px 12px; border: 0; border-radius: 999px; background: rgba(11,13,28,.72); color: #fff; font-family: inherit; font-size: 1rem; font-weight: 700; line-height: 1; cursor: pointer; backdrop-filter: blur(6px); box-shadow: 0 10px 30px rgba(0,0,0,.35); transition: transform .2s, background .2s; }
+.h-watch-play:hover, .h-watch-play:focus-visible { background: rgba(11,13,28,.88); transform: translate(-50%, -50%) scale(1.04); }
+.h-watch-play i, .h-watch-link i { position: relative; display: inline-block; width: 46px; height: 46px; border-radius: 50%; background: #ffc93c; flex: none; }
+.h-watch-play i::after, .h-watch-link i::after { content: ""; position: absolute; left: 54%; top: 50%; transform: translate(-50%, -50%); border-style: solid; border-width: 9px 0 9px 15px; border-color: transparent transparent transparent #0b0d1c; }
+.h-watch-play[hidden] { display: none; }
+.h-watch-link { display: inline-flex; align-items: center; gap: 10px; margin: 2px 0 20px; color: #fff; font-weight: 600; text-decoration: none; }
+.h-watch-link i { width: 30px; height: 30px; }
+.h-watch-link i::after { border-width: 6px 0 6px 10px; }
+.h-watch-link:hover { color: #ffc93c; }
+@media (max-width: 560px) { .h-watch { padding: 34px 0 30px; } .h-watch-vid video { border-radius: 12px; } .h-watch-play { padding: 6px; } .h-watch-play span { display: none; } .h-watch-play i { width: 44px; height: 44px; } }
+
 /* ===== v2.48.0 home: the reel as a portfolio tile (the hero graphic that started here is now .hx, v2.55.0, below) ===== */
 .t-reel{padding:0;min-height:460px;background:radial-gradient(120% 90% at 85% 0,#1d2b72 0,#0b0d1c 58%);border-color:rgba(122,162,255,.35);display:block}
 .t-reel::before{display:none}

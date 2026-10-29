@@ -1,7 +1,18 @@
 {
-  "version": "2.62.4",
+  "version": "2.63.0",
   "date": "2026-10-29",
   "releases": [
+    {
+      "version": "2.63.0",
+      "date": "2026-10-29",
+      "summary": "Home page: the Takgio promo video",
+      "changes": [
+        "Home page: a Watch band right under the ticker with the 58-second Takgio promo (16:9), poster frame, plays on click with sound, never autoplays",
+        "Hero: a 'Watch Takgio in under a minute' link to it",
+        "videos/takgio-promo-16x9.mp4 (7.8 MB) and images/marketing/takgio-promo-16x9-poster.jpg added; CSS prefix h-watch",
+        "HANDOFF.md and docs/promo/takgio/README.md updated"
+      ]
+    },
     {
       "version": "2.62.4",
       "date": "2026-10-29",

@@ -156,6 +156,7 @@
           </a>
           <h1>We turn human <em>expertise</em> into AI products.</h1>
           <p class="h-lead">We pair human experts with AI. Their knowledge is captured, checked against what they said, and built into the product &mdash; with the goal of AI that keeps learning from the people who know the work. Leading the way: <strong>ConcreteIQ</strong>, AI bid estimating for concrete contractors, and <strong>Brickture</strong>, one photo to a buildable brick model.</p>
+          <a class="h-watch-link" href="#watch"><i aria-hidden="true"></i>Watch Takgio in under a minute</a>
           <div class="h-stats">
             <div><b class="h-word">A real expert first</b><span>Every app starts with a practising expert, not scraped web data.</span></div>
             <div><b class="h-word">In their own words</b><span>Every rule traces back to what the expert said: 1,400+ statements for ConcreteIQ.</span></div>
@@ -252,6 +253,22 @@
         <a href="/case-study-legal-true-record.html" tabindex="-1" aria-hidden="true">True Record: submitted to the App Store 16 days after work began</a>
       </div>
     </div>
+
+    <!-- ===== v2.63.0: the Takgio promo video (docs/promo/takgio). Plays on click, never on its own ===== -->
+    <section class="h-watch" id="watch">
+      <div class="container">
+        <div class="xm-head reveal">
+          <span class="ship-kicker">Watch</span>
+          <h2>Takgio in under a minute.</h2>
+          <p>How an expert&rsquo;s know-how becomes an AI product, and the products we have built that way.</p>
+        </div>
+        <div class="h-watch-vid reveal">
+          <video id="takgio-promo" controls playsinline preload="none" width="1920" height="1080" poster="/images/marketing/takgio-promo-16x9-poster.jpg"
+            aria-label="Takgio promo video, 58 seconds: how a practising expert's knowledge becomes an AI product, and Takgio's products"><source src="/videos/takgio-promo-16x9.mp4?v=1" type="video/mp4"></video>
+          <button class="h-watch-play" type="button" aria-label="Play the video"><i aria-hidden="true"></i><span>Play &middot; 58 s</span></button>
+        </div>
+      </div>
+    </section>
 
     <!-- ===== How a Takgio product works: expert + expert model + Claude ===== -->
     <section class="xm-band" id="how-it-works">
@@ -632,5 +649,11 @@
   <script src="js/supabase-config.js"></script>
   <script src="js/news-feed.js"></script>
   <script src="js/hero-models.js"></script>
+  <script>
+  // The promo video: our play button starts it with sound, then gets out of the way.
+  (() => { const v = document.getElementById('takgio-promo'), btn = document.querySelector('.h-watch-play'); if (!v || !btn) return;
+    btn.addEventListener('click', () => { v.muted = false; v.play(); });
+    v.addEventListener('play', () => btn.hidden = true); })();
+  </script>
 </body>
 </html>
