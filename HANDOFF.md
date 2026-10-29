@@ -38,7 +38,7 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   in `index.html` and `css/styles.css`; `js/hero-models.js` draws only the two model pictures): 01 Human expertise (practising experts and what they know from:
   interviews, job records, drawings and specs, field know-how; "Decades of know-how", Ted) -> 02 Dual-model AI (the general-purpose LLM and the
   Takgio expert model, "work as a pair"; the expert model is the one highlighted card) -> 03 Takgio apps (ConcreteIQ,
-  Brickture, myBuyersGuide; it is "myBuyersGuide", Ted 26 Oct). A 6 s CSS loop plays the story: interview waveform and
+  Brickture, myBuyersCoach; renamed from myBuyersGuide on 29 Oct, when Ted named the home-buyer product myBuyersCoach). A 6 s CSS loop plays the story: interview waveform and
   one source lit -> pulse into the expert model (ripple, meter) -> pulses to the apps, which show what they do; every
   line also carries a steady stream of moving dots and has a port at each end (v2.55.1, Ted: show the data flowing). The
   pictures are turning lattices in the v2.48 graphic's style (`js/hero-models.js`; Ted: the icons looked generic), told
