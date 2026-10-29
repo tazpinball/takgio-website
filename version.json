@@ -1,7 +1,16 @@
 {
-  "version": "2.60.2",
+  "version": "2.61.0",
   "date": "2026-10-29",
   "releases": [
+    {
+      "version": "2.61.0",
+      "date": "2026-10-29",
+      "summary": "Ann Elise: the AnnElise portrait everywhere on the site (Ted, 29 Oct)",
+      "changes": [
+        "Every Ann Elise graphic now shows the AnnElise portrait (images/products/ann-elise-portrait.webp) instead of the blue AE icon: header Products menu and product switcher on every page, the Products, Industries and Ann Elise pages, the next/previous product links, and the Ann Elise page's downloadable app icon",
+        "Home page: the Ann Elise tile shows the portrait instead of a CSS 'AE' mark (the product reel and News page already showed it)"
+      ]
+    },
     {
       "version": "2.60.2",
       "date": "2026-10-29",
