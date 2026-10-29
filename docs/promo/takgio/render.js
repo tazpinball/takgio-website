@@ -2,11 +2,13 @@
 // for every frame of video.html (index.html in the stage), screenshot it, pipe to ffmpeg.
 //   node render.js <stage dir> <out.mp4> [from s] [to s]
 //   node render.js <stage dir> --stills <out dir> t1 t2 ...
+//   PROMO_TALL=1 node render.js ...    (9:16, 1080x1920, for social)
 const { chromium } = require('playwright');
 const http = require('http'), fs = require('fs'), path = require('path');
 const { spawn } = require('child_process');
 const [root, out, ...rest] = process.argv.slice(2);
 const FPS = 30;
+const TALL = !!process.env.PROMO_TALL;
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.json': 'application/json', '.jpg': 'image/jpeg',
   '.png': 'image/png', '.webp': 'image/webp', '.svg': 'image/svg+xml' };
 const server = http.createServer((req, res) => {
@@ -18,9 +20,9 @@ const server = http.createServer((req, res) => {
 (async () => {
   await new Promise(ok => server.listen(0, '127.0.0.1', ok));
   const b = await chromium.launch();
-  const p = await b.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1 });
+  const p = await b.newPage({ viewport: TALL ? { width: 1080, height: 1920 } : { width: 1920, height: 1080 }, deviceScaleFactor: 1 });
   p.on('pageerror', e => console.error('page error:', e.message));
-  await p.goto(`http://127.0.0.1:${server.address().port}/index.html`);
+  await p.goto(`http://127.0.0.1:${server.address().port}/index.html${TALL ? '?tall' : ''}`);
   await p.waitForFunction(() => window.ready === true, null, { timeout: 180000 });
   if (out === '--stills') {
     const [dir, ...ts] = rest; fs.mkdirSync(dir, { recursive: true });

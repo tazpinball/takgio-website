@@ -11,8 +11,10 @@ ElevenLabs; mixed with ffmpeg.
 - **Done:** the scene page (`video.html`, 1920x1080), its timing (`timeline.json`), the frame renderer
   (`render.js`) and the capture of the live home-page graphic (`hxcap.js`). The nine scenes were shown to Ted as
   stills (29 Oct). Ann Elise is shown by the AnnElise portrait (`images/reel/ann-elise-app-icon.webp`), Ted's pick.
-- **Waiting on Ted:** his OK on the nine scenes; whether the site also switches Ann Elise to the portrait.
-- **Next:** the 9:16 layout; then, in a session that has `ELEVENLABS_API_KEY` (Ted adds it to the environment; a new
+- **Approved by Ted (29 Oct):** the nine scenes ("The nine scenes are good."). The site now uses the AnnElise portrait
+  everywhere too (v2.61.0).
+- **Done:** the 9:16 layout (`?tall`, `PROMO_TALL=1 node render.js ...`), 1080x1920, same scenes and timing.
+- **Next:** in a session that has `ELEVENLABS_API_KEY` (Ted adds it to the environment; a new
   session picks it up), the voice (Jessica, voice id `cgSgspJ2msm6clMCkdW9`, eleven_multilingual_v2), music and snaps
   (copy the Brickture `audio.py` / `build.py` pattern), re-time the scenes to the measured voice lines, render, mix.
 - 🔴 TAKGIO is said "tak-geo": write it "tack-jee-oh" in the voice text.
@@ -41,6 +43,7 @@ mkdir -p $S/stage/img; cp docs/promo/takgio/video.html $S/stage/index.html; cp d
 ln -s $S/hx $S/stage/hx; cp <the images video.html names under img/> $S/stage/img/
 node docs/promo/takgio/render.js $S/stage --stills $S/stills 4.8 8.6 15.5   # stills to look at
 node docs/promo/takgio/render.js $S/stage $S/picture.mp4                    # the whole picture, silent
+PROMO_TALL=1 node docs/promo/takgio/render.js $S/stage $S/picture-9x16.mp4  # the 9:16 cut
 ```
 `hxcap.js` takes over the page's clock (document.timeline, performance.now, every CSS animation) so each frame is
 the graphic at an exact time.
