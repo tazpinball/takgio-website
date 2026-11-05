@@ -1,7 +1,18 @@
 {
-  "version": "2.63.1",
-  "date": "2026-10-29",
+  "version": "2.64.0",
+  "date": "2026-11-05",
   "releases": [
+    {
+      "version": "2.64.0",
+      "date": "2026-11-05",
+      "summary": "The business phone number, (201) 416-3123, on the site",
+      "changes": [
+        "Footer on all 32 public pages: (201) 416-3123 and info@takgio.com under the brand line, both tappable (tel: and mailto:)",
+        "Contact page: a third direct line, '(201) 416-3123 · Call or leave a message', beside Book a call and Email",
+        "Home page structured data: the Organization gains \"telephone\": \"+1-201-416-3123\" (the same number as the Google Play trader details)",
+        "The number is a Google Voice line that goes to voicemail, so it is not in the header and not offered as product support"
+      ]
+    },
     {
       "version": "2.63.1",
       "date": "2026-10-29",
