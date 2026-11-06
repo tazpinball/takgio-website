@@ -96,6 +96,11 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   and shows a thank-you line in place, chosen by `source` (the contact form has none and thanks the sender by first
   name). Without JS the forms post the old way and land on formspree.io/thanks. The Formspree form is named "Takgio
   website signups" (Ted, 6 Nov: one form for everything); the account is on the Professional plan (API access).
+  **API access works from cloud sessions** (6 Nov): the form's Master API key is saved as a network secret on Ted's
+  Default cloud environment for formspree.io (never in the repo), so `curl https://formspree.io/api/0/forms/mreokggq/submissions`
+  works with no header. Read only unless Ted asks. A scheduled task, "Takgio daily signup check" (trig_01X33je2kUpQJpwT8KQSknGy,
+  8:40 AM Eastern daily), reports new signups as a push notification; it has no Gmail connector, so no email.
+  Submissions on 6 Nov: 12 since 31 Mar (1 real Brickture waitlist, 1 newsletter, 2 contact; the rest Ted's tests and repeats).
 - **Home promo video (v2.63.0):** `#watch`, a white band between the ticker and How it works: the 16:9 cut
   `videos/takgio-promo-16x9.mp4` (7.8 MB, re-encoded for the web from the docs/promo build; link carries `?v=1`, bump it
   when the file changes), poster `images/marketing/takgio-promo-16x9-poster.jpg` (the opening scene, no caption),
@@ -133,6 +138,7 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
 
 | Version | What |
 |---|---|
+| 2.65.1 | HANDOFF.md only: Formspree API key on the cloud environment and the daily signup check |
 | 2.65.0 | Every form thanks the visitor on the page (`js/forms.js`) instead of sending them to formspree.io |
 | 2.64.1 | HANDOFF.md only: where the site's form signups go and the Formspree login |
 | 2.64.0 | The business phone number (201) 416-3123 in every footer, on the Contact page and in the home page structured data |

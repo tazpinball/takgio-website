@@ -1,7 +1,15 @@
 {
-  "version": "2.65.0",
+  "version": "2.65.1",
   "date": "2026-11-06",
   "releases": [
+    {
+      "version": "2.65.1",
+      "date": "2026-11-06",
+      "summary": "HANDOFF.md only: Formspree API access and the daily signup check",
+      "changes": [
+        "HANDOFF.md records that the Formspree Master API key is saved on Ted's Default cloud environment (not in the repo), that the API is read only unless Ted asks, and the scheduled task 'Takgio daily signup check' (8:40 AM Eastern, push notification)"
+      ]
+    },
     {
       "version": "2.65.0",
       "date": "2026-11-06",
