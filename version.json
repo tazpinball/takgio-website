@@ -1,7 +1,15 @@
 {
-  "version": "2.64.0",
-  "date": "2026-11-05",
+  "version": "2.64.1",
+  "date": "2026-11-06",
   "releases": [
+    {
+      "version": "2.64.1",
+      "date": "2026-11-06",
+      "summary": "HANDOFF.md only: where form signups go",
+      "changes": [
+        "HANDOFF.md records that all 35 site forms post to Formspree form mreokggq (told apart by the source field), that submissions are emailed to info@takgio.com and kept in Formspree, and that the Formspree login is info@takgio.com"
+      ]
+    },
     {
       "version": "2.64.0",
       "date": "2026-11-05",
