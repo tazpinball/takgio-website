@@ -1434,6 +1434,19 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .product-callout p { font-size: 0.95rem; margin: 0; }
 
+/* Formspree forms answer in place (js/forms.js) */
+.form-done { flex: 1 1 100%; margin: 0; padding: 0.75rem 1rem; border-radius: var(--radius-sm);
+  background: rgba(45, 212, 191, 0.12); border: 1px solid rgba(45, 212, 191, 0.45); color: inherit;
+  font-weight: 600; line-height: 1.45; outline: none; }
+.form-done::before { content: "\2713"; margin-right: 0.5rem; color: #2dd4bf; }
+.footer-newsletter .form-done, .pp-hero .form-done { color: #fff; }
+.form-error { flex: 1 1 100%; margin: 0.5rem 0 0; font-size: 0.9rem; color: #f87171; }
+.ct-form.is-sent { display: flex; align-items: center; min-height: 220px; }
+.ct-form .form-done { background: #ecfdf5; border-color: #6ee7b7; color: #065f46; font-size: 1.05rem; }
+.ct-form .form-done::before { color: #059669; }
+.ct-form .form-error { color: #b91c1c; }
+.btn[aria-busy="true"] { opacity: 0.6; cursor: progress; }
+
 /* Waitlist mini-form (products page) */
 .waitlist-form {
   display: flex;
