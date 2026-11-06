@@ -1,7 +1,19 @@
 {
-  "version": "2.64.1",
+  "version": "2.65.0",
   "date": "2026-11-06",
   "releases": [
+    {
+      "version": "2.65.0",
+      "date": "2026-11-06",
+      "summary": "Every form says thanks on the page instead of sending visitors to formspree.io",
+      "changes": [
+        "New js/forms.js on the 32 pages with a form: Formspree forms submit in the background (fetch, Accept: application/json) and the form is replaced by a thank-you line; if the script or fetch is unavailable the form still posts the old way",
+        "Messages by source: Brickture waitlist 'You're on the list. We'll email you when Brickture launches.', newsletter 'You're subscribed. Thanks for staying in the loop.', ConcreteIQ beta 'Thanks. We'll be in touch about ConcreteIQ beta access.', Contact 'Thanks, <first name>. We got your message and will get back to you within one business day.'",
+        "On a failed send the form stays, with 'Something went wrong. Please try again, or email info@takgio.com.' and the button re-enabled",
+        "CSS: .form-done, .form-error, the sent contact card, a busy button state",
+        "Ted (6 Nov): one Formspree form for all signups, renamed 'Takgio website signups'"
+      ]
+    },
     {
       "version": "2.64.1",
       "date": "2026-11-06",
