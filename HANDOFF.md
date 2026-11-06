@@ -87,6 +87,11 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   (`.ct-direct`, "Call or leave a message") and in `index.html`'s Organization structured data (`telephone`). Kept out
   of the header and the product support sections on purpose (no one answers live). Same number as the Google Play trader
   details.
+- **Forms (Formspree):** all 35 site forms post to one Formspree form, `mreokggq`; each submission carries a
+  `source` field (`newsletter` x32 footer, `brickture-waitlist` on the Brickture hero, `concreteiq-beta`). Each one is
+  emailed to info@takgio.com and kept in Formspree under Submissions. **The Formspree account login is
+  info@takgio.com** (Ted, 6 Nov). Nothing keeps a copy on our side (no Supabase table). A cloud session cannot see the
+  submissions: Ted exports them (Submissions > Export, CSV) and attaches the file.
 - **Home promo video (v2.63.0):** `#watch`, a white band between the ticker and How it works: the 16:9 cut
   `videos/takgio-promo-16x9.mp4` (7.8 MB, re-encoded for the web from the docs/promo build; link carries `?v=1`, bump it
   when the file changes), poster `images/marketing/takgio-promo-16x9-poster.jpg` (the opening scene, no caption),
@@ -124,6 +129,7 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
 
 | Version | What |
 |---|---|
+| 2.64.1 | HANDOFF.md only: where the site's form signups go and the Formspree login |
 | 2.64.0 | The business phone number (201) 416-3123 in every footer, on the Contact page and in the home page structured data |
 | 2.63.0 | The Takgio promo video on the home page: Watch band under the ticker (`#watch`), hero link to it |
 | 2.62.0–2.62.4 | Takgio client promo video finished: voice, music and snaps from ElevenLabs, scenes re-timed, 16:9 and 9:16 cuts (docs only); v2.62.3–2.62.4 say where each app is (Hoof Harted: App Store + Google Play; True Record: App Store; Pinball-QR: web only), 58 s |
