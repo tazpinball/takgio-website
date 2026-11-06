@@ -1,7 +1,15 @@
 {
-  "version": "2.65.1",
+  "version": "2.65.2",
   "date": "2026-11-06",
   "releases": [
+    {
+      "version": "2.65.2",
+      "date": "2026-11-06",
+      "summary": "A PNG of the Takgio logo for emails",
+      "changes": [
+        "images/brand/takgio-email-logo.png (537x152, white background), rendered from takgio-lockup.svg: the header image for Takgio's Kit emails (email clients do not show SVG)"
+      ]
+    },
     {
       "version": "2.65.1",
       "date": "2026-11-06",
