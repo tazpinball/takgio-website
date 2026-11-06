@@ -101,6 +101,17 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   works with no header. Read only unless Ted asks. A scheduled task, "Takgio daily signup check" (trig_01X33je2kUpQJpwT8KQSknGy,
   8:40 AM Eastern daily), reports new signups as a push notification; it has no Gmail connector, so no email.
   Submissions on 6 Nov: 12 since 31 Mar (1 real Brickture waitlist, 1 newsletter, 2 contact; the rest Ted's tests and repeats).
+- **Brickture waitlist in Kit (v2.66.0, 6 Nov):** Ted wants the waitlist treated as a list of future buyers, with email
+  confirmation. Kit (https://kit.com) account "Takgio", login info@takgio.com, **Creator plan** (14-day trial from 6 Nov, card
+  on file; launch is Thanksgiving, 26 Nov: App Store first, Google Play about two weeks later, kit ordering open). takgio.com
+  is a verified sending domain (3 CNAMEs at GoDaddy: ckespa, cka._domainkey, cka2._domainkey; Kit's own _dmarc record was
+  NOT added because takgio.com already has DMARC p=quarantine and a domain may have only one). Default sender "Brickture by
+  Takgio" <info@takgio.com>. Form "Brickture waitlist" id 10153875 (confirmation email on, redirect to
+  brickture.html?confirmed=1). Sequence "Brickture welcome" id 2960548 (welcome email, immediate). Template "Takgio" exists
+  but is a "starting point" template, which Kit will not attach to sequences, so emails carry their own logo
+  (images/brand/takgio-email-logo.png) and a #4A6CF7 button inline. A Kit V4 API key is saved on Ted's Default cloud
+  environment for api.kit.com (header X-Kit-Api-Key, never in the repo). Kit's web pages and takgio.kit.com answer a bot
+  check to cloud sessions; the API does not. `js/forms.js` posts forms with `data-kit-form` to app.kit.com as well as Formspree.
 - **Home promo video (v2.63.0):** `#watch`, a white band between the ticker and How it works: the 16:9 cut
   `videos/takgio-promo-16x9.mp4` (7.8 MB, re-encoded for the web from the docs/promo build; link carries `?v=1`, bump it
   when the file changes), poster `images/marketing/takgio-promo-16x9-poster.jpg` (the opening scene, no caption),
@@ -138,6 +149,7 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
 
 | Version | What |
 |---|---|
+| 2.66.0 | Brickture waitlist signups go to Kit (email confirmation, welcome email); 2.65.2 the email logo PNG |
 | 2.65.1 | HANDOFF.md only: Formspree API key on the cloud environment and the daily signup check |
 | 2.65.0 | Every form thanks the visitor on the page (`js/forms.js`) instead of sending them to formspree.io |
 | 2.64.1 | HANDOFF.md only: where the site's form signups go and the Formspree login |
