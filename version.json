@@ -1,7 +1,17 @@
 {
-  "version": "2.67.1",
+  "version": "2.68.0",
   "date": "2026-11-08",
   "releases": [
+    {
+      "version": "2.68.0",
+      "date": "2026-11-08",
+      "summary": "Brickture signup tells people they are already an Insider",
+      "changes": [
+        "New Vercel function api/insider-status.js: looks the address up in Kit (V4 API, key in the Vercel env var KIT_API_KEY) and answers active, pending or new",
+        "js/forms.js asks it before signing someone up: an existing Insider sees 'You're already a Brickture Insider, so you're all set' with a link to the Insider's view and nothing is sent; someone who signed up but never confirmed is told to look for the confirmation email; a new address gets the check-your-inbox line",
+        "If the check can't answer (key not set, slow, offline) the form behaves as in 2.67.1"
+      ]
+    },
     {
       "version": "2.67.1",
       "date": "2026-11-08",
