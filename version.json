@@ -1,7 +1,20 @@
 {
-  "version": "2.68.1",
+  "version": "2.69.0",
   "date": "2026-11-08",
   "releases": [
+    {
+      "version": "2.69.0",
+      "date": "2026-11-08",
+      "summary": "Brickture signups go to Kit through our own server, so none are lost to Kit's bot check; privacy line under the form",
+      "changes": [
+        "New Vercel function api/insider-signup.js replaces api/insider-status.js: it looks the address up and, if new, adds it to the Kit form through the V4 API (Kit then sends the confirmation email). Answers already, pending or sent",
+        "Why: Kit's public form endpoint held some real signups behind a bot check and they never reached Kit (ted@takgio.com, 8 Nov, on a VPN)",
+        "Unconfirmed signups are now found too (Kit's subscriber search does not return them; the form's unconfirmed list is read instead)",
+        "js/forms.js signs up through the function and falls back to Kit's public form only if the function can't answer",
+        "Brickture page: 'No spam; unsubscribe anytime. Privacy policy' under the signup form (links to the Brickture privacy policy)",
+        "Home page Brickture tile: the button says 'Become an Insider'"
+      ]
+    },
     {
       "version": "2.68.1",
       "date": "2026-11-08",
