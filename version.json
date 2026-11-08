@@ -1,7 +1,15 @@
 {
-  "version": "2.69.0",
+  "version": "2.69.1",
   "date": "2026-11-08",
   "releases": [
+    {
+      "version": "2.69.1",
+      "date": "2026-11-08",
+      "summary": "HANDOFF.md only: the daily signup check now reads Kit too",
+      "changes": [
+        "The scheduled 'Takgio daily signup check' reports confirmed and unconfirmed Brickture Insiders and flags Formspree signups missing from Kit"
+      ]
+    },
     {
       "version": "2.69.0",
       "date": "2026-11-08",
