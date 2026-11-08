@@ -1,7 +1,15 @@
 {
-  "version": "2.66.0",
-  "date": "2026-11-06",
+  "version": "2.66.1",
+  "date": "2026-11-08",
   "releases": [
+    {
+      "version": "2.66.1",
+      "date": "2026-11-08",
+      "summary": "HANDOFF.md only: the Brickture waitlist's Kit automation is live and tested",
+      "changes": [
+        "Recorded the Kit visual automation \"Brickture waitlist welcome\" (form to welcome sequence), live and tested end to end on 8 Nov"
+      ]
+    },
     {
       "version": "2.66.0",
       "date": "2026-11-06",
