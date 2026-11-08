@@ -1,7 +1,16 @@
 {
-  "version": "2.67.0",
+  "version": "2.67.1",
   "date": "2026-11-08",
   "releases": [
+    {
+      "version": "2.67.1",
+      "date": "2026-11-08",
+      "summary": "Brickture signup: says what happens when you are already an Insider, and handles Kit's bot check",
+      "changes": [
+        "The check-your-inbox line adds: 'Already an Insider? You're all set; there's no need to sign up again.' Kit sends no second email to someone already on the list and its reply does not say which case it was",
+        "When Kit answers 'quarantined' (its bot check), the visitor is sent to Kit's check page instead of being told an email is on its way"
+      ]
+    },
     {
       "version": "2.67.0",
       "date": "2026-11-08",

@@ -13,7 +13,9 @@
     'concreteiq-beta': "Thanks. We’ll be in touch about ConcreteIQ beta access.",
     newsletter: "You’re subscribed. Thanks for staying in the loop.",
   };
-  const CHECK_INBOX = 'Almost there! Check your inbox and click the link to confirm you’re a Brickture Insider.';
+  // Kit sends no second confirmation or welcome to someone already on the list, and its reply does not say which
+  // case it was, so the line covers both.
+  const CHECK_INBOX = 'Almost there! Check your inbox and click the link to confirm you’re a Brickture Insider. Already an Insider? You’re all set; there’s no need to sign up again.';
   const FAIL = 'Something went wrong. Please try again, or email info@takgio.com.';
 
   const say = (form, text, focus) => {
@@ -33,7 +35,10 @@
     body.append('email_address', email);
     return fetch('https://app.kit.com/forms/' + encodeURIComponent(formId) + '/subscriptions', {
       method: 'POST', body, headers: { Accept: 'application/json' },
-    }).then((res) => { if (!res.ok) throw new Error('Kit HTTP ' + res.status); });
+    }).then((res) => {
+      if (!res.ok) throw new Error('Kit HTTP ' + res.status);
+      return res.json().catch(() => ({}));
+    });
   };
 
   // Back from an older confirmation link (brickture.html?confirmed=1): on to the thank-you page.
@@ -56,7 +61,14 @@
         .then((res) => { if (!res.ok) throw new Error('HTTP ' + res.status); });
       const toKit = kitId && !data.get('_gotcha') ? sendToKit(kitId, String(data.get('email') || '')) : null;
       const [fs, kit] = await Promise.allSettled([toFormspree, toKit || Promise.resolve()]);
-      if (kitId && kit.status === 'fulfilled' && toKit) { say(form, CHECK_INBOX, true); return; }
+      if (kitId && kit.status === 'fulfilled' && toKit) {
+        // Kit's bot check: it answers "quarantined" with a page where the visitor proves they are a person,
+        // and nothing is sent until they do. Send them there rather than saying an email is on its way.
+        const k = kit.value || {};
+        if (k.status === 'quarantined' && /^https:\/\/app\.kit\.com\//.test(k.url || '')) { location.href = k.url; return; }
+        say(form, CHECK_INBOX, true);
+        return;
+      }
       if (fs.status === 'fulfilled') {
         const source = data.get('source');
         let text = DONE[source];
