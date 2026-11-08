@@ -7,8 +7,10 @@
 // which emails the visitor a link to confirm their address (double opt-in). Formspree still keeps a
 // copy. The confirmation link goes to /brickture/welcome (the thank-you page, set in Kit). Older
 // confirmation links came back to the Brickture page with ?confirmed=1; those are sent on to it too.
-// Before sending, /api/insider-status (a Vercel function holding the Kit API key) says whether the address is
-// already on the list, so an existing Insider is told so instead of waiting for an email that never comes.
+// Since v2.69.0 the signup goes through /api/insider-signup (a Vercel function holding the Kit API key), which
+// adds the address to Kit itself and says whether it was new, unconfirmed or already an Insider. That avoids Kit's
+// bot check on its public form, which silently dropped some real signups. If the function can't answer, the page
+// falls back to posting to Kit's public form as before.
 (() => {
   const DONE = {
     'brickture-waitlist': "You’re on the list. We’ll send you Insider news as Brickture gets closer to launch.",
@@ -16,7 +18,7 @@
     newsletter: "You’re subscribed. Thanks for staying in the loop.",
   };
   const CHECK_INBOX = 'Almost there! Check your inbox and click the link to confirm you’re a Brickture Insider.';
-  // When the status check can't answer, the line covers both cases: Kit sends no second email to someone
+  // When our function can't answer, the line covers both cases: Kit sends no second email to someone
   // already on the list, and its own reply does not say which case it was.
   const CHECK_INBOX_OR_ALREADY = CHECK_INBOX + ' Already an Insider? You’re all set; there’s no need to sign up again.';
   const ALREADY = 'You’re already a Brickture Insider, so you’re all set. Watch your inbox for launch news.';
@@ -52,20 +54,21 @@
     });
   };
 
-  // 'active' | 'pending' | 'new', or null when the check can't answer (not set up, slow, offline).
-  const insiderStatus = async (email) => {
+  // Sign up through our function: 'already' | 'pending' | 'sent', or null when it can't answer
+  // (not set up, slow, offline), in which case the caller falls back to Kit's public form.
+  const insiderSignup = async (email) => {
     try {
       const ctl = new AbortController();
-      const timer = setTimeout(() => ctl.abort(), 4000);
-      const res = await fetch('/api/insider-status', {
+      const timer = setTimeout(() => ctl.abort(), 8000);
+      const res = await fetch('/api/insider-signup', {
         method: 'POST', signal: ctl.signal,
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({ email }),
       });
       clearTimeout(timer);
       if (!res.ok) return null;
-      const { state } = await res.json();
-      return ['active', 'pending', 'new'].includes(state) ? state : null;
+      const { result } = await res.json();
+      return ['already', 'pending', 'sent'].includes(result) ? result : null;
     } catch (err) { return null; }
   };
 
@@ -86,21 +89,29 @@
       const data = new FormData(form);
       const kitId = form.getAttribute('data-kit-form');
       const email = String(data.get('email') || '').trim();
-      const status = kitId && !data.get('_gotcha') ? await insiderStatus(email) : null;
-      if (status === 'active') {
+      const human = kitId && !data.get('_gotcha');
+      const result = human ? await insiderSignup(email) : null;
+      if (result === 'already') {
         say(form, ALREADY, true, { href: '/brickture/insiders', text: 'See the Insider’s view →' });
         return;
       }
+      if (result === 'pending') { say(form, PENDING, true); return; }
       const toFormspree = fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
         .then((res) => { if (!res.ok) throw new Error('HTTP ' + res.status); });
-      const toKit = kitId && !data.get('_gotcha') ? sendToKit(kitId, email) : null;
+      if (result === 'sent') {
+        // In Kit already; Formspree keeps its usual copy, and its answer doesn't change what the visitor sees.
+        toFormspree.catch(() => {});
+        say(form, CHECK_INBOX, true);
+        return;
+      }
+      const toKit = human ? sendToKit(kitId, email) : null;
       const [fs, kit] = await Promise.allSettled([toFormspree, toKit || Promise.resolve()]);
       if (kitId && kit.status === 'fulfilled' && toKit) {
         // Kit's bot check: it answers "quarantined" with a page where the visitor proves they are a person,
         // and nothing is sent until they do. Send them there rather than saying an email is on its way.
         const k = kit.value || {};
         if (k.status === 'quarantined' && /^https:\/\/app\.kit\.com\//.test(k.url || '')) { location.href = k.url; return; }
-        say(form, status === 'pending' ? PENDING : status === 'new' ? CHECK_INBOX : CHECK_INBOX_OR_ALREADY, true);
+        say(form, CHECK_INBOX_OR_ALREADY, true);
         return;
       }
       if (fs.status === 'fulfilled') {

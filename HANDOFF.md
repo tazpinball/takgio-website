@@ -116,9 +116,14 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   the scenes). Confirmed subscribers land on `/brickture/welcome` (`brickture-welcome.html`), which links to the consumer page
   `/brickture/insiders` (`brickture-insiders.html`). Both noindex, not in the sitemap, no site header (consumer only, so the Demos
   counts are unchanged). Kit's form redirect should point at https://www.takgio.com/brickture/welcome; an old
-  `brickture.html?confirmed=1` link is forwarded there by `js/forms.js` either way. Since v2.68.0 the signup first asks `/api/insider-status` (`api/insider-status.js`, the site's first Vercel
-  function; Kit V4 key "Takgio website (Vercel)" in the Vercel env var `KIT_API_KEY`, Production only, so previews fall back; set and checked live 8 Nov) whether the address is active / pending / new;
-  without the key it answers 503 and the form falls back to the 2.67.1 message. It reveals whether an address is on the list. The perk is worded "insider-only offer" (Ted, 8 Nov: softened from "discounts"); Insiders will expect one at launch.
+  `brickture.html?confirmed=1` link is forwarded there by `js/forms.js` either way. Since v2.69.0 the signup goes through `/api/insider-signup` (`api/insider-signup.js`, the site's only Vercel
+  function; Kit V4 key "Takgio website (Vercel)" in the Vercel env var `KIT_API_KEY`, Production only, so previews fall back; set 8 Nov). It
+  answers `already` (confirmed; nothing sent), `pending` (unconfirmed; Kit does not resend) or `sent` (created as an unconfirmed
+  subscriber and added to the form, which makes Kit send the confirmation email). Why not Kit's public form endpoint: it held
+  ted@takgio.com (on a VPN) behind a bot check ("quarantined") and the signup never reached Kit. Gotchas: Kit's
+  `/v4/subscribers?status=all` search does NOT return unconfirmed subscribers, and `/v4/forms/{id}/subscribers` ignores an
+  `email_address` filter, so pending is found by reading the form's `status=inactive` list. If the function can't answer, the
+  page falls back to Kit's public form (with the bot-check redirect). It reveals whether an address is on the list. The perk is worded "insider-only offer" (Ted, 8 Nov: softened from "discounts"); Insiders will expect one at launch.
 - **Home promo video (v2.63.0):** `#watch`, a white band between the ticker and How it works: the 16:9 cut
   `videos/takgio-promo-16x9.mp4` (7.8 MB, re-encoded for the web from the docs/promo build; link carries `?v=1`, bump it
   when the file changes), poster `images/marketing/takgio-promo-16x9-poster.jpg` (the opening scene, no caption),
@@ -156,6 +161,7 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
 
 | Version | What |
 |---|---|
+| 2.69.0 | Brickture signups go to Kit through `api/insider-signup.js` (no more lost signups to Kit's bot check); privacy line under the form; home button "Become an Insider" |
 | 2.68.0 | Brickture signup says "You're already a Brickture Insider" to existing subscribers (`api/insider-status.js`, needs `KIT_API_KEY` in Vercel); 2.67.1 the Kit bot check |
 | 2.67.0 | Brickture Insiders: `/brickture/welcome` (thank-you page Kit sends confirmed subscribers to) and `/brickture/insiders` (consumer page), both noindex; signup says "Become an Insider" |
 | 2.66.1 | HANDOFF.md only: the Kit automation is live and tested |
