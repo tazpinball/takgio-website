@@ -100,6 +100,8 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   Default cloud environment for formspree.io (never in the repo), so `curl https://formspree.io/api/0/forms/mreokggq/submissions`
   works with no header. Read only unless Ted asks. A scheduled task, "Takgio daily signup check" (trig_01X33je2kUpQJpwT8KQSknGy,
   8:40 AM Eastern daily), reports new signups as a push notification; it has no Gmail connector, so no email.
+  Since 8 Nov it also reads the Kit form (confirmed / unconfirmed Insiders, unconfirmed after 2 days) and lists any Formspree
+  "brickture-waitlist" email missing from Kit as a lost signup. Read only.
   Submissions on 6 Nov: 12 since 31 Mar (1 real Brickture waitlist, 1 newsletter, 2 contact; the rest Ted's tests and repeats).
 - **Brickture waitlist in Kit (v2.66.0, 6 Nov):** Ted wants the waitlist treated as a list of future buyers, with email
   confirmation. Kit (https://kit.com) account "Takgio", login info@takgio.com, **Creator plan** (14-day trial from 6 Nov, card
