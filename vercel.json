@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/brickture",
+      "destination": "/brickture.html",
+      "permanent": false
+    },
+    {
       "source": "/CLAUDE.md",
       "destination": "/",
       "permanent": false

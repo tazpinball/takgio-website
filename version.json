@@ -1,7 +1,15 @@
 {
-  "version": "2.70.0",
+  "version": "2.70.1",
   "date": "2026-11-08",
   "releases": [
+    {
+      "version": "2.70.1",
+      "date": "2026-11-08",
+      "summary": "takgio.com/brickture works",
+      "changes": [
+        "/brickture now redirects to /brickture.html (query string kept). The promo videos' end card shows takgio.com/brickture, which returned a 404."
+      ]
+    },
     {
       "version": "2.70.0",
       "date": "2026-11-08",
