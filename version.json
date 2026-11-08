@@ -1,7 +1,18 @@
 {
-  "version": "2.65.2",
+  "version": "2.66.0",
   "date": "2026-11-06",
   "releases": [
+    {
+      "version": "2.66.0",
+      "date": "2026-11-06",
+      "summary": "Brickture waitlist signups go to Kit with email confirmation",
+      "changes": [
+        "brickture.html: the waitlist form carries data-kit-form=\"10153875\" (Kit form 'Brickture waitlist'); js/forms.js also posts the email to https://app.kit.com/forms/10153875/subscriptions, so Kit sends a confirmation email (double opt-in); Formspree still keeps a copy",
+        "After a signup the page says 'Almost there! Check your inbox and click the link to confirm your email.'; if Kit cannot be reached but Formspree can, it says 'You're on the list. We'll be in touch as Brickture gets closer to launch.'",
+        "The confirmation link returns to brickture.html?confirmed=1, where the form is replaced by 'You're confirmed. Welcome to the Brickture list! We'll send you updates as launch gets closer.'",
+        "Kit side (not in the repo): account Takgio (info@takgio.com login, Creator plan), takgio.com verified as sending domain, sender 'Brickture by Takgio' <info@takgio.com>, sequence 'Brickture welcome' with the approved welcome email"
+      ]
+    },
     {
       "version": "2.65.2",
       "date": "2026-11-06",
