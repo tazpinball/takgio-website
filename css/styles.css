@@ -1440,6 +1440,8 @@ img { max-width: 100%; height: auto; display: block; }
   font-weight: 600; line-height: 1.45; outline: none; }
 .form-done::before { content: "\2713"; margin-right: 0.5rem; color: #2dd4bf; }
 .footer-newsletter .form-done, .pp-hero .form-done { color: #fff; }
+.form-done a { color: inherit; font-weight: 700; text-decoration: underline; white-space: nowrap; }
+.pp-hero .form-done a { color: var(--pp-a, #fff); }
 .form-error { flex: 1 1 100%; margin: 0.5rem 0 0; font-size: 0.9rem; color: #f87171; }
 .ct-form.is-sent { display: flex; align-items: center; min-height: 220px; }
 .ct-form .form-done { background: #ecfdf5; border-color: #6ee7b7; color: #065f46; font-size: 1.05rem; }
