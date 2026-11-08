@@ -107,7 +107,7 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   is a verified sending domain (3 CNAMEs at GoDaddy: ckespa, cka._domainkey, cka2._domainkey; Kit's own _dmarc record was
   NOT added because takgio.com already has DMARC p=quarantine and a domain may have only one). Default sender "Brickture by
   Takgio" <info@takgio.com>. Form "Brickture waitlist" id 10153875 (confirmation email on, redirect to
-  brickture.html?confirmed=1). Sequence "Brickture welcome" id 2960548 (welcome email, immediate). Template "Takgio" exists
+  brickture.html?confirmed=1). Sequence "Brickture welcome" id 2960548 (welcome email, immediate). Visual automation "Brickture waitlist welcome" id 2209520 (form → sequence) is Live; tested end to end by Ted on 8 Nov (confirm email, then welcome email). Template "Takgio" exists
   but is a "starting point" template, which Kit will not attach to sequences, so emails carry their own logo
   (images/brand/takgio-email-logo.png) and a #4A6CF7 button inline. A Kit V4 API key is saved on Ted's Default cloud
   environment for api.kit.com (header X-Kit-Api-Key, never in the repo). Kit's web pages and takgio.kit.com answer a bot
@@ -149,6 +149,7 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
 
 | Version | What |
 |---|---|
+| 2.66.1 | HANDOFF.md only: the Kit automation is live and tested |
 | 2.66.0 | Brickture waitlist signups go to Kit (email confirmation, welcome email); 2.65.2 the email logo PNG |
 | 2.65.1 | HANDOFF.md only: Formspree API key on the cloud environment and the daily signup check |
 | 2.65.0 | Every form thanks the visitor on the page (`js/forms.js`) instead of sending them to formspree.io |
