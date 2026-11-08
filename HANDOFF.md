@@ -112,6 +112,11 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   (images/brand/takgio-email-logo.png) and a #4A6CF7 button inline. A Kit V4 API key is saved on Ted's Default cloud
   environment for api.kit.com (header X-Kit-Api-Key, never in the repo). Kit's web pages and takgio.kit.com answer a bot
   check to cloud sessions; the API does not. `js/forms.js` posts forms with `data-kit-form` to app.kit.com as well as Formspree.
+  **Brickture Insiders (v2.67.0, 8 Nov, Ted):** the list is marketed as an insider list (launch news, an insider-only offer, behind
+  the scenes). Confirmed subscribers land on `/brickture/welcome` (`brickture-welcome.html`), which links to the consumer page
+  `/brickture/insiders` (`brickture-insiders.html`). Both noindex, not in the sitemap, no site header (consumer only, so the Demos
+  counts are unchanged). Kit's form redirect should point at https://www.takgio.com/brickture/welcome; an old
+  `brickture.html?confirmed=1` link is forwarded there by `js/forms.js` either way. The perk is worded "insider-only offer" (Ted, 8 Nov: softened from "discounts"); Insiders will expect one at launch.
 - **Home promo video (v2.63.0):** `#watch`, a white band between the ticker and How it works: the 16:9 cut
   `videos/takgio-promo-16x9.mp4` (7.8 MB, re-encoded for the web from the docs/promo build; link carries `?v=1`, bump it
   when the file changes), poster `images/marketing/takgio-promo-16x9-poster.jpg` (the opening scene, no caption),
@@ -149,6 +154,7 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
 
 | Version | What |
 |---|---|
+| 2.67.0 | Brickture Insiders: `/brickture/welcome` (thank-you page Kit sends confirmed subscribers to) and `/brickture/insiders` (consumer page), both noindex; signup says "Become an Insider" |
 | 2.66.1 | HANDOFF.md only: the Kit automation is live and tested |
 | 2.66.0 | Brickture waitlist signups go to Kit (email confirmation, welcome email); 2.65.2 the email logo PNG |
 | 2.65.1 | HANDOFF.md only: Formspree API key on the cloud environment and the daily signup check |

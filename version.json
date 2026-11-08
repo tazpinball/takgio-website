@@ -1,7 +1,19 @@
 {
-  "version": "2.66.1",
+  "version": "2.67.0",
   "date": "2026-11-08",
   "releases": [
+    {
+      "version": "2.67.0",
+      "date": "2026-11-08",
+      "summary": "Brickture Insiders: the waitlist becomes an insider list, with a thank-you page and an Insider's view page for consumers",
+      "changes": [
+        "New unlisted page /brickture/welcome (brickture-welcome.html): where Kit's confirmation link lands; thanks the new Insider, lists the perks and links to the Insider's view",
+        "New unlisted page /brickture/insiders (brickture-insiders.html): consumer-only Brickture page with the vertical promo, a gallery of beta builds, how it works, Foundation and Ultimate, the launch timeline and a share button",
+        "Brickture page: the signup is now 'Become an Insider' (launch news, an insider-only offer, a look behind the scenes)",
+        "js/forms.js: confirm-email wording says Insider; an old brickture.html?confirmed=1 link now goes on to /brickture/welcome",
+        "vercel.json: clean URLs for both new pages; both are noindex and not in the sitemap"
+      ]
+    },
     {
       "version": "2.66.1",
       "date": "2026-11-08",

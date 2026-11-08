@@ -51,6 +51,14 @@
       "destination": "/hoof-harted-download.html"
     },
     {
+      "source": "/brickture/welcome",
+      "destination": "/brickture-welcome.html"
+    },
+    {
+      "source": "/brickture/insiders",
+      "destination": "/brickture-insiders.html"
+    },
+    {
       "source": "/careers",
       "destination": "/careers.html"
     },

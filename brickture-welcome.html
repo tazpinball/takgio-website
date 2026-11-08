@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome, Brickture Insider &mdash; Takgio</title>
+  <meta name="description" content="You're a Brickture Insider: launch-day news, an insider-only offer and a behind-the-scenes look at Brickture.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/images/brand/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/images/brand/apple-touch-icon.png">
+  <link rel="canonical" href="https://www.takgio.com/brickture/welcome">
+  <script defer src="/js/analytics.js"></script>
+  <style>
+    /* The page Kit's confirmation link lands on: a thank-you, what an Insider gets, and the door to the Insider's view.
+       Standalone (no site header) so a new subscriber sees Brickture and nothing else. */
+    :root { color-scheme: dark; --a: #ffd94a; --b: #f97316; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100svh; display: grid; place-items: center; padding: 2rem 1.25rem; color: #fff;
+      background: radial-gradient(110% 80% at 20% 0%, #2e2208, #0b0c14 65%);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    main { width: 100%; max-width: 34rem; text-align: center; }
+    .brand { display: inline-flex; align-items: center; gap: .6rem; color: rgba(255,255,255,.7); text-decoration: none; font-size: .85rem; }
+    .brand img { height: 22px; width: auto; }
+    .icon { display: block; margin: 1.6rem auto 0; width: 96px; height: 96px; border-radius: 22px; box-shadow: 0 14px 44px rgba(255, 217, 74, .25); }
+    .badge { display: inline-flex; align-items: center; gap: .45rem; margin-top: 1.3rem; padding: .4rem .8rem; border-radius: 999px;
+      font-size: .78rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #0b0c14; background: var(--a); }
+    .badge svg { width: 14px; height: 14px; }
+    h1 { font-size: clamp(2.2rem, 9vw, 3.2rem); line-height: 1.05; letter-spacing: -.03em; margin: 1rem 0 .7rem; }
+    h1 span { background: linear-gradient(90deg, var(--a), var(--b)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .lead { color: rgba(255,255,255,.82); font-size: 1.08rem; line-height: 1.6; margin: 0 auto 1.6rem; }
+    .perks { list-style: none; padding: 0; margin: 0 0 1.8rem; display: grid; gap: .7rem; text-align: left; }
+    .perks li { display: flex; gap: .9rem; align-items: flex-start; padding: .95rem 1.1rem; border-radius: .9rem;
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); line-height: 1.45; color: rgba(255,255,255,.78); font-size: .95rem; }
+    .perks b { display: block; color: #fff; font-size: 1rem; margin-bottom: .1rem; }
+    .perks .ico { flex: none; width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; color: #0b0c14;
+      background: linear-gradient(135deg, var(--a), var(--b)); }
+    .perks .ico svg { width: 19px; height: 19px; }
+    .cta { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; width: 100%; max-width: 22rem;
+      padding: 1.05rem 1.5rem; border-radius: .9rem; background: var(--a); color: #0b0c14; font-weight: 800; font-size: 1.1rem;
+      text-decoration: none; box-shadow: 0 12px 34px rgba(255, 217, 74, .28); transition: filter .15s, transform .15s; }
+    .cta:hover, .cta:focus-visible { filter: brightness(1.07); transform: translateY(-1px); outline: none; }
+    .cta svg { width: 20px; height: 20px; }
+    .note { color: rgba(255,255,255,.55); font-size: .85rem; line-height: 1.55; margin: 1.6rem auto 0; }
+    .note a { color: rgba(255,255,255,.8); }
+    @media (prefers-reduced-motion: reduce) { .cta { transition: none; } .cta:hover { transform: none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="brand" href="/"><img src="/images/brand/takgio-wordmark-white.svg" alt="Takgio" width="64" height="22"></a>
+    <img class="icon" src="/images/products/brickture-icon.png" alt="Brickture app icon" width="96" height="96">
+    <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>You&rsquo;re confirmed</span>
+    <h1>Welcome, <span>Insider.</span></h1>
+    <p class="lead">Thanks for joining. You&rsquo;re now a Brickture Insider &mdash; one of the first to turn a photo of something you love into a brick model you can build.</p>
+    <ul class="perks">
+      <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span><span><b>First to know</b>Launch-day news before anyone else. Brickture comes to the App Store on Thanksgiving.</span></li>
+      <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><path d="M7 7h.01"/></svg></span><span><b>Insider-only offer</b>A special offer we save for the people on this list.</span></li>
+      <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><span><b>A look behind the scenes</b>Real builds from our beta and what&rsquo;s coming next.</span></li>
+    </ul>
+    <a class="cta" href="/brickture/insiders">Enter the Insider&rsquo;s view<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <p class="note">Your welcome email is on its way. Can&rsquo;t find it? Check your spam or promotions folder and mark us as safe.<br><a href="/brickture.html">About Brickture</a></p>
+  </main>
+</body>
+</html>

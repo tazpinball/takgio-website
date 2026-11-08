@@ -5,16 +5,15 @@
 //
 // A form with data-kit-form="<Kit form id>" (the Brickture waitlist) is also sent to that Kit form,
 // which emails the visitor a link to confirm their address (double opt-in). Formspree still keeps a
-// copy. The confirmation link brings them back to the page with ?confirmed=1, where the form is
-// replaced by a welcome line.
+// copy. The confirmation link goes to /brickture/welcome (the thank-you page, set in Kit). Older
+// confirmation links came back to the Brickture page with ?confirmed=1; those are sent on to it too.
 (() => {
   const DONE = {
-    'brickture-waitlist': "You’re on the list. We’ll be in touch as Brickture gets closer to launch.",
+    'brickture-waitlist': "You’re on the list. We’ll send you Insider news as Brickture gets closer to launch.",
     'concreteiq-beta': "Thanks. We’ll be in touch about ConcreteIQ beta access.",
     newsletter: "You’re subscribed. Thanks for staying in the loop.",
   };
-  const CHECK_INBOX = 'Almost there! Check your inbox and click the link to confirm your email.';
-  const CONFIRMED = "You’re confirmed. Welcome to the Brickture list! We’ll send you updates as launch gets closer.";
+  const CHECK_INBOX = 'Almost there! Check your inbox and click the link to confirm you’re a Brickture Insider.';
   const FAIL = 'Something went wrong. Please try again, or email info@takgio.com.';
 
   const say = (form, text, focus) => {
@@ -37,13 +36,10 @@
     }).then((res) => { if (!res.ok) throw new Error('Kit HTTP ' + res.status); });
   };
 
-  // Back from the confirmation email: show the welcome where the form was.
-  if (/[?&]confirmed=1(&|$)/.test(location.search)) {
-    const form = document.querySelector('form[data-kit-form]');
-    if (form) {
-      const line = say(form, CONFIRMED, true);
-      line.scrollIntoView({ block: 'center' });
-    }
+  // Back from an older confirmation link (brickture.html?confirmed=1): on to the thank-you page.
+  if (/[?&]confirmed=1(&|$)/.test(location.search) && document.querySelector('form[data-kit-form]')) {
+    location.replace('/brickture/welcome');
+    return;
   }
 
   document.querySelectorAll('form[action*="formspree.io/f/"]').forEach((form) => {
