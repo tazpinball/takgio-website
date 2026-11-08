@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Insider&rsquo;s view &mdash; Brickture</title>
+  <meta name="description" content="For Brickture Insiders: see what you can build, how it works, and what's coming at launch.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/images/brand/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/images/brand/apple-touch-icon.png">
+  <link rel="canonical" href="https://www.takgio.com/brickture/insiders">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script defer src="/js/analytics.js"></script>
+<style>
+/* The Insider's view: Brickture for the people who joined the list, in consumer terms only.
+   Unlisted (noindex), no site header: a slim Brickture bar instead, so nothing here reads as corporate. */
+.ins-bar { background: #0b0c14; border-bottom: 1px solid rgba(255,255,255,.08); }
+.ins-bar-in { display: flex; align-items: center; gap: 14px; min-height: 60px; }
+.ins-bar a.ins-logo img { height: 24px; width: auto; display: block; }
+.ins-pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px; font-size: .72rem; font-weight: 800;
+  letter-spacing: .1em; text-transform: uppercase; color: #0b0c14; background: var(--pp-a); }
+.ins-pill img { width: 18px; height: 18px; border-radius: 5px; }
+.ins-pill, .ins-bar .ins-more { white-space: nowrap; }
+@media (max-width: 420px) { .ins-bar-in { gap: 10px; } .ins-pill { font-size: .66rem; padding: 5px 9px; } .ins-bar .ins-more { font-size: .8rem; } .ins-long { display: none; } .ins-pill { flex: none; } }
+.ins-bar .ins-more { margin-left: auto; color: rgba(255,255,255,.75); font-size: .88rem; text-decoration: none; }
+.ins-bar .ins-more:hover { color: #fff; text-decoration: underline; }
+.ins-hero .pp-kicker { color: var(--pp-a); }
+.ins-hero h1 span { background: linear-gradient(90deg, var(--pp-a), var(--pp-b)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.ins-date { display: inline-flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 12px; margin: 4px 0 0;
+  background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); color: #fff; font-size: .92rem; }
+.ins-date svg { width: 20px; height: 20px; color: var(--pp-a); flex: none; }
+.ins-date b { color: var(--pp-a); }
+.ins-phone { width: 290px; max-width: 76vw; margin: 0 auto; padding: 10px; border-radius: 44px; background: #0b0d1c;
+  box-shadow: 0 0 0 2px #2a2d3d, 0 30px 70px rgba(0,0,0,.55); }
+.ins-phone video { width: 100%; display: block; aspect-ratio: 9 / 16; border-radius: 34px; background: #000; }
+.ins-sound { display: flex; justify-content: center; margin-top: 14px; }
+.pp-sound { display: inline-flex; align-items: center; gap: 8px; font: 700 .85rem/1 inherit; font-family: inherit; color: #0b0d1c;
+  background: var(--pp-a); border: 0; border-radius: 999px; padding: 10px 14px; cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+.pp-sound svg { width: 18px; height: 18px; }
+.pp-sound[aria-pressed="true"] { background: rgba(255,255,255,.12); color: #fff; }
+.ins-gallery { display: grid; gap: 12px; grid-template-columns: repeat(2, 1fr); margin-top: 18px; }
+@media (max-width: 699px) { .ins-gallery figure:nth-child(5) { display: none; } }
+@media (min-width: 700px) { .ins-gallery { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1024px) { .ins-gallery { grid-template-columns: repeat(5, 1fr); } }
+.ins-gallery figure { margin: 0; position: relative; border-radius: 16px; overflow: hidden; background: #e9e9ee; }
+.ins-gallery img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block; }
+.ins-gallery figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 12px 10px; color: #fff; font-size: .86rem; font-weight: 700;
+  background: linear-gradient(transparent, rgba(0,0,0,.72)); }
+.ins-gallery figcaption small { display: block; font-weight: 500; opacity: .85; font-size: .76rem; }
+.ins-tiers .pp-card h3 { font-size: 1.15rem; }
+.ins-tiers .tier-tag { display: inline-block; font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+  color: #8a5a00; background: #fff4c7; border-radius: 999px; padding: 3px 9px; margin-bottom: 8px; }
+.ins-fine { font-size: .85rem; color: var(--color-text-secondary); margin-top: 12px; }
+.ins-time { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 12px; }
+@media (min-width: 900px) { .ins-time { grid-template-columns: repeat(3, 1fr); } }
+.ins-time li { background: #fff; border: 1px solid var(--color-border); border-radius: 16px; padding: 18px; position: relative; }
+.ins-time li.now { border-color: #f5c400; box-shadow: 0 0 0 3px #fff4c7; }
+.ins-time .when { font-size: .74rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--color-text-muted); }
+.ins-time li.now .when { color: #8a5a00; }
+.ins-time h3 { font-size: 1.08rem; margin: 6px 0 4px; }
+.ins-time p { margin: 0; font-size: .9rem; line-height: 1.55; color: var(--color-text-secondary); }
+.ins-close { color: #fff; padding: 48px 0; background: radial-gradient(90% 120% at 85% 100%, #2e2208, #0b0c14 70%); }
+.ins-close-grid { display: grid; gap: 22px; }
+@media (min-width: 900px) { .ins-close-grid { grid-template-columns: 1.2fr 1fr; align-items: center; gap: 44px; } }
+.ins-close h2 { color: #fff; font-size: clamp(1.5rem, 2.6vw, 2rem); letter-spacing: -0.02em; margin: 4px 0 8px; }
+.ins-close p { color: rgba(255,255,255,.78); line-height: 1.6; margin: 0; }
+.ins-close .pp-kicker { color: var(--pp-a); }
+.ins-share { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 18px; padding: 20px; }
+.ins-share h3 { color: #fff; margin: 0 0 6px; font-size: 1.1rem; }
+.ins-share .btn { margin-top: 14px; background: var(--pp-a); border-color: var(--pp-a); color: #0b0c14; }
+.ins-share .btn:hover { filter: brightness(1.07); color: #0b0c14; }
+.ins-share .ins-copied { font-size: .82rem; color: var(--pp-a); margin-top: 8px; min-height: 1.2em; }
+.ins-foot { background: #07080e; color: rgba(255,255,255,.55); font-size: .82rem; padding: 22px 0; }
+.ins-foot-in { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+.ins-foot a { color: rgba(255,255,255,.75); }
+.ins-foot .sp { margin-left: auto; }
+</style>
+</head>
+<body class="pp pp-brick">
+
+  <header class="ins-bar">
+    <div class="container ins-bar-in">
+      <a class="ins-logo" href="/" aria-label="Takgio home"><img src="/images/brand/takgio-wordmark-white.svg" alt="Takgio" width="70" height="24"></a>
+      <span class="ins-pill"><img src="/images/products/brickture-icon.png" alt="" width="18" height="18">Brickture Insider</span>
+      <a class="ins-more" href="/brickture.html">About<span class="ins-long"> Brickture</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="pp-hero ins-hero">
+      <div class="container pp-hero-grid">
+        <div>
+          <span class="pp-kicker">The Insider&rsquo;s view</span>
+          <h1>Your world, <span>brick by brick.</span></h1>
+          <p class="pp-tagline">Point. Snap. Build it.</p>
+          <p class="pp-lead">Snap a photo of something you love &mdash; your dog, your car, your favorite mug &mdash; and Brickture designs a brick model of it. It writes the step-by-step instructions, lists every piece, and lets you order the kit. Then you build it.</p>
+          <p class="ins-date"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Coming to the App Store <b>Thanksgiving 2026</b></span></p>
+        </div>
+        <div>
+          <div class="ins-phone"><video id="ins-video" controls autoplay muted loop playsinline preload="auto" poster="/images/products/brickture-promo-9x16-poster.jpg"
+            aria-label="Brickture in 50 seconds: a photo becomes a brick-built model, step-by-step instructions and a kit"><source src="/videos/brickture-promo-9x16.mp4?v=3" type="video/mp4"></video></div>
+          <div class="ins-sound"><button class="pp-sound" type="button" aria-pressed="false" data-video="ins-video">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg>
+            <span>Watch with sound</span></button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pp-sec" id="build">
+      <div class="container">
+        <span class="pp-kicker">What will you build?</span>
+        <h2>If you love it, you can build it.</h2>
+        <p class="pp-sub">Real builds from our beta. Every one started as a single photo.</p>
+        <div class="ins-gallery">
+          <figure class="reveal"><img src="/images/reel/brickture-octopus.webp" alt="A brick-built octopus" width="480" height="640" loading="lazy"><figcaption>Octopus<small>4,224 pieces, 758 steps</small></figcaption></figure>
+          <figure class="reveal"><img src="/images/reel/brickture-cruise.webp" alt="A brick-built cruise ship with a couple standing in front of it" width="480" height="640" loading="lazy"><figcaption>Our cruise<small>A vacation photo, in bricks</small></figcaption></figure>
+          <figure class="reveal"><img src="/images/reel/brickture-lighthouse.webp" alt="A brick-built lighthouse" width="480" height="640" loading="lazy"><figcaption>Lighthouse<small>A favorite place</small></figcaption></figure>
+          <figure class="reveal"><img src="/images/reel/brickture-elephant.webp" alt="A brick-built elephant" width="480" height="640" loading="lazy"><figcaption>Elephant<small>A favorite animal</small></figcaption></figure>
+          <figure class="reveal"><img src="/images/reel/brickture-witch-boot.webp" alt="A brick-built witch's boot Halloween decoration" width="480" height="640" loading="lazy"><figcaption>Witch&rsquo;s boot<small>Holiday decor</small></figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="pp-sec alt" id="how">
+      <div class="container">
+        <span class="pp-kicker">How it works</span>
+        <h2>From a photo to a model on your shelf</h2>
+        <ol class="pp-steps s4 reveal">
+          <li><b>Snap it</b>Take a photo of something you love.</li>
+          <li><b>See it in bricks</b>Brickture designs a brick version you can spin around in 3D.</li>
+          <li><b>Follow the steps</b>Clear step-by-step instructions, first brick to last, with every piece listed.</li>
+          <li><b>Order the kit</b>Every piece you need, in one box, delivered to your door.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="pp-sec ins-tiers" id="builds">
+      <div class="container">
+        <span class="pp-kicker">Two ways to build</span>
+        <h2>Pick the build that fits</h2>
+        <div class="pp-grid c2">
+          <div class="pp-card tile reveal"><span class="tier-tag">Foundation</span><h3>Simple, chunky and fun</h3><p>A smaller build in standard colors. Great for bold, simple shapes &mdash; a mug, a mailbox, a fire hydrant &mdash; and a perfect weekend project.</p></div>
+          <div class="pp-card tile reveal"><span class="tier-tag">Ultimate</span><h3>Every detail, every color</h3><p>Built from your picture, brick by brick, with more colors and more detail. The octopus above is an Ultimate build: 4,224 pieces across 758 steps.</p></div>
+        </div>
+        <p class="ins-fine">Every model stands on its own brick base.</p>
+      </div>
+    </section>
+
+    <section class="pp-sec alt" id="coming">
+      <div class="container">
+        <span class="pp-kicker">What&rsquo;s coming</span>
+        <h2>Launch is close. Insiders hear first.</h2>
+        <ol class="ins-time">
+          <li class="now reveal"><span class="when">Now</span><h3>Final testing</h3><p>Brickture is in beta with our testers, turning their photos into builds every day.</p></li>
+          <li class="reveal"><span class="when">Thanksgiving &middot; Nov 26, 2026</span><h3>App Store launch</h3><p>Brickture arrives on iPhone, and kit ordering opens. We&rsquo;ll email you the moment it&rsquo;s live.</p></li>
+          <li class="reveal"><span class="when">About two weeks later</span><h3>Google Play</h3><p>Brickture comes to Android. Insiders get the download link first.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="ins-close">
+      <div class="container ins-close-grid">
+        <div class="reveal">
+          <span class="pp-kicker">Your Insider perks</span>
+          <h2>Launch news, insider-only discounts, and a seat behind the scenes.</h2>
+          <p>Keep an eye on your inbox. We&rsquo;ll only write when there&rsquo;s something worth seeing &mdash; and if you have an idea for a build, just reply to any of our emails. We read every one.</p>
+        </div>
+        <div class="ins-share reveal">
+          <h3>Know someone who&rsquo;d love this?</h3>
+          <p>Send them our way so they can join the Insiders too.</p>
+          <button class="btn" type="button" id="ins-share-btn">Share Brickture</button>
+          <p class="ins-copied" id="ins-copied" role="status"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="ins-foot">
+    <div class="container ins-foot-in">
+      <span>&copy; 2026 Takgio &middot; Brickture</span>
+      <a href="https://bricksnap-takgio.fly.dev/privacy" target="_blank" rel="noopener">Privacy</a>
+      <a href="https://bricksnap-takgio.fly.dev/terms" target="_blank" rel="noopener">Terms</a>
+      <a href="mailto:info@takgio.com">info@takgio.com</a>
+      <a class="sp" href="/">takgio.com</a>
+    </div>
+  </footer>
+
+  <script src="/js/motion.js"></script>
+<script>
+// A visitor who asked for reduced motion gets the still with controls instead of autoplay.
+(function () {
+  var v = document.getElementById('ins-video');
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { v.removeAttribute('autoplay'); v.pause(); }
+  var b = document.querySelector('.pp-sound');
+  var sync = function () { var on = !v.muted; b.setAttribute('aria-pressed', String(on));
+    b.querySelector('span').textContent = on ? 'Sound on' : 'Watch with sound'; };
+  b.addEventListener('click', function () { var on = v.muted; v.muted = !on; if (on) { v.currentTime = 0; v.play(); } });
+  v.addEventListener('volumechange', sync);
+
+  // Share: the phone's own share sheet where there is one, else copy the link.
+  var URL_ = 'https://www.takgio.com/brickture.html';
+  var msg = document.getElementById('ins-copied');
+  document.getElementById('ins-share-btn').addEventListener('click', function () {
+    var data = { title: 'Brickture', text: 'Turn a photo of anything into a brick model you can build. Join the Brickture Insiders:', url: URL_ };
+    if (navigator.share) { navigator.share(data).catch(function () {}); return; }
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(URL_).then(function () { msg.textContent = 'Link copied: ' + URL_; },
+        function () { msg.textContent = URL_; });
+    } else { msg.textContent = URL_; }
+  });
+})();
+</script>
+</body>
+</html>
