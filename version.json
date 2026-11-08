@@ -1,7 +1,15 @@
 {
-  "version": "2.68.0",
+  "version": "2.68.1",
   "date": "2026-11-08",
   "releases": [
+    {
+      "version": "2.68.1",
+      "date": "2026-11-08",
+      "summary": "HANDOFF.md only: the Kit key for the Insider check is set in Vercel and checked live",
+      "changes": [
+        "KIT_API_KEY set in Vercel (Production only); /api/insider-status answers active/new on takgio.com"
+      ]
+    },
     {
       "version": "2.68.0",
       "date": "2026-11-08",

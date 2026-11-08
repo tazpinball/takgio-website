@@ -117,7 +117,7 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   `/brickture/insiders` (`brickture-insiders.html`). Both noindex, not in the sitemap, no site header (consumer only, so the Demos
   counts are unchanged). Kit's form redirect should point at https://www.takgio.com/brickture/welcome; an old
   `brickture.html?confirmed=1` link is forwarded there by `js/forms.js` either way. Since v2.68.0 the signup first asks `/api/insider-status` (`api/insider-status.js`, the site's first Vercel
-  function; Kit V4 key in the Vercel env var `KIT_API_KEY`, Production and Preview) whether the address is active / pending / new;
+  function; Kit V4 key "Takgio website (Vercel)" in the Vercel env var `KIT_API_KEY`, Production only, so previews fall back; set and checked live 8 Nov) whether the address is active / pending / new;
   without the key it answers 503 and the form falls back to the 2.67.1 message. It reveals whether an address is on the list. The perk is worded "insider-only offer" (Ted, 8 Nov: softened from "discounts"); Insiders will expect one at launch.
 - **Home promo video (v2.63.0):** `#watch`, a white band between the ticker and How it works: the 16:9 cut
   `videos/takgio-promo-16x9.mp4` (7.8 MB, re-encoded for the web from the docs/promo build; link carries `?v=1`, bump it
