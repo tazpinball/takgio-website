@@ -126,6 +126,12 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   `/v4/subscribers?status=all` search does NOT return unconfirmed subscribers, and `/v4/forms/{id}/subscribers` ignores an
   `email_address` filter, so pending is found by reading the form's `status=inactive` list. If the function can't answer, the
   page falls back to Kit's public form (with the bot-check redirect). It reveals whether an address is on the list. The perk is worded "insider-only offer" (Ted, 8 Nov: softened from "discounts"); Insiders will expect one at launch.
+  **Signup source (v2.70.0):** `js/forms.js` sends where the visitor first came from (`?utm_source=` / `?src=` on the link, else
+  the referring site mapped to tiktok, x, youtube, instagram, facebook, reddit, google, email..., else `direct`; first touch kept
+  30 days in localStorage `takgio.came_from`). Formspree gets it as `came_from`; Kit gets it in custom field "Signup source"
+  (key `signup_source`, id 1424378) on NEW subscribers only. TikTok and Instagram's in-app browsers often send no referrer, so
+  posts must use the tagged links, e.g. https://www.takgio.com/brickture.html?utm_source=tiktok (also youtube, x, instagram,
+  facebook, reddit, email). Signups before 8 Nov have no source.
 - **Home promo video (v2.63.0):** `#watch`, a white band between the ticker and How it works: the 16:9 cut
   `videos/takgio-promo-16x9.mp4` (7.8 MB, re-encoded for the web from the docs/promo build; link carries `?v=1`, bump it
   when the file changes), poster `images/marketing/takgio-promo-16x9-poster.jpg` (the opening scene, no caption),
@@ -163,6 +169,7 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
 
 | Version | What |
 |---|---|
+| 2.70.0 | Signup source tracking: every form sends where the visitor came from; Kit field "Signup source" |
 | 2.69.0 | Brickture signups go to Kit through `api/insider-signup.js` (no more lost signups to Kit's bot check); privacy line under the form; home button "Become an Insider" |
 | 2.68.0 | Brickture signup says "You're already a Brickture Insider" to existing subscribers (`api/insider-status.js`, needs `KIT_API_KEY` in Vercel); 2.67.1 the Kit bot check |
 | 2.67.0 | Brickture Insiders: `/brickture/welcome` (thank-you page Kit sends confirmed subscribers to) and `/brickture/insiders` (consumer page), both noindex; signup says "Become an Insider" |

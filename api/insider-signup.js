@@ -1,4 +1,4 @@
-// POST /api/insider-signup  {"email": "..."}  ->  {"result": "already" | "pending" | "sent"}
+// POST /api/insider-signup  {"email": "...", "source": "tiktok"}  ->  {"result": "already" | "pending" | "sent"}
 //
 // Signs someone up for the Brickture Insiders (Kit form "Brickture waitlist") through the Kit V4 API.
 // It replaced the browser posting to Kit's public form endpoint (v2.69.0): that endpoint puts some real
@@ -10,6 +10,8 @@
 //            which makes Kit send the "Confirm you're a Brickture Insider" email
 // The Kit V4 API key lives in the Vercel environment variable KIT_API_KEY, never in the repo. Without it,
 // or if Kit fails, this answers 503/502 and the page falls back to posting to Kit's public form.
+// "source" (v2.70.0) is where the visitor first came from (js/forms.js); a new subscriber gets it in Kit's custom
+// field "Signup source" (key signup_source), so signups can be counted by channel.
 const FORM_ID = 10153875; // Kit form "Brickture waitlist"
 
 const kit = (key, path, init = {}) => fetch('https://api.kit.com/v4' + path, {
@@ -27,6 +29,7 @@ module.exports = async (req, res) => {
   if (typeof body === 'string') { try { body = JSON.parse(body); } catch (e) { body = {}; } }
   if (body._gotcha) { res.status(200).json({ result: 'sent' }); return; } // honeypot filled: a bot; add nothing
   const email = String(body.email || '').trim().toLowerCase();
+  const source = String(body.source || '').toLowerCase().replace(/[^a-z0-9._-]/g, '').slice(0, 30);
   if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { res.status(400).json({ error: 'bad email' }); return; }
 
   try {
@@ -50,7 +53,7 @@ module.exports = async (req, res) => {
     }
 
     if (!found) {
-      const made = await kit(key, '/subscribers', { method: 'POST', body: JSON.stringify({ email_address: email, state: 'inactive' }) });
+      const made = await kit(key, '/subscribers', { method: 'POST', body: JSON.stringify({ email_address: email, state: 'inactive', fields: { signup_source: source || 'unknown' } }) });
       if (!made.ok) { res.status(502).json({ error: 'kit create ' + made.status }); return; }
     }
     const added = await kit(key, '/forms/' + FORM_ID + '/subscribers', { method: 'POST', body: JSON.stringify({ email_address: email }) });

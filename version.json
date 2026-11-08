@@ -1,7 +1,18 @@
 {
-  "version": "2.69.1",
+  "version": "2.70.0",
   "date": "2026-11-08",
   "releases": [
+    {
+      "version": "2.70.0",
+      "date": "2026-11-08",
+      "summary": "Signup source tracking: every form says where the visitor first came from",
+      "changes": [
+        "js/forms.js works out where a visitor first came from: ?utm_source= or ?src= on the link, else the site that sent them (TikTok, X, YouTube, Instagram, Facebook, Reddit, Google, email...), else 'direct'. The first source is remembered in the browser for 30 days.",
+        "Every Formspree submission carries it as 'came_from'.",
+        "api/insider-signup.js stores it on new Brickture Insiders in Kit's custom field 'Signup source' (key signup_source; 'unknown' if none came).",
+        "The daily signup check counts Insiders by source."
+      ]
+    },
     {
       "version": "2.69.1",
       "date": "2026-11-08",

@@ -11,7 +11,42 @@
 // adds the address to Kit itself and says whether it was new, unconfirmed or already an Insider. That avoids Kit's
 // bot check on its public form, which silently dropped some real signups. If the function can't answer, the page
 // falls back to posting to Kit's public form as before.
+//
+// Since v2.70.0 every form also says where the visitor first came from ("came_from"): a ?utm_source= or ?src= on
+// the link they arrived by (the tagged links we post on TikTok, YouTube and so on), else the site that sent them
+// (document.referrer), else "direct". The first one is remembered for 30 days in this browser, so a visitor who
+// arrives from TikTok and signs up two pages later still counts as TikTok. Brickture signups store it in Kit's
+// "Signup source" field; every Formspree submission carries it too.
 (() => {
+  const SRC_KEY = 'takgio.came_from';
+  const SRC_DAYS = 30;
+  const clean = (v) => String(v || '').toLowerCase().replace(/[^a-z0-9._-]/g, '').slice(0, 30);
+  const fromReferrer = (ref) => {
+    let host = '';
+    try { host = new URL(ref).hostname.toLowerCase().replace(/^(www|m|l|lm|mobile)\./, ''); } catch (e) { return ''; }
+    if (!host || /(^|\.)takgio\.com$/.test(host)) return ''; // our own pages are not a source
+    const known = [
+      [/(^|\.)tiktok\.com$/, 'tiktok'], [/^(t\.co|x\.com|twitter\.com)$/, 'x'],
+      [/(^|\.)(youtube\.com|youtu\.be)$/, 'youtube'], [/(^|\.)reddit\.com$/, 'reddit'],
+      [/(^|\.)(facebook\.com|fb\.com|messenger\.com)$/, 'facebook'], [/(^|\.)instagram\.com$/, 'instagram'],
+      [/(^|\.)threads\.net$/, 'threads'], [/(^|\.)pinterest\./, 'pinterest'], [/(^|\.)linkedin\.com$/, 'linkedin'],
+      [/(^|\.)google\./, 'google'], [/(^|\.)bing\.com$/, 'bing'], [/(^|\.)duckduckgo\.com$/, 'duckduckgo'],
+      [/(^|\.)(kit\.com|ck\.page|convertkit\.com|kit-mail\d*\.com)$/, 'email'], [/^mail\./, 'email'],
+    ];
+    for (const [re, name] of known) if (re.test(host)) return name;
+    return clean(host);
+  };
+  const cameFrom = (() => {
+    const q = new URLSearchParams(location.search);
+    const now = clean(q.get('utm_source') || q.get('src')) || fromReferrer(document.referrer);
+    let saved = null;
+    try { saved = JSON.parse(localStorage.getItem(SRC_KEY) || 'null'); } catch (e) { saved = null; }
+    if (saved && saved.s && Date.now() - saved.t < SRC_DAYS * 864e5) return saved.s; // first touch wins
+    const s = now || 'direct';
+    if (now) { try { localStorage.setItem(SRC_KEY, JSON.stringify({ s, t: Date.now() })); } catch (e) { /* private mode */ } }
+    return s;
+  })();
+
   const DONE = {
     'brickture-waitlist': "You’re on the list. We’ll send you Insider news as Brickture gets closer to launch.",
     'concreteiq-beta': "Thanks. We’ll be in touch about ConcreteIQ beta access.",
@@ -56,14 +91,14 @@
 
   // Sign up through our function: 'already' | 'pending' | 'sent', or null when it can't answer
   // (not set up, slow, offline), in which case the caller falls back to Kit's public form.
-  const insiderSignup = async (email) => {
+  const insiderSignup = async (email, source) => {
     try {
       const ctl = new AbortController();
       const timer = setTimeout(() => ctl.abort(), 8000);
       const res = await fetch('/api/insider-signup', {
         method: 'POST', signal: ctl.signal,
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, source }),
       });
       clearTimeout(timer);
       if (!res.ok) return null;
@@ -87,10 +122,11 @@
       if (old) old.remove();
       if (btn) { btn.disabled = true; btn.setAttribute('aria-busy', 'true'); }
       const data = new FormData(form);
+      data.set('came_from', cameFrom);
       const kitId = form.getAttribute('data-kit-form');
       const email = String(data.get('email') || '').trim();
       const human = kitId && !data.get('_gotcha');
-      const result = human ? await insiderSignup(email) : null;
+      const result = human ? await insiderSignup(email, cameFrom) : null;
       if (result === 'already') {
         say(form, ALREADY, true, { href: '/brickture/insiders', text: 'See the Insider’s view →' });
         return;
