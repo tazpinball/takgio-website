@@ -1,7 +1,17 @@
 {
-  "version": "2.73.1",
+  "version": "2.74.0",
   "date": "2026-11-09",
   "releases": [
+    {
+      "version": "2.74.0",
+      "date": "2026-11-09",
+      "summary": "Private Signups page: every list in one place (/admin/signups)",
+      "changes": [
+        "New admin page /admin/signups (signups-admin.html, js/signups-admin.js): Brickture Insiders and Takgio News from Kit (confirmed, waiting, where they came from), plus contact messages, ConcreteIQ requests and a safety check for Brickture signups missing from Kit.",
+        "New /api/signups answers only a signed-in, two-step-verified admin; read only. Needs FORMSPREE_API_KEY in Vercel for the Formspree part (Kit part works without it).",
+        "Admin hub card and /admin/signups rewrite added."
+      ]
+    },
     {
       "version": "2.73.1",
       "date": "2026-11-09",

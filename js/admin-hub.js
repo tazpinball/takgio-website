@@ -24,6 +24,7 @@
           return (w ? 'Latest week ' + TakgioAdmin.fmt(w.week_start) + (w.status === 'published' ? ' (published)' : ' (draft)') : 'No weeks yet') + ' · ' + (r[1].count || 0) + ' pulled';
         });
       } },
+    { href: '/admin/signups', title: 'Signups', what: 'Everyone on the Brickture Insiders and Takgio News lists, plus contact messages and ConcreteIQ requests.', who: 'admin' },
     { href: '/admin/team', title: 'Team & access', what: 'Who can use the admin, their roles, and the activity log.', who: 'admin' },
     { href: '/dashboard.html', title: 'Project dashboard', what: 'The internal project dashboard. It has its own sign-in.', who: 'all', external: true },
   ];
