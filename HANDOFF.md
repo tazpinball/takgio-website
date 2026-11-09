@@ -75,7 +75,7 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   falls back and says so.
 - **Careers:** `/careers` and `/careers/:slug` (`job.html`), with the Supabase functions `careers-apply` and
   `careers-confirm`.
-- **News:** `/news`, `/ai-news`, `/news/true-record-launch` and `/news/elevenlabs-grant` (v2.72.0; ElevenLabs' own page values the 33M characters at "more than $5,500"; Ted's team email said "just over $40,000": no dollar figure is published until Ted settles it). AI news updates itself daily (v2.50.0):
+- **News:** `/news`, `/ai-news`, `/news/true-record-launch` and `/news/elevenlabs-grant` (v2.72.0; ElevenLabs' own page values the 33M characters at "more than $5,500"; Ted's team email said "just over $40,000", but his own rate ($99 for 800,000 credits) gives about $4,084 for 33M: no dollar figure is published). AI news updates itself daily (v2.50.0):
   - The Supabase function `ai-news-daily` runs from pg_cron, reads official sources, writes fact-checked stories and
     sends a daily email.
   - That email's "Pull this story" link goes to `ai-news-pull.html` (function `ai-news-pull`).
