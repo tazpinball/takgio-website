@@ -1,7 +1,16 @@
 {
-  "version": "2.70.1",
-  "date": "2026-11-08",
+  "version": "2.71.0",
+  "date": "2026-11-09",
   "releases": [
+    {
+      "version": "2.71.0",
+      "date": "2026-11-09",
+      "summary": "\"Backed by ElevenLabs Grants\" in the footer",
+      "changes": [
+        "Takgio received an ElevenLabs startup grant (accepted by Ted, 9 Nov). The footer of all 32 public pages shows \"Backed by\" and ElevenLabs' white grants wordmark under the social icons, linking to https://elevenlabs.io/startup-grants.",
+        "The wordmark is ElevenLabs' own file, kept on our site at images/partners/elevenlabs-grants-white.webp (from their grant email) rather than loaded from their server."
+      ]
+    },
     {
       "version": "2.70.1",
       "date": "2026-11-08",
