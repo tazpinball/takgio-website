@@ -175,6 +175,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.takgio.com/news/elevenlabs-grant</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.takgio.com/news/true-record-launch</loc>
     <lastmod>2026-10-19</lastmod>
     <changefreq>yearly</changefreq>

@@ -75,7 +75,7 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   falls back and says so.
 - **Careers:** `/careers` and `/careers/:slug` (`job.html`), with the Supabase functions `careers-apply` and
   `careers-confirm`.
-- **News:** `/news`, `/ai-news` and `/news/true-record-launch`. AI news updates itself daily (v2.50.0):
+- **News:** `/news`, `/ai-news`, `/news/true-record-launch` and `/news/elevenlabs-grant` (v2.72.0; ElevenLabs' own page values the 33M characters at "more than $5,500"; Ted's team email said "just over $40,000", but his own rate ($99 for 800,000 credits) gives about $4,084 for 33M: no dollar figure is published). AI news updates itself daily (v2.50.0):
   - The Supabase function `ai-news-daily` runs from pg_cron, reads official sources, writes fact-checked stories and
     sends a daily email.
   - That email's "Pull this story" link goes to `ai-news-pull.html` (function `ai-news-pull`).
@@ -169,6 +169,7 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
 
 | Version | What |
 |---|---|
+| 2.72.0 | News article `/news/elevenlabs-grant` (the ElevenLabs Startup Grant: 33M characters, 12 months; applied 16 Oct, selected 6 Nov, accepted 9 Nov), share image, News list; Demos check now 33 / 34 / 0 |
 | 2.71.0 | "Backed by ElevenLabs Grants" in the footer of all 32 public pages (`.footer-backed`, `images/partners/`); Takgio's ElevenLabs startup grant, accepted 9 Nov |
 | 2.70.1 | `/brickture` redirects to `/brickture.html` (the promo end card shows takgio.com/brickture; it was a 404) |
 | 2.70.0 | Signup source tracking: every form sends where the visitor came from; Kit field "Signup source" |

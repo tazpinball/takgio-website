@@ -33,16 +33,16 @@ character for character** (no trailing slash, no `www`, no `/demos` page, no red
 change **only when Ted explicitly says so**. How it looks and where it lives on the site may change freely, but every
 Demos link must keep that exact href, and the site must never be left without one.
 
-- Every Demos anchor carries the attribute `data-demos-link`. As of v2.53.0 there are 33: the top-level header item
-  "Demos" on all 32 pages that carry the header (the 29 public pages, including `pinball-qr.html`, the ConcreteIQ customer story `case-study-construction-concreteiq-customer-story.html`, `leadership.html`, the unlisted `hoof-harted-marketing.html`, the Careers pages `careers.html` and `job.html`, and the News pages `news.html`, `ai-news.html` and `news-true-record-launch.html`; also in `docs\mockups\_generators\header_v228.html`, the header source the generators
+- Every Demos anchor carries the attribute `data-demos-link`. As of v2.72.0 there are 34: the top-level header item
+  "Demos" on all 33 pages that carry the header (the 30 public pages, including `pinball-qr.html`, the ConcreteIQ customer story `case-study-construction-concreteiq-customer-story.html`, `leadership.html`, the unlisted `hoof-harted-marketing.html`, the Careers pages `careers.html` and `job.html`, and the News pages `news.html`, `ai-news.html`, `news-true-record-launch.html` and `news-elevenlabs-grant.html`; also in `docs\mockups\_generators\header_v228.html`, the header source the generators
   copy), and the "Product demos" button in the investor block of
   `contact.html` (shown when the topic is Investing, i.e. `contact.html?topic=invest`, where every "Investors" link lands).
   The `index.html` hero's "Product demos" button was removed in v2.42.0 at Ted's request (Oct 18: the header already has Demos).
 - Moving or restyling it: keep `data-demos-link` and the exact href on the new element, and update the counts here.
-- **Before every commit**, run this check (from the project root). It must print 32 / 33 / 0, or the updated counts:
+- **Before every commit**, run this check (from the project root). It must print 33 / 34 / 0, or the updated counts:
 
 ```
-echo "pages: $(grep -l data-demos-link *.html | wc -l) (want 32)  links: $(grep -o data-demos-link *.html | wc -l) (want 33)  wrong href: $(grep -oh '<a [^>]*data-demos-link[^>]*>' *.html | grep -vc 'href="https://demos.takgio.com"') (want 0)"
+echo "pages: $(grep -l data-demos-link *.html | wc -l) (want 33)  links: $(grep -o data-demos-link *.html | wc -l) (want 34)  wrong href: $(grep -oh '<a [^>]*data-demos-link[^>]*>' *.html | grep -vc 'href="https://demos.takgio.com"') (want 0)"
 ```
 
 ## MANDATORY: Version Bump on Every Change
