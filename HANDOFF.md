@@ -132,6 +132,12 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   (key `signup_source`, id 1424378) on NEW subscribers only. TikTok and Instagram's in-app browsers often send no referrer, so
   posts must use the tagged links, e.g. https://www.takgio.com/brickture.html?utm_source=tiktok (also youtube, x, instagram,
   facebook, reddit, email). Signups before 8 Nov have no source.
+- **Takgio News list (v2.73.0, 9 Nov):** the footer box on every page ("Get Takgio news") joins Kit form **Takgio News** (id 10165648, inline,
+  Mills template, double opt-in, confirmation email "Confirm your subscription to Takgio News" from "Takgio" <ted@takgio.com>; Kit's
+  sending-address From name for ted@ was changed from "ted@takgio.com" to "Takgio"; the default stays "Brickture by Takgio" <info@takgio.com>),
+  through `/api/insider-signup` with `list: "news"`. After confirming they land on `/news/welcome` (`news-welcome.html`, noindex). A confirmed
+  Insider is just added to the news form. Kit's "Newsletter site" (a public profile page) is NOT used and not published. Each news article =
+  a Kit broadcast to this form (draft it, Ted approves, send); the daily signup check does not read this form yet.
 - **Home promo video (v2.63.0):** `#watch`, a white band between the ticker and How it works: the 16:9 cut
   `videos/takgio-promo-16x9.mp4` (7.8 MB, re-encoded for the web from the docs/promo build; link carries `?v=1`, bump it
   when the file changes), poster `images/marketing/takgio-promo-16x9-poster.jpg` (the opening scene, no caption),
@@ -169,6 +175,7 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
 
 | Version | What |
 |---|---|
+| 2.73.0 | Takgio News: the footer box on all 33 pages signs people up to Kit form "Takgio News" (id 10165648), confirm by email, thank-you page `/news/welcome`; sender name "Takgio" <ted@takgio.com> |
 | 2.72.0 | News article `/news/elevenlabs-grant` (the ElevenLabs Startup Grant: 33M characters, 12 months; applied 16 Oct, selected 6 Nov, accepted 9 Nov), share image, News list; Demos check now 33 / 34 / 0 |
 | 2.71.0 | "Backed by ElevenLabs Grants" in the footer of all 32 public pages (`.footer-backed`, `images/partners/`); Takgio's ElevenLabs startup grant, accepted 9 Nov |
 | 2.70.1 | `/brickture` redirects to `/brickture.html` (the promo end card shows takgio.com/brickture; it was a 404) |

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>You&rsquo;re subscribed to Takgio News &mdash; Takgio</title>
+  <meta name="description" content="You're subscribed to Takgio News: product launches, milestones and announcements from Takgio.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/images/brand/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/images/brand/apple-touch-icon.png">
+  <link rel="canonical" href="https://www.takgio.com/news/welcome">
+  <script defer src="/js/analytics.js"></script>
+  <style>
+    /* The page Kit's confirmation link lands on: a thank-you, what an Insider gets, and the door to the Insider's view.
+       Standalone (no site header) so a new subscriber sees Brickture and nothing else. */
+    :root { color-scheme: dark; --a: #ffd94a; --b: #f97316; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100svh; display: grid; place-items: center; padding: 2rem 1.25rem; color: #fff;
+      background: radial-gradient(110% 80% at 20% 0%, #2e2208, #0b0c14 65%);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    main { width: 100%; max-width: 34rem; text-align: center; }
+    .brand { display: flex; justify-content: center; align-items: center; gap: .6rem; color: rgba(255,255,255,.7); text-decoration: none; font-size: .85rem; }
+    .brand img { height: 22px; width: auto; }
+    .icon { display: block; margin: 1.6rem auto 0; width: 96px; height: 96px; border-radius: 22px; box-shadow: 0 14px 44px rgba(255, 217, 74, .25); }
+    .badge { display: inline-flex; align-items: center; gap: .45rem; margin-top: 2rem; padding: .4rem .8rem; border-radius: 999px;
+      font-size: .78rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #0b0c14; background: var(--a); }
+    .badge svg { width: 14px; height: 14px; }
+    h1 { font-size: clamp(2.2rem, 9vw, 3.2rem); line-height: 1.05; letter-spacing: -.03em; margin: 1rem 0 .7rem; }
+    h1 span { background: linear-gradient(90deg, var(--a), var(--b)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .lead { color: rgba(255,255,255,.82); font-size: 1.08rem; line-height: 1.6; margin: 0 auto 1.6rem; }
+    .perks { list-style: none; padding: 0; margin: 0 0 1.8rem; display: grid; gap: .7rem; text-align: left; }
+    .perks li { display: flex; gap: .9rem; align-items: flex-start; padding: .95rem 1.1rem; border-radius: .9rem;
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); line-height: 1.45; color: rgba(255,255,255,.78); font-size: .95rem; }
+    .perks b { display: block; color: #fff; font-size: 1rem; margin-bottom: .1rem; }
+    .perks .ico { flex: none; width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; color: #0b0c14;
+      background: linear-gradient(135deg, var(--a), var(--b)); }
+    .perks .ico svg { width: 19px; height: 19px; }
+    .cta { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; width: 100%; max-width: 22rem;
+      padding: 1.05rem 1.5rem; border-radius: .9rem; background: var(--a); color: #0b0c14; font-weight: 800; font-size: 1.1rem;
+      text-decoration: none; box-shadow: 0 12px 34px rgba(255, 217, 74, .28); transition: filter .15s, transform .15s; }
+    .cta:hover, .cta:focus-visible { filter: brightness(1.07); transform: translateY(-1px); outline: none; }
+    .cta svg { width: 20px; height: 20px; }
+    .note { color: rgba(255,255,255,.55); font-size: .85rem; line-height: 1.55; margin: 1.6rem auto 0; }
+    .note a { color: rgba(255,255,255,.8); }
+    @media (prefers-reduced-motion: reduce) { .cta { transition: none; } .cta:hover { transform: none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="brand" href="/"><img src="/images/brand/takgio-wordmark-white.svg" alt="Takgio" width="64" height="22"></a>
+    <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>You&rsquo;re confirmed</span>
+    <h1>You&rsquo;re on the <span>list.</span></h1>
+    <p class="lead">Thanks for subscribing to Takgio News. We&rsquo;ll email you when we publish something important: product launches, milestones and announcements from the team behind ConcreteIQ, Brickture, True Record, Ann Elise, Hoof Harted and Pinball-QR.</p>
+    <a class="cta" href="/news.html">Read the latest news<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <p class="note">Can&rsquo;t find our emails? Check your spam or promotions folder and mark us as safe. You can unsubscribe at any time from the link at the bottom of every email.<br><a href="/products.html">See our products</a></p>
+  </main>
+</body>
+</html>

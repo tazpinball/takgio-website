@@ -58,6 +58,15 @@
   const CHECK_INBOX_OR_ALREADY = CHECK_INBOX + ' Already an Insider? You’re all set; there’s no need to sign up again.';
   const ALREADY = 'You’re already a Brickture Insider, so you’re all set. Watch your inbox for launch news.';
   const PENDING = 'You’ve already signed up but haven’t confirmed yet. Check your inbox (and spam folder) for “Confirm you’re a Brickture Insider” and click the button inside.';
+  // The Takgio News form in Kit (v2.73.0; id 10165648, the footer box on every page): the same confirm-by-email flow.
+  const NEWS_FORM = '10165648';
+  const NEWS = {
+    sent: 'Almost there! Check your inbox and click the link to confirm your subscription to Takgio News.',
+    sentOrAlready: 'Almost there! Check your inbox and click the link to confirm your subscription to Takgio News. Already subscribed? You’re all set.',
+    already: 'You’re already subscribed to Takgio News, so you’re all set.',
+    added: 'You’re subscribed to Takgio News. Watch your inbox for company news.',
+    pending: 'You’ve already signed up but haven’t confirmed yet. Check your inbox (and spam folder) for “Confirm your subscription to Takgio News” and click the button inside.',
+  };
   const FAIL = 'Something went wrong. Please try again, or email info@takgio.com.';
 
   const say = (form, text, focus, link) => {
@@ -91,24 +100,24 @@
 
   // Sign up through our function: 'already' | 'pending' | 'sent', or null when it can't answer
   // (not set up, slow, offline), in which case the caller falls back to Kit's public form.
-  const insiderSignup = async (email, source) => {
+  const insiderSignup = async (email, source, list) => {
     try {
       const ctl = new AbortController();
       const timer = setTimeout(() => ctl.abort(), 8000);
       const res = await fetch('/api/insider-signup', {
         method: 'POST', signal: ctl.signal,
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ email, source }),
+        body: JSON.stringify({ email, source, list }),
       });
       clearTimeout(timer);
       if (!res.ok) return null;
       const { result } = await res.json();
-      return ['already', 'pending', 'sent'].includes(result) ? result : null;
+      return ['already', 'pending', 'sent', 'added'].includes(result) ? result : null;
     } catch (err) { return null; }
   };
 
   // Back from an older confirmation link (brickture.html?confirmed=1): on to the thank-you page.
-  if (/[?&]confirmed=1(&|$)/.test(location.search) && document.querySelector('form[data-kit-form]')) {
+  if (/[?&]confirmed=1(&|$)/.test(location.search) && document.querySelector('form[data-kit-form="10153875"]')) {
     location.replace('/brickture/welcome');
     return;
   }
@@ -126,18 +135,21 @@
       const kitId = form.getAttribute('data-kit-form');
       const email = String(data.get('email') || '').trim();
       const human = kitId && !data.get('_gotcha');
-      const result = human ? await insiderSignup(email, cameFrom) : null;
+      const isNews = kitId === NEWS_FORM;
+      const result = human ? await insiderSignup(email, cameFrom, isNews ? 'news' : 'insiders') : null;
       if (result === 'already') {
-        say(form, ALREADY, true, { href: '/brickture/insiders', text: 'See the Insider’s view →' });
+        if (isNews) say(form, NEWS.already, true, { href: '/news.html', text: 'Read the latest news →' });
+        else say(form, ALREADY, true, { href: '/brickture/insiders', text: 'See the Insider’s view →' });
         return;
       }
-      if (result === 'pending') { say(form, PENDING, true); return; }
+      if (result === 'added') { say(form, NEWS.added, true, { href: '/news.html', text: 'Read the latest news →' }); return; }
+      if (result === 'pending') { say(form, isNews ? NEWS.pending : PENDING, true); return; }
       const toFormspree = fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
         .then((res) => { if (!res.ok) throw new Error('HTTP ' + res.status); });
       if (result === 'sent') {
         // In Kit already; Formspree keeps its usual copy, and its answer doesn't change what the visitor sees.
         toFormspree.catch(() => {});
-        say(form, CHECK_INBOX, true);
+        say(form, isNews ? NEWS.sent : CHECK_INBOX, true);
         return;
       }
       const toKit = human ? sendToKit(kitId, email) : null;
@@ -147,7 +159,7 @@
         // and nothing is sent until they do. Send them there rather than saying an email is on its way.
         const k = kit.value || {};
         if (k.status === 'quarantined' && /^https:\/\/app\.kit\.com\//.test(k.url || '')) { location.href = k.url; return; }
-        say(form, CHECK_INBOX_OR_ALREADY, true);
+        say(form, isNews ? NEWS.sentOrAlready : CHECK_INBOX_OR_ALREADY, true);
         return;
       }
       if (fs.status === 'fulfilled') {
