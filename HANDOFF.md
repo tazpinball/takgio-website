@@ -169,6 +169,7 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
 
 | Version | What |
 |---|---|
+| 2.71.0 | "Backed by ElevenLabs Grants" in the footer of all 32 public pages (`.footer-backed`, `images/partners/`); Takgio's ElevenLabs startup grant, accepted 9 Nov |
 | 2.70.1 | `/brickture` redirects to `/brickture.html` (the promo end card shows takgio.com/brickture; it was a 404) |
 | 2.70.0 | Signup source tracking: every form sends where the visitor came from; Kit field "Signup source" |
 | 2.69.0 | Brickture signups go to Kit through `api/insider-signup.js` (no more lost signups to Kit's bot check); privacy line under the form; home button "Become an Insider" |

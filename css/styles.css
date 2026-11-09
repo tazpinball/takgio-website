@@ -238,6 +238,25 @@ img { max-width: 100%; height: auto; display: block; }
   font-size: 0.8rem;
 }
 
+/* "Backed by ElevenLabs Grants" under the social icons (v2.71.0); the white wordmark is ElevenLabs' own file */
+.footer-backed {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-top: var(--space-md);
+  text-decoration: none;
+  opacity: 0.75;
+  transition: opacity 0.2s;
+}
+.footer-backed:hover, .footer-backed:focus-visible { opacity: 1; }
+.footer-backed span {
+  color: rgba(255,255,255,0.5);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.footer-backed img { display: block; width: 180px; height: auto; }
+
 .footer-links {
   display: flex;
   flex-direction: column;
