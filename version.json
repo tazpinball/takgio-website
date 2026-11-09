@@ -1,7 +1,15 @@
 {
-  "version": "2.73.0",
+  "version": "2.73.1",
   "date": "2026-11-09",
   "releases": [
+    {
+      "version": "2.73.1",
+      "date": "2026-11-09",
+      "summary": "News page: the sign-up box is now at the top",
+      "changes": [
+        "news.html: a \"Get Takgio news by email\" sign-up box under the page heading (same Takgio News form as the footer box), so visitors don't have to scroll to the footer."
+      ]
+    },
     {
       "version": "2.73.0",
       "date": "2026-11-09",
