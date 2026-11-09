@@ -1,7 +1,17 @@
 {
-  "version": "2.74.0",
+  "version": "2.74.1",
   "date": "2026-11-09",
   "releases": [
+    {
+      "version": "2.74.1",
+      "date": "2026-11-09",
+      "summary": "Signups page redone: people grouped by status, one row per person",
+      "changes": [
+        "/admin/signups now groups people as Needs a nudge (not confirmed after 2+ days), Waiting to confirm, Confirmed, Job applicants and Messages; one row per person with tags for Brickture, News, Jobs and where they came from.",
+        "Added a summary row, search, a list filter and a Download list (CSV) button; job applicants are read from the Careers data; compact layout.",
+        "js/signups-admin.js only; api/signups.js unchanged."
+      ]
+    },
     {
       "version": "2.74.0",
       "date": "2026-11-09",

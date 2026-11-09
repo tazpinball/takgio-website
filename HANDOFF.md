@@ -138,7 +138,7 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
   through `/api/insider-signup` with `list: "news"`. After confirming they land on `/news/welcome` (`news-welcome.html`, noindex). A confirmed
   Insider is just added to the news form. Kit's "Newsletter site" (a public profile page) is NOT used and not published. Each news article =
   a Kit broadcast to this form (draft it, Ted approves, send); the daily signup check now reads this form too.
-- **Signups page (v2.74.0):** https://www.takgio.com/admin/signups (admin + two-step only; `api/signups.js`, `js/signups-admin.js`). Kit lists live; Formspree part needs `FORMSPREE_API_KEY` in Vercel Production (until set the page says so).
+- **Signups page (v2.74.0):** https://www.takgio.com/admin/signups (admin + two-step only; `api/signups.js`, `js/signups-admin.js`). Redone in v2.74.1: people grouped by status (needs a nudge, waiting, confirmed, jobs, messages), one row per person with tags; job applicants read from `job_applications` under the admin's sign-in. `FORMSPREE_API_KEY` is set in Vercel Production (Ted, 9 Nov) and works.
 - **Home promo video (v2.63.0):** `#watch`, a white band between the ticker and How it works: the 16:9 cut
   `videos/takgio-promo-16x9.mp4` (7.8 MB, re-encoded for the web from the docs/promo build; link carries `?v=1`, bump it
   when the file changes), poster `images/marketing/takgio-promo-16x9-poster.jpg` (the opening scene, no caption),
