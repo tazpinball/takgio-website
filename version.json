@@ -1,7 +1,18 @@
 {
-  "version": "2.71.0",
+  "version": "2.72.0",
   "date": "2026-11-09",
   "releases": [
+    {
+      "version": "2.72.0",
+      "date": "2026-11-09",
+      "summary": "News: Takgio receives an ElevenLabs Startup Grant",
+      "changes": [
+        "New article /news/elevenlabs-grant (news-elevenlabs-grant.html): the grant (33 million characters, 12 months of the full platform), what it took (ElevenLabs' eligibility rules; applied 16 Oct, selected 6 Nov, accepted 9 Nov), where Takgio uses ElevenLabs today, and how it plans to use the grant.",
+        "Share image images/news/elevenlabs-grant.png (1200x630) for LinkedIn and X.",
+        "News page: the article leads the list (Milestones 5); True Record's press release moves to an ordinary row. Clean URL in vercel.json, URL in sitemap.xml.",
+        "The new page carries the site header: the Demos check is now 33 pages / 34 links / 0 (CLAUDE.md updated)."
+      ]
+    },
     {
       "version": "2.71.0",
       "date": "2026-11-09",

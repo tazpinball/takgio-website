@@ -80,6 +80,10 @@
       "destination": "/ai-news.html"
     },
     {
+      "source": "/news/elevenlabs-grant",
+      "destination": "/news-elevenlabs-grant.html"
+    },
+    {
       "source": "/news/true-record-launch",
       "destination": "/news-true-record-launch.html"
     },
