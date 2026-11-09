@@ -104,6 +104,10 @@
       "destination": "/news-admin.html"
     },
     {
+      "source": "/admin/signups",
+      "destination": "/signups-admin.html"
+    },
+    {
       "source": "/admin/team",
       "destination": "/team-admin.html"
     }
