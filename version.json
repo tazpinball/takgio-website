@@ -1,7 +1,17 @@
 {
-  "version": "2.72.0",
+  "version": "2.73.0",
   "date": "2026-11-09",
   "releases": [
+    {
+      "version": "2.73.0",
+      "date": "2026-11-09",
+      "summary": "Takgio News: subscribe to company news (Kit form, confirm by email)",
+      "changes": [
+        "The footer box on all 33 pages now reads \"Get Takgio news\" and signs people up to the Kit form \"Takgio News\" (id 10165648) through /api/insider-signup (new list=news): confirm by email, then they land on /news/welcome (news-welcome.html, noindex).",
+        "Someone already confirmed in Kit (a Brickture Insider) is simply added to the news list; an address already on it, or waiting to confirm, gets a plain message.",
+        "Still copied to Formspree as before (source newsletter). js/forms.js only forwards old ?confirmed=1 links on the Brickture form."
+      ]
+    },
     {
       "version": "2.72.0",
       "date": "2026-11-09",
