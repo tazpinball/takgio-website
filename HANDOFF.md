@@ -227,7 +227,7 @@ Full notes for each release are in `version.json`.
   no investor or expert is named; a rating is never shown without its count.
 - **Still blank in v4 (Ted's):** the amount and instrument and the milestones (14), downloads, installs and revenue
   (8), Richard's background and who is full-time (13), the 24-month and 5-year vision (15), and the expert's OK on
-  "30+ years" (4). The site's Hoof Harted page says 2 ratings where Apple showed 3 on 20 Oct.
+  "30+ years" (4). The site shows Hoof Harted at 5.0 from 4 ratings and True Record at 5.0 from 2 (Apple lookup API, 10 Nov; `https://itunes.apple.com/lookup?id=6805927078` / `id=6812451571`).
 
 ## Fundraising (started 26 Oct)
 
