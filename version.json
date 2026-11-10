@@ -1,7 +1,15 @@
 {
-  "version": "2.74.3",
+  "version": "2.74.4",
   "date": "2026-11-10",
   "releases": [
+    {
+      "version": "2.74.4",
+      "date": "2026-11-10",
+      "summary": "Docs only: the phone-line agent's script and knowledge base",
+      "changes": [
+        "docs/phone-agent/README.md (agent settings, first message, system prompt) and docs/phone-agent/knowledge-base.md (the facts it may tell callers); HANDOFF.md notes the plan. No site change."
+      ]
+    },
     {
       "version": "2.74.3",
       "date": "2026-11-10",
