@@ -1,7 +1,15 @@
 {
-  "version": "2.74.4",
+  "version": "2.74.5",
   "date": "2026-11-10",
   "releases": [
+    {
+      "version": "2.74.5",
+      "date": "2026-11-10",
+      "summary": "HANDOFF.md only: (201) 416-3123 is being ported to Twilio for the phone agent",
+      "changes": [
+        "HANDOFF.md records the Twilio account, the port-in request and its status, and what to do once it completes. No site change."
+      ]
+    },
     {
       "version": "2.74.4",
       "date": "2026-11-10",
