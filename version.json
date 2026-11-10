@@ -1,7 +1,15 @@
 {
-  "version": "2.74.2",
+  "version": "2.74.3",
   "date": "2026-11-10",
   "releases": [
+    {
+      "version": "2.74.3",
+      "date": "2026-11-10",
+      "summary": "HANDOFF.md only: Takgio Intelligence (TI) idea tabled, product company kept",
+      "changes": [
+        "HANDOFF.md records Ted's TI motto idea, the mockup link, that it is tabled, and that Takgio stays a product company."
+      ]
+    },
     {
       "version": "2.74.2",
       "date": "2026-11-10",
