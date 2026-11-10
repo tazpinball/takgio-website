@@ -1,7 +1,19 @@
 {
-  "version": "2.74.1",
-  "date": "2026-11-09",
+  "version": "2.74.2",
+  "date": "2026-11-10",
   "releases": [
+    {
+      "version": "2.74.2",
+      "date": "2026-11-10",
+      "summary": "Product pages brought up to date",
+      "changes": [
+        "Hoof Harted: 5.0 stars from 4 ratings (Apple, 10 Nov), on Products, Industries and its page; True Record: 5.0 stars (2 ratings) on its card and page.",
+        "Products: real estate named with the other industries; myBuyersCoach in the page title and description; ConcreteIQ's <11 min marked as one live bid.",
+        "Brickture: three tiers of build (Foundation, Ultimate, Ultimate Plus) on its page, the Products card and the case study.",
+        "True Record and Ann Elise: a 'Backed by an ElevenLabs Startup Grant' card linking to the article.",
+        "Meta Ray-Ban Display: the toolkit rollout in the past tense; 'A company that ships' with Pinball-QR added."
+      ]
+    },
     {
       "version": "2.74.1",
       "date": "2026-11-09",
