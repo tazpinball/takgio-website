@@ -1,7 +1,13 @@
 {
-  "version": "2.74.5",
+  "version": "2.74.6",
   "date": "2026-11-10",
   "releases": [
+    {
+      "version": "2.74.6",
+      "date": "2026-11-10",
+      "summary": "HANDOFF.md only: Google approved the number port; it moves to Twilio on 17 Nov",
+      "changes": ["HANDOFF.md: port approved, date 17 Nov 2026. No site change."]
+    },
     {
       "version": "2.74.5",
       "date": "2026-11-10",
