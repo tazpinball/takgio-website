@@ -29,8 +29,8 @@ NEXT     Ted's verdict on the promo video and its home-page placement; the 9:16 
          ConcreteIQ stays BETA until Ted says it is live; then the CPN story is redone (Open / not verified).
          Investor work (deck template, fundraising targets) is below.
 SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked 26 Oct, see Open / verified).
-DASHBOARD v2.75.0 (11 Nov) is merged, but its sync waits on Ted: run docs/dashboard-sync-schema.sql, deploy
-         project-sync (see "Project dashboard" below), then press Sync now. Until then the board shows 15 projects.
+DASHBOARD v2.75.0 (11 Nov) is live and its GitHub sync is running (SQL run, function deployed, takgio token set;
+         Ted pressed Sync now and it worked). Next scheduled runs: Fri 6 PM and Mon 1 PM ET.
 ```
 
 ## What the site is
@@ -186,10 +186,16 @@ DASHBOARD v2.75.0 (11 Nov) is merged, but its sync waits on Ted: run docs/dashbo
   page run the same function (signed-in user). Repos are in `projects.github_repo` (comma-separated for several; editable in the
   project's Edit form). No repo mapped (11 Nov): Bluetooth Dog, CAM (the service), Compliance M&A, Pinball Guide (maybe
   tazpinball/taz-pinball?) and the three discarded ones. Repos with no dashboard project: takgio/takgio-demos, takgio/govreports,
-  tazpinball/kith, tazpinball/estate-recovery, tazpinball/TAZville. **Ted's steps (not done yet, 11 Nov):** run
-  `docs/dashboard-sync-schema.sql` in the SQL editor; `supabase functions deploy project-sync --no-verify-jwt`; make sure the
-  function's `GITHUB_TOKEN` can read both tazpinball/* and takgio/* (else add `GITHUB_TOKEN_TAKGIO`); press Sync now and read the
-  result line. The old `generate-project-update` function stays deployed but nothing calls it.
+  tazpinball/kith, tazpinball/TAZville. Ann Elise AI Tutor reads both ann-elise-poc and ann-elise-mobile (Ted, 11 Nov).
+  Class Action Monitor (CAM) was already linked to tazpinball/estate-recovery before 11 Nov; asked Ted whether that is right
+  (no answer yet; harmless while that repo is idle). **Set up 11 Nov (done by Ted):** the SQL was run; the function was deployed
+  from Ted's laptop clone `C:\Users\Ted\OneDrive\TAZville\Projects\takgio-website` (no Supabase CLI installed there: use
+  `npx supabase@2 functions deploy project-sync --no-verify-jwt --project-ref pwmrbmjlgweahridxvgk --use-api`; CLI v3 rejects
+  the laptop's old local `supabase/config.toml`, which is not in git). `GITHUB_TOKEN` reads tazpinball/* only; the takgio/* repos
+  use secret `GITHUB_TOKEN_TAKGIO`, a fine-grained token "Takgio dashboard sync" (owner takgio, all repos, Contents read-only),
+  **expires 11 Nov 2027**: after that the five takgio projects show as "problems" until Ted makes a new one and runs
+  `npx supabase@2 secrets set GITHUB_TOKEN_TAKGIO=... --project-ref pwmrbmjlgweahridxvgk`. The old `generate-project-update`
+  function stays deployed but nothing calls it.
 - **Routing:** `vercel.json` holds the rewrites for the clean URLs above, plus `/hoof` and `/marketing/hoof-harted`.
   `/services` permanently redirects to `/industries.html`.
 
