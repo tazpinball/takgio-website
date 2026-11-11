@@ -4,7 +4,7 @@
 > place at the end of each session; do not append a per-session log. The release history lives in `version.json`
 > (`releases`, newest first) and in `git log`.
 
-*Started 2026-10-26 (it did not exist before this date); last updated 2026-10-29, after v2.63.1 (the Takgio promo video on the home page). Built from
+*Started 2026-10-26 (it did not exist before this date); last updated 2026-11-11, after v2.75.0 (the project dashboard board and its GitHub sync). Built from
 `version.json`, `git log` and the repo itself.
 The Supabase side was checked by Ted in the dashboard on 26 Oct (below). Since 28 Oct a cloud session CAN reach
 takgio.com (Ted added it to the environment), so check the live site yourself with curl after a merge. It still
@@ -29,6 +29,8 @@ NEXT     Ted's verdict on the promo video and its home-page placement; the 9:16 
          ConcreteIQ stays BETA until Ted says it is live; then the CPN story is redone (Open / not verified).
          Investor work (deck template, fundraising targets) is below.
 SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked 26 Oct, see Open / verified).
+DASHBOARD v2.75.0 (11 Nov) is merged, but its sync waits on Ted: run docs/dashboard-sync-schema.sql, deploy
+         project-sync (see "Project dashboard" below), then press Sync now. Until then the board shows 15 projects.
 ```
 
 ## What the site is
@@ -171,6 +173,23 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
     Ultimate, every model on its own brick base, kit ordering in beta, Coming Thanksgiving 2026. No prices, no cost
     estimate, no "about two minutes" or "~2 min", no XS-L sizes anywhere on the site (all retired with the old app;
     v2.59.2 cleared them from the case study, Case Studies, Industries and Products too, which now quote 4,224). The "no people or pets" rule is gone from the Don't list (the video shows both).
+- **Project dashboard (v2.75.0, 11 Nov, Ted's design):** https://www.takgio.com/dashboard.html. The top band counts projects
+  (listed on takgio.com vs internal) and Live / UAT / Building / Idea; "Pipeline by stage" is a board, one column per stage:
+  products on takgio.com are white cards with the site's status (`SITE_PRODUCTS` in `js/dashboard.js`: change it in the same
+  commit as the site), internal projects grey cards. Needs attention, Recent activity and the All projects table are kept below
+  (Ted: keep them). Mockup: https://claude.ai/artifact/GhXMZ3zNKkEtGZoEVuYK8a.
+  **The sync** (`supabase/functions/project-sync`, Ted: "Friday 6:00 PM ET" and "Monday 1 PM ET"; "Move it automatically"):
+  pg_cron fires at both UTC hours of each slot and the function skips the off-hour call, so summer/winter time needs nothing.
+  For a project with new commits since its last sync, Claude reads them and the repo's HANDOFF.md (else SUMMARY.md, CLAUDE.md,
+  README.md), writes an update ("Claude (weekly sync)") and sets the stage (never Discarded; moves logged in stage_transitions).
+  A project with no repo, or no new commits, is left alone. "Sync now" on the dashboard and "Generate AI Update" on a project
+  page run the same function (signed-in user). Repos are in `projects.github_repo` (comma-separated for several; editable in the
+  project's Edit form). No repo mapped (11 Nov): Bluetooth Dog, CAM (the service), Compliance M&A, Pinball Guide (maybe
+  tazpinball/taz-pinball?) and the three discarded ones. Repos with no dashboard project: takgio/takgio-demos, takgio/govreports,
+  tazpinball/kith, tazpinball/estate-recovery, tazpinball/TAZville. **Ted's steps (not done yet, 11 Nov):** run
+  `docs/dashboard-sync-schema.sql` in the SQL editor; `supabase functions deploy project-sync --no-verify-jwt`; make sure the
+  function's `GITHUB_TOKEN` can read both tazpinball/* and takgio/* (else add `GITHUB_TOKEN_TAKGIO`); press Sync now and read the
+  result line. The old `generate-project-update` function stays deployed but nothing calls it.
 - **Routing:** `vercel.json` holds the rewrites for the clean URLs above, plus `/hoof` and `/marketing/hoof-harted`.
   `/services` permanently redirects to `/industries.html`.
 
@@ -178,6 +197,7 @@ SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked
 
 | Version | What |
 |---|---|
+| 2.75.0 | Project dashboard: pipeline board by stage (Ted's design, 20 projects, 8 on takgio.com), Friday 6 PM / Monday 1 PM ET GitHub sync that writes updates and moves stages (`project-sync`, `docs/dashboard-sync-schema.sql`) |
 | 2.73.0 | Takgio News: the footer box on all 33 pages signs people up to Kit form "Takgio News" (id 10165648), confirm by email, thank-you page `/news/welcome`; sender name "Takgio" <ted@takgio.com> |
 | 2.72.0 | News article `/news/elevenlabs-grant` (the ElevenLabs Startup Grant: 33M characters, 12 months; applied 16 Oct, selected 6 Nov, accepted 9 Nov), share image, News list; Demos check now 33 / 34 / 0 |
 | 2.71.0 | "Backed by ElevenLabs Grants" in the footer of all 32 public pages (`.footer-backed`, `images/partners/`); Takgio's ElevenLabs startup grant, accepted 9 Nov |
@@ -288,7 +308,7 @@ Full notes for each release are in `version.json`.
 - **Every change bumps `version.json`**: the top-level `version` and `date`, plus a new entry at the top of
   `releases`. Patch for a fix, minor for a feature.
 - **The Demos link is fixed at `https://demos.takgio.com`.** Run the check in CLAUDE.md before every commit; it must
-  print 32 / 33 / 0, or the counts updated on purpose.
+  print 33 / 34 / 0, or the counts updated on purpose.
 - **A new public page** goes into the header and footer nav of the other public pages and into `sitemap.xml`.
 - **`js/supabase-config.js` loads before `auth.js`.** Only the public anon key goes in code.
 

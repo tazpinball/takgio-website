@@ -449,7 +449,8 @@
       var token = session.data.session?.access_token;
       if (!token) { alert('You must be logged in.'); return; }
 
-      var res = await fetch(SUPABASE_URL + '/functions/v1/generate-project-update', {
+      // the same job as the twice-weekly sync (supabase/functions/project-sync), for this project only
+      var res = await fetch(SUPABASE_URL + '/functions/v1/project-sync', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -461,6 +462,11 @@
 
       var data = await res.json();
       if (!res.ok) throw new Error(data.error || data.message || 'Failed to generate update');
+      var one = data.projects && data.projects[0];
+      if (one && one.result.indexOf('update written') !== 0) {
+        var why = Object.keys(one.repos || {}).map(function (r) { return r + ': ' + one.repos[r]; }).join('\n');
+        alert('No update written: ' + one.result + (why ? '\n\n' + why : ''));
+      }
 
       await loadProject(project.id);
     } catch (err) {
@@ -612,6 +618,7 @@
     document.getElementById('edit-client').value = p.client || '';
     document.getElementById('edit-tech').value = (p.tech_stack || []).join(', ');
     document.getElementById('edit-version').value = p.version || '';
+    document.getElementById('edit-repo').value = p.github_repo || '';
     document.getElementById('modal-edit-project').style.display = 'flex';
     document.getElementById('edit-name').focus();
   }
@@ -644,6 +651,7 @@
       client: document.getElementById('edit-client').value.trim() || null,
       tech_stack: techStack,
       version: document.getElementById('edit-version').value.trim() || null,
+      github_repo: document.getElementById('edit-repo').value.trim() || null,
       updated_by: currentUser.id
     };
 

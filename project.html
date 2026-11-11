@@ -94,6 +94,11 @@
             <input type="text" id="edit-version" placeholder="e.g. 1.0.0">
           </div>
         </div>
+        <div class="form-field">
+          <label for="edit-repo">GitHub repo(s)</label>
+          <input type="text" id="edit-repo" placeholder="e.g. tazpinball/brickture (several: separate with commas)" aria-describedby="edit-repo-help">
+          <small id="edit-repo-help" class="form-help">The Friday and Monday sync reads these repos to update this project.</small>
+        </div>
         <div class="modal-actions">
           <button type="button" class="btn-modal-secondary" id="btn-cancel-edit">Cancel</button>
           <button type="submit" class="btn-modal-primary">Save Changes</button>

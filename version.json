@@ -1,7 +1,22 @@
 {
-  "version": "2.74.6",
-  "date": "2026-11-10",
+  "version": "2.75.0",
+  "date": "2026-11-11",
   "releases": [
+    {
+      "version": "2.75.0",
+      "date": "2026-11-11",
+      "summary": "Project dashboard: a pipeline board by stage (Ted's design), and every project updates itself from GitHub every Friday 6 PM and Monday 1 PM ET",
+      "changes": [
+        "dashboard.html: the top band shows the project count, how many are listed on takgio.com and how many are internal, and Live / UAT / Building / Idea counts (Open tasks and Quiet 14d+ are gone from it). Under it: when the sync runs, its last run and its next run",
+        "dashboard.html: 'Pipeline by stage' is now a board with one column per stage. The 8 products on takgio.com are white cards with their initials and the status the site gives them (Upcoming, Live beta, Beta, Live); internal projects are plain grey cards. A card the sync moved in the last 14 days says so. 'Sync now' runs the sync at once",
+        "dashboard.html: Needs attention and Recent activity kept below the board; the All projects table gets an 'On takgio.com' column and a Show filter (all / on takgio.com / internal). A project counts as quiet only if neither the dashboard nor its repos changed for 14 days",
+        "js/dashboard.js: SITE_PRODUCTS lists the products takgio.com shows and their site status; change it in the same commit as the site",
+        "supabase/functions/project-sync (new): reads each project's GitHub repos; for a project with new commits Claude reads them and the project's HANDOFF.md (else SUMMARY.md, CLAUDE.md, README.md), writes an update and sets the stage itself (never Discarded); every stage move is logged. Runs Friday 6 PM and Monday 1 PM New York time, summer or winter. Offline test: supabase/functions/_tests/project-sync-harness.ts (36 checks)",
+        "docs/dashboard-sync-schema.sql (new, run once in Supabase): the sync's columns and run log, the five products missing from the dashboard (Hoof Harted, True Record, Pinball-QR, Meta Ray-Ban Display, myBuyersCoach), each project's repo, and the two schedules",
+        "project.html: the edit form has a 'GitHub repo(s)' field; 'Generate AI Update' now runs the same sync for that one project",
+        "Phone widths: the dashboard no longer scrolls sideways (long names in the table and the activity card)"
+      ]
+    },
     {
       "version": "2.74.6",
       "date": "2026-11-10",
