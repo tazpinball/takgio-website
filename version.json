@@ -1,7 +1,13 @@
 {
-  "version": "2.75.1",
+  "version": "2.75.2",
   "date": "2026-11-11",
   "releases": [
+    {
+      "version": "2.75.2",
+      "date": "2026-11-11",
+      "summary": "HANDOFF.md only: CAM's repo confirmed; how ideas and accounts work on the dashboard",
+      "changes": ["HANDOFF.md: Class Action Monitor (CAM) reads tazpinball/estate-recovery (Ted confirmed); new ideas go in as dashboard projects; accounts are created by Ted. No site change."]
+    },
     {
       "version": "2.75.1",
       "date": "2026-11-11",

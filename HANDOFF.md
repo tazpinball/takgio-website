@@ -184,11 +184,11 @@ DASHBOARD v2.75.0 (11 Nov) is live and its GitHub sync is running (SQL run, func
   README.md), writes an update ("Claude (weekly sync)") and sets the stage (never Discarded; moves logged in stage_transitions).
   A project with no repo, or no new commits, is left alone. "Sync now" on the dashboard and "Generate AI Update" on a project
   page run the same function (signed-in user). Repos are in `projects.github_repo` (comma-separated for several; editable in the
-  project's Edit form). No repo mapped (11 Nov): Bluetooth Dog, CAM (the service), Compliance M&A, Pinball Guide (maybe
+  project's Edit form). No repo mapped (11 Nov): Bluetooth Dog, Compliance M&A, Pinball Guide (maybe
   tazpinball/taz-pinball?) and the three discarded ones. Repos with no dashboard project: takgio/takgio-demos, takgio/govreports,
-  tazpinball/kith, tazpinball/TAZville. Ann Elise AI Tutor reads both ann-elise-poc and ann-elise-mobile (Ted, 11 Nov).
-  Class Action Monitor (CAM) was already linked to tazpinball/estate-recovery before 11 Nov; asked Ted whether that is right
-  (no answer yet; harmless while that repo is idle). **Set up 11 Nov (done by Ted):** the SQL was run; the function was deployed
+  tazpinball/kith, tazpinball/TAZville. New ideas are added as dashboard projects (+ New Project, stage Idea);
+  `ideas.html` only redirects to the dashboard. Accounts are Supabase Auth users created by Ted (no sign-up page). Ann Elise AI Tutor reads both ann-elise-poc and ann-elise-mobile (Ted, 11 Nov).
+  Class Action Monitor (CAM) reads tazpinball/estate-recovery: that is correct (Ted, 11 Nov). **Set up 11 Nov (done by Ted):** the SQL was run; the function was deployed
   from Ted's laptop clone `C:\Users\Ted\OneDrive\TAZville\Projects\takgio-website` (no Supabase CLI installed there: use
   `npx supabase@2 functions deploy project-sync --no-verify-jwt --project-ref pwmrbmjlgweahridxvgk --use-api`; CLI v3 rejects
   the laptop's old local `supabase/config.toml`, which is not in git). `GITHUB_TOKEN` reads tazpinball/* only; the takgio/* repos
