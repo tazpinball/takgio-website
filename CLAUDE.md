@@ -90,8 +90,8 @@ Everything sits in the project root as plain `.html` files; `vercel.json` gives 
 - `js/` — `supabase-config.js` (SUPABASE_URL / SUPABASE_ANON_KEY, load first), `auth.js` (dashboard login), `admin-core.js` + the `*-admin.js` / `admin-hub.js` pages, `careers.js`, `news-feed.js`, `nav.js`, `motion.js`, `hero-reel.js`, `hero-models.js` (the two model lattices in the hero graphic), `showcase.js`, `analytics.js`, and the dashboard's `dashboard.js`, `my-tasks.js`, `project-detail.js`
 - `videos/` — the Brickture promo videos (`brickture-promo-16x9.mp4`, `brickture-promo-9x16.mp4`), served from the site
 - `images/` — graphics (`brand/`, `hero/`, `marketing/`, `news/`, `products/`, `reel/`, `team/`); `og-image.html` generates `og-image.png`
-- `supabase/functions/` — Deno/TS edge functions: `careers-apply`, `careers-confirm`, `ai-news-daily`, `ai-news-pull`, `generate-project-update`; offline tests in `_tests/`. Deployed with the Supabase CLI, not by git.
-- `docs/` — SQL to run in the Supabase SQL editor (`supabase-schema.sql`, `careers-schema.sql`, `news-schema.sql`, `news-daily-schema.sql`, `admin-team-emails.sql`, `migrate-ideas.sql`) and `strategy-project-dashboard.md`
+- `supabase/functions/` — Deno/TS edge functions: `careers-apply`, `careers-confirm`, `ai-news-daily`, `ai-news-pull`, `project-sync` (the dashboard's Friday/Monday GitHub sync), `generate-project-update` (no longer called by the site since v2.75.0); offline tests in `_tests/`. Deployed with the Supabase CLI, not by git.
+- `docs/` — SQL to run in the Supabase SQL editor (`supabase-schema.sql`, `careers-schema.sql`, `news-schema.sql`, `news-daily-schema.sql`, `dashboard-sync-schema.sql`, `admin-team-emails.sql`, `migrate-ideas.sql`) and `strategy-project-dashboard.md`
 - `version.json`, `robots.txt`, `sitemap.xml`, `vercel.json`, `.vercelignore`
 
 ## Local Development
