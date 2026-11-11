@@ -1,7 +1,13 @@
 {
-  "version": "2.75.0",
+  "version": "2.75.1",
   "date": "2026-11-11",
   "releases": [
+    {
+      "version": "2.75.1",
+      "date": "2026-11-11",
+      "summary": "HANDOFF.md only: the dashboard's GitHub sync is set up and running",
+      "changes": ["HANDOFF.md: SQL run, project-sync deployed, takgio token set (expires 11 Nov 2027), the laptop deploy command. No site change."]
+    },
     {
       "version": "2.75.0",
       "date": "2026-11-11",
