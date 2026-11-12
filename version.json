@@ -1,7 +1,13 @@
 {
-  "version": "2.75.2",
-  "date": "2026-11-11",
+  "version": "2.75.3",
+  "date": "2026-11-12",
   "releases": [
+    {
+      "version": "2.75.3",
+      "date": "2026-11-12",
+      "summary": "HANDOFF.md only: the new Highlights product (Joe Rizzo's hockey highlight videos) lives in its own repo, takgio/highlights",
+      "changes": ["HANDOFF.md: a HIGHLIGHTS line in 'Where the next session starts' pointing to takgio/highlights, the Highlights cloud environment and Joe's questions page on demos.takgio.com. No site change."]
+    },
     {
       "version": "2.75.2",
       "date": "2026-11-11",
