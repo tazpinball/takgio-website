@@ -4,7 +4,7 @@
 > place at the end of each session; do not append a per-session log. The release history lives in `version.json`
 > (`releases`, newest first) and in `git log`.
 
-*Started 2026-10-26 (it did not exist before this date); last updated 2026-11-11, after v2.75.0 (the project dashboard board and its GitHub sync). Built from
+*Started 2026-10-26 (it did not exist before this date); last updated 2026-11-12, after v2.75.3 (a note: the new Highlights product lives in its own repo). Built from
 `version.json`, `git log` and the repo itself.
 The Supabase side was checked by Ted in the dashboard on 26 Oct (below). Since 28 Oct a cloud session CAN reach
 takgio.com (Ted added it to the environment), so check the live site yourself with curl after a merge. It still
@@ -29,6 +29,9 @@ NEXT     Ted's verdict on the promo video and its home-page placement; the 9:16 
          ConcreteIQ stays BETA until Ted says it is live; then the CPN story is redone (Open / not verified).
          Investor work (deck template, fundraising targets) is below.
 SUPABASE Project pwmrbmjlgweahridxvgk: everything installed and running (checked 26 Oct, see Open / verified).
+HIGHLIGHTS (new product, 12 Nov) Joe Rizzo's hockey highlight videos (working name): its own repo takgio/highlights
+         (HANDOFF.md there is its record) and cloud environment "Highlights"; Joe's questions page
+         https://demos.takgio.com/hockey/ is live. Not on takgio.com, not on the project dashboard yet (Ted: + New Project).
 DASHBOARD v2.75.0 (11 Nov) is live and its GitHub sync is running (SQL run, function deployed, takgio token set;
          Ted pressed Sync now and it worked). Next scheduled runs: Fri 6 PM and Mon 1 PM ET.
 ```
